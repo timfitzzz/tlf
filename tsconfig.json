@@ -16,6 +16,6 @@
     ],
     "target": "es2015"
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "src/ContentUIComponents.jsx"],
   "exclude": ["node_modules/*", "public/*"]
 }

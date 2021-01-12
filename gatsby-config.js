@@ -4,9 +4,9 @@ const playgroundHastPlugin = require("./src/utils/playgroundHastPlugin")
 
 module.exports = {
   siteMetadata: {
-    title: "Gatsby Starter",
+    title: "Tim L. Fitzgerald",
     description: "-- placeholder --",
-    author: "damassi.pappas@gmail.com",
+    author: "timothyliamfitzgerald@gmail.com",
   },
   plugins: [
     {
@@ -42,6 +42,19 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `open sans condensed\:300,300i,700`, // you can also specify font weights and styles
+          `asap condensed\:400,400i,500,500i,600,600i`,
+          `poppins\:200,300,400,400i`,
+          `asap\:400,400i`,
+          `crimson text\:400,400i,600,600i,700,700i`
+        ],
+        display: 'swap'
+      }
+    },
+    {
       resolve: "gatsby-plugin-netlify-cms",
       options: {
         modulePath: `${__dirname}/src/cms/cms.jsx`,
@@ -61,7 +74,7 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "mdx",
+        name: "sections",
         path: `${__dirname}/content/mdx/`,
       },
     },
@@ -70,5 +83,6 @@ module.exports = {
     "gatsby-plugin-typescript",
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
+    "gatsby-plugin-transition-link"
   ],
 }

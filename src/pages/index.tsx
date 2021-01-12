@@ -1,48 +1,22 @@
-import { graphql, Link, StaticQuery } from "gatsby"
+import SectionsLayout from "../layouts/SectionsLayout"
 import React from "react"
+import { WindowLocation } from "@reach/router"
+import { useTransitionState } from "gatsby-plugin-transition-link/hooks"
+import { useWindowConfig } from "hooks/useWindowConfig"
 
-export default function Home() {
+export default function Home({ location }: { location: WindowLocation }) {
+  const state = useTransitionState()
+  const { w } = useWindowConfig()
+  const { mount, current, exit, entry } = state
+
+  console.log("transitionstate: ", mount, current, exit, entry)
+
   return (
-    <StaticQuery
-      query={graphql`
-        query AllPagesQuery {
-          allMdx {
-            edges {
-              node {
-                fields {
-                  route
-                }
-                frontmatter {
-                  title
-                }
-              }
-            }
-          }
-        }
-      `}
-      render={data => {
-        return (
-          <div>
-            <h1>Page Index</h1>
-            <div>
-              {data.allMdx.edges.map((edge, index) => {
-                const {
-                  node: {
-                    fields: { route },
-                    frontmatter: { title },
-                  },
-                } = edge
-
-                return (
-                  <div key={index}>
-                    <Link to={route}>{title}</Link>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        )
-      }}
+    <SectionsLayout
+      windowWidth={w}
+      current={current}
+      sectionTitle={"Home"}
+      location={location}
     />
   )
 }

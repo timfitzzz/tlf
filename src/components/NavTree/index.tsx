@@ -21,6 +21,7 @@ export const NavTree = _props => {
                 }
                 frontmatter {
                   title
+                  path
                   # navSpacer
                   # showInNav
                 }

@@ -1,4 +1,4 @@
-export type ISectionEdge = {
+export interface ISectionEdge {
   node: {
     frontmatter: {
       title: string
@@ -7,7 +7,7 @@ export type ISectionEdge = {
       body: string
     }
   }
-  title: string,
-  pathName: string,
+  title: string
+  pathName: string
   body: string
 }

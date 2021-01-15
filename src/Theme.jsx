@@ -6,9 +6,10 @@
 
 import React, { Fragment } from "react"
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components"
-import { Button, Flex, Box } from "rebass/styled-components"
+import { Button } from "rebass/styled-components"
 import { Row, Column, Section } from "./components/elements";
 import { CVDatesDisplay, CVRow, CVSectionTitle, CVEmployer, CVDates, CVJobTitle, CVLocation, CVDescription, CVSection, CVEntryContainer, CVDescriptionListItem, CVDescriptionList } from './ContentUIComponents';
+
 export const theme = {
   // TODO: https://rebassjs.org/theming
   fonts: {
@@ -33,7 +34,35 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 200;
     letter-spacing: 1px;
     font-size: 16px;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+    min-width: 100%
   }
+
+  /* #___gatsby {
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+    min-width: 100%;
+
+  }
+
+  #gatsby-focus-wrapper {
+    height: 100%;
+    min-height: 100%;
+    display: flex;
+  }
+
+  .tl-edges {
+    width: 100%;
+    height: 100%;
+  }
+
+  .tl-wrapper {
+    width: 100%;
+    height: 100%;
+  } */
 
   h1 {
     font-family: "Asap Condensed", Arial, Helvetica, sans-serif;
@@ -75,17 +104,20 @@ export const LayoutComponents = {
   bodyContainer: styled.div`
     background-color: white;
     display: flex;
-    height: auto;
+
     flex-direction: column;
     margin: auto auto;
     align-items: top;
+    height: 100%;
     width: 100%;
-    padding: 10px;
     max-width: 1000px;
+    
   `
 }
 
-
+export const TRANSITION_DURATION = 5
+export const MIN_WIDTH = 304
+export const MIN_HEIGHT = 568
 
 export const UIComponents = {
   Button: props => <Button {...props}>{props.children}</Button>,

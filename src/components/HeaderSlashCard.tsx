@@ -1,5 +1,5 @@
 // UI Libraries
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { Flex } from "rebass"
 import styled from "styled-components"
 import { Location } from "history"
@@ -16,7 +16,7 @@ const transitions = {
   MenuCardContainer: {
     expanded: {
       delay: TRANSITION_DURATION * 0,
-      duration: TRANSITION_DURATION * 0.2,
+      duration: TRANSITION_DURATION * 0.4,
       // when: "beforeChildren",
       // staggerChildren: TRANSITION_DURATION / 20,
       // delayChildren: TRANSITION_DURATION * 0.8,
@@ -32,8 +32,8 @@ const transitions = {
   },
   MenuCard: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.2,
-      duration: TRANSITION_DURATION * 0.3,
+      delay: TRANSITION_DURATION * 0.4,
+      duration: TRANSITION_DURATION * 0.2,
     },
     contracted: {
       // duration: TRANSITION_DURATION * 0.8,
@@ -41,18 +41,18 @@ const transitions = {
   },
   MenuMiddle: {
     expanded: {
-      // delay: TRANSITION_DURATION * 0.7,
-      duration: TRANSITION_DURATION * 0.1,
+      delay: TRANSITION_DURATION * 0.1,
+      duration: TRANSITION_DURATION * 0.7,
     },
     contracted: {
-      delay: TRANSITION_DURATION * 0.8,
-      duration: TRANSITION_DURATION * 0.05,
+      delay: TRANSITION_DURATION * 0.6,
+      duration: TRANSITION_DURATION * 0.02,
     },
   },
   MenuMiddleColumn: {
     expanded: {
-      // delay: TRANSITION_DURATION * 0.7,
-      duration: TRANSITION_DURATION * 0.1,
+      delay: TRANSITION_DURATION * 0.1,
+      duration: TRANSITION_DURATION * 0.7,
     },
     contracted: {
       delay: TRANSITION_DURATION * 0.8,
@@ -61,8 +61,8 @@ const transitions = {
   },
   TextContainers: {
     expanded: {
-      // delay: TRANSITION_DURATION * 0.8,
-      duration: TRANSITION_DURATION * 0.05,
+      delay: TRANSITION_DURATION * 0.8,
+      duration: TRANSITION_DURATION * 0.2,
     },
     contracted: {
       duration: TRANSITION_DURATION * 0.1,
@@ -70,8 +70,8 @@ const transitions = {
   },
   PortraitPhotoBox: {
     expanded: {
-      // delay: TRANSITION_DURATION * 0.85,
-      duration: TRANSITION_DURATION * 0.15,
+      delay: TRANSITION_DURATION * 0.8,
+      duration: TRANSITION_DURATION * 0.2,
     },
     contracted: {
       duration: TRANSITION_DURATION * 0.2,
@@ -79,8 +79,8 @@ const transitions = {
   },
   PortraitPhoto: {
     expanded: {
-      // delay: TRANSITION_DURATION * 0.85,
-      duration: TRANSITION_DURATION * 0.15,
+      delay: TRANSITION_DURATION * 0.8,
+      duration: TRANSITION_DURATION * 0.2,
     },
     contracted: {
       duration: TRANSITION_DURATION * 0.2,
@@ -88,8 +88,9 @@ const transitions = {
   },
   MenuContainer: {
     expanded: {
-      // delay: TRANSITION_DURATION * 0.4,
-      duration: TRANSITION_DURATION * 0.6,
+      delay: TRANSITION_DURATION * 0.2,
+      duration: TRANSITION_DURATION * 0.8,
+      times: [0, 0.1, 0.2, 0.9, 1],
       // times: [
       //   0,
       //   TRANSITION_DURATION * 0.25,
@@ -328,13 +329,20 @@ const DescH2 = motion.custom(LayoutComponents.h2compact)
 const MenuContainerVariants = {
   expanded: {
     opacity: [null, 0, 0, 0, 1],
-    height: [0, 0, 0, 75, 75],
+    height: [75, 0, 0, 0, 75],
+    width: ["100%", "100%", "0%", "0%", "100%"],
     transition: transitions.MenuContainer.expanded,
+    transitionEnd: {
+      justifyContent: "flex-start",
+    },
   },
   contracted: {
-    opacity: [0, 0, 0, 0, 1],
+    opacity: [1, 0, 0, 0, 1],
     height: 75,
     transition: transitions.MenuContainer.contracted,
+    transitionEnd: {
+      justifyContent: "flex-end",
+    },
   },
 }
 
@@ -360,22 +368,38 @@ const TopNavLink = styled(TransitionLink)<TopNavLinkProps>`
 
 const HomeNavLink = styled(TransitionLink)``
 
-export const Menu = ({
+export const HeaderSlashCard = ({
   data,
   location,
-  animate,
-  initial,
   windowWidth,
 }: {
   data: any
   location: Location
-  animate: string
-  initial: string
   windowWidth: number
 }) => {
-  let currentPath = location.pathname
+  console.log(windowWidth)
+  const [currentPath, setCurrentPath] = useState<string>(location.pathname)
+  const [lastPath, setLastPath] = useState<string>(currentPath)
 
-  // const [width, setWidth] = useState<number>(windowWidth)
+  function getMenuAnimate(currentPath) {
+    return currentPath === "/" ? "expanded" : "contracted"
+  }
+
+  const animate = useMemo(() => getMenuAnimate(currentPath), [currentPath])
+
+  function getMenuInitial(currentPath, lastPath) {
+    console.log(currentPath, lastPath)
+    return currentPath == lastPath
+      ? false
+      : lastPath === "/"
+      ? "expanded"
+      : "contracted"
+  }
+
+  const initial = useMemo(() => getMenuInitial(currentPath, lastPath), [
+    currentPath,
+    lastPath,
+  ])
 
   function getNextInitial(path) {
     if (path === "/") {
@@ -412,6 +436,12 @@ export const Menu = ({
       return "contracted"
     }
   }
+
+  useEffect(() => {
+    setLastPath(currentPath)
+    setCurrentPath(location.pathname)
+  }, [location.pathname])
+
   // useEffect(() => {
   //   if (windowWidth) {
   //     console.log("setting width ", windowWidth, ", prev width ", width)
@@ -419,133 +449,141 @@ export const Menu = ({
   //   }
   // }, [windowWidth])
 
-  return (
-    <MenuCardContainer
-      windowWidth={windowWidth}
-      animate={animate}
-      initial={initial || getCurrentInitial()}
-      layout
-    >
-      <MenuCard layout>
-        <MenuContainer>
-          <AnimatePresence>
-            {data.allMdx.edges.map((edge, index) => {
-              let {
-                node: {
-                  frontmatter: { title, path },
-                },
-              } = edge
+  console.log("animate: ", animate)
+  console.log("initial :", initial)
 
-              if (path === null || path === "") {
-                path = "/"
-              } else {
-                path = `/${path}`
-                return (
-                  <TopNavLink
-                    to={`${path}`}
-                    key={index}
-                    $isCurrent={currentPath === path ? true : undefined}
-                    entry={{
-                      appearAfter: TRANSITION_DURATION,
-                      state: {
-                        initial: getNextInitial(path),
-                        animate: getNextAnimate(path),
-                      },
-                    }}
-                    exit={{
-                      length: TRANSITION_DURATION,
-                      state: {
-                        initial: getCurrentInitial(),
-                        animate: getExitAnimate(path),
-                      },
-                    }}
-                    preventScrollJump
+  return (
+    <>
+      {windowWidth && (
+        <MenuCardContainer
+          windowWidth={windowWidth}
+          animate={animate}
+          initial={initial}
+          layout
+        >
+          <MenuCard layout>
+            <MenuContainer>
+              <AnimatePresence>
+                {data.allMdx.edges.map((edge, index) => {
+                  let {
+                    node: {
+                      frontmatter: { title, path },
+                    },
+                  } = edge
+
+                  if (path === null || path === "") {
+                    path = "/"
+                  } else {
+                    path = `/${path}`
+                    return (
+                      <TopNavLink
+                        to={`${path}`}
+                        key={index}
+                        $isCurrent={currentPath === path ? true : undefined}
+                        entry={{
+                          appearAfter: TRANSITION_DURATION,
+                          state: {
+                            initial: getNextInitial(path),
+                            animate: getNextAnimate(path),
+                          },
+                        }}
+                        exit={{
+                          length: TRANSITION_DURATION,
+                          state: {
+                            initial: getCurrentInitial(),
+                            animate: getExitAnimate(path),
+                          },
+                        }}
+                      >
+                        {title}
+                      </TopNavLink>
+                    )
+                  }
+                  // }
+                })}
+              </AnimatePresence>
+              <TopNavLink
+                to={`/blog`}
+                $isCurrent={
+                  currentPath.indexOf(`/blog`) !== -1 ? true : undefined
+                }
+                entry={{
+                  length: TRANSITION_DURATION * 0.5,
+                  state: {
+                    initial: getNextAnimate("/blog"),
+                  },
+                }}
+                exit={{
+                  length: TRANSITION_DURATION * 0.5,
+                  state: {
+                    initial: getCurrentInitial(),
+                    animate: getExitAnimate("/blog"),
+                  },
+                }}
+              >
+                Blog
+              </TopNavLink>
+            </MenuContainer>
+            <MenuMiddle>
+              <MenuMiddleColumn>
+                <NameContainer>
+                  <Name>Tim L. Fitzgerald</Name>
+                </NameContainer>
+                <DescriptionContainer>
+                  <DescH2
+                    initial={initial || getCurrentInitial()}
+                    variants={getTextContainerVariants(20)}
                   >
-                    {title}
-                  </TopNavLink>
-                )
-              }
-              // }
-            })}
-          </AnimatePresence>
-          <TopNavLink
-            to={`/blog`}
-            $isCurrent={currentPath.indexOf(`/blog`) !== -1 ? true : undefined}
-            entry={{
-              length: TRANSITION_DURATION * 0.5,
-              state: {
-                initial: getNextAnimate("/blog"),
-              },
-            }}
-            exit={{
-              length: TRANSITION_DURATION * 0.5,
-              state: {
-                initial: getCurrentInitial(),
-                animate: getExitAnimate("/blog"),
-              },
-            }}
-          >
-            Blog
-          </TopNavLink>
-        </MenuContainer>
-        <MenuMiddle>
-          <MenuMiddleColumn>
-            <NameContainer>
-              <Name>Tim L. Fitzgerald</Name>
-            </NameContainer>
-            <DescriptionContainer>
-              <DescH2
-                initial={initial || getCurrentInitial()}
-                variants={getTextContainerVariants(20)}
+                    programmer
+                  </DescH2>
+                  <DescH2
+                    initial={initial || getCurrentInitial()}
+                    variants={getTextContainerVariants(20)}
+                  >
+                    sysadmin
+                  </DescH2>
+                  <DescH2
+                    initial={initial || getCurrentInitial()}
+                    variants={getTextContainerVariants(20)}
+                  >
+                    systems engineer
+                  </DescH2>
+                  <DescH2
+                    initial={initial || getCurrentInitial()}
+                    variants={getTextContainerVariants(20)}
+                  >
+                    useful human
+                  </DescH2>
+                </DescriptionContainer>
+              </MenuMiddleColumn>
+              <HomeNavLink
+                to={"/"}
+                key={"indexlink"}
+                disabled={currentPath === "/" ? true : false}
+                $isCurrent={false}
+                entry={{
+                  length: TRANSITION_DURATION,
+                  state: {
+                    initial: getNextInitial("/"),
+                    animate: getNextAnimate("/"),
+                  },
+                }}
+                exit={{
+                  length: TRANSITION_DURATION,
+                  state: {
+                    initial: getCurrentInitial(),
+                    animate: getExitAnimate("/"),
+                  },
+                }}
               >
-                programmer
-              </DescH2>
-              <DescH2
-                initial={initial || getCurrentInitial()}
-                variants={getTextContainerVariants(20)}
-              >
-                sysadmin
-              </DescH2>
-              <DescH2
-                initial={initial || getCurrentInitial()}
-                variants={getTextContainerVariants(20)}
-              >
-                systems engineer
-              </DescH2>
-              <DescH2
-                initial={initial || getCurrentInitial()}
-                variants={getTextContainerVariants(20)}
-              >
-                useful human
-              </DescH2>
-            </DescriptionContainer>
-          </MenuMiddleColumn>
-          <HomeNavLink
-            to={"/"}
-            key={"indexlink"}
-            disabled={currentPath === "/" ? true : false}
-            $isCurrent={false}
-            entry={{
-              length: TRANSITION_DURATION,
-              state: {
-                initial: getNextInitial("/"),
-                animate: getNextAnimate("/"),
-              },
-            }}
-            exit={{
-              length: TRANSITION_DURATION,
-              state: {
-                initial: getCurrentInitial(),
-                animate: getExitAnimate("/"),
-              },
-            }}
-          >
-            <PortraitPhotoBox>
-              <PortraitPhoto src="/assets/media/tim-photo-cutout-bw.png" />
-            </PortraitPhotoBox>
-          </HomeNavLink>
-        </MenuMiddle>
-      </MenuCard>
-    </MenuCardContainer>
+                <PortraitPhotoBox>
+                  <PortraitPhoto src="/assets/media/tim-photo-cutout-bw.png" />
+                </PortraitPhotoBox>
+              </HomeNavLink>
+            </MenuMiddle>
+          </MenuCard>
+        </MenuCardContainer>
+      )}
+    </>
   )
 }

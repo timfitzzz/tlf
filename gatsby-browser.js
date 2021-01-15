@@ -6,6 +6,14 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-import { Boot } from "./src/Boot"
+const { Boot } = require("./src/Boot")
+const { Location } = require("@reach/router")
+const React = require('react')
 
-export const wrapRootElement = Boot
+exports.wrapRootElement = ({element}) => (
+  <Location>
+    {location => <Boot element={element} {...location} />}
+  </Location>
+)
+
+exports.shouldUpdateScroll = () => { return [0,0]; };

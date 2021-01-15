@@ -11,7 +11,3 @@ export const Sans = styled.div<Typography>`
 export const Serif = styled.div<Typography>`
   font-family: "Times New Roman", Times, serif;
 `
-
-const NavTitle = styled(Sans as any)`
-    
-`

@@ -4,23 +4,24 @@ import { Box } from "rebass/styled-components"
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
 import { ISectionEdge } from "../types"
 import styled from "styled-components"
-import { LayoutComponents } from "../Theme"
+import { TRANSITION_DURATION, LayoutComponents } from "../Theme"
 import { Menu } from "components/Menu"
 import { WindowLocation } from "@reach/router"
-import { motion } from "framer-motion"
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion"
 
 const ContentContainerVariants = {
   expanded: {
-    opacity: [null, 0.95, 0.9, 0.6, 0.4, 0.1, 0],
+    opacity: [null, 0.8, 0.5, 0.3, 0.2, 0.1, 0],
+    height: "0px",
     transition: {
-      duration: 1,
+      duration: TRANSITION_DURATION * 0.25,
     },
   },
   contracted: {
     height: "100%",
-    opacity: 1,
+    opacity: [null, 0.1, 0.2, 0.3, 0.5, 0.8, 1],
     transition: {
-      duration: 1,
+      duration: TRANSITION_DURATION * 0.25,
     },
   },
 }
@@ -37,10 +38,10 @@ const ContentContainer = styled(motion.custom(Box)).attrs(() => ({
 
 const InnerBodyContainerVariants = {
   expanded: {
-    height: "480px",
+    marginTop: "8px",
   },
   contracted: {
-    height: "inherit",
+    marginTop: "8px",
   },
 }
 
@@ -51,6 +52,8 @@ const InnerBodyContainer = styled(motion.div).attrs(() => ({
   border-radius: 16px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
 `
 
 export default ({
@@ -58,12 +61,14 @@ export default ({
   location,
   current,
   windowWidth,
+  windowHeight,
   children,
 }: {
   sectionTitle: string
   current: any
   location: WindowLocation
   windowWidth: number
+  windowHeight: number
   children?: ReactNode[] | ReactNode
 }) => {
   // if (exit || entry) {
@@ -136,56 +141,36 @@ export default ({
       `}
       render={data => (
         <LayoutComponents.bodyContainer>
-          <InnerBodyContainer initial={initial} animate={animate}>
-            <Menu
-              windowWidth={windowWidth}
-              data={data}
-              location={location}
-              sectionTitle={sectionTitle}
-              animate={animate}
-              initial={initial}
-            />
-            <ContentContainer initial={initial} animate={animate} layout>
-              <MDXRenderer key={Math.random().toString()}>
-                {data.allMdx.edges.filter((edge: ISectionEdge) => {
-                  return edge.node.frontmatter.title === sectionTitle
-                    ? true
-                    : false
-                })[0]?.node.code.body || ""}
-              </MDXRenderer>
-              {children}
-            </ContentContainer>
+          <InnerBodyContainer initial={initial} animate={animate} layout>
+            <AnimateSharedLayout>
+              {/* <Menu
+                windowWidth={windowWidth}
+                data={data}
+                location={location}
+                animate={animate}
+                initial={initial}
+              /> */}
+              <AnimatePresence>
+                {location.pathname !== "/" && (
+                  <ContentContainer
+                    initial={initial}
+                    animate={animate}
+                    layout
+                    key={sectionTitle + "ContentContainer"}
+                  >
+                    <MDXRenderer key={Math.random().toString()}>
+                      {data.allMdx.edges.filter((edge: ISectionEdge) => {
+                        return edge.node.frontmatter.title === sectionTitle
+                          ? true
+                          : false
+                      })[0]?.node.code.body || ""}
+                    </MDXRenderer>
+                    {children}
+                  </ContentContainer>
+                )}
+              </AnimatePresence>
+            </AnimateSharedLayout>
           </InnerBodyContainer>
-
-          {/* <MyWorkshop fullScreen={true} /> */}
-          {/* <LeftFlexColumn flexDirection={"column"}>
-                <LeftColumnContentsBox>
-                  <Box>
-                    <Name>Tim L. Fitzgerald</Name>
-                  </Box>
-                  <DescriptionContainer>
-                    <LayoutComponents.h2compact>
-                      programmer
-                    </LayoutComponents.h2compact>
-                    <LayoutComponents.h2compact>
-                      sysadmin
-                    </LayoutComponents.h2compact>
-                    <LayoutComponents.h2compact>
-                      systems engineer
-                    </LayoutComponents.h2compact>
-                    <LayoutComponents.h2compact>
-                      useful human
-                    </LayoutComponents.h2compact>
-                  </DescriptionContainer>
-                  <PortraitPhotoBox>
-                    <PortraitPhoto src="assets/media/tim-photo-cutout-bw.png" />
-                  </PortraitPhotoBox>
-                </LeftColumnContentsBox>
-              </LeftFlexColumn>
-              <RightColumnContainer>
-                
-                
-              </RightColumnContainer> */}
         </LayoutComponents.bodyContainer>
       )}
     />

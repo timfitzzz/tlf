@@ -49,7 +49,7 @@
     "@types/react": "^16.7.20",
     "@types/react-dom": "^16.0.11",
     "@types/rebass": "^4.0.7",
-    "@types/styled-components": "^4.1.6",
+    "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^1.1.0",
     "auto-release-cli": "2.3.0",
     "babel-eslint": "^10.0.1",

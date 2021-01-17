@@ -9,14 +9,14 @@ import { AnimatePresence, motion, TargetAndTransition } from "framer-motion"
 import TransitionLink from "gatsby-plugin-transition-link"
 
 // UI
-import { LayoutComponents } from "Theme"
+import { LayoutComponents, theme } from "Theme"
 import { TRANSITION_DURATION, MIN_WIDTH } from "Theme"
 
 const transitions = {
   MenuCardContainer: {
     expanded: {
-      delay: TRANSITION_DURATION * 0,
-      duration: TRANSITION_DURATION * 0.4,
+      delay: TRANSITION_DURATION * 0.1,
+      duration: TRANSITION_DURATION * 0.3,
       // when: "beforeChildren",
       // staggerChildren: TRANSITION_DURATION / 20,
       // delayChildren: TRANSITION_DURATION * 0.8,
@@ -24,7 +24,8 @@ const transitions = {
       ease: "easeIn",
     },
     contracted: {
-      duration: TRANSITION_DURATION * 0.8,
+      delay: TRANSITION_DURATION * 0.4,
+      duration: TRANSITION_DURATION * 0.4,
       // when: "afterChildren",
       // staggerChildren: TRANSITION_DURATION / 20,
       ease: "easeOut",
@@ -36,61 +37,68 @@ const transitions = {
       duration: TRANSITION_DURATION * 0.2,
     },
     contracted: {
+      delay: TRANSITION_DURATION * 0.2,
+      duration: TRANSITION_DURATION * 0.2,
       // duration: TRANSITION_DURATION * 0.8,
     },
   },
   MenuMiddle: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.1,
-      duration: TRANSITION_DURATION * 0.7,
+      delay: TRANSITION_DURATION * 0.2,
+      duration: TRANSITION_DURATION * 0.3,
+      ease: "easeIn",
     },
     contracted: {
       delay: TRANSITION_DURATION * 0.6,
-      duration: TRANSITION_DURATION * 0.02,
+      duration: TRANSITION_DURATION * 0.3,
+      ease: "easeOut",
     },
   },
   MenuMiddleColumn: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.1,
+      delay: TRANSITION_DURATION * 0.2,
       duration: TRANSITION_DURATION * 0.7,
     },
     contracted: {
-      delay: TRANSITION_DURATION * 0.8,
-      duration: TRANSITION_DURATION * 0.05,
+      delay: TRANSITION_DURATION * 0.3,
+      duration: TRANSITION_DURATION * 0.3,
     },
   },
   TextContainers: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.8,
+      delay: TRANSITION_DURATION * 0.65,
       duration: TRANSITION_DURATION * 0.2,
     },
     contracted: {
-      duration: TRANSITION_DURATION * 0.1,
+      duration: TRANSITION_DURATION * 0.2,
+      delay: 0,
     },
   },
   PortraitPhotoBox: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.8,
+      delay: TRANSITION_DURATION * 0.25,
       duration: TRANSITION_DURATION * 0.2,
     },
     contracted: {
       duration: TRANSITION_DURATION * 0.2,
+      delay: TRANSITION_DURATION * 0.1,
     },
   },
   PortraitPhoto: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.8,
+      delay: TRANSITION_DURATION * 0.65,
       duration: TRANSITION_DURATION * 0.2,
     },
     contracted: {
       duration: TRANSITION_DURATION * 0.2,
+      delay: TRANSITION_DURATION * 0.1,
     },
   },
   MenuContainer: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.2,
-      duration: TRANSITION_DURATION * 0.8,
-      times: [0, 0.1, 0.2, 0.9, 1],
+      delay: TRANSITION_DURATION * 0.0,
+      duration: TRANSITION_DURATION * 1,
+      times: [0, 0.2, 0.4, 0.6, 0.8, 1],
       // times: [
       //   0,
       //   TRANSITION_DURATION * 0.25,
@@ -100,8 +108,9 @@ const transitions = {
       // ],
     },
     contracted: {
-      delay: TRANSITION_DURATION * 0.4,
-      duration: TRANSITION_DURATION * 0.6,
+      delay: TRANSITION_DURATION * 0.1,
+      duration: TRANSITION_DURATION * 0.9,
+      times: [0, 0.2, 0.4, 0.6, 0.8, 1],
       // times: [
       //   0,
       //   TRANSITION_DURATION * 0.25,
@@ -109,12 +118,23 @@ const transitions = {
       //   TRANSITION_DURATION * 0.75,
       //   TRANSITION_DURATION,
       // ],
+    },
+  },
+  MenuPositionContainer: {
+    expanded: {
+      delay: TRANSITION_DURATION * 0.5,
+      duration: TRANSITION_DURATION * 0.1,
+    },
+    contracted: {
+      delay: TRANSITION_DURATION * 0.5,
+      duration: TRANSITION_DURATION * 0.1,
     },
   },
 }
 
 const getMenuCardContainerVariants = (
-  windowWidth: number
+  windowWidth: number,
+  windowHeight: number
 ): { expanded: TargetAndTransition; contracted: TargetAndTransition } => {
   // function getWidthTween(percentageOfMargin) {
   //   if (windowWidth) {
@@ -128,14 +148,15 @@ const getMenuCardContainerVariants = (
       // display: "flex",
       // flexDirection: "column",
 
-      // marginTop: "auto",
-      // marginBottom: "auto",
+      marginTop: windowHeight
+        ? [null, (windowHeight - 300) / 2 + "px"]
+        : "auto",
+
       transition: transitions.MenuCardContainer.expanded,
     },
     contracted: {
       width: windowWidth ? [null, windowWidth - 16] : "100%",
-      // marginTop: "unset",
-      // marginBottom: "unset",
+      marginTop: "0px",
       // flexDirection: "row-reverse",
       transition: transitions.MenuCardContainer.contracted,
     },
@@ -145,13 +166,14 @@ const getMenuCardContainerVariants = (
 }
 
 const MenuCardContainer = styled(motion.div).attrs(
-  (p: { windowWidth: number }) => ({
-    variants: getMenuCardContainerVariants(p.windowWidth),
+  (p: { windowWidth: number; windowHeight: number }) => ({
+    variants: getMenuCardContainerVariants(p.windowWidth, p.windowHeight),
   })
-)<{ windowWidth: number }>`
+)<{ windowWidth: number; windowHeight: number }>`
   display: flex;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: auto;
 `
 
 const MenuCardVariants: {
@@ -160,6 +182,8 @@ const MenuCardVariants: {
 } = {
   expanded: {
     height: "300px",
+    borderTopLeftRadius: "16px",
+    borderBottomLeftRadius: "16px",
     transitionEnd: {
       flexDirection: "column",
     },
@@ -167,6 +191,8 @@ const MenuCardVariants: {
   },
   contracted: {
     height: "75px",
+    borderTopLeftRadius: "35px",
+    borderBottomLeftRadius: "35px",
     transitionEnd: {
       flexDirection: "row-reverse",
     },
@@ -178,7 +204,7 @@ const MenuCard = styled(motion.div).attrs(() => ({
   variants: MenuCardVariants,
 }))`
   width: 100%;
-  background-color: black;
+  background-color: ${p => p.theme.palette.darkBackground};
   border-radius: 16px;
   display: flex;
   margin-left: auto;
@@ -187,14 +213,18 @@ const MenuCard = styled(motion.div).attrs(() => ({
 
 const MenuMiddleVariants = {
   expanded: {
-    height: [null, 253, 253, 253],
+    height: [null, 150, 201, 253],
     width: 288,
+    paddingTop: 6,
+    marginLeft: "8px",
+    alignItems: "inherit",
     transition: transitions.MenuMiddle.expanded,
   },
   contracted: {
-    height: [null, 62, 62, 62],
-    marginLeft: "16px",
+    height: [null, 170, 115, 75],
+    marginLeft: "7px",
     width: 86,
+    paddingTop: 6,
     transition: transitions.MenuMiddle.contracted,
   },
 }
@@ -214,17 +244,20 @@ const MenuMiddle = styled(motion.div).attrs(() => ({
 const MenuMiddleColumnVariants = {
   expanded: {
     opacity: [null, 0, 0.2, 0.6, 0.9, 1],
-    width: [null, "0%", "20%", "60%", "90%", "100%"],
+    width: [null, "0%", "25%", "50%", "75%", "100%"],
     display: "flex",
     height: "100%",
     transition: transitions.MenuMiddleColumn.expanded,
   },
   contracted: {
     opacity: [null, 1, 0.9, 0.6, 0.2, 0],
-    width: [null, "100%", "90%", "60%", "20%", "0%"],
-    display: "none",
+    width: [null, "100%", "60%", "40%", "15%", "0%"],
+    display: "flex",
     height: "0%",
     transition: transitions.MenuMiddleColumn.contracted,
+    transitionEnd: {
+      display: "none",
+    },
   },
 }
 
@@ -239,7 +272,7 @@ const PortraitPhotoBoxVariants = {
     height: "unset",
     borderRadius: "1px",
     border: "0px",
-    backgroundColor: "rgba(0,0,0,1)",
+    backgroundColor: theme.palette.darkBackground, //"rgba(0,0,0,1)",
     transition: transitions.PortraitPhotoBox.expanded,
   },
   contracted: {
@@ -264,7 +297,7 @@ const PortraitPhotoBox = styled(motion.div).attrs(() => ({
 const PortraitPhotoVariants = {
   expanded: {
     width: "120px",
-    height: "250px",
+    height: "230px",
     borderRadius: "0px",
     transition: transitions.PortraitPhoto.expanded,
   },
@@ -278,10 +311,10 @@ const PortraitPhotoVariants = {
 
 const PortraitPhoto = styled(motion.img).attrs(() => ({
   variants: PortraitPhotoVariants,
-}))`
+}))<{ currentAnimate: string }>`
   mask-image: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 1) 80%,
+    ${p => p.theme.palette.darkBackground} 90%,
     rgba(0, 0, 0, 0)
   );
   object-fit: cover;
@@ -326,23 +359,33 @@ const Name = styled.h1`
 
 const DescH2 = motion.custom(LayoutComponents.h2compact)
 
-const MenuContainerVariants = {
-  expanded: {
-    opacity: [null, 0, 0, 0, 1],
-    height: [75, 0, 0, 0, 75],
-    width: ["100%", "100%", "0%", "0%", "100%"],
-    transition: transitions.MenuContainer.expanded,
-    transitionEnd: {
+const MenuPositionContainer = styled(motion.div).attrs(() => ({
+  variants: {
+    expanded: {
       justifyContent: "flex-start",
+      transition: transitions.MenuPositionContainer.expanded,
+    },
+    contracted: {
+      justifyContent: "flex-end",
+      transition: transitions.MenuPositionContainer.contracted,
     },
   },
+}))`
+  display: flex;
+  width: 304px;
+`
+
+const MenuContainerVariants = {
+  expanded: {
+    opacity: [null, 0, 0, 0, 0, 1],
+    height: [75, 75, 0, 0, 50, 50],
+    width: [304, 304, 0, 0, 304, 304],
+    transition: transitions.MenuContainer.expanded,
+  },
   contracted: {
-    opacity: [1, 0, 0, 0, 1],
-    height: 75,
+    opacity: [1, 0, 0, 0, 0, 1],
+    height: [50, 50, 0, 0, 75, 75],
     transition: transitions.MenuContainer.contracted,
-    transitionEnd: {
-      justifyContent: "flex-end",
-    },
   },
 }
 
@@ -360,7 +403,7 @@ interface TopNavLinkProps {
 
 const TopNavLink = styled(TransitionLink)<TopNavLinkProps>`
   text-decoration: none;
-  color: ${p => (p.$isCurrent ? "gold" : "white")};
+  color: ${p => (p.$isCurrent ? p.theme.palette.highlightText : "white")};
   margin: auto 8px auto 8px;
   padding: 8px 16px;
   height: 20px;
@@ -372,12 +415,13 @@ export const HeaderSlashCard = ({
   data,
   location,
   windowWidth,
+  windowHeight,
 }: {
   data: any
   location: Location
   windowWidth: number
+  windowHeight: number
 }) => {
-  console.log(windowWidth)
   const [currentPath, setCurrentPath] = useState<string>(location.pathname)
   const [lastPath, setLastPath] = useState<string>(currentPath)
 
@@ -388,7 +432,6 @@ export const HeaderSlashCard = ({
   const animate = useMemo(() => getMenuAnimate(currentPath), [currentPath])
 
   function getMenuInitial(currentPath, lastPath) {
-    console.log(currentPath, lastPath)
     return currentPath == lastPath
       ? false
       : lastPath === "/"
@@ -449,80 +492,81 @@ export const HeaderSlashCard = ({
   //   }
   // }, [windowWidth])
 
-  console.log("animate: ", animate)
-  console.log("initial :", initial)
-
   return (
     <>
       {windowWidth && (
         <MenuCardContainer
           windowWidth={windowWidth}
+          windowHeight={windowHeight}
           animate={animate}
           initial={initial}
           layout
         >
-          <MenuCard layout>
+          <MenuCard>
             <MenuContainer>
-              <AnimatePresence>
-                {data.allMdx.edges.map((edge, index) => {
-                  let {
-                    node: {
-                      frontmatter: { title, path },
-                    },
-                  } = edge
+              <MenuPositionContainer>
+                <AnimatePresence>
+                  {data.allMdx.edges.map((edge, index) => {
+                    let {
+                      node: {
+                        frontmatter: { title, path },
+                      },
+                    } = edge
 
-                  if (path === null || path === "") {
-                    path = "/"
-                  } else {
-                    path = `/${path}`
-                    return (
-                      <TopNavLink
-                        to={`${path}`}
-                        key={index}
-                        $isCurrent={currentPath === path ? true : undefined}
-                        entry={{
-                          appearAfter: TRANSITION_DURATION,
-                          state: {
-                            initial: getNextInitial(path),
-                            animate: getNextAnimate(path),
-                          },
-                        }}
-                        exit={{
-                          length: TRANSITION_DURATION,
-                          state: {
-                            initial: getCurrentInitial(),
-                            animate: getExitAnimate(path),
-                          },
-                        }}
-                      >
-                        {title}
-                      </TopNavLink>
-                    )
+                    if (path === null || path === "") {
+                      path = "/"
+                    } else {
+                      path = `/${path}`
+                      return (
+                        <TopNavLink
+                          to={`${path}`}
+                          key={index}
+                          $isCurrent={currentPath === path ? true : undefined}
+                          entry={{
+                            delay: TRANSITION_DURATION,
+                            length: TRANSITION_DURATION,
+                            state: {
+                              initial: getNextInitial(path),
+                              animate: getNextAnimate(path),
+                            },
+                          }}
+                          exit={{
+                            length: TRANSITION_DURATION,
+                            state: {
+                              initial: getCurrentInitial(),
+                              animate: getExitAnimate(path),
+                            },
+                          }}
+                        >
+                          {title}
+                        </TopNavLink>
+                      )
+                    }
+                    // }
+                  })}
+                </AnimatePresence>
+                <TopNavLink
+                  to={`/blog`}
+                  $isCurrent={
+                    currentPath.indexOf(`/blog`) !== -1 ? true : undefined
                   }
-                  // }
-                })}
-              </AnimatePresence>
-              <TopNavLink
-                to={`/blog`}
-                $isCurrent={
-                  currentPath.indexOf(`/blog`) !== -1 ? true : undefined
-                }
-                entry={{
-                  length: TRANSITION_DURATION * 0.5,
-                  state: {
-                    initial: getNextAnimate("/blog"),
-                  },
-                }}
-                exit={{
-                  length: TRANSITION_DURATION * 0.5,
-                  state: {
-                    initial: getCurrentInitial(),
-                    animate: getExitAnimate("/blog"),
-                  },
-                }}
-              >
-                Blog
-              </TopNavLink>
+                  entry={{
+                    length: TRANSITION_DURATION * 0.5,
+                    state: {
+                      initial: getNextAnimate("/blog"),
+                    },
+                  }}
+                  exit={{
+                    length: TRANSITION_DURATION * 0.5,
+                    state: {
+                      initial: getCurrentInitial(),
+                      animate: getExitAnimate("/blog"),
+                    },
+                  }}
+                >
+                  Blog
+                </TopNavLink>
+              </MenuPositionContainer>
             </MenuContainer>
             <MenuMiddle>
               <MenuMiddleColumn>
@@ -577,7 +621,10 @@ export const HeaderSlashCard = ({
                 }}
               >
                 <PortraitPhotoBox>
-                  <PortraitPhoto src="/assets/media/tim-photo-cutout-bw.png" />
+                  <PortraitPhoto
+                    currentAnimate={animate}
+                    src="/assets/media/tim-photo-cutout-bw.png"
+                  />
                 </PortraitPhotoBox>
               </HomeNavLink>
             </MenuMiddle>

@@ -1,5 +1,5 @@
 // UI Libraries
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { Flex } from "rebass"
 import styled from "styled-components"
 import { Location } from "history"
@@ -88,7 +88,7 @@ const transitions = {
   },
   MenuContainer: {
     expanded: {
-      // delay: TRANSITION_DURATION * 0.4,
+      //delay: TRANSITION_DURATION * 0.4,
       duration: TRANSITION_DURATION * 0.6,
       // times: [
       //   0,

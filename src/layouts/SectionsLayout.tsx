@@ -4,24 +4,23 @@ import { Box } from "rebass/styled-components"
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
 import { ISectionEdge } from "../types"
 import styled from "styled-components"
-import { TRANSITION_DURATION, LayoutComponents } from "../Theme"
-import { Menu } from "components/Menu"
+import { TRANSITION_DURATION } from "../Theme"
 import { WindowLocation } from "@reach/router"
-import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 
 const ContentContainerVariants = {
   expanded: {
     opacity: [null, 0.8, 0.5, 0.3, 0.2, 0.1, 0],
     height: "0px",
     transition: {
-      duration: TRANSITION_DURATION * 0.25,
+      duration: TRANSITION_DURATION,
     },
   },
   contracted: {
-    height: "100%",
-    opacity: [null, 0.1, 0.2, 0.3, 0.5, 0.8, 1],
+    height: "unset",
+    opacity: [null, 0.05, 0.1, 0.2, 0.4, 0.8, 1],
     transition: {
-      duration: TRANSITION_DURATION * 0.25,
+      duration: TRANSITION_DURATION,
     },
   },
 }
@@ -34,6 +33,7 @@ const ContentContainer = styled(motion.custom(Box)).attrs(() => ({
   width: 100%;
   height: 100%;
   display: block;
+  color: ${p => p.theme.palette.darkBackground};
 `
 
 const InnerBodyContainerVariants = {
@@ -60,62 +60,22 @@ export default ({
   sectionTitle,
   location,
   current,
-  windowWidth,
-  windowHeight,
   children,
 }: {
   sectionTitle: string
   current: any
   location: WindowLocation
-  windowWidth: number
-  windowHeight: number
   children?: ReactNode[] | ReactNode
 }) => {
-  // if (exit || entry) {
-  //   debugger
-  // }
-
   const animate =
     current && current.state && current.state.animate
       ? current.state.animate
       : null
 
-  // (function() {
-  //   switch (transitionStatus) {
-  //     case "entering":
-  //       return entry.state.animate
-  //     case "exiting":
-  //       return exit.state.animate
-  //     case "entered":
-  //       return entry.state.animate
-  //     case "exited":
-  //       return exit.state.animate
-  //   }
-  // })()
-
   const initial =
     current && current.state && current.state.initial
       ? current.state.initial
       : null
-
-  // (function() {
-  //   switch (transitionStatus) {
-  //     case "entering":
-  //       return entry.state.initial
-  //     case "exiting":
-  //       return exit.state.initial
-  //     case "entered":
-  //       return entry.state.initial
-  //     case "exited":
-  //       return exit.state.initial
-  //   }
-  // })()
-  //   exit && exit.state.animate
-  //     ? exit.state.animate
-  //     : entry && entry.state.animate
-  //     ? entry.state.animate
-  //     : null
-  // const initial = exit ? exit.state.initial : entry ? entry.state.initial : null
 
   return (
     <StaticQuery
@@ -140,38 +100,27 @@ export default ({
         }
       `}
       render={data => (
-        <LayoutComponents.bodyContainer>
-          <InnerBodyContainer initial={initial} animate={animate} layout>
-            <AnimateSharedLayout>
-              {/* <Menu
-                windowWidth={windowWidth}
-                data={data}
-                location={location}
-                animate={animate}
-                initial={initial}
-              /> */}
-              <AnimatePresence>
-                {location.pathname !== "/" && (
-                  <ContentContainer
-                    initial={initial}
-                    animate={animate}
-                    layout
-                    key={sectionTitle + "ContentContainer"}
-                  >
-                    <MDXRenderer key={Math.random().toString()}>
-                      {data.allMdx.edges.filter((edge: ISectionEdge) => {
-                        return edge.node.frontmatter.title === sectionTitle
-                          ? true
-                          : false
-                      })[0]?.node.code.body || ""}
-                    </MDXRenderer>
-                    {children}
-                  </ContentContainer>
-                )}
-              </AnimatePresence>
-            </AnimateSharedLayout>
-          </InnerBodyContainer>
-        </LayoutComponents.bodyContainer>
+        <InnerBodyContainer initial={initial} animate={animate} layout>
+          <AnimatePresence>
+            <ContentContainer
+              initial={initial}
+              animate={animate}
+              layout
+              key={sectionTitle + "ContentContainer"}
+            >
+              {location.pathname !== "/" && (
+                <MDXRenderer key={Math.random().toString()}>
+                  {data.allMdx.edges.filter((edge: ISectionEdge) => {
+                    return edge.node.frontmatter.title === sectionTitle
+                      ? true
+                      : false
+                  })[0]?.node.code.body || ""}
+                </MDXRenderer>
+              )}
+              {children}
+            </ContentContainer>
+          </AnimatePresence>
+        </InnerBodyContainer>
       )}
     />
   )

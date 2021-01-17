@@ -9,17 +9,33 @@ export function useWindowConfig() {
     w: 0,
   })
 
+  let [resize, setResize] = useState<boolean>(false)
+
+  function getAdjustedWidth() {
+    if (window) {
+      if (window.innerWidth > 1000) {
+        return 1000 - 8
+      } else {
+        return window.innerWidth - 8
+      }
+    }
+  }
+
+  function triggerResize() {
+    setResize(true)
+  }
+
   useEffect(() => {
     if (window) {
-      let dimensions = { h: window.innerHeight, w: window.innerWidth }
-
-      if (window.innerWidth > 1000) {
-        dimensions.w = 1000
-      }
-
-      setDimensions(dimensions)
+      window.addEventListener("resize", triggerResize)
+      setDimensions({ h: window.innerHeight, w: getAdjustedWidth() })
+      setResize(false)
     }
-  }, [isBrowser])
+
+    return () => {
+      window.removeEventListener("resize", triggerResize)
+    }
+  }, [isBrowser, resize])
 
   return dimensions
 }

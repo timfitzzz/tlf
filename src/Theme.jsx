@@ -8,7 +8,17 @@ import React, { Fragment } from "react"
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components"
 import { Button } from "rebass/styled-components"
 import { Row, Column, Section } from "./components/elements";
-import { CVDatesDisplay, CVRow, CVSectionTitle, CVEmployer, CVDates, CVJobTitle, CVLocation, CVDescription, CVSection, CVEntryContainer, CVDescriptionListItem, CVDescriptionList } from './ContentUIComponents';
+import { CVColumn, CVDatesDisplay, CVRow, CVSectionTitle, CVEmployer, CVDates, CVJobTitle, CVLocation, CVDescription, CVSection, CVEntryContainer, CVDescriptionListItem, CVDescriptionList } from './ContentUIComponents';
+
+const colors = {
+  gold: 'gold',
+  gray: 'gray',
+  spectralMaroon: 'rgba(71, 19, 55, 1)',
+  spectralRed: '#b13254',
+  spectralDarkOrange: '#ff5349',
+  spectralOrange: '#ff7249',
+  spectralLightOrange: '#ff9248'
+}
 
 export const theme = {
   // TODO: https://rebassjs.org/theming
@@ -19,10 +29,13 @@ export const theme = {
     bodyB: `"Poppins", Arial, Helvetica, sans-serif`,
     body2: `"Crimson Text", Times New Roman, serif`
   },
-  colors: {
-    gold: 'gold',
-    gray: 'gray'
+  colors,
+  palette: {
+    darkBackground: colors.spectralMaroon,
+    highlightText: colors.spectralOrange,
+    lightBackground: colors.spectralRed,
   }
+
 }
 
 const GlobalStyle = createGlobalStyle`
@@ -37,17 +50,25 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     min-height: 100%;
     width: 100%;
-    min-width: 100%
+    min-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  body {
+    padding: 4px;
+    margin: 0px;
+    height: 100%;
+    min-height: 100%;
   }
 
-  /* #___gatsby {
+   #___gatsby {
     height: 100%;
     min-height: 100%;
     width: 100%;
     min-width: 100%;
 
   }
-
+  /*
   #gatsby-focus-wrapper {
     height: 100%;
     min-height: 100%;
@@ -115,7 +136,7 @@ export const LayoutComponents = {
   `
 }
 
-export const TRANSITION_DURATION = 5
+export const TRANSITION_DURATION = 1
 export const MIN_WIDTH = 304
 export const MIN_HEIGHT = 568
 
@@ -135,7 +156,8 @@ export const UIComponents = {
   Row: props => <Row {...props}>{props.children}</Row>,
   Column: props => <Column {...props}>{props.children}</Column>,
   Section: props => <Section {...props}>{props.children}</Section>,
-  CVDatesDisplay: props => <CVDatesDisplay {...props}>{props.children}</CVDatesDisplay>
+  CVDatesDisplay: props => <CVDatesDisplay {...props}>{props.children}</CVDatesDisplay>,
+  CVColumn: props => <CVColumn {...props}>{props.children}</CVColumn>
 }
 
 

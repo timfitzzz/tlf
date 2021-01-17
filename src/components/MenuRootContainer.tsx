@@ -10,7 +10,7 @@ export const MenuRootContainer = ({
 }: {
   location: Location<LocationState>
 }) => {
-  const { w } = WindowConfig.useContainer()
+  const { w, h } = WindowConfig.useContainer()
 
   return (
     <InternalProvider>
@@ -36,7 +36,12 @@ export const MenuRootContainer = ({
           }
         `}
         render={data => (
-          <HeaderSlashCard windowWidth={w} data={data} location={location} />
+          <HeaderSlashCard
+            windowWidth={w}
+            windowHeight={h}
+            data={data}
+            location={location}
+          />
         )}
       />
     </InternalProvider>

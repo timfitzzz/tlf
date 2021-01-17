@@ -34,10 +34,10 @@ export const CVJobTitle = styled.span`
   
 export const CVLocation = styled.span`
   font-family: ${p=>p.theme.fonts.title1};
-  margin-left: 8px;
+  margin-left: 0px;
   font-size: 14px;
   line-height: 15.5px;
-  margin-top: auto;
+  margin-top: 8px;
 `
 
 export const CVDescription = styled.div`
@@ -54,6 +54,11 @@ export const CVSection = styled(Box)`
 
 export const CVRow = styled(Flex)`
   margin-bottom: 4px!important;
+`
+
+export const CVColumn = styled(Flex)`
+  flex-direction: column;
+  width: 100%;
 `
 
 export const CVEntryContainer = styled(Box)`
@@ -83,7 +88,7 @@ export const CVDescriptionListItem = styled.li`
 const CVDatesDisplaySquare = styled.div`
   width: 3px;
   height: 1px;
-  background-color: ${p => p.fillSquare ? p.theme.colors.gold : p.theme.colors.gray};
+  background-color: ${p => p.fillSquare ? p.theme.palette.highlightText : 'lightgray' };
   margin: 0px 1px;
   padding: 1px 1px;
 `

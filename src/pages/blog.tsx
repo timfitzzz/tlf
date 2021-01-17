@@ -4,11 +4,9 @@ import React from "react"
 import { Link, graphql, StaticQuery } from "gatsby"
 import { WindowLocation } from "@reach/router"
 import { useTransitionState } from "gatsby-plugin-transition-link/hooks"
-import { WindowConfig } from "hooks/useWindowConfig"
 
 export default function Blog({ location }: { location: WindowLocation }) {
   const state = useTransitionState()
-  const { w } = WindowConfig.useContainer()
   const { current } = state
 
   return (
@@ -35,7 +33,6 @@ export default function Blog({ location }: { location: WindowLocation }) {
       `}
       render={data => (
         <SectionsLayout
-          windowWidth={w}
           current={current}
           sectionTitle={"blog"}
           location={location}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
-export const CVSectionTitle = styled.span`
+export const CVSectionTitle = styled.div`
   font-family: ${p=>p.theme.fonts.title1};
   font-size: 20px;
   font-weight: 500;
@@ -10,34 +10,41 @@ export const CVSectionTitle = styled.span`
   padding: 10px 0px 5px 0px;
 `
 
-export const CVEmployer = styled.span`
+export const CVEmployer = styled.div`
   font-family: ${p=>p.theme.fonts.title2};
   font-size: 16px;
+  line-height: 21px;
   font-weight: 600;
-  margin-top: 0;
+  margin-top: 0px;
 `
 
-export const CVDates = styled.span`
+export const CVDates = styled.div`
   font-family: ${p=>p.theme.fonts.title1};
   line-height: 21px;
   margin-left: auto;
   margin-top: auto;
 `
   
-export const CVJobTitle = styled.span`
+export const CVJobTitle = styled.div`
   font-family: ${p=>p.theme.fonts.title1};
-  font-style: italic;
   font-size: 16px;
   line-height: 20px;
-  padding-top: 4px;
+  margin-top: 4px;
+`
+
+export const CVFlexBreak = styled.div`
+  flex-basis: 100%;
+  height: 0;
 `
   
-export const CVLocation = styled.span`
+export const CVLocation = styled.div`
   font-family: ${p=>p.theme.fonts.title1};
-  margin-left: 0px;
+  font-style: italic;
+
+  white-space: nowrap;
+  margin-left: 8px;
   font-size: 14px;
-  line-height: 15.5px;
-  margin-top: 8px;
+  line-height: 21px;
 `
 
 export const CVDescription = styled.div`
@@ -55,6 +62,13 @@ export const CVSection = styled(Box)`
 export const CVRow = styled(Flex)`
   margin-bottom: 4px!important;
 `
+
+export const CVJobTitleRow = styled.div`
+  flex-direction: row;
+  flex-wrap: wrap;
+  display: inline-block;
+`
+
 
 export const CVColumn = styled(Flex)`
   flex-direction: column;
@@ -138,6 +152,14 @@ const CVDatesDisplayContainer = styled.div`
   margin-top: 5px;
 `
 
+const CVDatesDisplayOuterContainer = styled.div`
+  display: block;
+  float: right;
+  height: fit-content;
+  margin-left: 4px;
+  min-height: 30px;
+`
+
 const CVDatesBoxesContainer = styled(Flex)`
   flex-direction: column;
   padding: 1px 0;
@@ -197,30 +219,32 @@ export const CVDatesDisplay = ({startMonth, startYear, endMonth, endYear}) => {
   }
 
   return (
-    <CVDatesDisplayContainer>
-      <CVDatesYearColumn>
-        <CVDatesDisplayYear edge={ years.length > 1 ? 'top' : 'center'}>{endYear}</CVDatesDisplayYear>
-        { years.length > 1 && (
-          <CVDatesDisplayYear key={Math.random().toString()} edge={'bottom'}>{startYear}</CVDatesDisplayYear>
-        )}
-      </CVDatesYearColumn>
-      <CVDatesBoxesContainer>
-        { years.reverse().map(year => {
-          let monthA = 1;
-          let monthB = 12;
+    <CVDatesDisplayOuterContainer>
+      <CVDatesDisplayContainer>
+        <CVDatesYearColumn>
+          <CVDatesDisplayYear edge={ years.length > 1 ? 'top' : 'center'}>{endYear}</CVDatesDisplayYear>
+          { years.length > 1 && (
+            <CVDatesDisplayYear key={Math.random().toString()} edge={'bottom'}>{startYear}</CVDatesDisplayYear>
+          )}
+        </CVDatesYearColumn>
+        <CVDatesBoxesContainer>
+          { years.reverse().map(year => {
+            let monthA = 1;
+            let monthB = 12;
 
-          if (year === startYear)  {
-            monthA = startMonth
-          }
+            if (year === startYear)  {
+              monthA = startMonth
+            }
 
-          if (year === endYear) {
-            monthB = endMonth
-          }
+            if (year === endYear) {
+              monthB = endMonth
+            }
 
-          return getYearRow(monthA, monthB)
-        })}
-      </CVDatesBoxesContainer>
+            return getYearRow(monthA, monthB)
+          })}
+        </CVDatesBoxesContainer>
 
-    </CVDatesDisplayContainer>
+      </CVDatesDisplayContainer>
+    </CVDatesDisplayOuterContainer>
   )
 }

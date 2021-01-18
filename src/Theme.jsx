@@ -8,7 +8,7 @@ import React, { Fragment } from "react"
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components"
 import { Button } from "rebass/styled-components"
 import { Row, Column, Section } from "./components/elements";
-import { CVColumn, CVDatesDisplay, CVRow, CVSectionTitle, CVEmployer, CVDates, CVJobTitle, CVLocation, CVDescription, CVSection, CVEntryContainer, CVDescriptionListItem, CVDescriptionList } from './ContentUIComponents';
+import { CVColumn, CVDatesDisplay, CVRow, CVSectionTitle, CVEmployer, CVDates, CVJobTitle, CVLocation, CVDescription, CVSection, CVEntryContainer, CVDescriptionListItem, CVDescriptionList, CVFlexBreak, CVJobTitleRow } from './ContentUIComponents';
 
 const colors = {
   gold: 'gold',
@@ -112,28 +112,28 @@ export const LayoutComponents = {
   p: styled.p`
     font-size: 16px;
   `,
-  h2compact: styled.h2`
-    font-size: 15px;
-    margin: 2px 0px;
-    padding: 0px;
-    line-height: 20px;
-    font-weight: 400;
-  `,
+  // h2compact: styled.h2`
+  //   font-size: 15px;
+  //   margin: 2px 0px;
+  //   padding: 0px;
+  //   line-height: 20px;
+  //   font-weight: 400;
+  // `,
   h3: styled.h3`
     font-family: "Asap Condensed", Helvetica, sans-serif;
   `,
-  bodyContainer: styled.div`
-    background-color: white;
-    display: flex;
+  // bodyContainer: styled.div`
+  //   background-color: white;
+  //   display: flex;
 
-    flex-direction: column;
-    margin: auto auto;
-    align-items: top;
-    height: 100%;
-    width: 100%;
-    max-width: 1000px;
+  //   flex-direction: column;
+  //   margin: auto auto;
+  //   align-items: top;
+  //   height: 100%;
+  //   width: 100%;
+  //   max-width: 1000px;
     
-  `
+  // `
 }
 
 export const TRANSITION_DURATION = 1
@@ -157,7 +157,9 @@ export const UIComponents = {
   Column: props => <Column {...props}>{props.children}</Column>,
   Section: props => <Section {...props}>{props.children}</Section>,
   CVDatesDisplay: props => <CVDatesDisplay {...props}>{props.children}</CVDatesDisplay>,
-  CVColumn: props => <CVColumn {...props}>{props.children}</CVColumn>
+  CVColumn: props => <CVColumn {...props}>{props.children}</CVColumn>,
+  CVFlexBreak: props => <CVFlexBreak {...props}/>,
+  CVJobTitleRow: props => <CVJobTitleRow {...props}/>
 }
 
 

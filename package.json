@@ -105,8 +105,8 @@
     "netlify-cms-widget-mdx": "0.4.4",
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "react-head": "^3.0.2",
     "react-konva": "^16.13.0-6",
     "react-pose": "^4.0.10",
@@ -126,6 +126,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/damassi/gatsby-starter-typescript-rebass-netlifycms"
+  },
+  "resolutions": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
   },
   "bugs": {
     "url": "https://github.com/damassi/gatsby-starter-typescript-rebass-netlifycms/issues"

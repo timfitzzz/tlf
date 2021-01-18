@@ -112,28 +112,28 @@ export const LayoutComponents = {
   p: styled.p`
     font-size: 16px;
   `,
-  // h2compact: styled.h2`
-  //   font-size: 15px;
-  //   margin: 2px 0px;
-  //   padding: 0px;
-  //   line-height: 20px;
-  //   font-weight: 400;
-  // `,
+  h2compact: styled.h2`
+    font-size: 15px;
+    margin: 2px 0px;
+    padding: 0px;
+    line-height: 20px;
+    font-weight: 400;
+  `,
   h3: styled.h3`
     font-family: "Asap Condensed", Helvetica, sans-serif;
   `,
-  // bodyContainer: styled.div`
-  //   background-color: white;
-  //   display: flex;
+  bodyContainer: styled.div`
+    background-color: white;
+    display: flex;
 
-  //   flex-direction: column;
-  //   margin: auto auto;
-  //   align-items: top;
-  //   height: 100%;
-  //   width: 100%;
-  //   max-width: 1000px;
+    flex-direction: column;
+    margin: auto auto;
+    align-items: top;
+    height: 100%;
+    width: 100%;
+    max-width: 1000px;
     
-  // `
+  `
 }
 
 export const TRANSITION_DURATION = 1

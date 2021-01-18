@@ -10,15 +10,15 @@ import { AnimatePresence, motion } from "framer-motion"
 
 const ContentContainerVariants = {
   expanded: {
-    opacity: [null, 0.8, 0.5, 0.3, 0.2, 0.1, 0],
-    height: "0px",
+    opacity: [null, 0.8, 0.5, 0.2, 0.0, 0.0, 0],
+    // height: "0px",
     transition: {
       duration: TRANSITION_DURATION,
     },
   },
   contracted: {
-    height: "unset",
-    opacity: [null, 0.05, 0.1, 0.2, 0.4, 0.8, 1],
+    // height: "unset",
+    opacity: [null, 0.1, 0.3, 0.6, 0.75, 0.9, 1],
     transition: {
       duration: TRANSITION_DURATION,
     },
@@ -39,9 +39,15 @@ const ContentContainer = styled(motion.custom(Box)).attrs(() => ({
 const InnerBodyContainerVariants = {
   expanded: {
     marginTop: "8px",
+    transition: {
+      duration: TRANSITION_DURATION,
+    },
   },
   contracted: {
     marginTop: "8px",
+    transition: {
+      duration: TRANSITION_DURATION,
+    },
   },
 }
 
@@ -102,13 +108,13 @@ export default ({
       render={data => (
         <InnerBodyContainer initial={initial} animate={animate} layout>
           <AnimatePresence>
-            <ContentContainer
-              initial={initial}
-              animate={animate}
-              layout
-              key={sectionTitle + "ContentContainer"}
-            >
-              {location.pathname !== "/" && (
+            {location.pathname !== "/" && (
+              <ContentContainer
+                initial={initial}
+                animate={animate}
+                layout
+                key={sectionTitle + "ContentContainer"}
+              >
                 <MDXRenderer key={Math.random().toString()}>
                   {data.allMdx.edges.filter((edge: ISectionEdge) => {
                     return edge.node.frontmatter.title === sectionTitle
@@ -116,9 +122,9 @@ export default ({
                       : false
                   })[0]?.node.code.body || ""}
                 </MDXRenderer>
-              )}
-              {children}
-            </ContentContainer>
+                {children}
+              </ContentContainer>
+            )}
           </AnimatePresence>
         </InnerBodyContainer>
       )}

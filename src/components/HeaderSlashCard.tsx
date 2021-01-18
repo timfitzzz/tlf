@@ -74,6 +74,16 @@ const transitions = {
       delay: 0,
     },
   },
+  IconContainers: {
+    expanded: {
+      delay: TRANSITION_DURATION * 0.65,
+      duration: TRANSITION_DURATION * 0.2,
+    },
+    contracted: {
+      duration: TRANSITION_DURATION * 0.2,
+      delay: 0,
+    },
+  },
   PortraitPhotoBox: {
     expanded: {
       delay: TRANSITION_DURATION * 0.25,
@@ -156,7 +166,7 @@ const getMenuCardContainerVariants = (
     },
     contracted: {
       width: windowWidth ? [null, windowWidth - 16] : "100%",
-      marginTop: "0px",
+      marginTop: "8px",
       // flexDirection: "row-reverse",
       transition: transitions.MenuCardContainer.contracted,
     },
@@ -332,11 +342,13 @@ const DescriptionContainer = styled.div`
 const getTextContainerVariants = (lineHeight: number) => ({
   expanded: {
     lineHeight: `${lineHeight}px`,
+    paddingTop: 4,
     opacity: 1,
     transition: transitions.TextContainers.expanded,
   },
   contracted: {
     lineHeight: "0px",
+    paddingTop: 0,
     opacity: 0,
     transition: transitions.TextContainers.contracted,
   },
@@ -351,7 +363,7 @@ const NameContainer = styled(motion.div).attrs(() => ({
 
 const Name = styled.h1`
   margin-top: 8px;
-  margin-bottom: 0px;
+  margin-bottom: 8px;
   font-size: 28px;
   overflow: visible;
   color: white;
@@ -523,8 +535,8 @@ export const HeaderSlashCard = ({
                           key={index}
                           $isCurrent={currentPath === path ? true : undefined}
                           entry={{
-                            delay: TRANSITION_DURATION,
-                            length: TRANSITION_DURATION,
+                            delay: TRANSITION_DURATION * 0.75,
+                            length: TRANSITION_DURATION * 0.25,
                             state: {
                               initial: getNextInitial(path),
                               animate: getNextAnimate(path),
@@ -576,25 +588,25 @@ export const HeaderSlashCard = ({
                 <DescriptionContainer>
                   <DescH2
                     initial={initial || getCurrentInitial()}
-                    variants={getTextContainerVariants(20)}
+                    variants={getTextContainerVariants(16)}
                   >
                     programmer
                   </DescH2>
                   <DescH2
                     initial={initial || getCurrentInitial()}
-                    variants={getTextContainerVariants(20)}
+                    variants={getTextContainerVariants(16)}
                   >
                     sysadmin
                   </DescH2>
                   <DescH2
                     initial={initial || getCurrentInitial()}
-                    variants={getTextContainerVariants(20)}
+                    variants={getTextContainerVariants(16)}
                   >
                     systems engineer
                   </DescH2>
                   <DescH2
                     initial={initial || getCurrentInitial()}
-                    variants={getTextContainerVariants(20)}
+                    variants={getTextContainerVariants(16)}
                   >
                     useful human
                   </DescH2>

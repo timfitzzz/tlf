@@ -3,28 +3,34 @@ import { WindowConfig } from "hooks/useWindowConfig"
 import React from "react"
 import { Provider as StateProvider } from "unstated"
 import { LayoutComponents, Theme } from "./Theme"
-import { Location, LocationState } from "history"
+import { Location as LocationProvider } from "@reach/router"
 import { MenuRootContainer } from "./components/MenuRootContainer"
+import BodyContainer from "components/BodyContainer"
 
 // TODO: Need to create gatsby-plugin-react-head
 // import { HeadProvider } from "react-head"
 
 export const Boot: React.FunctionComponent<{
-  element: any
-  location: Location<LocationState>
-}> = ({ element, location }) => {
+  children: any
+}> = ({ children }) => {
   return (
-    <StateProvider>
-      <MDXProvider components={LayoutComponents}>
-        <Theme>
-          <WindowConfig.Provider>
-            <LayoutComponents.bodyContainer>
-              <MenuRootContainer location={location} />
-              {element}
-            </LayoutComponents.bodyContainer>
-          </WindowConfig.Provider>
-        </Theme>
-      </MDXProvider>
-    </StateProvider>
+    <LocationProvider>
+      {location => (
+        <StateProvider>
+          <MDXProvider components={LayoutComponents}>
+            <Theme>
+              <WindowConfig.Provider>
+                <BodyContainer>
+                  <MenuRootContainer location={location.location} />
+                  {children}
+                </BodyContainer>
+              </WindowConfig.Provider>
+            </Theme>
+          </MDXProvider>
+        </StateProvider>
+      )}
+    </LocationProvider>
   )
 }
+
+export default Boot

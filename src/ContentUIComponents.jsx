@@ -13,9 +13,10 @@ export const CVSectionTitle = styled.div`
 export const CVEmployer = styled.div`
   font-family: ${p=>p.theme.fonts.title2};
   font-size: 16px;
-  line-height: 21px;
+  line-height: 16px;
   font-weight: 600;
   margin-top: 0px;
+  margin-right: 8px;
 `
 
 export const CVDates = styled.div`
@@ -32,19 +33,27 @@ export const CVJobTitle = styled.div`
   margin-top: 4px;
 `
 
+export const CVJobTitleRow = styled.div`
+  flex-direction: row;
+  flex-wrap: wrap;
+  display: flex;
+  width: calc(100% - 116px);
+`
+
+
 export const CVFlexBreak = styled.div`
   flex-basis: 100%;
   height: 0;
 `
   
-export const CVLocation = styled.div`
+export const CVLocation = styled.span`
   font-family: ${p=>p.theme.fonts.title1};
   font-style: italic;
 
   white-space: nowrap;
-  margin-left: 8px;
   font-size: 14px;
-  line-height: 21px;
+  line-height: 14px;
+  margin-top: 2px;
 `
 
 export const CVDescription = styled.div`
@@ -63,11 +72,6 @@ export const CVRow = styled(Flex)`
   margin-bottom: 4px!important;
 `
 
-export const CVJobTitleRow = styled.div`
-  flex-direction: row;
-  flex-wrap: wrap;
-  display: inline-block;
-`
 
 
 export const CVColumn = styled(Flex)`
@@ -75,10 +79,16 @@ export const CVColumn = styled(Flex)`
   width: 100%;
 `
 
+export const CVJobTitleTextColumn = styled(Flex)`
+  flex-direction: column;
+  width: 100%;
+`
+
 export const CVEntryContainer = styled(Box)`
-  padding-left: 0px;
+  padding-left: 8px;
   padding-right: 8px;
   padding-top: 16px;
+  position: relative;
 `
 
 export const CVDescriptionList = styled.ul`
@@ -153,11 +163,10 @@ const CVDatesDisplayContainer = styled.div`
 `
 
 const CVDatesDisplayOuterContainer = styled.div`
-  display: block;
-  float: right;
-  height: fit-content;
-  margin-left: 4px;
-  min-height: 30px;
+  display: flex;
+  position: absolute;
+  top: 14px;
+  right: 8px;
 `
 
 const CVDatesBoxesContainer = styled(Flex)`

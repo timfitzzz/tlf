@@ -8,7 +8,7 @@ import React, { Fragment } from "react"
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components"
 import { Button } from "rebass/styled-components"
 import { Row, Column, Section } from "./components/elements";
-import { CVColumn, CVDatesDisplay, CVRow, CVSectionTitle, CVEmployer, CVDates, CVJobTitle, CVLocation, CVDescription, CVSection, CVEntryContainer, CVDescriptionListItem, CVDescriptionList, CVFlexBreak, CVJobTitleRow } from './ContentUIComponents';
+import { CVColumn, CVDatesDisplay, CVRow, CVSectionTitle, CVEmployer, CVDates, CVJobTitle, CVLocation, CVDescription, CVSection, CVEntryContainer, CVDescriptionListItem, CVDescriptionList, CVFlexBreak, CVJobTitleRow, CVJobTitleTextColumn } from './ContentUIComponents';
 
 const colors = {
   gold: 'gold',
@@ -59,6 +59,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0px;
     height: 100%;
     min-height: 100%;
+    overflow: scroll;
   }
 
    #___gatsby {
@@ -116,7 +117,7 @@ export const LayoutComponents = {
     font-size: 15px;
     margin: 2px 0px;
     padding: 0px;
-    line-height: 20px;
+    line-height: 15px;
     font-weight: 400;
   `,
   h3: styled.h3`
@@ -159,7 +160,8 @@ export const UIComponents = {
   CVDatesDisplay: props => <CVDatesDisplay {...props}>{props.children}</CVDatesDisplay>,
   CVColumn: props => <CVColumn {...props}>{props.children}</CVColumn>,
   CVFlexBreak: props => <CVFlexBreak {...props}/>,
-  CVJobTitleRow: props => <CVJobTitleRow {...props}/>
+  CVJobTitleRow: props => <CVJobTitleRow {...props}/>,
+  CVJobTitleTextColumn: props => <CVJobTitleTextColumn {...props}/>
 }
 
 

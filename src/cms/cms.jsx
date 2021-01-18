@@ -2,7 +2,7 @@ import { MdxControl, MdxPreview } from "netlify-cms-widget-mdx"
 import React, { Component } from "react"
 import { StyleSheetManager } from "styled-components"
 import { Theme, LayoutComponents, UIComponents } from "../Theme"
-import CMS, { init } from "netlify-cms"
+import CMS, { init } from "netlify-cms-app"
 
 const isClient = typeof window !== "undefined"
 const isDevelopment = process.env.NODE_ENV === "development"

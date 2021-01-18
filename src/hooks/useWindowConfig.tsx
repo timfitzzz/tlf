@@ -9,20 +9,27 @@ export function useWindowConfig() {
     w: 0,
   })
 
+  let [scrollbarWidth, setScrollbarWidth] = useState<number>(0)
+
   let [resize, setResize] = useState<boolean>(false)
+  let [scrollResize, setScrollResize] = useState<boolean>(false)
 
   function getAdjustedWidth() {
     if (window) {
       if (window.innerWidth > 1000) {
-        return 1000 - 8
+        return 1000 - 8 - 2 * scrollbarWidth
       } else {
-        return window.innerWidth - 8
+        return window.innerWidth - 8 - 2 * scrollbarWidth
       }
     }
   }
 
   function triggerResize() {
     setResize(true)
+  }
+
+  function triggerScrollResize() {
+    setScrollResize(true)
   }
 
   useEffect(() => {
@@ -36,6 +43,18 @@ export function useWindowConfig() {
       window.removeEventListener("resize", triggerResize)
     }
   }, [isBrowser, resize])
+
+  useEffect(() => {
+    if (window) {
+      window.document.addEventListener("resize", triggerScrollResize)
+      setScrollbarWidth(window.innerWidth - window.document.body.clientWidth)
+      setScrollResize(false)
+    }
+
+    return () => {
+      window.document.removeEventListener("resize", triggerScrollResize)
+    }
+  }, [isBrowser, scrollResize])
 
   return dimensions
 }

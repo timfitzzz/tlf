@@ -9,8 +9,8 @@ local_backend: true
 
 backend:
   name: github
-  repo: damassi/gatsby-starter-typescript-rebass-netlifycms
-  branch: master
+  repo: timfitzzz/tlf
+  branch: main
 
 display_url: http://localhost:41052/
 media_folder: static/assets

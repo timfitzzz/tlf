@@ -16,7 +16,7 @@ const transitions = {
   MenuCardContainer: {
     expanded: {
       delay: TRANSITION_DURATION * 0.1,
-      duration: TRANSITION_DURATION * 0.3,
+      duration: TRANSITION_DURATION * 0.6,
       // when: "beforeChildren",
       // staggerChildren: TRANSITION_DURATION / 20,
       // delayChildren: TRANSITION_DURATION * 0.8,
@@ -24,7 +24,7 @@ const transitions = {
       ease: "easeIn",
     },
     contracted: {
-      delay: TRANSITION_DURATION * 0.4,
+      delay: TRANSITION_DURATION * 0.3,
       duration: TRANSITION_DURATION * 0.4,
       // when: "afterChildren",
       // staggerChildren: TRANSITION_DURATION / 20,
@@ -33,40 +33,51 @@ const transitions = {
   },
   MenuCard: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.4,
-      duration: TRANSITION_DURATION * 0.2,
+      delay: TRANSITION_DURATION * 0.6,
+      duration: TRANSITION_DURATION * 0.3,
     },
     contracted: {
       delay: TRANSITION_DURATION * 0.2,
-      duration: TRANSITION_DURATION * 0.2,
+      duration: TRANSITION_DURATION * 0.5,
+      times: [0, 0.2, 1],
       // duration: TRANSITION_DURATION * 0.8,
     },
   },
   MenuMiddle: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.2,
+      delay: TRANSITION_DURATION * 0.3,
       duration: TRANSITION_DURATION * 0.3,
       ease: "easeIn",
     },
     contracted: {
-      delay: TRANSITION_DURATION * 0.6,
+      delay: TRANSITION_DURATION * 0.4,
       duration: TRANSITION_DURATION * 0.3,
       ease: "easeOut",
     },
   },
   MenuMiddleColumn: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.2,
-      duration: TRANSITION_DURATION * 0.7,
+      delay: TRANSITION_DURATION * 0.3,
+      duration: TRANSITION_DURATION * 0.3,
     },
     contracted: {
       delay: TRANSITION_DURATION * 0.3,
+      duration: TRANSITION_DURATION * 0.5,
+    },
+  },
+  PortraitPhotoColumn: {
+    expanded: {
+      delay: TRANSITION_DURATION * 0.3,
       duration: TRANSITION_DURATION * 0.3,
+    },
+    contracted: {
+      delay: TRANSITION_DURATION * 0.3,
+      duration: TRANSITION_DURATION * 0.5,
     },
   },
   TextContainers: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.65,
+      delay: TRANSITION_DURATION * 0.8,
       duration: TRANSITION_DURATION * 0.2,
     },
     contracted: {
@@ -76,8 +87,8 @@ const transitions = {
   },
   IconContainers: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.65,
-      duration: TRANSITION_DURATION * 0.2,
+      delay: TRANSITION_DURATION * 0.9,
+      duration: TRANSITION_DURATION * 0.1,
     },
     contracted: {
       duration: TRANSITION_DURATION * 0.2,
@@ -86,29 +97,29 @@ const transitions = {
   },
   PortraitPhotoBox: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.25,
+      delay: TRANSITION_DURATION * 0.8,
       duration: TRANSITION_DURATION * 0.2,
     },
     contracted: {
       duration: TRANSITION_DURATION * 0.2,
-      delay: TRANSITION_DURATION * 0.1,
+      delay: TRANSITION_DURATION * 0.0,
     },
   },
   PortraitPhoto: {
     expanded: {
-      delay: TRANSITION_DURATION * 0.65,
+      delay: TRANSITION_DURATION * 0.8,
       duration: TRANSITION_DURATION * 0.2,
     },
     contracted: {
       duration: TRANSITION_DURATION * 0.2,
-      delay: TRANSITION_DURATION * 0.1,
+      delay: TRANSITION_DURATION * 0.0,
     },
   },
   MenuContainer: {
     expanded: {
       delay: TRANSITION_DURATION * 0.0,
       duration: TRANSITION_DURATION * 1,
-      times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+      times: [0, 0.1, 0.3, 0.7, 0.9, 1],
       // times: [
       //   0,
       //   TRANSITION_DURATION * 0.25,
@@ -118,9 +129,9 @@ const transitions = {
       // ],
     },
     contracted: {
-      delay: TRANSITION_DURATION * 0.1,
-      duration: TRANSITION_DURATION * 0.9,
-      times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+      delay: TRANSITION_DURATION * 0.0,
+      duration: TRANSITION_DURATION,
+      times: [0, 0.1, 0.4, 0.7, 0.9, 0.95, 1],
       // times: [
       //   0,
       //   TRANSITION_DURATION * 0.25,
@@ -136,7 +147,7 @@ const transitions = {
       duration: TRANSITION_DURATION * 0.1,
     },
     contracted: {
-      delay: TRANSITION_DURATION * 0.5,
+      delay: TRANSITION_DURATION * 0.7,
       duration: TRANSITION_DURATION * 0.1,
     },
   },
@@ -200,9 +211,9 @@ const MenuCardVariants: {
     transition: transitions.MenuCard.expanded,
   },
   contracted: {
-    height: "75px",
-    borderTopLeftRadius: "35px",
-    borderBottomLeftRadius: "35px",
+    height: [null, "75px", "75px"],
+    borderTopLeftRadius: [null, "35px", "35px"],
+    borderBottomLeftRadius: [null, "35px", "35px"],
     transitionEnd: {
       flexDirection: "row-reverse",
     },
@@ -228,12 +239,13 @@ const MenuMiddleVariants = {
     paddingTop: 6,
     marginLeft: "8px",
     alignItems: "inherit",
+    justifyContent: "end",
     transition: transitions.MenuMiddle.expanded,
   },
   contracted: {
     height: [null, 170, 115, 75],
     marginLeft: "7px",
-    width: 86,
+    width: 60,
     paddingTop: 6,
     transition: transitions.MenuMiddle.contracted,
   },
@@ -254,16 +266,15 @@ const MenuMiddle = styled(motion.div).attrs(() => ({
 const MenuMiddleColumnVariants = {
   expanded: {
     opacity: [null, 0, 0.2, 0.6, 0.9, 1],
-    width: [null, "0%", "25%", "50%", "75%", "100%"],
-    display: "flex",
+    width: [null, "0%", "15%", "30%", "40%", "50%"],
     height: "100%",
     transition: transitions.MenuMiddleColumn.expanded,
+    display: "flex",
   },
   contracted: {
-    opacity: [null, 1, 0.9, 0.6, 0.2, 0],
-    width: [null, "100%", "60%", "40%", "15%", "0%"],
-    display: "flex",
-    height: "0%",
+    // opacity: [null, 1, 0.9, 0.6, 0.2, 0],
+    width: [null, "0%"],
+    height: [null, "0%"],
     transition: transitions.MenuMiddleColumn.contracted,
     transitionEnd: {
       display: "none",
@@ -277,9 +288,23 @@ const MenuMiddleColumn = styled(motion.div).attrs(() => ({
   flex-direction: column;
 `
 
+const PortraitPhotoColumn = styled(motion.div).attrs(() => ({
+  variants: {
+    expanded: {
+      width: "50%",
+      transition: transitions.PortraitPhotoColumn.expanded,
+    },
+    contracted: {
+      width: "100%",
+      transition: transitions.PortraitPhotoColumn.contracted,
+    },
+  },
+}))``
+
 const PortraitPhotoBoxVariants = {
   expanded: {
-    height: "unset",
+    height: 231,
+    width: 120,
     borderRadius: "1px",
     border: "0px",
     backgroundColor: theme.palette.darkBackground, //"rgba(0,0,0,1)",
@@ -287,6 +312,7 @@ const PortraitPhotoBoxVariants = {
   },
   contracted: {
     height: "60px",
+    width: 60,
     borderRadius: "50%",
     border: "1px solid white",
     backgroundColor: "rgba(255,255,255,1)",
@@ -301,7 +327,8 @@ const PortraitPhotoBox = styled(motion.div).attrs(() => ({
   align-content: center;
   text-align: center;
   margin-bottom: 0;
-  margin-right: 24px;
+  margin-right: auto;
+  margin-left: auto;
 `
 
 const PortraitPhotoVariants = {
@@ -387,16 +414,17 @@ const MenuPositionContainer = styled(motion.div).attrs(() => ({
   width: 304px;
 `
 
+// times: [0, 0.1, 0.4, 0.7, 0.9, 0.95, 1],
 const MenuContainerVariants = {
   expanded: {
     opacity: [null, 0, 0, 0, 0, 1],
-    height: [75, 75, 0, 0, 50, 50],
-    width: [304, 304, 0, 0, 304, 304],
+    height: [75, 75, 0, 0, 0, 50],
+    width: [304, 304, 0, 0, 0, 304],
     transition: transitions.MenuContainer.expanded,
   },
   contracted: {
-    opacity: [1, 0, 0, 0, 0, 1],
-    height: [50, 50, 0, 0, 75, 75],
+    opacity: [null, 0, 0, 0, 0, 1, 1],
+    height: [null, 0, 0, 0, 75, 75, 75],
     transition: transitions.MenuContainer.contracted,
   },
 }
@@ -612,33 +640,35 @@ export const HeaderSlashCard = ({
                   </DescH2>
                 </DescriptionContainer>
               </MenuMiddleColumn>
-              <HomeNavLink
-                to={"/"}
-                key={"indexlink"}
-                disabled={currentPath === "/" ? true : false}
-                $isCurrent={false}
-                entry={{
-                  length: TRANSITION_DURATION,
-                  state: {
-                    initial: getNextInitial("/"),
-                    animate: getNextAnimate("/"),
-                  },
-                }}
-                exit={{
-                  length: TRANSITION_DURATION,
-                  state: {
-                    initial: getCurrentInitial(),
-                    animate: getExitAnimate("/"),
-                  },
-                }}
-              >
-                <PortraitPhotoBox>
-                  <PortraitPhoto
-                    currentAnimate={animate}
-                    src="/assets/media/tim-photo-cutout-bw.png"
-                  />
-                </PortraitPhotoBox>
-              </HomeNavLink>
+              <PortraitPhotoColumn>
+                <HomeNavLink
+                  to={"/"}
+                  key={"indexlink"}
+                  disabled={currentPath === "/" ? true : false}
+                  $isCurrent={false}
+                  entry={{
+                    length: TRANSITION_DURATION,
+                    state: {
+                      initial: getNextInitial("/"),
+                      animate: getNextAnimate("/"),
+                    },
+                  }}
+                  exit={{
+                    length: TRANSITION_DURATION,
+                    state: {
+                      initial: getCurrentInitial(),
+                      animate: getExitAnimate("/"),
+                    },
+                  }}
+                >
+                  <PortraitPhotoBox>
+                    <PortraitPhoto
+                      currentAnimate={animate}
+                      src="/assets/media/tim-photo-cutout-bw.png"
+                    />
+                  </PortraitPhotoBox>
+                </HomeNavLink>
+              </PortraitPhotoColumn>
             </MenuMiddle>
           </MenuCard>
         </MenuCardContainer>

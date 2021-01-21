@@ -10,6 +10,8 @@ export const MenuRootContainer = ({
   location: Location<LocationState>
 }) => {
   const { w, h } = WindowConfig.useContainer()
+  // eslint-disable-next-line
+  console.log("loaded menu root container")
 
   return (
     <StaticQuery

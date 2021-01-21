@@ -22,7 +22,7 @@ export const Boot: React.FunctionComponent<{
               <WindowConfig.Provider>
                 <BodyContainer>
                   <MenuRootContainer location={location.location} />
-                  {children}
+                  {children !== 0 ? children : null}
                 </BodyContainer>
               </WindowConfig.Provider>
             </Theme>

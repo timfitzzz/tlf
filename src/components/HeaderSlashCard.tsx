@@ -5,6 +5,13 @@ import styled from "styled-components"
 import { Location } from "history"
 import { AnimatePresence, motion, TargetAndTransition } from "framer-motion"
 
+// social SVGs
+import InstagramIcon from "../../static/assets/media/instagram.svg"
+import LinkedInIcon from "../../static/assets/media/linkedin.svg"
+import GithubIcon from "../../static/assets/media/github.svg"
+import TwitterIcon from "../../static/assets/media/twitter.svg"
+import EmailIcon from "../../static/assets/media/email.svg"
+
 // Gatsby Lifecycle
 import TransitionLink from "gatsby-plugin-transition-link"
 
@@ -71,8 +78,9 @@ const transitions = {
       duration: TRANSITION_DURATION * 0.3,
     },
     contracted: {
-      delay: TRANSITION_DURATION * 0.3,
+      delay: TRANSITION_DURATION * 0.25,
       duration: TRANSITION_DURATION * 0.5,
+      times: [0, 0.1, 1],
     },
   },
   TextContainers: {
@@ -85,7 +93,19 @@ const transitions = {
       delay: 0,
     },
   },
-  IconContainers: {
+  TopNavNameContainer: {
+    expanded: {
+      delay: TRANSITION_DURATION * 0,
+      duration: TRANSITION_DURATION * 0.3,
+      times: [0, 0.1, 1],
+    },
+    contracted: {
+      duration: TRANSITION_DURATION * 0.3,
+      delay: TRANSITION_DURATION * 0.5,
+      times: [0, 0.9, 1],
+    },
+  },
+  SocialIconsContainer: {
     expanded: {
       delay: TRANSITION_DURATION * 0.9,
       duration: TRANSITION_DURATION * 0.1,
@@ -171,7 +191,7 @@ const getMenuCardContainerVariants = (
       // flexDirection: "column",
 
       marginTop: windowHeight
-        ? [null, (windowHeight - 300) / 2 + "px"]
+        ? [null, (windowHeight - 320) / 2 + "px"]
         : "auto",
 
       transition: transitions.MenuCardContainer.expanded,
@@ -203,7 +223,7 @@ const MenuCardVariants: {
   contracted: TargetAndTransition
 } = {
   expanded: {
-    height: "300px",
+    height: "320px",
     borderTopLeftRadius: "16px",
     borderBottomLeftRadius: "16px",
     transitionEnd: {
@@ -237,7 +257,6 @@ const MenuMiddleVariants = {
   expanded: {
     height: [null, 150, 201, 253],
     width: 288,
-    paddingTop: 6,
     marginLeft: "8px",
     alignItems: "inherit",
     justifyContent: "end",
@@ -246,8 +265,7 @@ const MenuMiddleVariants = {
   contracted: {
     height: [null, 170, 115, 75],
     marginLeft: "7px",
-    width: 60,
-    paddingTop: 6,
+    width: 200,
     transition: transitions.MenuMiddle.contracted,
   },
 }
@@ -260,21 +278,21 @@ const MenuMiddle = styled(motion.div).attrs(() => ({
   justify-content: center;
   max-width: "100%";
   margin-right: auto;
-  margin-top: auto;
+  margin-top: 0;
   margin-bottom: auto;
 `
 
 const MenuMiddleColumnVariants = {
   expanded: {
     opacity: [null, 0, 0.2, 0.6, 0.9, 1],
-    width: [null, "0%", "15%", "30%", "40%", "50%"],
+    width: [null, 0, 20, 40, 50, 136],
     height: "100%",
     transition: transitions.MenuMiddleColumn.expanded,
     display: "flex",
   },
   contracted: {
     // opacity: [null, 1, 0.9, 0.6, 0.2, 0],
-    width: [null, "0%"],
+    width: [null, 0],
     height: [null, "0%"],
     transition: transitions.MenuMiddleColumn.contracted,
     transitionEnd: {
@@ -292,11 +310,13 @@ const MenuMiddleColumn = styled(motion.div).attrs(() => ({
 const PortraitPhotoColumn = styled(motion.div).attrs(() => ({
   variants: {
     expanded: {
-      width: "50%",
+      width: 144,
+      marginTop: 8,
       transition: transitions.PortraitPhotoColumn.expanded,
     },
     contracted: {
-      width: "100%",
+      width: 62,
+      marginTop: [null, 6, 6, 6],
       transition: transitions.PortraitPhotoColumn.contracted,
     },
   },
@@ -308,6 +328,7 @@ const PortraitPhotoBoxVariants = {
     width: 120,
     borderRadius: "1px",
     border: "0px",
+    paddingLeft: 16,
     backgroundColor: [
       null,
       theme.palette.darkBackground,
@@ -322,6 +343,7 @@ const PortraitPhotoBoxVariants = {
     border: "1px solid white",
     backgroundColor: "rgba(255,255,255,1)",
     transition: transitions.PortraitPhotoBox.contracted,
+    paddingLeft: [null, null, null, 0],
   },
 }
 
@@ -362,9 +384,12 @@ const PortraitPhoto = styled(motion.img).attrs(() => ({
   object-fit: cover;
   object-position: top;
   overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
 `
 
 const DescriptionContainer = styled.div`
+  margin-top: 8px;
   margin-left: 16px;
   margin-right: auto;
   margin-bottom: 8px;
@@ -374,13 +399,11 @@ const DescriptionContainer = styled.div`
 const getTextContainerVariants = (lineHeight: number) => ({
   expanded: {
     lineHeight: `${lineHeight}px`,
-    paddingTop: 4,
     opacity: 1,
     transition: transitions.TextContainers.expanded,
   },
   contracted: {
     lineHeight: "0px",
-    paddingTop: 0,
     opacity: 0,
     transition: transitions.TextContainers.contracted,
   },
@@ -397,6 +420,37 @@ const Name = styled.h1`
   margin-top: 8px;
   margin-bottom: 8px;
   font-size: 28px;
+  overflow: visible;
+  color: white;
+`
+
+const TopNavNameContainer = styled(motion.div).attrs(() => ({
+  variants: {
+    expanded: {
+      paddingTop: 0,
+      opacity: [null, 0, 0],
+      transition: transitions.TopNavNameContainer.expanded,
+      width: 0,
+    },
+    contracted: {
+      paddingTop: 0,
+      opacity: [null, 0, 1],
+      transition: transitions.TopNavNameContainer.contracted,
+      width: 120,
+    },
+  },
+}))`
+  margin-left: 16px;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+`
+
+const TopNavName = styled.div`
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 16px;
   overflow: visible;
   color: white;
 `
@@ -426,21 +480,56 @@ const MenuContainerVariants = {
     height: [75, 75, 0, 0, 0, 50],
     width: [304, 304, 0, 0, 0, 304],
     transition: transitions.MenuContainer.expanded,
+    marginTop: 6,
   },
   contracted: {
     opacity: [null, 0, 0, 0, 0, 1, 1],
     height: [null, 0, 0, 0, 75, 75, 75],
     transition: transitions.MenuContainer.contracted,
+    marginTop: [null, 4, 2, 0, 0, 0, 0],
   },
 }
 
 const MenuContainer = styled(motion.custom(Flex)).attrs(() => ({
   variants: MenuContainerVariants,
 }))`
-  margin-top: 8px;
   flex-direction: row;
   max-width: 500px;
 `
+
+const SocialIconsContainer = styled(motion.div).attrs(() => ({
+  variants: {
+    expanded: {
+      height: "auto",
+      transition: transitions.SocialIconsContainer.expanded,
+    },
+    contracted: {
+      height: "0px",
+      transition: transitions.SocialIconsContainer.contracted,
+    },
+  },
+}))`
+  display: flex;
+  flex-direction: row;
+  margin-top: 16px;
+  margin-left: 12px;
+  width: 125px;
+  justify-content: space-around;
+  overflow: hidden;
+  > a {
+    > svg {
+      fill: white;
+      width: 16px;
+    }
+  }
+`
+
+// const SocialIcon = styled(motion.img).attrs(() => ({
+//   variants: {
+//     expanded: {},
+//     contracted: {},
+//   },
+// }))``
 
 interface TopNavLinkProps {
   readonly iscurrent: boolean
@@ -646,6 +735,43 @@ export const HeaderSlashCard = ({
                     useful human
                   </DescH2>
                 </DescriptionContainer>
+                <SocialIconsContainer>
+                  <a
+                    href={"https://github.com/timfitzzz"}
+                    target={"_blank"}
+                    rel="noreferrer"
+                  >
+                    <GithubIcon />
+                  </a>
+                  <a
+                    href={"https://twitter.com/timfitzzz"}
+                    target={"_blank"}
+                    rel="noreferrer"
+                  >
+                    <TwitterIcon />
+                  </a>
+                  <a
+                    href={"https://instagram.com/diceytroop"}
+                    target={"_blank"}
+                    rel="noreferrer"
+                  >
+                    <InstagramIcon />
+                  </a>
+                  <a
+                    href={"https://linkedin.com/timlfitzgerald"}
+                    target={"_blank"}
+                    rel="noreferrer"
+                  >
+                    <LinkedInIcon />
+                  </a>
+                  <a
+                    href={"mailto:timothyliamfitzgerald@gmail.com"}
+                    target={"_blank"}
+                    rel="noreferrer"
+                  >
+                    <EmailIcon />
+                  </a>
+                </SocialIconsContainer>
               </MenuMiddleColumn>
               <PortraitPhotoColumn>
                 <HomeNavLink
@@ -676,6 +802,13 @@ export const HeaderSlashCard = ({
                   </PortraitPhotoBox>
                 </HomeNavLink>
               </PortraitPhotoColumn>
+              <AnimatePresence>
+                {animate === "contracted" && (
+                  <TopNavNameContainer>
+                    <TopNavName>Tim L. Fitzgerald</TopNavName>
+                  </TopNavNameContainer>
+                )}
+              </AnimatePresence>
             </MenuMiddle>
           </MenuCard>
         </MenuCardContainer>

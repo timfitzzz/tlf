@@ -95,6 +95,14 @@ module.exports = {
       options: {
         layout: require.resolve(`./src/Boot.tsx`)
       }
-   }
+    },
+    {
+      resolve: `gatsby-plugin-react-svg`,
+      options: {
+        rule: {
+          include: /assets/
+        }
+      }
+    }
   ],
 }

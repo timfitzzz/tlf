@@ -78,6 +78,13 @@ module.exports = {
         path: `${__dirname}/content/mdx/`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: "images",
+        path: `${__dirname}/images`
+      }
+    },
     "gatsby-plugin-catch-links",
     "gatsby-plugin-styled-components",
     "gatsby-plugin-typescript",

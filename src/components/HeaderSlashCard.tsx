@@ -99,6 +99,7 @@ const transitions = {
     expanded: {
       delay: TRANSITION_DURATION * 0.8,
       duration: TRANSITION_DURATION * 0.2,
+      times: [0, 0.2, 1],
     },
     contracted: {
       duration: TRANSITION_DURATION * 0.2,
@@ -307,7 +308,11 @@ const PortraitPhotoBoxVariants = {
     width: 120,
     borderRadius: "1px",
     border: "0px",
-    backgroundColor: theme.palette.darkBackground, //"rgba(0,0,0,1)",
+    backgroundColor: [
+      null,
+      theme.palette.darkBackground,
+      theme.palette.darkBackground,
+    ], //"rgba(0,0,0,1)",
     transition: transitions.PortraitPhotoBox.expanded,
   },
   contracted: {
@@ -452,11 +457,13 @@ const TopNavLink = styled(TransitionLink)<TopNavLinkProps>`
 const HomeNavLink = styled(TransitionLink)``
 
 export const HeaderSlashCard = ({
+  headerImageUrl,
   data,
   location,
   windowWidth,
   windowHeight,
 }: {
+  headerImageUrl: string
   data: any
   location: Location
   windowWidth: number
@@ -531,7 +538,7 @@ export const HeaderSlashCard = ({
   //     setWidth(windowWidth)
   //   }
   // }, [windowWidth])
-
+  // imageData.allImageSharp.edges[0].node.resize.src
   return (
     <>
       {windowWidth && (
@@ -664,7 +671,7 @@ export const HeaderSlashCard = ({
                   <PortraitPhotoBox>
                     <PortraitPhoto
                       currentAnimate={animate}
-                      src="/assets/media/tim-photo-cutout-bw.png"
+                      src={headerImageUrl}
                     />
                   </PortraitPhotoBox>
                 </HomeNavLink>

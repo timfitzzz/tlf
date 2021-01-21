@@ -14,7 +14,7 @@ export const MenuRootContainer = ({
   return (
     <StaticQuery
       query={graphql`
-        query SectionsQuery {
+        query timImageAndSectionsQuery {
           allMdx(filter: { fileAbsolutePath: { regex: "/content/mdx/" } }) {
             edges {
               node {
@@ -31,10 +31,23 @@ export const MenuRootContainer = ({
               }
             }
           }
+          allImageSharp(
+            filter: { resize: { src: { regex: "/(tim-photo-cutout-bw)/" } } }
+          ) {
+            edges {
+              node {
+                id
+                resize(width: 240) {
+                  src
+                }
+              }
+            }
+          }
         }
       `}
       render={data => (
         <HeaderSlashCard
+          headerImageUrl={data.allImageSharp.edges[0].node.resize.src}
           windowWidth={w}
           windowHeight={h}
           data={data}

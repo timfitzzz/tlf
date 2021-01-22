@@ -630,189 +630,187 @@ export const HeaderSlashCard = ({
   // imageData.allImageSharp.edges[0].node.resize.src
   return (
     <>
-      {windowWidth && (
-        <MenuCardContainer
-          windowWidth={windowWidth}
-          windowHeight={windowHeight}
-          animate={animate}
-          initial={initial}
-          layout
-        >
-          <MenuCard>
-            <MenuContainer>
-              <MenuPositionContainer>
-                <AnimatePresence>
-                  {data.allMdx.edges.map((edge, index) => {
-                    let {
-                      node: {
-                        frontmatter: { title, path },
-                      },
-                    } = edge
-
-                    if (path === null || path === "") {
-                      path = "/"
-                    } else {
-                      path = `/${path}`
-                      return (
-                        <TopNavLink
-                          to={`${path}`}
-                          key={index}
-                          $isCurrent={currentPath === path ? true : undefined}
-                          entry={{
-                            delay: TRANSITION_DURATION * 0.75,
-                            length: TRANSITION_DURATION * 0.25,
-                            state: {
-                              initial: getNextInitial(path),
-                              animate: getNextAnimate(path),
-                            },
-                          }}
-                          exit={{
-                            length: TRANSITION_DURATION,
-                            state: {
-                              initial: getCurrentInitial(),
-                              animate: getExitAnimate(path),
-                            },
-                          }}
-                        >
-                          {title}
-                        </TopNavLink>
-                      )
-                    }
-                    // }
-                  })}
-                </AnimatePresence>
-                <TopNavLink
-                  to={`/blog`}
-                  $isCurrent={
-                    currentPath.indexOf(`/blog`) !== -1 ? true : undefined
-                  }
-                  entry={{
-                    length: TRANSITION_DURATION * 0.5,
-                    state: {
-                      initial: getNextAnimate("/blog"),
-                    },
-                  }}
-                  exit={{
-                    length: TRANSITION_DURATION * 0.5,
-                    state: {
-                      initial: getCurrentInitial(),
-                      animate: getExitAnimate("/blog"),
-                    },
-                  }}
-                >
-                  Blog
-                </TopNavLink>
-              </MenuPositionContainer>
-            </MenuContainer>
-            <MenuMiddle>
-              <MenuMiddleColumn>
-                <NameContainer>
-                  <Name>Tim L. Fitzgerald</Name>
-                </NameContainer>
-                <DescriptionContainer>
-                  <DescH2
-                    initial={initial || getCurrentInitial()}
-                    variants={getTextContainerVariants(16)}
-                  >
-                    programmer
-                  </DescH2>
-                  <DescH2
-                    initial={initial || getCurrentInitial()}
-                    variants={getTextContainerVariants(16)}
-                  >
-                    sysadmin
-                  </DescH2>
-                  <DescH2
-                    initial={initial || getCurrentInitial()}
-                    variants={getTextContainerVariants(16)}
-                  >
-                    systems engineer
-                  </DescH2>
-                  <DescH2
-                    initial={initial || getCurrentInitial()}
-                    variants={getTextContainerVariants(16)}
-                  >
-                    useful human
-                  </DescH2>
-                </DescriptionContainer>
-                <SocialIconsContainer>
-                  <a
-                    href={"https://github.com/timfitzzz"}
-                    target={"_blank"}
-                    rel="noreferrer"
-                  >
-                    <GithubIcon />
-                  </a>
-                  <a
-                    href={"https://twitter.com/timfitzzz"}
-                    target={"_blank"}
-                    rel="noreferrer"
-                  >
-                    <TwitterIcon />
-                  </a>
-                  <a
-                    href={"https://instagram.com/diceytroop"}
-                    target={"_blank"}
-                    rel="noreferrer"
-                  >
-                    <InstagramIcon />
-                  </a>
-                  <a
-                    href={"https://linkedin.com/timlfitzgerald"}
-                    target={"_blank"}
-                    rel="noreferrer"
-                  >
-                    <LinkedInIcon />
-                  </a>
-                  <a
-                    href={"mailto:timothyliamfitzgerald@gmail.com"}
-                    target={"_blank"}
-                    rel="noreferrer"
-                  >
-                    <EmailIcon />
-                  </a>
-                </SocialIconsContainer>
-              </MenuMiddleColumn>
-              <PortraitPhotoColumn>
-                <HomeNavLink
-                  to={"/"}
-                  key={"indexlink"}
-                  disabled={currentPath === "/" ? true : false}
-                  $isCurrent={false}
-                  entry={{
-                    length: TRANSITION_DURATION,
-                    state: {
-                      initial: getNextInitial("/"),
-                      animate: getNextAnimate("/"),
-                    },
-                  }}
-                  exit={{
-                    length: TRANSITION_DURATION,
-                    state: {
-                      initial: getCurrentInitial(),
-                      animate: getExitAnimate("/"),
-                    },
-                  }}
-                >
-                  <PortraitPhotoBox>
-                    <PortraitPhoto
-                      currentAnimate={animate}
-                      src={headerImageUrl}
-                    />
-                  </PortraitPhotoBox>
-                </HomeNavLink>
-              </PortraitPhotoColumn>
+      <MenuCardContainer
+        windowWidth={windowWidth}
+        windowHeight={windowHeight}
+        animate={animate}
+        initial={initial}
+        layout
+      >
+        <MenuCard>
+          <MenuContainer>
+            <MenuPositionContainer>
               <AnimatePresence>
-                {animate === "contracted" && (
-                  <TopNavNameContainer>
-                    <TopNavName>Tim L. Fitzgerald</TopNavName>
-                  </TopNavNameContainer>
-                )}
+                {data.allMdx.edges.map((edge, index) => {
+                  let {
+                    node: {
+                      frontmatter: { title, path },
+                    },
+                  } = edge
+
+                  if (path === null || path === "") {
+                    path = "/"
+                  } else {
+                    path = `/${path}`
+                    return (
+                      <TopNavLink
+                        to={`${path}`}
+                        key={index}
+                        $isCurrent={currentPath === path ? true : undefined}
+                        entry={{
+                          delay: TRANSITION_DURATION * 0.75,
+                          length: TRANSITION_DURATION * 0.25,
+                          state: {
+                            initial: getNextInitial(path),
+                            animate: getNextAnimate(path),
+                          },
+                        }}
+                        exit={{
+                          length: TRANSITION_DURATION,
+                          state: {
+                            initial: getCurrentInitial(),
+                            animate: getExitAnimate(path),
+                          },
+                        }}
+                      >
+                        {title}
+                      </TopNavLink>
+                    )
+                  }
+                  // }
+                })}
               </AnimatePresence>
-            </MenuMiddle>
-          </MenuCard>
-        </MenuCardContainer>
-      )}
+              <TopNavLink
+                to={`/blog`}
+                $isCurrent={
+                  currentPath.indexOf(`/blog`) !== -1 ? true : undefined
+                }
+                entry={{
+                  length: TRANSITION_DURATION * 0.5,
+                  state: {
+                    initial: getNextAnimate("/blog"),
+                  },
+                }}
+                exit={{
+                  length: TRANSITION_DURATION * 0.5,
+                  state: {
+                    initial: getCurrentInitial(),
+                    animate: getExitAnimate("/blog"),
+                  },
+                }}
+              >
+                Blog
+              </TopNavLink>
+            </MenuPositionContainer>
+          </MenuContainer>
+          <MenuMiddle>
+            <MenuMiddleColumn>
+              <NameContainer>
+                <Name>Tim L. Fitzgerald</Name>
+              </NameContainer>
+              <DescriptionContainer>
+                <DescH2
+                  initial={initial || getCurrentInitial()}
+                  variants={getTextContainerVariants(16)}
+                >
+                  programmer
+                </DescH2>
+                <DescH2
+                  initial={initial || getCurrentInitial()}
+                  variants={getTextContainerVariants(16)}
+                >
+                  sysadmin
+                </DescH2>
+                <DescH2
+                  initial={initial || getCurrentInitial()}
+                  variants={getTextContainerVariants(16)}
+                >
+                  systems engineer
+                </DescH2>
+                <DescH2
+                  initial={initial || getCurrentInitial()}
+                  variants={getTextContainerVariants(16)}
+                >
+                  useful human
+                </DescH2>
+              </DescriptionContainer>
+              <SocialIconsContainer>
+                <a
+                  href={"https://github.com/timfitzzz"}
+                  target={"_blank"}
+                  rel="noreferrer"
+                >
+                  <GithubIcon />
+                </a>
+                <a
+                  href={"https://twitter.com/timfitzzz"}
+                  target={"_blank"}
+                  rel="noreferrer"
+                >
+                  <TwitterIcon />
+                </a>
+                <a
+                  href={"https://instagram.com/diceytroop"}
+                  target={"_blank"}
+                  rel="noreferrer"
+                >
+                  <InstagramIcon />
+                </a>
+                <a
+                  href={"https://linkedin.com/timlfitzgerald"}
+                  target={"_blank"}
+                  rel="noreferrer"
+                >
+                  <LinkedInIcon />
+                </a>
+                <a
+                  href={"mailto:timothyliamfitzgerald@gmail.com"}
+                  target={"_blank"}
+                  rel="noreferrer"
+                >
+                  <EmailIcon />
+                </a>
+              </SocialIconsContainer>
+            </MenuMiddleColumn>
+            <PortraitPhotoColumn>
+              <HomeNavLink
+                to={"/"}
+                key={"indexlink"}
+                disabled={currentPath === "/" ? true : false}
+                $isCurrent={false}
+                entry={{
+                  length: TRANSITION_DURATION,
+                  state: {
+                    initial: getNextInitial("/"),
+                    animate: getNextAnimate("/"),
+                  },
+                }}
+                exit={{
+                  length: TRANSITION_DURATION,
+                  state: {
+                    initial: getCurrentInitial(),
+                    animate: getExitAnimate("/"),
+                  },
+                }}
+              >
+                <PortraitPhotoBox>
+                  <PortraitPhoto
+                    currentAnimate={animate}
+                    src={headerImageUrl}
+                  />
+                </PortraitPhotoBox>
+              </HomeNavLink>
+            </PortraitPhotoColumn>
+            <AnimatePresence>
+              {animate === "contracted" && (
+                <TopNavNameContainer>
+                  <TopNavName>Tim L. Fitzgerald</TopNavName>
+                </TopNavNameContainer>
+              )}
+            </AnimatePresence>
+          </MenuMiddle>
+        </MenuCard>
+      </MenuCardContainer>
     </>
   )
 }

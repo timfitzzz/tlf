@@ -42,7 +42,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-fonts`,
+      resolve: `gatsby-plugin-google-fonts-with-attributes`,
       options: {
         fonts: [
           `open sans condensed\:300,300i,700`, // you can also specify font weights and styles
@@ -51,7 +51,10 @@ module.exports = {
           `asap\:400,400i`,
           `crimson text\:400,400i,600,600i,700,700i`
         ],
-        display: 'swap'
+        display: 'block',
+        attributes: {
+          rel: "stylesheet preload prefetch",
+        },
       }
     },
     {

@@ -51,6 +51,23 @@ const InnerBodyContainerVariants = {
   },
 }
 
+const InnerBodyFadeContainer = styled(motion.div).attrs(() => ({
+  variants: {
+    fadedOut: {
+      opacity: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+    fadedIn: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  },
+}))``
+
 const InnerBodyContainer = styled(motion.div).attrs(() => ({
   variants: InnerBodyContainerVariants,
 }))`
@@ -106,27 +123,32 @@ export default ({
         }
       `}
       render={data => (
-        <InnerBodyContainer initial={initial} animate={animate} layout>
-          <AnimatePresence>
-            {location.pathname !== "/" && (
-              <ContentContainer
-                initial={initial}
-                animate={animate}
-                layout
-                key={sectionTitle + "ContentContainer"}
-              >
-                <MDXRenderer key={Math.random().toString()}>
-                  {data.allMdx.edges.filter((edge: ISectionEdge) => {
-                    return edge.node.frontmatter.title === sectionTitle
-                      ? true
-                      : false
-                  })[0]?.node.code.body || ""}
-                </MDXRenderer>
-                {children}
-              </ContentContainer>
-            )}
-          </AnimatePresence>
-        </InnerBodyContainer>
+        <InnerBodyFadeContainer
+          initial={current && current.state ? "fadedIn" : "fadedOut"}
+          animate={"fadedIn"}
+        >
+          <InnerBodyContainer initial={initial} animate={animate} layout>
+            <AnimatePresence>
+              {location.pathname !== "/" && (
+                <ContentContainer
+                  initial={initial}
+                  animate={animate}
+                  layout
+                  key={sectionTitle + "ContentContainer"}
+                >
+                  <MDXRenderer key={Math.random().toString()}>
+                    {data.allMdx.edges.filter((edge: ISectionEdge) => {
+                      return edge.node.frontmatter.title === sectionTitle
+                        ? true
+                        : false
+                    })[0]?.node.code.body || ""}
+                  </MDXRenderer>
+                  {children}
+                </ContentContainer>
+              )}
+            </AnimatePresence>
+          </InnerBodyContainer>
+        </InnerBodyFadeContainer>
       )}
     />
   )

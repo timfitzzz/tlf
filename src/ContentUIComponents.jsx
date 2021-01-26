@@ -5,7 +5,7 @@ import styled from 'styled-components';
 export const CVSectionTitle = styled.div`
   font-family: ${p=>p.theme.fonts.title1};
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 20px;
   padding: 10px 0px 5px 0px;
 `
@@ -100,6 +100,8 @@ export const CVDescriptionList = styled.ul`
   padding-right: 10px;
   margin-top: 8px;
   margin-bottom: 8px;
+  width: 80%;
+  min-width: 300px;
 `
 
 export const CVDescriptionListItem = styled.li`

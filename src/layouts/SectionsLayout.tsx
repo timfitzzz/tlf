@@ -1,8 +1,6 @@
-import { graphql, StaticQuery } from "gatsby"
+import { graphql } from "gatsby"
 import React, { ReactNode } from "react"
 import { Box } from "rebass/styled-components"
-import MDXRenderer from "gatsby-mdx/mdx-renderer"
-import { ISectionEdge } from "../types"
 import styled from "styled-components"
 import { TRANSITION_DURATION } from "../Theme"
 import { WindowLocation } from "@reach/router"
@@ -100,56 +98,46 @@ export default ({
       ? current.state.initial
       : null
 
+  // const allMdxQuery = graphql`
+  //   query MainSectionsQuery {
+  //     allMdx(filter: { fileAbsolutePath: { regex: "/content/mdx/" } }) {
+  //       edges {
+  //         node {
+  //           fields {
+  //             route
+  //           }
+  //           frontmatter {
+  //             title
+  //             path
+  //           }
+  //           code {
+  //             body
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `
+
   return (
-    <StaticQuery
-      query={graphql`
-        query MainSectionsQuery {
-          allMdx(filter: { fileAbsolutePath: { regex: "/content/mdx/" } }) {
-            edges {
-              node {
-                fields {
-                  route
-                }
-                frontmatter {
-                  title
-                  path
-                }
-                code {
-                  body
-                }
-              }
-            }
-          }
-        }
-      `}
-      render={data => (
-        <InnerBodyFadeContainer
-          initial={current && current.state ? "fadedIn" : "fadedOut"}
-          animate={"fadedIn"}
-        >
-          <InnerBodyContainer initial={initial} animate={animate} layout>
-            <AnimatePresence>
-              {location.pathname !== "/" && (
-                <ContentContainer
-                  initial={initial}
-                  animate={animate}
-                  layout
-                  key={sectionTitle + "ContentContainer"}
-                >
-                  <MDXRenderer key={Math.random().toString()}>
-                    {data.allMdx.edges.filter((edge: ISectionEdge) => {
-                      return edge.node.frontmatter.title === sectionTitle
-                        ? true
-                        : false
-                    })[0]?.node.code.body || ""}
-                  </MDXRenderer>
-                  {children}
-                </ContentContainer>
-              )}
-            </AnimatePresence>
-          </InnerBodyContainer>
-        </InnerBodyFadeContainer>
-      )}
-    />
+    <InnerBodyFadeContainer
+      initial={current && current.state ? "fadedOut" : "fadedIn"}
+      animate={"fadedIn"}
+    >
+      <InnerBodyContainer initial={initial} animate={animate} layout>
+        <AnimatePresence>
+          {location.pathname !== "/" && (
+            <ContentContainer
+              initial={initial}
+              animate={animate}
+              layout
+              key={sectionTitle + "ContentContainer"}
+            >
+              {children}
+            </ContentContainer>
+          )}
+        </AnimatePresence>
+      </InnerBodyContainer>
+    </InnerBodyFadeContainer>
   )
 }

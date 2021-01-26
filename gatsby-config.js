@@ -46,9 +46,9 @@ module.exports = {
       options: {
         fonts: [
           `open sans condensed\:300,300i,700`, // you can also specify font weights and styles
-          `asap condensed\:400,400i,500,500i,600,600i`,
+          `asap condensed\:200,400,400i,500,500i,600,600i`,
           `poppins\:200,300,400,400i`,
-          `asap\:400,400i`,
+          `asap\:400,400i,600`,
           `crimson text\:400,400i,600,600i,700,700i`
         ],
         display: 'block',

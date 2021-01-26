@@ -140,6 +140,7 @@ export const LayoutComponents = {
 export const TRANSITION_DURATION = 1
 export const MIN_WIDTH = 304
 export const MIN_HEIGHT = 568
+export const MAX_WIDTH = 800
 
 export const UIComponents = {
   Button: props => <Button {...props}>{props.children}</Button>,

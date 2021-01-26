@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { createContainer } from "unstated-next"
+import { MAX_WIDTH } from "../Theme"
 
 export function useWindowConfig() {
   const isBrowser = typeof window === "undefined"
@@ -16,8 +17,8 @@ export function useWindowConfig() {
 
   function getAdjustedWidth() {
     if (window) {
-      if (window.innerWidth > 1000) {
-        return 1000 - 8 - 2 * scrollbarWidth
+      if (window.innerWidth > MAX_WIDTH) {
+        return MAX_WIDTH - 8 - 2 * scrollbarWidth
       } else {
         return window.innerWidth - 8 - 2 * scrollbarWidth
       }

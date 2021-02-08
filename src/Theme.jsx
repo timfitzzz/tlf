@@ -17,7 +17,24 @@ const colors = {
   spectralRed: '#b13254',
   spectralDarkOrange: '#ff5349',
   spectralOrange: '#ff7249',
-  spectralLightOrange: '#ff9248'
+  spectralLightOrange: '#ff9248',
+  blue: '#7531B0',
+  darkPurple: '#A031B0',
+  purple: '#B03194',
+  burntOrange: '#B03B31',
+  orange: '#B05131',
+  yellowOrange: '#B07C31',
+  pukeGreen: '#B0A831'
+}
+
+const tagColors = {
+  'music': colors.blue,
+  'parker/bird': colors.darkPurple,
+  'funk-hop': colors.yellowOrange,
+  'soundcloud': colors.burntOrange,
+  'rap': colors.purple,
+  'github': colors.orange,
+  'default': colors.spectralLightOrange
 }
 
 export const theme = {
@@ -34,8 +51,8 @@ export const theme = {
     darkBackground: colors.spectralMaroon,
     highlightText: colors.spectralOrange,
     lightBackground: colors.spectralRed,
-  }
-
+  },
+  tagColors
 }
 
 const GlobalStyle = createGlobalStyle`

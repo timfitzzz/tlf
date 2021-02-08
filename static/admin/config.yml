@@ -45,3 +45,24 @@ collections:
       - { label: Title, name: title, widget: string }
 
       - { label: Body, name: body, widget: markdown }
+      - { label: Tags, name: tags, widget: list }
+
+  - name: io
+    label: I/O
+    folder: content/io
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {
+          label: Template Key,
+          name: templateKey,
+          widget: hidden,
+          default: blog-post,
+        }
+      - { label: Title, name: title, widget: string }
+      - { label: Source, name: source, widget: string }
+      - { label: URI, name: URI, widget: string }
+      - { label: Body, name: body, widget: mdx }
+      - { label: Date, name: date, widget: date }
+      - { label: Tags, name: tags, widget: list }
+      # - { label: Data, name: data, widget: code }

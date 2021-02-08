@@ -12,10 +12,11 @@ export default function Blog({ location }: { location: WindowLocation }) {
   return (
     <StaticQuery
       query={graphql`
-        query BlogPostQuery {
+        query BlogPostsQuery {
           allMdx(filter: { fileAbsolutePath: { regex: "/content/blog/" } }) {
             edges {
               node {
+                excerpt(pruneLength: 300)
                 fields {
                   route
                 }
@@ -25,7 +26,6 @@ export default function Blog({ location }: { location: WindowLocation }) {
                 code {
                   body
                 }
-                excerpt(pruneLength: 300)
               }
             }
           }
@@ -40,7 +40,7 @@ export default function Blog({ location }: { location: WindowLocation }) {
           {data.allMdx.edges.map(edge => (
             <>
               <div>
-                <Link to={edge.node.fields.route}>
+                <Link to={`/blog${edge.node.fields.route}`}>
                   {edge.node.frontmatter.title}
                 </Link>
               </div>

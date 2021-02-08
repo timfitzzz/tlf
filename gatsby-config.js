@@ -77,6 +77,13 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
+        name: "io",
+        path: `${__dirname}/content/io/`,
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
         name: "sections",
         path: `${__dirname}/content/mdx/`,
       },

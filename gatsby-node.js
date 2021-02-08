@@ -71,9 +71,9 @@ exports.createPages = ({ graphql, actions }) => {
         result.data.allMdx.edges.forEach(({ node }) => {
           actions.createPage({
             // Encode the route
-            path: node.fields.route,
+            path: `/blog` + node.fields.route,
             // Layout for the page
-            component: path.resolve("./src/layouts/DefaultLayout.tsx"),
+            component: path.resolve("./src/layouts/BlogPage.tsx"),
             // Values defined here are injected into the page as props and can
             // be passed to a GraphQL query as arguments
             context: {

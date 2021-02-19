@@ -1,5 +1,6 @@
 import { DateTime } from "luxon"
 import axios, { AxiosRequestConfig } from "axios"
+import _ from "lodash"
 const fs = require("fs")
 import { IioRecordsListItem } from "../collect"
 import { getLastRecordDate } from "../getLastRecord"
@@ -14,6 +15,10 @@ export interface GitHubWeek extends IOMDXRecord {
 }
 
 export type GithubEvent = Endpoints["GET /users/{username}/events"]["response"]["data"][0] // cool trick
+export type GithubIssue = Endpoints["GET /repos/{owner}/{repo}/issues"]["response"]["data"][0]
+export type GithubLabel = Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/labels"]["response"]["data"][0]
+export type GithubUser = Endpoints["GET /users/{username}"]["response"]["data"]
+export type GithubRepo = Endpoints["GET /repos/{owner}/{repo}"]["response"]["data"]
 
 async function getNewGithubEvents(
   personalAccessToken: string,
@@ -103,6 +108,203 @@ function parseNewGithubRecords(newRecords: GithubEvent[]) {
 
   return weeks
 }
+
+export function groupEventsByFieldPath(
+  events: GithubEvent[],
+  fieldName: string
+): { [key: string]: GithubEvent[] } {
+  let output: { [key: string]: GithubEvent[] } = {}
+
+  events.forEach(
+    event =>
+      (output[_.get(event, fieldName)] = [
+        event,
+        ...output[_.get(event, fieldName)],
+      ])
+  )
+
+  return output
+}
+
+export interface RepoEventsGroup {
+  repoName: string
+  commitEvents: GithubEvent[]
+  issueEvents: GithubEvent[]
+  commentsByIssue: {
+    issueId: string
+    comments: []
+  }
+}
+
+interface GithubForkEvent extends GithubEvent {
+  type: "ForkEvent"
+  payload: {
+    action: string
+    forkee: GithubEvent["repo"]
+  }
+  repo: GithubRepo
+}
+
+interface GithubIssuesEvent extends GithubEvent {
+  type: "IssuesEvent"
+  payload: {
+    action: string
+    label?: GithubLabel
+    issue?: GithubIssue
+    assignee?: GithubUser
+  }
+}
+
+export type GithubSingleEvent = GithubForkEvent | GithubIssuesEvent
+
+function lMd(entity: { html_url?: string; name?: string; title?: string }) {
+  let name = entity.name || entity.title
+  return `[${name}](${entity.html_url})`
+}
+
+export function generateIssuesEventLanguage(event: GithubIssuesEvent) {
+  switch (event.payload.action) {
+    case "labeled":
+      return `assigned issue ${lMd(event.payload.issue)} the ${
+        event.payload.label.name
+      } label`
+    case "unlabeled":
+      return `removed from issue ${lMd(event.payload.issue)} the ${
+        event.payload.label.name
+      } label`
+    case "assigned":
+      return `assigned the issue ${lMd(event.payload.issue)} to ${lMd(
+        event.payload.assignee
+      )}`
+    case "unassigned":
+      return `unassigned the issue ${lMd(event.payload.issue)} from ${lMd(
+        event.payload.assignee
+      )}`
+    default:
+      return `${event.payload.action} an issue on ${lMd(event.repo)}: ${lMd(
+        event.payload.issue
+      )}`
+  }
+}
+
+// export function getTargetMd(event: GithubEvent): string {
+//   const {
+//     target: { id, url, desc, title },
+//   } = eventPaths[event.type]
+
+//   const name: string = title || id
+
+//   return `${desc && desc + " "}[${_.get(event, name)}](${_.get(event, url)})`
+// }
+
+// export function getBriefTargetMd(event: GithubEvent) {
+//   let {
+//     target: { id, url, desc, title },
+//   } = eventPaths[event.type]
+
+//   return `[${_.get(event, id)}](${_.get(event, url)})${title && ": " + title}`
+// }
+
+// export function getSourceMd(event: GithubEvent): string {
+//   const {
+//     source: { id, url, desc, title },
+//   } = eventPaths[event.type]
+
+//   const name: string = title || id
+
+//   return `${desc && desc + " "}[${_.get(event, name)}](${_.get(event, url)})`
+// }
+
+export const defaultActorPaths = {
+  id: "actor.login",
+  url: "actor.html_url",
+}
+
+export const repoParentPaths = {
+  id: "repo.full_name",
+  url: "repo.html_url",
+  preposition: "in",
+}
+
+export const pullRequestPaths = {
+  id: "payload.pull_request.number",
+  url: "payload.pull_request.html_url",
+  title: "payload.pull_request.title",
+}
+
+// single events include: ForkEvent
+// export function generateSingleEventLanguage(event: GithubEvent) {
+//   switch (event.type) {
+//     case "ForkEvent": {
+//       return `forked ${event.repo.name}, creating ${event.payload.forkee.name}`
+//     }
+//     case "IssuesEvent": {
+//       return generateIssuesEventLanguage(event)
+//     }
+//     case "MemberEvent": {
+//       return `${event.payload.action}`
+//     }
+//   }
+// }
+
+const repoNameMd = (repo: GithubEvent["repo"]) =>
+  `[${repo.name}](https://github.com/${repo.name})`
+
+// grouped events include: CommitCommentEvent, CreateEvent, DeleteEvent, GollumEvent
+
+export function generateGroupedEventSummary(
+  type: string,
+  quant: number,
+  repo: GithubEvent["repo"]
+) {
+  let plural = !!(quant > 1)
+
+  switch (type) {
+    case "CommitCommentEvent":
+      return `left ${plural ? quant : "a"} comment${plural &&
+        "s"} on commits in ${repoNameMd(repo)}`
+    case "CreateEvent":
+      return `created ${plural ? quant : "a"} branch${plural &&
+        "es"}/tag${plural && "s"} in ${repoNameMd(repo)}`
+    case "DeleteEvent":
+      return `deleted ${plural ? quant : "a"} branch${plural &&
+        "es"}/tag${plural && "s"} in ${repoNameMd(repo)}`
+    case "GollumEvent":
+      return `created or changed ${plural ? quant : "a"} wiki page${plural &&
+        "s"} in ${repoNameMd(repo)}`
+    case "IssueCommentEvent":
+      return `added or deleted ${plural ? quant : "a"} comment${plural &&
+        "s"} on ${!plural && "an"} issue${plural && "s"} in ${repoNameMd(repo)}`
+    case "IssuesEvent":
+      return ``
+  }
+}
+
+// export function groupEvents(events: GithubEvent[]): RepoEventsGroup[] {
+//   // const output: RepoEventsGroup[] = []
+
+//   const repoNames: string[] = events.reduce(
+//     (acc, event) =>
+//       acc.indexOf(event.repo.name) === -1 ? acc + event.repo.name : acc },
+//     []
+//   )
+
+//   const eventsByRepo = groupEventsByFieldPath(events, "repo.name")
+
+//   return repoNames.map(repoName => {
+//     const repoEventsByType = groupEventsByFieldPath(
+//       eventsByRepo[repoName],
+//       "type"
+//     )
+
+//     return {
+//       repoName: repoName,
+//       commitEvents: repoEventsByType.commit,
+//       issueEvents: repoEventsByType.issue,
+//       commentsByIssue: groupEventsByFieldPathrepoEventsByType.issue,
+//     }
+//   })
+// }
 
 function generateGitHubWeekObject(weekEvents: GithubEvent[]): GitHubWeek {
   function generateTitle() {

@@ -14,7 +14,8 @@
         "name": "typescript-styled-plugin"
       }
     ],
-    "target": "es2015"
+    "target": "es2015",
+    "noErrorTruncation": true
   },
   "include": ["**/*.ts", "**/*.tsx", "src/ContentUIComponents.jsx", "src/svg.d.ts"],
   "exclude": ["node_modules/*", "public/*"]

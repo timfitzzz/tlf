@@ -11,7 +11,7 @@
     "prettier-write": "prettier --write \"src/**/*.js\"",
     "release": "auto shipit",
     "start": "yarn develop",
-    "test": "jest",
+    "test": "jest --verbose",
     "type-check": "tsc --pretty --noEmit"
   },
   "husky": {

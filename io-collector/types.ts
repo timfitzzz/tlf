@@ -9,3 +9,7 @@ export interface IOMDXRecord {
   // data: string
   body: string[]
 }
+
+export interface TestInterface {
+  huskyWorks: boolean
+}

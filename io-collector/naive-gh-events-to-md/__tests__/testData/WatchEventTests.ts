@@ -9,6 +9,7 @@ WatchEventTests["testEvents"] = [
         md:
           "[timfitzzz](https://github.com/timfitzzz) started watching repository [mohebifar/react-use-context-selector](https://github.com/mohebifar/react-use-context-selector)",
       },
+      actionTypes: [],
       actor: {
         plain: `timfitzzz started`,
         md: `[timfitzzz](https://github.com/timfitzzz) started`,

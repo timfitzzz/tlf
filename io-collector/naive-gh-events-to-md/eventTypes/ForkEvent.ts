@@ -1,3 +1,4 @@
+import { GithubRepo } from "../types"
 import { GithubEventType, defaultActorPaths } from "./helperTypes"
 
 const ForkEvent: GithubEventType = {
@@ -22,3 +23,7 @@ const ForkEvent: GithubEventType = {
 }
 
 export default ForkEvent
+
+export interface ForkEventPayload {
+  forkee: GithubRepo
+}

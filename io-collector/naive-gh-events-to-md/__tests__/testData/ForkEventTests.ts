@@ -13,6 +13,7 @@ ForkEventTests["testEvents"] = [
         plain: "shangow forked",
         md: "[shangow](https://github.com/shangow) forked",
       },
+      actionTypes: [],
       result: "a repo",
       subject: {
         plain: [["errodringer/ransomware"]],

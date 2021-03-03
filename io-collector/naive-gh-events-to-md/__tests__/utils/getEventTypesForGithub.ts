@@ -1,12 +1,12 @@
 /* eslint-disable */
 
 import { GithubEvent } from "../../types"
-import EventTypes from '../../eventTypes'
+import EventTypes from "../../eventTypes"
 
 const axios = require("axios")
 const fs = require("fs")
 const { eventPaths } = require("../../eventPaths.ts")
-const _ = require('lodash')
+const _ = require("lodash")
 
 var getConfig = () => ({
   method: "get",
@@ -24,11 +24,6 @@ interface GHRequiredEvents {
       }
 }
 
-
-
-
-
-
 export function getEventRequirementsChecklist(): GHRequiredEvents {
   let roles = ["subject", "target", "parent", "verb"]
   const output: GHRequiredEvents = {}
@@ -38,18 +33,18 @@ export function getEventRequirementsChecklist(): GHRequiredEvents {
       let entityRolePaths = eventPaths[eventType][role]
       if (entityRolePaths && typeof entityRolePaths != "string") {
         if (Array.isArray(entityRolePaths)) {
-          console.log("eventType ", eventType, " role ", role, " is Array")
+          // console.log("eventType ", eventType, " role ", role, " is Array")
           let iterationProps = Object.getOwnPropertyNames(entityRolePaths[1])
           // if iterator
           if (typeof entityRolePaths[1][iterationProps[1]] === "object") {
             // if multiple action types
-            console.log(
-              "eventType ",
-              eventType,
-              " role ",
-              role,
-              " has multiple action types"
-            )
+            // console.log(
+            //   "eventType ",
+            //   eventType,
+            //   " role ",
+            //   role,
+            //   " has multiple action types"
+            // )
             output[eventType] = {}
             iterationProps.forEach(actionType => {
               if (output[eventType] && typeof output[eventType] === "object") {
@@ -66,36 +61,36 @@ export function getEventRequirementsChecklist(): GHRequiredEvents {
               typeof output[eventType] !== "object" &&
               output[eventType] < 3
             ) {
-              console.log(
-                "eventType ",
-                eventType,
-                " role ",
-                role,
-                " has iterator with one action type and currently set to ",
-                output[eventType],
-                " marking for 3"
-              )
+              // console.log(
+              //   "eventType ",
+              //   eventType,
+              //   " role ",
+              //   role,
+              //   " has iterator with one action type and currently set to ",
+              //   output[eventType],
+              //   " marking for 3"
+              // )
               output[eventType] = 3
             }
           }
         } else if (typeof entityRolePaths.id === "undefined") {
-          console.log(
-            "eventType ",
-            eventType,
-            " role ",
-            role,
-            " has multiple action types"
-          )
+          // console.log(
+          //   "eventType ",
+          //   eventType,
+          //   " role ",
+          //   role,
+          //   " has multiple action types"
+          // )
           let actionTypes = Object.getOwnPropertyNames(entityRolePaths)
-          console.log(
-            "eventType ",
-            eventType,
-            " role ",
-            role,
-            " has multiple action types",
-            actionTypes,
-            "marking one for each"
-          )
+          // console.log(
+          //   "eventType ",
+          //   eventType,
+          //   " role ",
+          //   role,
+          //   " has multiple action types",
+          //   actionTypes,
+          //   "marking one for each"
+          // )
           output[eventType] = {}
           actionTypes.forEach(actionType => {
             if (
@@ -112,21 +107,21 @@ export function getEventRequirementsChecklist(): GHRequiredEvents {
           })
         } else {
           if (!output[eventType]) {
-            console.log(
-              "eventType ",
-              eventType,
-              " role ",
-              role,
-              " has one condition, marking 1"
-            )
+            // console.log(
+            //   "eventType ",
+            //   eventType,
+            //   " role ",
+            //   role,
+            //   " has one condition, marking 1"
+            // )
             output[eventType] = 1
           } else {
-            console.log(
-              "eventType ",
-              eventType,
-              " already defined, skipping single condition role ",
-              role
-            )
+            // console.log(
+            //   "eventType ",
+            //   eventType,
+            //   " already defined, skipping single condition role ",
+            //   role
+            // )
           }
         }
       }
@@ -169,11 +164,9 @@ export function updateCheckList(
   return checklist
 }
 
-export function checkExistingEvents(checklist: GHRequiredEvents): GHRequiredEvents {
+// export function checkExistingEvents(checklist: GHRequiredEvents): GHRequiredEvents {
 
-  
-
-}
+// }
 
 export default async function getTestEventsForGithub(
   eventTypes: string[],
@@ -191,20 +184,20 @@ export default async function getTestEventsForGithub(
   }
 
   if (allFound()) {
-    console.log("all types found")
+    // console.log("all types found")
     return
   } else {
     axios(getConfig())
       .then(function(response) {
         response.data.forEach(async event => {
           if (foundTypes.indexOf(event.type) === -1) {
-            console.log("found ", event.type, ", writing")
+            // console.log("found ", event.type, ", writing")
             foundTypes.push(event.type)
             fs.writeFileSync(
               `${__dirname}/ghevents/${event.type}.json`,
               JSON.stringify(event)
             )
-            console.log(`wrote ${event.type}`)
+            // console.log(`wrote ${event.type}`)
           }
           await new Promise(r => setTimeout(r, 10000))
           return getTestEventsForGithub(eventTypes, foundTypes, nextPage++)
@@ -215,8 +208,6 @@ export default async function getTestEventsForGithub(
       })
   }
 }
-
-
 
 // retrievedTypes.
 

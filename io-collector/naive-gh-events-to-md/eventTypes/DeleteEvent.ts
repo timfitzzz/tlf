@@ -29,3 +29,9 @@ const DeleteEvent: GithubEventType = {
 }
 
 export default DeleteEvent
+
+export interface DeleteEventPayload {
+  ref: string
+  ref_type: string
+  pusher_type: string
+}

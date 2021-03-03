@@ -1,5 +1,5 @@
 import { GithubEvent } from "./types"
-import { eventPaths, entityRef } from "./eventPaths"
+import { eventPaths, EntityRef } from "./eventPaths"
 import _ from "lodash"
 
 export function getActorMd(event: GithubEvent) {
@@ -43,13 +43,13 @@ export function getEntityMd(
   entityType: string
 ): string | string[] {
   const entityPaths:
-    | entityRef
-    | { [key: string]: entityRef }
-    | [string, entityRef] = eventPaths[event.type][entityType]
-  let { id, url, desc, title, preposition }: Partial<entityRef> = {}
+    | EntityRef
+    | { [key: string]: EntityRef }
+    | [string, EntityRef] = eventPaths[event.type][entityType]
+  let { id, url, desc, title, preposition }: Partial<EntityRef> = {}
 
   // for entities with multiple items,
-  // entityPaths = ['property to iterate', entityRef]
+  // entityPaths = ['property to iterate', EntityRef]
   if (Array.isArray(entityPaths)) {
     let entities = _.get(event, entityPaths[0]) // get the entities to iterate
     desc = entityPaths[1].desc // get the entityPaths
@@ -85,7 +85,7 @@ export function getEntityMd(
 }
 
 export function getBriefIteratorMds(
-  entityPath: entityRef,
+  entityPath: EntityRef,
   iterator: any
 ): string[] {
   const { id, url, title } = entityPath
@@ -103,9 +103,9 @@ export function getBriefEntityMd(
   event: GithubEvent,
   entityType: string
 ): string {
-  const entityPaths: entityRef | { [key: string]: entityRef } =
+  const entityPaths: EntityRef | { [key: string]: EntityRef } =
     eventPaths[event.type][entityType]
-  let { id, url, title }: Partial<entityRef> = {}
+  let { id, url, title }: Partial<EntityRef> = {}
 
   if (!entityPaths.id) {
     id = entityPaths[event.payload.action].id

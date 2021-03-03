@@ -1,3 +1,4 @@
+import { GithubIssue } from "../types"
 import {
   defaultActorPaths,
   GithubEventType,
@@ -18,18 +19,15 @@ const IssuesEvent: GithubEventType = {
   },
   paths: {
     actor: defaultActorPaths,
-    verb: [
-      "payload.action",
-      {
-        opened: "opened",
-        closed: "closed",
-        reopened: "reopened",
-        assigned: "assigned",
-        unassigned: "unassigned",
-        labeled: "applied",
-        unlabeled: "removed",
-      },
-    ],
+    verb: {
+      opened: "opened",
+      closed: "closed",
+      reopened: "reopened",
+      assigned: "assigned",
+      unassigned: "unassigned",
+      labeled: "applied",
+      unlabeled: "removed",
+    },
     result: {
       opened: ["issue", "issues"],
       closed: ["issue", "issues"],
@@ -105,3 +103,8 @@ const IssuesEvent: GithubEventType = {
 }
 
 export default IssuesEvent
+
+export interface IssuesEventPayload {
+  action: string
+  issue: GithubIssue
+}

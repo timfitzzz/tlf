@@ -21,6 +21,7 @@ CommitCommentEventTests["testEvents"] = [
           ],
         ],
       },
+      actionTypes: [],
       actor: {
         plain: "vercel[bot] created",
         md: "[vercel[bot]](https://github.com/apps/vercel) created",

@@ -1,23 +1,24 @@
 // import {
-//   entityRef,
+//   EntityRef,
 //   getActorVerbText,
 //   getEntityText,
 //   getEventSummary,
 //   getResult,
 //   getVerb,
 // } from "../eventPaths"
-import { entityProps, GithubEvent } from "../types"
-import EventTypes from "../eventTypes"
-import { entityRef } from "../eventTypes/helperTypes"
+import _ from "lodash"
+import EventTypes, { GHEvent, GHEventPayloadIteree } from "../eventTypes"
+import { EntityRef } from "../eventTypes/helperTypes"
 import testData from "./testData"
+import { getActorVerbText } from "../getText"
 import {
-  getActorVerbText,
-  getEntityText,
-  getEventSummary,
-  getResult,
-  getVerb,
-} from "../getText"
-import { getEntityProps, getActorProps } from "../getProps"
+  getEntityProps,
+  getActorProps,
+  lookupActionTypes,
+  lookupActionType,
+  getVerbs,
+  getSubjectPropSets,
+} from "../getProps"
 
 Object.getOwnPropertyNames(EventTypes).map(eventType => {
   describe(`Event type definition for ${eventType}`, () => {
@@ -41,7 +42,7 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
   //
   // entityRoles is a list of strings so we can iterate through possible
   // complex properties on the event object
-  const entityRoles = ["subject", "target", "parent"]
+  const entityRoles = ["target", "parent"]
   //
   // paths is the defined set of meaningful value paths on the event
   const paths = EventTypes[eventType].paths
@@ -84,13 +85,13 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
   // -- ensure that all test data needed for each event type exists
   // -- test string (plaintext and markdown) generation
 
-  console.log(testData[eventType])
+  // console.log(testData[eventType])
 
   if (testData[eventType]) {
     actionTypes.forEach(actionType => {
-      console.log(eventType)
+      // console.log(eventType)
       const testEvents = testData[eventType].testEvents
-      let testDatums: { testStrings: any; event: GithubEvent }[] =
+      let testDatums: { testStrings: any; event: GHEvent }[] =
         actionType === "none" ? testEvents : testEvents[actionType]
 
       describe("Scenario data", () => {
@@ -104,7 +105,53 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
           const { testStrings, event } = testDatum
 
           describe(`Scenario: Event type ${eventType}, action type ${actionType}, testEvent ${datumIndex}`, () => {
+            describe("Configuration", () => {
+              if (actionPropPath) {
+                it(`actionPathProp should be correctly defined for event type ${eventType}`, () => {
+                  // if actionPathProp is an array, it means there's an iterator and the action prop
+                  // is on the individual iteration. so let's make sure that's all true.
+                  if (Array.isArray(actionPropPath)) {
+                    let iterants: GHEventPayloadIteree[] = _.get(
+                      event,
+                      actionPropPath[0]
+                    )
+
+                    expect(iterator).toBeDefined()
+                    expect(iterator).toEqual(actionPropPath[0])
+                    expect(Array.isArray(iterants)).toEqual(true)
+                    if (Array.isArray(iterants) === true && iterants[0]) {
+                      expect(iterants[0][actionPropPath[1]]).toBeDefined()
+                    }
+                  } else {
+                    // if actionPathProp is a string, it means the prop is not within an iterated subject.
+
+                    let actionType = _.get(event, actionPropPath)
+                    expect(typeof actionType).toBe("string")
+                  }
+                })
+              }
+
+              if (actionTypes.length > 0) {
+                it("actionPropPath should be defined if actionTypes is defined", () => {
+                  expect(actionPropPath).not.toBe(null)
+                })
+              }
+            })
+
             describe(`event deconstruction`, () => {
+              const eventActionTypes: string[] | null = lookupActionTypes(event)
+
+              describe("event action types", () => {
+                it("should have the same action types for the event that are described in the testdata", () => {
+                  expect(eventActionTypes).toEqual(
+                    typeof testDatum.testStrings.actionTypes === "undefined" ||
+                      testDatum.testStrings.actionTypes.length === 0
+                      ? null
+                      : testDatum.testStrings.actionTypes
+                  )
+                })
+              })
+
               describe("event actor", () => {
                 const actor = getActorProps(event)
 
@@ -124,58 +171,161 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
                 })
               })
 
-              describe("event verb", () => {
-                const verb = getVerb(event)
+              describe("event verb(s)", () => {
+                const verbs = getVerbs(event)
 
                 it("should exist", () => {
-                  expect(verb).not.toBeUndefined()
-                  expect(verb).not.toBeNull()
+                  expect(verbs).not.toBeUndefined()
+                  expect(verbs).not.toBeNull()
                 })
               })
 
-              describe("event result noun", () => {
-                const singleResult = getResult(event)
-                const pluralResult = getResult(event, true)
+              // describe("event result noun", () => {
+              //   const singleResult = getResult(event)
+              //   const pluralResult = getResult(event, 2)
 
-                it("should exist for both single and plural forms", () => {
-                  expect(singleResult).not.toBeNull()
-                  expect(pluralResult).not.toBeUndefined()
-                })
+              //   it("should exist for both single and plural forms", () => {
+              //     expect(singleResult).not.toBeNull()
+              //     expect(pluralResult).not.toBeUndefined()
+              //   })
+              // })
+
+              describe("event subject(s)", () => {
+                const subjectPaths: EntityRef = paths["subject"]
+                const subjectProps = getSubjectPropSets(event)
+
+                if (subjectPaths) {
+                  // if (actionTypes) {
+                  //   it("if event has multiple action types, event subject paths should contain an entry for each action type", () => {
+                  //     actionTypes.forEach(actionType => {
+                  //       console.log(actionType)
+                  //       expect(subjectPaths[actionType]).toBeDefined()
+                  //     })
+                  //   })
+                  // }
+
+                  if (iterator) {
+                    describe("multiple subject event", () => {
+                      it("if an event has an iterator, subjectProps should be an array", () => {
+                        expect(Array.isArray(subjectProps)).toBe(true)
+                      })
+
+                      if (Array.isArray(subjectProps)) {
+                        it("each subject prop set should contain a property for each one defined in event subject paths", () => {
+                          subjectProps.forEach((subjectPropSet, i) => {
+                            let definedPaths =
+                              actionTypes && !paths.subject.id // if there are multiple types, gotta use the paths defined for this one
+                                ? Object.getOwnPropertyNames(
+                                    paths["subject"][lookupActionType(event, i)]
+                                  )
+                                : Object.getOwnPropertyNames(paths["subject"])
+
+                            definedPaths.forEach(path => {
+                              expect(subjectPropSet[path]).toBeDefined()
+                            })
+                          })
+                        })
+                      }
+                    })
+                  } else {
+                    describe("single subject event", () => {
+                      it("if an event does not have an iterator, subjectProps should be an object", () => {
+                        expect(Array.isArray(subjectProps)).toBe(true)
+                      })
+
+                      if (!Array.isArray(subjectProps)) {
+                        it("the subject props object should contain a property for each one defined in event subject paths", () => {
+                          let definedPaths = actionTypes
+                            ? Object.getOwnPropertyNames(
+                                paths["subject"][lookupActionType(event)]
+                              )
+                            : Object.getOwnPropertyNames(paths["subject"])
+
+                          definedPaths.forEach(path => {
+                            expect(subjectProps[path]).toBeDefined()
+                          })
+                        })
+                      }
+                    })
+                  }
+                }
               })
 
               describe("entity properties", () => {
                 entityRoles
                   .filter(role => !!paths[role])
                   .forEach(entityRole => {
-                    describe(`it should return props for all ${entityRole} properties defined in eventPaths`, () => {
-                      let rolePaths: entityRef
+                    describe(`it should return props for all ${entityRole} properties defined in eventPaths for each defined action type or for no action type`, () => {
+                      let rolePaths: EntityRef
                       let rolePathProps: string[] = []
 
-                      if (Array.isArray(paths[entityRole])) {
-                        rolePaths = paths[entityRole][1]
+                      // if (Array.isArray(paths[entityRole])) {
+                      //   rolePaths = paths[entityRole][1]
+                      //   rolePathProps = Object.getOwnPropertyNames(rolePaths)
+
+                      //   let entityPropSets: entityProps[] = getEntityProps(
+                      //     event,
+                      //     entityRole
+                      //   ) as entityProps[]
+
+                      //   entityPropSets.forEach((entityPropSet, key) => {
+                      //     rolePathProps.forEach(rolePathProp => {
+                      //       it(`returns a ${rolePathProp} prop for set '${key}`, () => {
+                      //         expect(entityPropSet[rolePathProp]).not.toBeNull()
+                      //         expect(
+                      //           entityPropSet[rolePathProp]
+                      //         ).not.toBeUndefined()
+                      //       })
+                      //     })
+                      //   })
+                      // } else
+                      if (
+                        actionTypes &&
+                        eventActionTypes &&
+                        !paths[entityRole].id
+                      ) {
+                        // if there are multiple action types in the event, and this entity cares about them,
+                        // this should work for each of them.
+                        eventActionTypes.forEach(actionType => {
+                          rolePaths = paths[entityRole][actionType]
+                          if (rolePaths) {
+                            rolePathProps = Object.getOwnPropertyNames(
+                              rolePaths
+                            )
+
+                            let entityPropSet = getEntityProps(
+                              event,
+                              entityRole
+                            )
+                            rolePathProps.forEach(rolePathProp => {
+                              it(`returns a ${rolePathProp} prop`, () => {
+                                expect(
+                                  entityPropSet[rolePathProp]
+                                ).not.toBeNull()
+                                expect(
+                                  entityPropSet[rolePathProp]
+                                ).not.toBeUndefined()
+                              })
+                            })
+                          }
+                        })
+                      } else {
+                        // if action types is not defined, the event has
+                        // no action types, or this entity doesn't care
+                        rolePaths = paths[entityRole]
                         rolePathProps = Object.getOwnPropertyNames(rolePaths)
+                        let entityPropSet = getEntityProps(event, entityRole)
 
-                        let entityPropSets: entityProps[] = getEntityProps(
-                          event,
-                          entityRole
-                        ) as entityProps[]
-
-                        entityPropSets.forEach((entityPropSet, key) => {
-                          rolePathProps.forEach(rolePathProp => {
-                            it(`returns a ${rolePathProp} prop for set '${key}`, () => {
-                              expect(entityPropSet[rolePathProp]).not.toBeNull()
-                              expect(
-                                entityPropSet[rolePathProp]
-                              ).not.toBeUndefined()
+                        if (iterator && Array.isArray(entityPropSet)) {
+                          entityPropSet.forEach(entSet => {
+                            rolePathProps.forEach(rolePathProp => {
+                              it(`returns a ${rolePathProp} prop`, () => {
+                                expect(entSet[rolePathProp]).not.toBeNull()
+                                expect(entSet[rolePathProp]).not.toBeUndefined()
+                              })
                             })
                           })
-                        })
-                      } else if (!paths[entityRole].id) {
-                        rolePaths = paths[entityRole][event.payload.action]
-                        if (rolePaths) {
-                          rolePathProps = Object.getOwnPropertyNames(rolePaths)
-
-                          let entityPropSet = getEntityProps(event, entityRole)
+                        } else {
                           rolePathProps.forEach(rolePathProp => {
                             it(`returns a ${rolePathProp} prop`, () => {
                               expect(entityPropSet[rolePathProp]).not.toBeNull()
@@ -185,19 +335,6 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
                             })
                           })
                         }
-                      } else {
-                        rolePaths = paths[entityRole]
-                        rolePathProps = Object.getOwnPropertyNames(rolePaths)
-
-                        let entityPropSet = getEntityProps(event, entityRole)
-                        rolePathProps.forEach(rolePathProp => {
-                          it(`returns a ${rolePathProp} prop`, () => {
-                            expect(entityPropSet[rolePathProp]).not.toBeNull()
-                            expect(
-                              entityPropSet[rolePathProp]
-                            ).not.toBeUndefined()
-                          })
-                        })
                       }
                     })
                   })
@@ -262,86 +399,85 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
                       expect(isDefined(role)).toBe(true)
                     })
 
-                    if (isDefined(role)) {
-                      describe(`${event.type} ${role} text generator`, () => {
-                        describe("plaintext output", () => {
-                          let plaintext: string[][] = getEntityText(event, role)
+                    // if (isDefined(role)) {
+                    //   describe(`${event.type} ${role} text generator`, () => {
+                    //     describe("plaintext output", () => {
+                    //       let plaintext: string[][] = getEntityText(event, role)
 
-                          plaintext.forEach((set, i) => {
-                            // console.log(set)
-                            let [summary, ...content] = set
-                            describe(`the summary text for item ${i}`, () => {
-                              it("should match expected text", () => {
-                                expect(summary).toEqual(
-                                  testStrings[role]["plain"][i][0]
-                                )
-                              })
-                            })
+                    //       plaintext.forEach((set, i) => {
+                    //         let [summary, ...content] = set
+                    //         describe(`the summary text for item ${i}`, () => {
+                    //           it("should match expected text", () => {
+                    //             expect(summary).toEqual(
+                    //               testStrings[role]["plain"][i][0]
+                    //             )
+                    //           })
+                    //         })
 
-                            if (content && content.length > 0) {
-                              if (Array.isArray(content)) {
-                                content.forEach((contentLine, j) => {
-                                  describe(`the content line ${j}`, () => {
-                                    it("should match expected text", () => {
-                                      expect(contentLine).toEqual(
-                                        testStrings[role]["plain"][i][j + 1]
-                                      )
-                                    })
-                                  })
-                                })
-                              } else {
-                                describe(`the content line 1`, () => {
-                                  it("should match expected text", () => {
-                                    expect(content).toEqual(
-                                      testStrings[role]["plain"][i][1]
-                                    )
-                                  })
-                                })
-                              }
-                            }
-                          })
-                        })
+                    //         if (content && content.length > 0) {
+                    //           if (Array.isArray(content)) {
+                    //             content.forEach((contentLine, j) => {
+                    //               describe(`the content line ${j}`, () => {
+                    //                 it("should match expected text", () => {
+                    //                   expect(contentLine).toEqual(
+                    //                     testStrings[role]["plain"][i][j + 1]
+                    //                   )
+                    //                 })
+                    //               })
+                    //             })
+                    //           } else {
+                    //             describe(`the content line 1`, () => {
+                    //               it("should match expected text", () => {
+                    //                 expect(content).toEqual(
+                    //                   testStrings[role]["plain"][i][1]
+                    //                 )
+                    //               })
+                    //             })
+                    //           }
+                    //         }
+                    //       })
+                    //     })
 
-                        describe("markdown output", () => {
-                          let md: string[][] = getEntityText(event, role, {
-                            md: true,
-                          })
+                    //     describe("markdown output", () => {
+                    //       let md: string[][] = getEntityText(event, role, {
+                    //         md: true,
+                    //       })
 
-                          md.forEach((set, i) => {
-                            let [summary, ...content] = set
-                            describe(`the summary text for item ${i}`, () => {
-                              it("should match expected text", () => {
-                                expect(summary).toEqual(
-                                  testStrings[role]["md"][i][0]
-                                )
-                              })
-                            })
+                    //       md.forEach((set, i) => {
+                    //         let [summary, ...content] = set
+                    //         describe(`the summary text for item ${i}`, () => {
+                    //           it("should match expected text", () => {
+                    //             expect(summary).toEqual(
+                    //               testStrings[role]["md"][i][0]
+                    //             )
+                    //           })
+                    //         })
 
-                            if (content && content.length > 0) {
-                              if (Array.isArray(content)) {
-                                content.forEach((contentLine, j) => {
-                                  describe(`the content line ${j}`, () => {
-                                    it("should match expected text", () => {
-                                      expect(contentLine).toEqual(
-                                        testStrings[role]["md"][i][j + 1]
-                                      )
-                                    })
-                                  })
-                                })
-                              } else {
-                                describe(`the content line 1`, () => {
-                                  it("should match expected text", () => {
-                                    expect(content).toEqual(
-                                      testStrings[role]["md"][i][1]
-                                    )
-                                  })
-                                })
-                              }
-                            }
-                          })
-                        })
-                      })
-                    }
+                    //         if (content && content.length > 0) {
+                    //           if (Array.isArray(content)) {
+                    //             content.forEach((contentLine, j) => {
+                    //               describe(`the content line ${j}`, () => {
+                    //                 it("should match expected text", () => {
+                    //                   expect(contentLine).toEqual(
+                    //                     testStrings[role]["md"][i][j + 1]
+                    //                   )
+                    //                 })
+                    //               })
+                    //             })
+                    //           } else {
+                    //             describe(`the content line 1`, () => {
+                    //               it("should match expected text", () => {
+                    //                 expect(content).toEqual(
+                    //                   testStrings[role]["md"][i][1]
+                    //                 )
+                    //               })
+                    //             })
+                    //           }
+                    //         }
+                    //       })
+                    //     })
+                    //   })
+                    // }
                   })
               })
 
@@ -350,23 +486,23 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
                   expect(testStrings.summary.plain).toBeDefined()
                 })
 
-                if (testStrings.summary.plain) {
-                  it("should generate the expected plaintext summary for the event", () => {
-                    let summary = getEventSummary(event, { md: false })
-                    expect(summary).toEqual(testStrings.summary.plain)
-                  })
-                }
+                // if (testStrings.summary.plain) {
+                //   it("should generate the expected plaintext summary for the event", () => {
+                //     let summary = getEventSummary(event, { md: false })
+                //     expect(summary).toEqual(testStrings.summary.plain)
+                //   })
+                // }
 
-                it("should have test strings defined for the markdown summary", () => {
-                  expect(testStrings.summary.md).toBeDefined()
-                })
+                // it("should have test strings defined for the markdown summary", () => {
+                //   expect(testStrings.summary.md).toBeDefined()
+                // })
 
-                if (testStrings.summary.md) {
-                  it("should generate the expected md summary for the event", () => {
-                    let summary = getEventSummary(event, { md: true })
-                    expect(summary).toEqual(testStrings.summary.md)
-                  })
-                }
+                // if (testStrings.summary.md) {
+                //   it("should generate the expected md summary for the event", () => {
+                //     let summary = getEventSummary(event, { md: true })
+                //     expect(summary).toEqual(testStrings.summary.md)
+                //   })
+                // }
               })
             })
           })

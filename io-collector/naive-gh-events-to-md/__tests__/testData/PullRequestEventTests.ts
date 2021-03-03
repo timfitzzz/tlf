@@ -10,6 +10,7 @@ PullRequestEventTests["testEvents"]["closed"] = [
         md:
           "[timfitzzz](https://github.com/timfitzzz) closed pull request [Bringing up to date with current version](https://github.com/timfitzzz/gatsby-theme-localization/pull/1) in [timfitzzz/gatsby-theme-localization](https://github.com/timfitzzz/gatsby-theme-localization)",
       },
+      actionTypes: ["closed"],
       actor: {
         plain: `timfitzzz closed`,
         md: `[timfitzzz](https://github.com/timfitzzz) closed`,

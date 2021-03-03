@@ -1,3 +1,4 @@
+import { GithubEvent } from "../types"
 import { GithubEventType } from "./helperTypes"
 
 const CommitCommentEvent: GithubEventType = {
@@ -30,3 +31,7 @@ const CommitCommentEvent: GithubEventType = {
 }
 
 export default CommitCommentEvent
+
+export interface CommitCommentEventPayload {
+  comment: GithubEvent["payload"]["comment"]
+}

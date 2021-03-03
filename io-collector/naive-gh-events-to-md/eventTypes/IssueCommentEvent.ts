@@ -1,3 +1,4 @@
+import { GithubIssue, GithubEvent } from "../types"
 import { GithubEventType } from "./helperTypes"
 
 const IssueCommentEvent: GithubEventType = {
@@ -12,14 +13,11 @@ const IssueCommentEvent: GithubEventType = {
       id: "actor.login",
       url: "actor.url",
     },
-    verb: [
-      "payload.action",
-      {
-        created: "created",
-        edited: "edited",
-        deleted: "deleted",
-      },
-    ],
+    verb: {
+      created: "created",
+      edited: "edited",
+      deleted: "deleted",
+    },
     result: ["comment", "comments"],
     subject: {
       id: "payload.comment.id",
@@ -43,3 +41,9 @@ const IssueCommentEvent: GithubEventType = {
 }
 
 export default IssueCommentEvent
+
+export interface IssueCommentEventPayload {
+  action: string
+  issue: GithubIssue
+  comment: GithubEvent["payload"]["comment"]
+}

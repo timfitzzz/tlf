@@ -10,6 +10,7 @@ IssuesEventTests["testEvents"]["closed"] = [
         md:
           "[timfitzzz](https://github.com/timfitzzz) closed issue [set up test mongodb database](https://github.com/timfitzzz/stemmy/issues/13) in [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy)",
       },
+      actionTypes: ["closed"],
       actor: {
         plain: `timfitzzz closed`,
         md: `[timfitzzz](https://github.com/timfitzzz) closed`,

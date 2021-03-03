@@ -10,6 +10,7 @@ CreateEventTests["testEvents"]["branch"] = [
         md:
           "[timfitzzz](https://github.com/timfitzzz) created a branch newPlatformDesign in [timfitzzz/nursefornyc](https://github.com/timfitzzz/nursefornyc)",
       },
+      actionTypes: ["branch"],
       actor: {
         plain: `timfitzzz created`,
         md: `[timfitzzz](https://github.com/timfitzzz) created`,

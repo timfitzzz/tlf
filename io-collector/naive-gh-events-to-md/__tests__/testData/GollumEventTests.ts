@@ -14,30 +14,40 @@ GollumEventTests["testEvents"]["multiple"] = [
           "[kii-chan-reloaded](https://github.com/kii-chan-reloaded) edited 2 wiki pages in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering)",
         ],
       },
+      actionTypes: ["created", "edited", "edited"],
       content: {
-        plain: ["Home", "Settings"],
+        plain: [[], ["Home", "Settings"]],
         md: [
-          "[Home](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
-          "[Settings](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
+          [],
+          [
+            "[Home](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
+            "[Settings](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
+          ],
         ],
       },
       actor: {
-        plain: ["kii-chan-reloaded created", "kii-chan-reloaded edited"],
+        plain: [
+          "kii-chan-reloaded created",
+          "kii-chan-reloaded edited",
+          "kii-chan-reloaded edited",
+        ],
         md: [
           "[kii-chan-reloaded](https://github.com/kii-chan-reloaded) created",
+          "[kii-chan-reloaded](https://github.com/kii-chan-reloaded) edited",
           "[kii-chan-reloaded](https://github.com/kii-chan-reloaded) edited",
         ],
       },
       result: ["wiki page", "wiki pages"],
       subject: {
-        plain: [["Pain"], ["Home", "Settings"]],
+        plain: [["Pain"], ["Home"], ["Settings"]],
         md: [
           [
             "[Pain](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Pain)",
           ],
           [
-            "",
             "[Home](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
+          ],
+          [
             "[Settings](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
           ],
         ],
@@ -46,8 +56,12 @@ GollumEventTests["testEvents"]["multiple"] = [
         plain: [
           ["in kii-chan-reloaded/GeneticChickengineering"],
           ["in kii-chan-reloaded/GeneticChickengineering"],
+          ["in kii-chan-reloaded/GeneticChickengineering"],
         ],
         md: [
+          [
+            "in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering)",
+          ],
           [
             "in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering)",
           ],
@@ -120,6 +134,7 @@ GollumEventTests["testEvents"]["created"] = [
         md:
           "[kii-chan-reloaded](https://github.com/kii-chan-reloaded) created wiki page [Pain](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Pain) in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering)",
       },
+      actionTypes: ["created"],
       content: {
         plain: [],
         md: [],
@@ -191,6 +206,7 @@ GollumEventTests["testEvents"]["edited"] = [
         md:
           "[songkwwwwwww](https://github.com/songkwwwwwww) edited wiki page [데이터베이스 인터널스 Chap3 파일 포맷](https://github.com/songkwwwwwww/study/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%9D%B8%ED%84%B0%EB%84%90%EC%8A%A4-Chap3-%ED%8C%8C%EC%9D%BC-%ED%8F%AC%EB%A7%B7) in [songkwwwwwww/study](https://github.com/songkwwwwwww/study)",
       },
+      actionTypes: ["edited"],
       actor: {
         plain: "songkwwwwwww edited",
         md: "[songkwwwwwww](https://github.com/songkwwwwwww) edited",

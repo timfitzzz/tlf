@@ -1,3 +1,4 @@
+import { GithubPullRequest, GithubPullRequestReview } from "../types"
 import {
   defaultActorPaths,
   GithubEventType,
@@ -11,14 +12,11 @@ const PullRequestReviewEvent: GithubEventType = {
   },
   paths: {
     actor: defaultActorPaths,
-    verb: [
-      "payload.action",
-      {
-        created: "added",
-        edited: "changed",
-        deleted: "removed",
-      },
-    ],
+    verb: {
+      created: "added",
+      edited: "changed",
+      deleted: "removed",
+    },
     result: {
       created: ["a review", "reviews"],
       edited: ["a review", "reviews"],
@@ -40,3 +38,9 @@ const PullRequestReviewEvent: GithubEventType = {
 }
 
 export default PullRequestReviewEvent
+
+export interface PullRequestReviewEventPayload {
+  action: string
+  review: GithubPullRequestReview
+  pull_request: GithubPullRequest
+}

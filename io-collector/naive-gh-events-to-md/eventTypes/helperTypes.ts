@@ -14,14 +14,14 @@ export type singleWithPlural = [string, string]
 export type resultDef = string | singleWithPlural
 
 // indexed single and plural = [<prop path to test>, { value: [single, plural]}
-export type indexedResultDef = {
-  [key: string]: resultDef
+export interface IndexedResultDef {
+  [key: string]: string | resultDef
 }
 
 export type propValResult = [string, any, string]
 export type iteratorMap = [string, { [key: string]: string }]
 
-export interface entityRef {
+export interface EntityRef {
   id: string
   url?: string
   preposition?: string
@@ -30,16 +30,16 @@ export interface entityRef {
   content?: string
 }
 
-export interface eventPathSet {
+export interface EventPathSet {
   actor?: {
     id: string
     url: string
   }
-  verb?: string | iteratorMap
-  result?: resultDef | indexedResultDef
-  parent?: entityRef | { [key: string]: entityRef } | [string, entityRef]
-  target?: entityRef | { [key: string]: entityRef } | [string, entityRef]
-  subject?: entityRef | { [key: string]: entityRef } | [string, entityRef]
+  verb?: string | { [key: string]: string }
+  result?: resultDef | IndexedResultDef
+  parent?: EntityRef | { [key: string]: EntityRef }
+  target?: EntityRef | { [key: string]: EntityRef }
+  subject?: EntityRef | { [key: string]: EntityRef }
 }
 
 export interface GithubEventType {
@@ -54,5 +54,5 @@ export interface GithubEventType {
     // iterator: path to array to iterate if multiple subjects per event
     iterator?: string
   }
-  paths: eventPathSet
+  paths: EventPathSet
 }

@@ -16,6 +16,7 @@ IssueCommentEventTests["testEvents"]["created"] = [
         plain: `timfitzzz created`,
         md: `[timfitzzz](https://github.com/timfitzzz) created`,
       },
+      actionTypes: ["created"],
       result: "comment",
       subject: {
         plain: [

@@ -1,3 +1,4 @@
+import { GithubRelease } from "../types"
 import {
   defaultActorPaths,
   GithubEventType,
@@ -11,13 +12,10 @@ const ReleaseEvent: GithubEventType = {
   },
   paths: {
     actor: defaultActorPaths,
-    verb: [
-      "payload.action",
-      {
-        published: "published",
-        edited: "edited",
-      },
-    ],
+    verb: {
+      published: "published",
+      edited: "edited",
+    },
     result: ["a release", "releases"],
     subject: {
       id: "payload.release.id",
@@ -29,3 +27,8 @@ const ReleaseEvent: GithubEventType = {
 }
 
 export default ReleaseEvent
+
+export interface ReleaseEventPayload {
+  action: string
+  release: GithubRelease
+}

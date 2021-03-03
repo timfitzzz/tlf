@@ -9,6 +9,7 @@ ReleaseEventTests["testEvents"] = [
         md:
           "[arzrasel](https://github.com/arzrasel) published a release [EasySwiftUIKit](https://github.com/arzrasel/EasySwiftUIKit/releases/tag/1.0.3.04) in [arzrasel/EasySwiftUIKit](https://github.com/arzrasel/EasySwiftUIKit)",
       },
+      actionTypes: [],
       actor: {
         plain: "arzrasel published",
         md: "[arzrasel](https://github.com/arzrasel) published",

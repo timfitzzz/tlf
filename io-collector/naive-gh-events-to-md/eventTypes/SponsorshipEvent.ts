@@ -11,16 +11,17 @@ const SponsorshipEvent: GithubEventType = {
   },
   paths: {
     actor: defaultActorPaths,
-    verb: [
-      "payload.action",
-      {
-        created: "added",
-        removed: "removed",
-      },
-    ],
+    verb: {
+      created: "added",
+      removed: "removed",
+    },
     result: ["a sponsorship tier", "sponsorship tiers"],
     target: repoParentPaths,
   },
 }
 
 export default SponsorshipEvent
+
+export interface SponsorshipEventPayload {
+  action: string
+}

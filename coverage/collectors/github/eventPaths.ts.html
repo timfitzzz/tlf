@@ -1432,7 +1432,7 @@ export type indexedSingleAndPlural = [
 export type propValResult = [string, any, string]
 export type iteratorMap = [string, { [key: string]: string }]
 &nbsp;
-export interface entityRef {
+export interface EntityRef {
   id: string
   url?: string
   preposition?: string
@@ -1441,16 +1441,16 @@ export interface entityRef {
   content?: string
 }
 &nbsp;
-export interface eventPathSet {
+export interface EventPathSet {
   actor?: {
     id: string
     url: string
   }
   verb?: string | iteratorMap
   result?: string | singleWithPlural | indexedSingleAndPlural
-  parent?: entityRef | { [key: string]: entityRef } | [string, entityRef]
-  target?: entityRef | { [key: string]: entityRef } | [string, entityRef]
-  subject?: entityRef | { [key: string]: entityRef } | [string, entityRef]
+  parent?: EntityRef | { [key: string]: EntityRef } | [string, EntityRef]
+  target?: EntityRef | { [key: string]: EntityRef } | [string, EntityRef]
+  subject?: EntityRef | { [key: string]: EntityRef } | [string, EntityRef]
 }
 &nbsp;
 export const defaultActorPaths = {
@@ -1481,7 +1481,7 @@ export const pullRequestPaths = {
 //                [content]
 // plural desc: [actor] [verb] [result] [target.preposition] [target.desc] [target.id | target.title] [subject...] [parent...]:
 //                &gt; [content]
-export const eventPaths: { [key: string]: eventPathSet } = {
+export const eventPaths: { [key: string]: EventPathSet } = {
   CommitCommentEvent: {
     // single: 'timfitzzz created a comment on commit #123daff in timfitzzz/stemmy:'
     //         '  [comment.text]'
@@ -1987,9 +1987,9 @@ export function getEntityProps(
   entityType: string
 ): entityProps | entityProps[] {
   const entityPaths:
-    | entityRef
-    | { [key: string]: entityRef }
-    | [string, entityRef] = eventPaths[event.type][entityType]
+    | EntityRef
+    | { [key: string]: EntityRef }
+    | [string, EntityRef] = eventPaths[event.type][entityType]
 &nbsp;
   let output: entityProps | entityProps[]
 &nbsp;
@@ -2010,7 +2010,7 @@ export function getEntityProps(
       }))
     } else if (!entityPaths.id) {
       // for entities with multiple action types:
-      // entityPaths = { [key: string]: entityRef }
+      // entityPaths = { [key: string]: EntityRef }
       output = {
         id: _.get(event, entityPaths[event.payload.action].id),
         url: _.get(event, entityPaths[event.payload.action].url)
@@ -2038,7 +2038,7 @@ export function getEntityProps(
     }
   }
   // for entities with multiple items,
-  // entityPaths = ['property to iterate', entityRef]
+  // entityPaths = ['property to iterate', EntityRef]
   return output
 }
 &nbsp;

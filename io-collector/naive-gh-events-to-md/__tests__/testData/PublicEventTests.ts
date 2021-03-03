@@ -10,6 +10,7 @@ PublicEventTests["testEvents"] = [
         md:
           "[RegularSpark](https://github.com/RegularSpark) set repository [RegularSpark/wrappedchat](https://github.com/RegularSpark/wrappedchat) to 'public'",
       },
+      actionTypes: [],
       actor: {
         plain: "RegularSpark set",
         md: "[RegularSpark](https://github.com/RegularSpark) set",

@@ -10,6 +10,7 @@ PullRequestReviewEventTests["testEvents"]["created"] = [
         md:
           "[Grandolf49](https://github.com/Grandolf49) added a review [589944777](https://github.com/openMF/android-client/pull/1539#pullrequestreview-589944777) of [a pull request](https://github.com/openMF/android-client/pull/1539) in [openMF/android-client](https://github.com/openMF/android-client)",
       },
+      actionTypes: ["created"],
       actor: {
         plain: "Grandolf49 added",
         md: "[Grandolf49](https://github.com/Grandolf49) added",

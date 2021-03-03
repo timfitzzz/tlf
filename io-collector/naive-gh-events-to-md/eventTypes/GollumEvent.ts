@@ -1,3 +1,4 @@
+import { GithubEvent } from "../types"
 import {
   defaultActorPaths,
   GithubEventType,
@@ -12,24 +13,22 @@ const GollumEvent: GithubEventType = {
   },
   paths: {
     actor: defaultActorPaths,
-    verb: [
-      "payload.pages[0].action",
-      {
-        created: "created",
-        edited: "edited",
-      },
-    ],
+    verb: {
+      created: "created",
+      edited: "edited",
+    },
     result: ["wiki page", "wiki pages"],
-    subject: [
-      "payload.pages",
-      {
-        id: "page_name",
-        url: "html_url",
-        title: "title",
-      },
-    ],
+    subject: {
+      id: "page_name",
+      url: "html_url",
+      title: "title",
+    },
     parent: repoParentPaths,
   },
 }
 
 export default GollumEvent
+
+export interface GollumEventPayload {
+  pages: GithubEvent["payload"]["pages"]
+}

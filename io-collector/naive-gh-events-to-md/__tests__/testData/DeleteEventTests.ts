@@ -10,6 +10,7 @@ DeleteEventTests["testEvents"]["branch"] = [
         md:
           "[rixtech](https://github.com/rixtech) deleted a branch feature/dirs-with-spaces in [rixtech/webp2gif](https://github.com/rixtech/webp2gif)",
       },
+      actionTypes: ["branch"],
       actor: {
         plain: "rixtech deleted",
         md: "[rixtech](https://github.com/rixtech) deleted",

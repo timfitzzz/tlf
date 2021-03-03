@@ -10,6 +10,7 @@ PushEventTests["testEvents"] = [
         md:
           "[timfitzzz](https://github.com/timfitzzz) pushed commit [d4e5d71da8b6cd7b169c090458142527eeb3c0af](https://github.com/timfitzzz/nursefornyc/commits/d4e5d71da8b6cd7b169c090458142527eeb3c0af) to [timfitzzz/nursefornyc](https://github.com/timfitzzz/nursefornyc)",
       },
+      actionTypes: [],
       actor: {
         plain: `timfitzzz pushed`,
         md: `[timfitzzz](https://github.com/timfitzzz) pushed`,

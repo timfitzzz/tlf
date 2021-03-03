@@ -10,6 +10,7 @@ PullRequestReviewCommentEventTests["testEvents"]["created"] = [
         md:
           "[paq](https://github.com/paq) added a comment [575624667](https://github.com/ruffle-rs/ruffle/pull/3213#discussion_r575624667) on pull request [avm2: Implement ByteArray](https://github.com/ruffle-rs/ruffle/pull/3213) in [ruffle-rs/ruffle](https://github.com/ruffle-rs/ruffle)",
       },
+      actionTypes: ["created"],
       actor: {
         plain: "paq added",
         md: "[paq](https://github.com/paq) added",

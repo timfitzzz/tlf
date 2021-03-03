@@ -1,3 +1,4 @@
+import { GithubUser } from "../types"
 import { defaultActorPaths, GithubEventType } from "./helperTypes"
 
 const MemberEvent: GithubEventType = {
@@ -7,14 +8,11 @@ const MemberEvent: GithubEventType = {
   },
   paths: {
     actor: defaultActorPaths,
-    verb: [
-      "payload.action",
-      {
-        added: "granted",
-        edited: "modified",
-        removed: "revoked",
-      },
-    ],
+    verb: {
+      added: "granted",
+      edited: "modified",
+      removed: "revoked",
+    },
     result: ["access", "access"],
     subject: {
       preposition: "for",
@@ -32,3 +30,8 @@ const MemberEvent: GithubEventType = {
 }
 
 export default MemberEvent
+
+export interface MemberEventPayload {
+  member: GithubUser
+  action: string
+}

@@ -16,3 +16,7 @@ const WatchEvent: GithubEventType = {
 }
 
 export default WatchEvent
+
+export interface WatchEventPayload {
+  action: string
+}

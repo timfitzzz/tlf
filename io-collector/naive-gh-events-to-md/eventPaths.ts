@@ -15,7 +15,7 @@
 // export type propValResult = [string, any, string]
 // export type iteratorMap = [string, { [key: string]: string }]
 
-// export interface entityRef {
+// export interface EntityRef {
 //   id: string
 //   url?: string
 //   preposition?: string
@@ -24,16 +24,16 @@
 //   content?: string
 // }
 
-// export interface eventPathSet {
+// export interface EventPathSet {
 //   actor?: {
 //     id: string
 //     url: string
 //   }
 //   verb?: string | iteratorMap
 //   result?: string | singleWithPlural | indexedSingleAndPlural
-//   parent?: entityRef | { [key: string]: entityRef } | [string, entityRef]
-//   target?: entityRef | { [key: string]: entityRef } | [string, entityRef]
-//   subject?: entityRef | { [key: string]: entityRef } | [string, entityRef]
+//   parent?: EntityRef | { [key: string]: EntityRef } | [string, EntityRef]
+//   target?: EntityRef | { [key: string]: EntityRef } | [string, EntityRef]
+//   subject?: EntityRef | { [key: string]: EntityRef } | [string, EntityRef]
 // }
 
 // export const defaultActorPaths = {
@@ -64,7 +64,7 @@
 // //                [content]
 // // plural desc: [actor] [verb] [result] [target.preposition] [target.desc] [target.id | target.title] [subject...] [parent...]:
 // //                > [content]
-// export const eventPaths: { [key: string]: eventPathSet } = {
+// export const eventPaths: { [key: string]: EventPathSet } = {
 //   CommitCommentEvent: {
 //     // single: 'timfitzzz created a comment on commit #123daff in timfitzzz/stemmy:'
 //     //         '  [comment.text]'

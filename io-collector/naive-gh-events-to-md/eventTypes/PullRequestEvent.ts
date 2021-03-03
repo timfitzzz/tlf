@@ -1,3 +1,4 @@
+import { GithubPullRequest } from "../types"
 import {
   GithubEventType,
   defaultActorPaths,
@@ -28,21 +29,18 @@ const PullRequestEvent: GithubEventType = {
   },
   paths: {
     actor: defaultActorPaths,
-    verb: [
-      "payload.action",
-      {
-        opened: "opened",
-        closed: "closed",
-        reopened: "reopened",
-        assigned: "assigned",
-        unassigned: "unassigned",
-        review_requested: "requested",
-        review_request_removed: "rescinded",
-        labeled: "applied",
-        unlabeled: "removed",
-        synchronize: "synchronized",
-      },
-    ],
+    verb: {
+      opened: "opened",
+      closed: "closed",
+      reopened: "reopened",
+      assigned: "assigned",
+      unassigned: "unassigned",
+      review_requested: "requested",
+      review_request_removed: "rescinded",
+      labeled: "applied",
+      unlabeled: "removed",
+      synchronize: "synchronized",
+    },
     result: {
       opened: ["pull request", "pull requests"],
       closed: ["pull request", "pull requests"],
@@ -91,3 +89,9 @@ const PullRequestEvent: GithubEventType = {
 }
 
 export default PullRequestEvent
+
+export interface PullRequestEventPayload {
+  action: string
+  number: number
+  pull_request: GithubPullRequest
+}

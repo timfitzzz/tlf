@@ -9,6 +9,7 @@ MemberEventTests["testEvents"]["added"] = [
         md:
           "[timfitzzz](https://github.com/timfitzzz) granted access for user [rf-](https://github.com/rf-) to [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy)",
       },
+      actionTypes: ["added"],
       actor: {
         plain: `timfitzzz granted`,
         md: `[timfitzzz](https://github.com/timfitzzz) granted`,

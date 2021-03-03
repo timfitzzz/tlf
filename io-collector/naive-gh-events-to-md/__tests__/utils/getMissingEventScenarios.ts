@@ -1,7 +1,8 @@
-import eventTypes from "../../eventTypes"
+/*  eslint-disable no-console */
+
+import { lookupActionType } from "../../getProps"
 import { GithubEvent } from "../../types"
 const fs = require("fs")
-const _ = require("lodash")
 const axios = require("axios")
 
 var getConfig = () => ({
@@ -30,23 +31,6 @@ let neededTypes: { [key: string]: string[] } = {
   PullRequestReviewCommentEvent: ["edited", "deleted"],
   ReleaseEvent: ["edited"],
   SponsorshipData: [""],
-}
-
-function lookupActionType(event: GithubEvent): string | string[] | null {
-  const { actionPropPath, actionTypes, iterator } = eventTypes[
-    event.type
-  ].config
-
-  if (iterator && actionTypes) {
-    let types: string[] = _.get(event, iterator)
-      .map(iteree => _.get(iteree, actionPropPath[1]))
-      .reduce((acc, i) => (acc.indexOf(i) ? acc + i : acc), [])
-    return types.length > 1 ? types : types[0]
-  } else if (actionPropPath) {
-    return _.get(event, actionPropPath)
-  } else {
-    return null
-  }
 }
 
 function isNeeded(event: GithubEvent): boolean {

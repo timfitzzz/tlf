@@ -1,3 +1,4 @@
+import { GithubPullRequest, GithubPullRequestComment } from "../types"
 import {
   GithubEventType,
   repoParentPaths,
@@ -11,14 +12,11 @@ const PullRequestReviewCommentEvent: GithubEventType = {
   },
   paths: {
     actor: defaultActorPaths,
-    verb: [
-      "payload.action",
-      {
-        created: "added",
-        edited: "changed",
-        deleted: "removed",
-      },
-    ],
+    verb: {
+      created: "added",
+      edited: "changed",
+      deleted: "removed",
+    },
     result: {
       created: ["a comment", "comments"],
       deleted: ["a comment", "comments"],
@@ -59,3 +57,10 @@ const PullRequestReviewCommentEvent: GithubEventType = {
 }
 
 export default PullRequestReviewCommentEvent
+
+export interface PullRequestReviewCommentEventPayload {
+  action: string
+  number: number
+  comment: GithubPullRequestComment
+  pull_request: GithubPullRequest
+}

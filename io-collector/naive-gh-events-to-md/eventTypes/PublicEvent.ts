@@ -21,3 +21,5 @@ const PublicEvent: GithubEventType = {
 }
 
 export default PublicEvent
+
+export interface PublicEventPayload {} // eslint-disable-line

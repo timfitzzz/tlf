@@ -12,5 +12,4 @@ export interface IOMDXRecord {
 
 export interface TestInterface {
   huskyWorks: boolean
-  huskyDoesntWork: boolean
 }

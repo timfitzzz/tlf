@@ -12,7 +12,8 @@
     "release": "auto shipit",
     "start": "yarn develop",
     "test": "jest --verbose",
-    "type-check": "tsc --pretty --noEmit"
+    "type-check": "tsc --pretty --noEmit",
+    "install-husky": "node ./node_modules/.bin/husky install"
   },
   "husky": {
     "hooks": {

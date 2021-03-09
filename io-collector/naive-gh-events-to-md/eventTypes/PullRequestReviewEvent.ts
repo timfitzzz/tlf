@@ -30,7 +30,8 @@ const PullRequestReviewEvent: GithubEventType = {
     target: {
       id: "payload.pull_request.id",
       url: "payload.pull_request.html_url",
-      desc: "a pull request",
+      title: "payload.pull_request.title",
+      desc: "pull request",
       preposition: "of",
     },
     parent: repoParentPaths,

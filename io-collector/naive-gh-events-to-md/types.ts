@@ -1,5 +1,8 @@
 import { Endpoints } from "@octokit/types"
+import { DateTime, DateTimeFormatOptions, LocaleOptions } from "luxon"
+import { GHEvent } from "./eventTypes"
 import { resultDef } from "./eventTypes/helperTypes"
+import { RenderedEventPropSet, RenderedEventsTextSet } from "./getText"
 
 export type GithubEvent = Endpoints["GET /users/{username}/events"]["response"]["data"][0]
 export type GithubIssue = Endpoints["GET /repos/{owner}/{repo}/issues"]["response"]["data"][0]
@@ -36,4 +39,70 @@ export interface EventPropSet {
   actor: ActorProps
   target?: EntityProps
   parent: EntityProps
+}
+
+export interface TestStringsSet {
+  plain: string
+  md: string
+}
+
+export interface TestStringsArraysSet {
+  plain: string[][]
+  md: string[][]
+}
+
+// export interface TestStrings {
+//   summary: TestStringsSet
+//   content: TestStringsArraysSet
+//   actionTypes: string[],
+//   actor: TestStringsSet,
+//   result: resultDef,
+//   subject:
+// }
+
+export interface TestEvent {
+  propSets: EventPropSet[]
+  renderedPropSets: { plain: RenderedEventPropSet; md: RenderedEventPropSet }[]
+  renderedEventsTextSets: {
+    collapsed: {
+      plain: RenderedEventsTextSet
+      md: RenderedEventsTextSet
+    }[]
+    individual: {
+      plain: RenderedEventsTextSet
+      md: RenderedEventsTextSet
+    }[]
+  }
+  events: GHEvent[]
+}
+
+export interface TestEventsByActionType {
+  [key: string]: TestEvent[]
+}
+export type TestEvents = TestEventsByActionType
+
+export interface TypeTestData {
+  testEvents?: TestEvents
+}
+
+export interface NaiveConfig {
+  sortBy?: "date" | "actor" | "type" | "target" | "parent"
+  collapse?: boolean
+  groupByDays?: number
+  startDate?: Date
+  md?: boolean
+  omitContent?: boolean
+  indentContent?: boolean
+  dateTimeFormatOptions?: LocaleOptions & DateTimeFormatOptions
+}
+
+export const defaultNaiveConfig: NaiveConfig = {
+  sortBy: "date",
+  collapse: true,
+  groupByDays: 7,
+  startDate: new Date("1/1/1970"),
+  md: true,
+  omitContent: false,
+  indentContent: true,
+  dateTimeFormatOptions: DateTime.DATE_FULL,
 }

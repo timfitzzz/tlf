@@ -26,13 +26,11 @@ const PullRequestReviewCommentEvent: GithubEventType = {
       created: {
         id: "payload.comment.id",
         url: "payload.comment.html_url",
-        title: "payload.comment.id",
         content: "payload.comment.body",
       },
       edited: {
         id: "payload.comment.id",
         url: "payload.comment.html_url",
-        title: "payload.comment.id",
         content: "payload.changes",
       },
     },

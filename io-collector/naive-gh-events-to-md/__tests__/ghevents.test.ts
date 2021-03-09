@@ -1,11 +1,3 @@
-// import {
-//   EntityRef,
-//   getActorVerbText,
-//   getEntityText,
-//   getEventSummary,
-//   getResult,
-//   getVerb,
-// } from "../eventPaths"
 import _ from "lodash"
 import EventTypes, { GHEvent, GHEventPayloadIteree } from "../eventTypes"
 import { EntityRef } from "../eventTypes/helperTypes"
@@ -15,12 +7,11 @@ import {
   getEntityProps,
   getActorProps,
   lookupActionTypes,
-  lookupActionType,
   getVerbs,
   getSubjectPropSets,
 } from "../getProps"
 
-Object.getOwnPropertyNames(EventTypes).map(eventType => {
+Object.getOwnPropertyNames(EventTypes).map((eventType) => {
   describe(`Event type definition for ${eventType}`, () => {
     it("has paths and config defined", () => {
       expect(EventTypes[eventType].paths).not.toBeUndefined()
@@ -88,7 +79,7 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
   // console.log(testData[eventType])
 
   if (testData[eventType]) {
-    actionTypes.forEach(actionType => {
+    actionTypes.forEach((actionType) => {
       // console.log(eventType)
       const testEvents = testData[eventType].testEvents
       let testDatums: { testStrings: any; event: GHEvent }[] =
@@ -216,11 +207,13 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
                             let definedPaths =
                               actionTypes && !paths.subject.id // if there are multiple types, gotta use the paths defined for this one
                                 ? Object.getOwnPropertyNames(
-                                    paths["subject"][lookupActionType(event, i)]
+                                    paths["subject"][
+                                      lookupActionTypes(event, i)
+                                    ]
                                   )
                                 : Object.getOwnPropertyNames(paths["subject"])
 
-                            definedPaths.forEach(path => {
+                            definedPaths.forEach((path) => {
                               expect(subjectPropSet[path]).toBeDefined()
                             })
                           })
@@ -237,11 +230,11 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
                         it("the subject props object should contain a property for each one defined in event subject paths", () => {
                           let definedPaths = actionTypes
                             ? Object.getOwnPropertyNames(
-                                paths["subject"][lookupActionType(event)]
+                                paths["subject"][lookupActionTypes(event)]
                               )
                             : Object.getOwnPropertyNames(paths["subject"])
 
-                          definedPaths.forEach(path => {
+                          definedPaths.forEach((path) => {
                             expect(subjectProps[path]).toBeDefined()
                           })
                         })
@@ -253,8 +246,8 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
 
               describe("entity properties", () => {
                 entityRoles
-                  .filter(role => !!paths[role])
-                  .forEach(entityRole => {
+                  .filter((role) => !!paths[role])
+                  .forEach((entityRole) => {
                     describe(`it should return props for all ${entityRole} properties defined in eventPaths for each defined action type or for no action type`, () => {
                       let rolePaths: EntityRef
                       let rolePathProps: string[] = []
@@ -286,7 +279,7 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
                       ) {
                         // if there are multiple action types in the event, and this entity cares about them,
                         // this should work for each of them.
-                        eventActionTypes.forEach(actionType => {
+                        eventActionTypes.forEach((actionType) => {
                           rolePaths = paths[entityRole][actionType]
                           if (rolePaths) {
                             rolePathProps = Object.getOwnPropertyNames(
@@ -297,7 +290,7 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
                               event,
                               entityRole
                             )
-                            rolePathProps.forEach(rolePathProp => {
+                            rolePathProps.forEach((rolePathProp) => {
                               it(`returns a ${rolePathProp} prop`, () => {
                                 expect(
                                   entityPropSet[rolePathProp]
@@ -317,8 +310,8 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
                         let entityPropSet = getEntityProps(event, entityRole)
 
                         if (iterator && Array.isArray(entityPropSet)) {
-                          entityPropSet.forEach(entSet => {
-                            rolePathProps.forEach(rolePathProp => {
+                          entityPropSet.forEach((entSet) => {
+                            rolePathProps.forEach((rolePathProp) => {
                               it(`returns a ${rolePathProp} prop`, () => {
                                 expect(entSet[rolePathProp]).not.toBeNull()
                                 expect(entSet[rolePathProp]).not.toBeUndefined()
@@ -326,7 +319,7 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
                             })
                           })
                         } else {
-                          rolePathProps.forEach(rolePathProp => {
+                          rolePathProps.forEach((rolePathProp) => {
                             it(`returns a ${rolePathProp} prop`, () => {
                               expect(entityPropSet[rolePathProp]).not.toBeNull()
                               expect(
@@ -393,8 +386,8 @@ Object.getOwnPropertyNames(EventTypes).map(eventType => {
 
               describe(`${event.type} entity text generator`, () => {
                 entityRoles
-                  .filter(role => !!paths[role]) // only test roles actually defined for this entity
-                  .forEach(role => {
+                  .filter((role) => !!paths[role]) // only test roles actually defined for this entity
+                  .forEach((role) => {
                     it(`should have test strings defined for ${role} entity`, () => {
                       expect(isDefined(role)).toBe(true)
                     })

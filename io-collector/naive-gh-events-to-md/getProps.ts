@@ -7,41 +7,45 @@ import {
   resultDef,
 } from "./eventTypes/helperTypes"
 const _ = require("lodash")
-import { LocaleOptions, DateTimeFormatOptions } from "luxon"
 
 export function fixUrl(url: string): string | null {
+  if (url.indexOf("[bot]") !== -1) {
+    url = url.replace("[bot]", "").replace("/users", "/apps")
+  }
+
   return url
     ? url
         .replace("api.", "")
         .replace("www.", "")
         .replace("/repos", "")
+        .replace("/users", "")
     : null
 }
 
-export function lookupActionType(
-  event: GHEvent,
-  iteree?: number
-): string | string[] | null {
-  const { actionPropPath, actionTypes, iterator } = EventTypes[
-    event.type
-  ].config
+// export function lookupActionType(
+//   event: GHEvent,
+//   iteree?: number
+// ): string | string[] | null {
+//   const { actionPropPath, actionTypes, iterator } = EventTypes[
+//     event.type
+//   ].config
 
-  if (iterator && actionTypes) {
-    if (iteree) {
-      return _.get(_.get(event, iterator)[iteree], [actionPropPath[1]])
-    } else {
-      let types: string[] = _.get(event, iterator).map(iteree =>
-        _.get(iteree, actionPropPath[1])
-      )
-      // .reduce((acc, i) => (acc.indexOf(i) ? acc + i : acc), [])
-      return types.length > 1 ? types : types[0]
-    }
-  } else if (actionPropPath) {
-    return _.get(event, actionPropPath)
-  } else {
-    return null
-  }
-}
+//   if (iterator && actionTypes) {
+//     if (iteree) {
+//       return _.get(_.get(event, iterator)[iteree], [actionPropPath[1]])
+//     } else {
+//       let types: string[] = _.get(event, iterator).map(iteree =>
+//         _.get(iteree, actionPropPath[1])
+//       )
+//       // .reduce((acc, i) => (acc.indexOf(i) ? acc + i : acc), [])
+//       return types.length > 1 ? types : types[0]
+//     }
+//   } else if (actionPropPath) {
+//     return _.get(event, actionPropPath)
+//   } else {
+//     return null
+//   }
+// }
 
 export function lookupActionTypes(
   event: GHEvent,
@@ -57,17 +61,22 @@ export function lookupActionTypes(
       let iteree = _.get(event, iterator)[itereeIdx]
       // console.log(`got iteree: ${iteree}`)
       // console.log("getting path ", actionPropPath[1])
-      return _.get(iteree, actionPropPath[1])
+      // console.log(_.get(iteree, actionPropPath[1]))
+      let output = [_.get(iteree, actionPropPath[1])]
+      return output
     } else {
-      let types: string[] = _.get(event, iterator).map(iteree =>
+      let types: string[] = _.get(event, iterator).map((iteree) =>
         _.get(iteree, actionPropPath[1])
       )
+      // console.log(types)
       // .reduce((acc, i) => (acc.indexOf(i) ? acc + i : acc), [])
       return types
     }
   } else if (actionPropPath) {
+    // console.log(_.get(event, actionPropPath))
     return [_.get(event, actionPropPath)]
   } else {
+    // console.log("actionTypes === null")
     return null
   }
 }
@@ -91,7 +100,7 @@ export function getVerbs<K extends GHEvent>(
       return [paths.verb]
     }
   } else {
-    return lookupActionTypes(event).map(type => paths.verb[type])
+    return lookupActionTypes(event).map((type) => paths.verb[type])
   }
 }
 
@@ -138,6 +147,20 @@ export function getActorProps(event: GHEvent): { id: string; url: string } {
 //   content: string
 // }
 
+function pathsToProps(obj: object, paths: EntityRef): EntityProps {
+  // console.log(paths)
+  // paths.id === "page_name" && console.log("processing obj: ", obj)
+  // paths.id === "page_name" && console.log("getting paths ", paths)
+  return {
+    preposition: paths.preposition,
+    id: _.get(obj, paths.id) || paths.id,
+    url: paths.url ? fixUrl(_.get(obj, paths.url)) : undefined,
+    title: _.get(obj, paths.title),
+    desc: _.get(obj, paths.desc) || paths.desc,
+    content: _.get(obj, paths.content),
+  }
+}
+
 // goal: produce property sets for each subject within an event
 export function getSubjectPropSets(event: GHEvent): EntityProps[] {
   // console.log(event.type)
@@ -172,39 +195,28 @@ export function getSubjectPropSets(event: GHEvent): EntityProps[] {
   return output
 }
 
-function pathsToProps(obj: object, paths: EntityRef): EntityProps {
-  // console.log(paths)
-  // paths.id === "page_name" && console.log("processing obj: ", obj)
-  // paths.id === "page_name" && console.log("getting paths ", paths)
-
-  return {
-    preposition: paths.preposition,
-    id: _.get(obj, paths.id),
-    url: fixUrl(_.get(obj, paths.url)),
-    title: _.get(obj, paths.title),
-    desc: _.get(obj, paths.desc) || paths.desc,
-    content: _.get(obj, paths.content),
-  }
-}
-
 export function getEntityProps(
   event: GHEvent,
-  entityType: string
-): EntityProps | EntityProps[] {
+  entityType: string,
+  actionType?: string
+): EntityProps {
+  // console.dir(event.type + " " + entityType + " " + actionType)
   const entityPaths: EntityRef | { [key: string]: EntityRef } =
     EventTypes[event.type].paths[entityType]
 
   // const { iterator } = EventTypes[event.type].config
 
-  let output: EntityProps | EntityProps[]
-
-  // console.log(entityPaths)
+  let output: EntityProps | undefined
 
   if (entityPaths) {
-    if (!entityPaths.id && entityPaths[lookupActionTypes(event)[0]]) {
-      // for entities with multiple action types:
-      // entityPaths = { [key: string]: EntityRef }
-      output = pathsToProps(event, entityPaths[lookupActionTypes(event)[0]])
+    if (typeof entityPaths.id === "undefined") {
+      if (entityPaths[actionType]) {
+        // for entities with multiple action types:
+        // entityPaths = { [key: string]: EntityRef }
+        output = pathsToProps(event, entityPaths[actionType])
+      } else {
+        output = undefined
+      }
     } else {
       output = pathsToProps(event, entityPaths as EntityRef)
     }
@@ -225,6 +237,7 @@ export function getEntityProps(
   //     }))
   //   } else
   // }
+  // console.log(event, entityPaths, entityType, actionType, output)
   return output
 }
 
@@ -232,6 +245,8 @@ export function getEventPropSets(event: GHEvent): EventPropSet[] {
   let subjectPropSets = getSubjectPropSets(event)
   let subjectActionTypes = lookupActionTypes(event)
   let verbs = getVerbs(event)
+
+  // console.dir(subjectActionTypes)
 
   return subjectPropSets.map((subject, i) => {
     return {
@@ -246,178 +261,20 @@ export function getEventPropSets(event: GHEvent): EventPropSet[] {
       actionType: subjectActionTypes ? subjectActionTypes[i] : undefined,
       subject,
       actor: getActorProps(event),
-      target: getEntityProps(event, "target") as EntityProps,
-      parent: getEntityProps(event, "parent") as EntityProps,
+      target: getEntityProps(
+        event,
+        "target",
+        subjectActionTypes ? subjectActionTypes[i] : undefined
+      ) as EntityProps,
+      parent: getEntityProps(
+        event,
+        "parent",
+        subjectActionTypes ? subjectActionTypes[i] : undefined
+      ) as EntityProps,
     }
   })
 }
 
 export function getEventsPropSets(events: GHEvent[]): EventPropSet[] {
   return events.reduce((acc, event) => acc.concat(getEventPropSets(event)), [])
-}
-
-export interface NaiveConfig {
-  sortBy: "date" | "actor" | "type" | "target" | "parent"
-  collapse: boolean
-  groupByDays?: number
-  startDate?: Date
-  md?: boolean
-  omitContent?: boolean
-  indentContent?: boolean
-  dateTimeFormatOptions: LocaleOptions & DateTimeFormatOptions
-}
-
-export function groupEventPropSets(evps: EventPropSet[]): EventPropSet[][] {
-  return evps.reduce(
-    (acc, set, index) => {
-      let { done } = acc
-      if (done.indexOf(index) === -1) {
-        let sameSets = evps.filter((innerSet, innerIndex) => {
-          if (done.indexOf(innerIndex) === -1) {
-            if (
-              _.isEqual(set.type, innerSet.type) &&
-              _.isEqual(set.verb, innerSet.verb) &&
-              _.isEqual(set.actionType, innerSet.actionType) &&
-              _.isEqual(set.actor, innerSet.actor) &&
-              _.isEqual(set.target, innerSet.target) &&
-              _.isEqual(set.parent, innerSet.parent)
-            ) {
-              done.push(innerIndex)
-              return true
-            }
-          } else {
-            return false
-          }
-        })
-        return { ...acc, sets: [...acc.sets, sameSets] }
-      } else {
-        return acc
-      }
-    },
-    { done: [], sets: [] }
-  ).sets
-}
-
-// export function sortEventPropSets(evps: EventPropSet[], { sort, collapse }: sortEventPropSetsOptions): EventPropSet[][] {
-
-//   if (sort && sort.length > 0) {
-//     sort.forEach(sortProperty)
-//   }
-
-// }
-
-export interface DatedEventCollection {
-  startDate: Date
-  endDate: Date
-  eventPropSet: EventPropSet[]
-}
-
-export interface SortedDatedEventCollection {
-  startDate: Date
-  endDate: Date
-  eventPropSetGroups: EventPropSet[][]
-}
-
-export type DatedEventCollections = DatedEventCollection[]
-export type SortedDatedEventCollections = SortedDatedEventCollection[]
-
-export function collectEventsByDate(
-  evps: EventPropSet[],
-  startDate: Date,
-  days: number = 7
-): DatedEventCollections {
-  let collectionLengthMs = days * 86400000
-
-  return evps
-    .filter(evp => new Date(evp.date) > startDate)
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-    .reduce(
-      (acc, evp) => {
-        let { collections } = acc
-
-        let openCollection = collections[collections.length - 1]
-
-        // if the event date is within {days} days after the current collection start date
-        //
-        if (
-          new Date(evp.date).getTime() <=
-          openCollection.startDate.getTime() + collectionLengthMs
-        ) {
-          openCollection.eventPropSet.push(evp)
-        } else {
-          // close up a collection with something & start a new one,
-          // or move start date of current (empty) collection until it includes this event
-          if (openCollection.eventPropSet.length > 0) {
-            openCollection.endDate = new Date(
-              openCollection.startDate.getTime() + collectionLengthMs
-            )
-
-            collections.push({
-              startDate: new Date(openCollection.endDate.getTime() + 1),
-              endDate: null,
-              eventPropSet: [evp],
-            })
-          } else {
-            while (
-              new Date(evp.date).getTime() >
-              openCollection.startDate.getTime() + collectionLengthMs
-            ) {
-              openCollection.startDate = new Date(
-                openCollection.startDate.getTime() + collectionLengthMs
-              )
-            }
-
-            openCollection.eventPropSet.push(evp)
-          }
-
-          // start a new collection
-        }
-        return acc
-      },
-      {
-        collections: [
-          { startDate: startDate, endDate: null, eventPropSet: [] },
-        ],
-      }
-    ).collections
-}
-
-export function getSortedDatedEventCollections(
-  events: GHEvent[],
-  { sortBy, collapse, groupByDays, startDate }: NaiveConfig
-): SortedDatedEventCollection[] {
-  let propSets = getEventsPropSets(events).sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-  )
-  let output = []
-
-  if (groupByDays) {
-    output = collectEventsByDate(propSets, startDate, groupByDays)
-  } else {
-    output = collectEventsByDate(propSets, new Date("1/1/1970"), 1000000000)
-  }
-
-  if (collapse) {
-    output = output.map(eventCollection => ({
-      ...eventCollection,
-      eventPropSetGroups: groupEventPropSets(eventCollection.eventPropSet),
-    }))
-  } else {
-    output = output.map(eventCollection => ({
-      ...eventCollection,
-      eventPropSetGroups: eventCollection.eventPropSet.map(epset => [epset]),
-    }))
-  }
-
-  if (sortBy && sortBy !== "date") {
-    // should already be sorted by date
-    output = output.map(refinedEventCollection => ({
-      ...refinedEventCollection,
-      eventPropSetGroups: refinedEventCollection.eventPropSetGroups.sort(
-        (epsgroupA, epsgroupB) => epsgroupA[0][sortBy] - epsgroupB[0][sortBy]
-      ),
-    }))
-  }
-
-  return output
 }

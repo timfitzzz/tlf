@@ -1,4 +1,8 @@
-import { defaultActorPaths, GithubEventType } from "./helperTypes"
+import {
+  defaultActorPaths,
+  GithubEventType,
+  repoParentPaths,
+} from "./helperTypes"
 
 const PushEvent: GithubEventType = {
   config: {
@@ -14,11 +18,11 @@ const PushEvent: GithubEventType = {
       content: "message",
     },
     target: {
-      id: "repo.id",
-      title: "repo.name",
+      id: "payload.ref",
+      title: "payload.ref",
       preposition: "to",
-      url: "repo.url",
     },
+    parent: repoParentPaths,
   },
 }
 

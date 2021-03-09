@@ -16,10 +16,10 @@ const ReleaseEvent: GithubEventType = {
       published: "published",
       edited: "edited",
     },
-    result: ["a release", "releases"],
+    result: ["release", "releases"],
     subject: {
       id: "payload.release.id",
-      title: "payload.release.name",
+      title: "payload.release.tag_name",
       url: "payload.release.html_url",
     },
     target: repoParentPaths,

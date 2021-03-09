@@ -1,11 +1,8 @@
 import { DateTimeFormatOptions, DateTime } from "luxon"
 import { GHEvent } from "./eventTypes"
-import {
-  getActorProps,
-  getVerbs,
-  NaiveConfig,
-  getSortedDatedEventCollections,
-} from "./getProps"
+import { getActorProps, getVerbs } from "./getProps"
+import { NaiveConfig } from "./types"
+import { getSortedDatedEventCollections } from "./collectPropSets"
 import { EntityProps, EventPropSet } from "./types"
 
 // type EventTypeRequirement<T> = T extends GHEventPayloadIteree
@@ -121,7 +118,10 @@ import { EntityProps, EventPropSet } from "./types"
 
 // }
 
-function processPropSet(set: Partial<EntityProps> = {}, { md }: { md: boolean} = { md: false }) {
+function processPropSet(
+  set: Partial<EntityProps> = {},
+  { md }: { md: boolean } = { md: false }
+) {
   let { id, url, desc, preposition, title } = set
   let space = " "
 
@@ -159,9 +159,6 @@ function processPropSet(set: Partial<EntityProps> = {}, { md }: { md: boolean} =
 //       (md && url ? `(${url})` : "") // url if md and url
 // }
 
-
-
-
 // export function getEntityText(
 //   EntityProps: EntityProps,
 //   { md }: { md: boolean } = { md: false }
@@ -184,7 +181,6 @@ export function renderActorText(
   return `${md ? "[" : ""}${id}${md ? "](" + url + ")" : ""}`
 }
 
-
 export function getActorText(
   event: GHEvent,
   { md }: { md: boolean } = { md: false }
@@ -192,7 +188,6 @@ export function getActorText(
   let { id, url } = getActorProps(event)
   return `${md ? "[" : ""}${id}${md ? "](" + url + ")" : ""}`
 }
-
 
 export function renderVerbText(verb: EventPropSet["verb"]): string {
   return verb
@@ -206,7 +201,7 @@ export function getActorVerbText(
   let verbs = getVerbs(event)
 
   if (verbs.length > 1) {
-    return verbs.map(verb => `${actorText} ${verb}`)
+    return verbs.map((verb) => `${actorText} ${verb}`)
   } else {
     let verb = verbs[0]
     return `${actorText} ${verb}`
@@ -225,12 +220,12 @@ export function getActorVerbText(
 
 export function isEntityPlural(entityText: string[][]): boolean {
   return (
-    entityText.length > 1 || entityText.filter(i => i.length > 2).length > 0
+    entityText.length > 1 || entityText.filter((i) => i.length > 2).length > 0
   )
 }
 
 export function joinEntitySummaries(entityText: string[][]): string {
-  return entityText.map(item => item[0]).join(", ")
+  return entityText.map((item) => item[0]).join(", ")
 }
 
 // export function getEventTexts(
@@ -283,17 +278,21 @@ export function joinEntitySummaries(entityText: string[][]): string {
 //   )
 // }
 
+export type RenderedSubjectAndContent = [subject: string, content: string]
+export type RenderedEventPropSetText = [summary: string, ...content: string[]]
+export type RenderedEventsTextSet = [
+  dates: string[],
+  summary: string,
+  ...content: string[]
+]
 
-export type RenderedSubjectAndContent = [ subject: string, content: string ]
-export type RenderedEventPropSetText = [ summary: string, ...content: string[] ]
-export type RenderedEventsTextSet = [ dates: string[], summary: string, ...content: string[] ]
 export interface RenderedEventPropSet {
   date: string
-  actor: string,
-  verb: string,
-  subject: string,
-  content: string,
-  target: string,
+  actor: string
+  verb: string
+  subject: string
+  content: string
+  target: string
   parent: string
 }
 
@@ -307,11 +306,20 @@ export function renderEntityText(
 export const renderSubject = (
   subjectProps: EventPropSet["subject"],
   { md }: { md: boolean } = { md: false }
-): RenderedSubjectAndContent => [renderEntityText(subjectProps, { md }), subjectProps.content]
+): RenderedSubjectAndContent => [
+  renderEntityText(subjectProps, { md }),
+  subjectProps.content,
+]
 
 export function getRenderedEventPropSet(
   eventProps: EventPropSet,
-  { md, dateTimeFormatOptions }: { md: boolean, dateTimeFormatOptions: DateTimeFormatOptions } = { md: false, dateTimeFormatOptions: DateTime.DATE_FULL }
+  {
+    md,
+    dateTimeFormatOptions,
+  }: { md: boolean; dateTimeFormatOptions: DateTimeFormatOptions } = {
+    md: false,
+    dateTimeFormatOptions: DateTime.DATE_FULL,
+  }
 ): RenderedEventPropSet {
   let date = renderDate(eventProps.date, dateTimeFormatOptions) // make the format a config option
   let actor = renderActorText(eventProps.actor, { md })
@@ -327,11 +335,14 @@ export function getRenderedEventPropSet(
     subject: subject[0],
     content: subject[1],
     target,
-    parent
+    parent,
   }
 }
 
-export function renderDate(date: Date, formatOptions: DateTimeFormatOptions): string {
+export function renderDate(
+  date: Date,
+  formatOptions: DateTimeFormatOptions
+): string {
   return DateTime.fromJSDate(date).toLocaleString(formatOptions)
 }
 
@@ -342,36 +353,54 @@ export function renderDatedContent(
   title: string,
   { md }: { md: boolean } = { md: false }
 ): string {
-  return title ? date : '' +
-         md ? '[' : '' + 
-         title ? title : date +
-         md ? '](' + url + '): ' : ': ' +
-         content
+  return title
+    ? date
+    : "" + md
+    ? "["
+    : "" + title
+    ? title
+    : date + md
+    ? "](" + url + "): "
+    : ": " + content
 }
 
 export function renderEventPropSetGroup(
   eventPropSets: EventPropSet[],
-  { md, dateTimeFormatOptions }: { md: boolean, dateTimeFormatOptions: DateTimeFormatOptions } = { md: false, dateTimeFormatOptions: DateTime.DATE_FULL }
+  {
+    md,
+    dateTimeFormatOptions,
+  }: { md: boolean; dateTimeFormatOptions: DateTimeFormatOptions } = {
+    md: false,
+    dateTimeFormatOptions: DateTime.DATE_FULL,
+  }
 ): RenderedEventsTextSet {
   let output: RenderedEventsTextSet = [[], undefined, undefined]
 
-  let renderedSets = eventPropSets.map(eps => {
+  let renderedSets = eventPropSets.map((eps) => {
     // console.log(eps);
     return getRenderedEventPropSet(eps, { md, dateTimeFormatOptions })
-    
   })
 
   // console.log(renderedSets)
 
   renderedSets.forEach((reps, i) => {
+    let {
+      subject: { url, title },
+      result,
+    } = eventPropSets[i]
 
-    let { subject: { url, title }, result } = eventPropSets[i]
-    
     output[0].push(reps.date)
-    
-    if (i === 0) {
 
-      const summaryString = `${reps.actor} ${reps.verb} ${typeof result === 'string' ? result : eventPropSets.length > 1 ? result[1] : result[0]} ${eventPropSets.length > 1 ? '' : (reps.subject + " ")}${reps.target ? reps.target + (reps.parent ? " " :  '') : ''}${reps.parent ? reps.parent : ''}`
+    if (i === 0) {
+      const summaryString = `${reps.actor} ${reps.verb} ${
+        typeof result === "string"
+          ? result
+          : eventPropSets.length > 1
+          ? result[1]
+          : result[0]
+      } ${eventPropSets.length > 1 ? "" : reps.subject + " "}${
+        reps.target ? reps.target + (reps.parent ? " " : "") : ""
+      }${reps.parent ? reps.parent : ""}`
 
       output[1] = summaryString
       // console.log(summaryString)
@@ -381,12 +410,19 @@ export function renderEventPropSetGroup(
     // )
 
     if (reps.content) {
-      output.push(renderDatedContent(reps.content, reps.date, url ? url : null, title ? title : null, { md }))
+      output.push(
+        renderDatedContent(
+          reps.content,
+          reps.date,
+          url ? url : null,
+          title ? title : null,
+          { md }
+        )
+      )
     }
   })
 
   return output
-
 }
 
 // export function collapseRenderedEventPropSets(
@@ -412,26 +448,46 @@ export type RenderedEventCollection = string
 export function renderEvents(
   events: GHEvent[],
   options: NaiveConfig = {
-    sortBy: 'date',
+    sortBy: "date",
     groupByDays: 7,
     collapse: true,
     md: true,
-    startDate: new Date(1/1/1970),
+    startDate: new Date(1 / 1 / 1970),
     omitContent: false,
     indentContent: true,
-    dateTimeFormatOptions: DateTime.DATE_FULL
+    dateTimeFormatOptions: DateTime.DATE_FULL,
   }
 ): RenderedEventCollections[] {
-
   const { md, dateTimeFormatOptions } = options
 
-  let eventPropSetGroupCollection = getSortedDatedEventCollections(events, options)
+  let eventPropSetGroupCollection = getSortedDatedEventCollections(
+    events,
+    options
+  )
 
-  return eventPropSetGroupCollection.map(({ startDate, endDate, eventPropSetGroups }) => {
-    return {
-      startDate: typeof startDate === 'string' ? startDate : startDate ? renderDate(startDate, options.dateTimeFormatOptions) : '',
-      endDate: typeof endDate === 'string' ? endDate : endDate ? renderDate(endDate, options.dateTimeFormatOptions) : '',
-      renderedEventCollections: eventPropSetGroups ? eventPropSetGroups.map(epsg => renderEventPropSetGroup(epsg, { md, dateTimeFormatOptions}).join('\r\n')) : []
+  return eventPropSetGroupCollection.map(
+    ({ startDate, endDate, eventPropSetGroups }) => {
+      return {
+        startDate:
+          typeof startDate === "string"
+            ? startDate
+            : startDate
+            ? renderDate(startDate, options.dateTimeFormatOptions)
+            : "",
+        endDate:
+          typeof endDate === "string"
+            ? endDate
+            : endDate
+            ? renderDate(endDate, options.dateTimeFormatOptions)
+            : "",
+        renderedEventCollections: eventPropSetGroups
+          ? eventPropSetGroups.map((epsg) =>
+              renderEventPropSetGroup(epsg, { md, dateTimeFormatOptions }).join(
+                "\r\n"
+              )
+            )
+          : [],
+      }
     }
-  })
+  )
 }

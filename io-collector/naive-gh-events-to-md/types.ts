@@ -96,17 +96,20 @@ export interface NaiveConfig {
   omitContent?: boolean
   indentContent?: boolean
   dateTimeFormatOptions?: LocaleOptions
+  newLinesBetween?: boolean
 }
 
 export const defaultNaiveConfig: NaiveConfig = {
   sortBy: "date",
   collapse: true,
   groupByDays: 7,
+  dateSummaries: false,
   startDate: new Date("1/1/1970"),
   md: true,
   omitContent: false,
   indentContent: true,
   dateTimeFormatOptions: DateTime.DATE_FULL,
+  newLinesBetween: true,
 }
 
 export type RenderedSubjectAndContent = [subject: string, content?: string]

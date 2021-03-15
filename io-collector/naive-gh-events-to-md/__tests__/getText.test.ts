@@ -11,7 +11,6 @@ import {
 import { RenderedEventsTextSet, TestEvent } from "../types"
 import { getSortedDatedEventCollections } from "../collectPropSets"
 import allEventsOutput from "./testData/allEventsOutput"
-// import fs from "fs"
 
 let testEventsSets: TestEvent[] = []
 
@@ -242,10 +241,10 @@ describe("renderDatedContent", () => {
       "March 12, 2021",
       null,
       null,
-      { md: false, indentContent: true }
+      { md: false }
     )
 
-    expect(output).toBe("  March 12, 2021: content string")
+    expect(output).toBe("March 12, 2021: content string")
   })
 
   it("should return expected md text with only required args", () => {
@@ -254,10 +253,10 @@ describe("renderDatedContent", () => {
       "March 12, 2021",
       null,
       null,
-      { md: true, indentContent: true }
+      { md: true }
     )
 
-    expect(output).toBe("  * March 12, 2021: content string")
+    expect(output).toBe("March 12, 2021: content string")
   })
 
   it("should return expected plain text with url but no title", () => {
@@ -266,11 +265,11 @@ describe("renderDatedContent", () => {
       "March 12, 2021",
       "https://github.com/timfitzzz",
       null,
-      { md: false, indentContent: true }
+      { md: false }
     )
 
     expect(output).toBe(
-      "  March 12, 2021: content string (https://github.com/timfitzzz)"
+      "March 12, 2021: content string (https://github.com/timfitzzz)"
     )
   })
 
@@ -280,11 +279,11 @@ describe("renderDatedContent", () => {
       "March 12, 2021",
       "https://github.com/timfitzzz",
       null,
-      { md: true, indentContent: true }
+      { md: true }
     )
 
     expect(output).toBe(
-      "  * [March 12, 2021](https://github.com/timfitzzz): content string"
+      "[March 12, 2021](https://github.com/timfitzzz): content string"
     )
   })
 
@@ -298,7 +297,7 @@ describe("renderDatedContent", () => {
     )
 
     expect(output).toBe(
-      "  March 12, 2021 - Test Content: content string (https://github.com/timfitzzz)"
+      "March 12, 2021 - Test Content: content string (https://github.com/timfitzzz)"
     )
   })
 
@@ -312,7 +311,7 @@ describe("renderDatedContent", () => {
     )
 
     expect(output).toBe(
-      "  * March 12, 2021 - [Test Content](https://github.com/timfitzzz): content string"
+      "March 12, 2021 - [Test Content](https://github.com/timfitzzz): content string"
     )
   })
 
@@ -325,7 +324,7 @@ describe("renderDatedContent", () => {
       { md: false, indentContent: true }
     )
 
-    expect(output).toBe("  March 12, 2021 - Test Content: content string")
+    expect(output).toBe("March 12, 2021 - Test Content: content string")
   })
 
   it("should return expected md text with title but no url", () => {
@@ -337,7 +336,7 @@ describe("renderDatedContent", () => {
       { md: true, indentContent: true }
     )
 
-    expect(output).toBe("  * March 12, 2021 - Test Content: content string")
+    expect(output).toBe("March 12, 2021 - Test Content: content string")
   })
 })
 
@@ -347,11 +346,12 @@ describe("renderEvents for all event sets", () => {
       return acc.concat(tes.events)
     }, [] as GHEvent[])
 
-    let plainEvents = renderEvents(testEvents, { md: false })
-    let mdEvents = renderEvents(testEvents, { md: true })
+    let plainEvents = renderEvents(testEvents, {
+      md: false,
+      dateContent: false,
+    })
 
     expect(plainEvents.length).toBe(6)
-    expect(mdEvents.length).toBe(6)
 
     // plainEvents.forEach((recs, i) => {
     //   fs.writeFileSync(
@@ -360,6 +360,23 @@ describe("renderEvents for all event sets", () => {
     //   )
     // })
 
+    plainEvents.forEach((recs, i) => {
+      // console.log(recs.renderedEventCollections.join(""))
+      expect(recs.renderedEventCollections.join("")).toBe(
+        allEventsOutput.default.plain[i]
+      )
+    })
+  })
+
+  it("should accept unprocessed events and convert them to the correct array of md collapsed rendered event collections", () => {
+    const testEvents = testEventsSets.reduce((acc, tes) => {
+      return acc.concat(tes.events)
+    }, [] as GHEvent[])
+
+    let mdEvents = renderEvents(testEvents, { md: true, dateContent: false })
+
+    expect(mdEvents.length).toBe(6)
+
     // mdEvents.forEach((recs, i) => {
     //   fs.writeFileSync(
     //     "./io-collector/naive-gh-events-to-md/__tests__/outputs/md" + i,
@@ -367,13 +384,8 @@ describe("renderEvents for all event sets", () => {
     //   )
     // })
 
-    plainEvents.forEach((recs, i) => {
-      expect(recs.renderedEventCollections.join("")).toBe(
-        allEventsOutput.default.plain[i]
-      )
-    })
-
     mdEvents.forEach((recs, i) => {
+      // console.log(recs.renderedEventCollections.join(""))
       expect(recs.renderedEventCollections.join("")).toBe(
         allEventsOutput.default.md[i]
       )

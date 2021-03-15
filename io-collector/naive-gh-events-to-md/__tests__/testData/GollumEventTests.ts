@@ -245,14 +245,14 @@ GollumEventTests.testEvents.edited = [
           plain: [
             ["February 19, 2021", "February 19, 2021"],
             "kii-chan-reloaded edited 2 wiki pages in kii-chan-reloaded/GeneticChickengineering",
-            "  Home (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
-            "  Settings (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
+            "Home (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
+            "Settings (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
           ],
           md: [
             ["February 19, 2021", "February 19, 2021"],
             "[kii-chan-reloaded](https://github.com/kii-chan-reloaded) edited 2 wiki pages in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering)",
-            "  * [Home](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
-            "  * [Settings](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
+            "[Home](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
+            "[Settings](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
           ],
         },
       ],

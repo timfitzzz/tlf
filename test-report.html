@@ -229,1220 +229,218 @@ header {
   font-size: 1rem;
   padding: 0 0.5rem;
 }
-</style></head><body><div id="jesthtml-content"><header><h1 id="title">Test Report</h1></header><div id="metadata-container"><div id="timestamp">Started: 2021-03-14 21:13:52</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (5)</div><div class="summary-passed">4 passed</div><div class="summary-failed">1 failed</div><div class="summary-pending summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (401)</div><div class="summary-passed">277 passed</div><div class="summary-failed">36 failed</div><div class="summary-pending">88 pending</div></div></div></div><div id="suite-1" class="suite-container"><div class="suite-info"><div class="suite-path">/home/timfitzgerald/tlf/src/components/NavTree/__tests__/NavTree.test.tsx</div><div class="suite-time">1.232s</div></div><div class="suite-tests"/></div><div id="suite-2" class="suite-container"><div class="suite-info"><div class="suite-path">/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/ghevents.test.ts</div><div class="suite-time">1.3s</div></div><div class="suite-tests"/></div><div id="suite-3" class="suite-container"><div class="suite-info"><div class="suite-path">/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/collectPropSets.test.ts</div><div class="suite-time">1.411s</div></div><div class="suite-tests"/></div><div id="suite-4" class="suite-container"><div class="suite-info"><div class="suite-path">/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getProps.test.ts</div><div class="suite-time">1.564s</div></div><div class="suite-tests"/></div><div id="suite-5" class="suite-container"><div class="suite-info"><div class="suite-path">/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts</div><div class="suite-time">2.307s</div></div><div class="suite-tests"><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.008s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 5
-+ Received  + 6
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
-    "vercel[bot] created a comment 47077458 on a commit (4b8dd057ab076677f75d1ffe2bcc36cb43c07a1c) in dm2444/Venwiz-Demo",
--   "Successfully deployed to the following URLs:
--
-- * [venwiz-demo.dm2444.vercel.app](https://venwiz-demo.dm2444.vercel.app)  
-- * [venwiz-demo.vercel.app](https://venwiz-demo.vercel.app)  
-- * [venwiz-demo-git-main.dm2444.vercel.app](https://venwiz-demo-git-main.dm2444.vercel.app)",
-+   "  Successfully deployed to the following URLs:
-+   
-+   * [venwiz-demo.dm2444.vercel.app](https://venwiz-demo.dm2444.vercel.app)  
-+   * [venwiz-demo.vercel.app](https://venwiz-demo.vercel.app)  
-+   * [venwiz-demo-git-main.dm2444.vercel.app](https://venwiz-demo-git-main.dm2444.vercel.app) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
+</style></head><body><div id="jesthtml-content"><header><h1 id="title">Test Report</h1></header><div id="metadata-container"><div id="timestamp">Started: 2021-03-15 14:59:30</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (5)</div><div class="summary-passed">5 passed</div><div class="summary-failed summary-empty">0 failed</div><div class="summary-pending summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (402)</div><div class="summary-passed">314 passed</div><div class="summary-failed summary-empty">0 failed</div><div class="summary-pending">88 pending</div></div></div></div><div id="suite-1" class="suite-container"><div class="suite-info"><div class="suite-path">/home/timfitzgerald/tlf/src/components/NavTree/__tests__/NavTree.test.tsx</div><div class="suite-time">1.035s</div></div><div class="suite-tests"/></div><div id="suite-2" class="suite-container"><div class="suite-info"><div class="suite-path">/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/ghevents.test.ts</div><div class="suite-time">1.135s</div></div><div class="suite-tests"/></div><div id="suite-3" class="suite-container"><div class="suite-info"><div class="suite-path">/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/collectPropSets.test.ts</div><div class="suite-time">1.238s</div></div><div class="suite-tests"/></div><div id="suite-4" class="suite-container"><div class="suite-info"><div class="suite-path">/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getProps.test.ts</div><div class="suite-time">1.419s</div></div><div class="suite-tests"/></div><div id="suite-5" class="suite-container"><div class="suite-info"><div class="suite-path">/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts</div><div class="suite-time">1.891s</div></div><div class="suite-tests"/><div class="suite-consolelog"><div class="suite-consolelog-header">Console Log</div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:365:15)
     at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
+    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:364:17)
     at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
     at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
     at new Promise (&lt;anonymous&gt;)
     at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 5
-+ Received  + 6
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
-    "[vercel[bot]](https://github.com/apps/vercel) created a comment [47077458](https://github.com/dm2444/Venwiz-Demo/commit/4b8dd057ab076677f75d1ffe2bcc36cb43c07a1c#commitcomment-47077458) on [a commit](https://github.com/dm2444/Venwiz-Demo/commit/4b8dd057ab076677f75d1ffe2bcc36cb43c07a1c#commitcomment-47077458) in [dm2444/Venwiz-Demo](https://github.com/dm2444/Venwiz-Demo)",
--   "Successfully deployed to the following URLs:
--
-- * [venwiz-demo.dm2444.vercel.app](https://venwiz-demo.dm2444.vercel.app)  
-- * [venwiz-demo.vercel.app](https://venwiz-demo.vercel.app)  
-- * [venwiz-demo-git-main.dm2444.vercel.app](https://venwiz-demo-git-main.dm2444.vercel.app)",
-+   "* Successfully deployed to the following URLs:
-+   
-+   * [venwiz-demo.dm2444.vercel.app](https://venwiz-demo.dm2444.vercel.app)  
-+   * [venwiz-demo.vercel.app](https://venwiz-demo.vercel.app)  
-+   * [venwiz-demo-git-main.dm2444.vercel.app](https://venwiz-demo-git-main.dm2444.vercel.app) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
+    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">timfitzzz started watching repository mohebifar/react-use-context-selector &#xD;
+&#xD;
+</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:365:15)
     at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
+    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:364:17)
     at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
     at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
     at new Promise (&lt;anonymous&gt;)
     at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "January 25, 2021",
-    ],
--   "timfitzzz created a branch newPlatformDesign in timfitzzz/nursefornyc",
-+   "timfitzzz created a branch newPlatformDesign in timfitzzz/nursefornyc &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
+    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">timfitzzz closed pull request Bringing up to date with current version in timfitzzz/gatsby-theme-localization &#xD;
+&#xD;
+</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:365:15)
     at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
+    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:364:17)
     at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
     at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
     at new Promise (&lt;anonymous&gt;)
     at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "January 25, 2021",
-    ],
--   "[timfitzzz](https://github.com/timfitzzz) created a branch newPlatformDesign in [timfitzzz/nursefornyc](https://github.com/timfitzzz/nursefornyc)",
-+   "[timfitzzz](https://github.com/timfitzzz) created a branch newPlatformDesign in [timfitzzz/nursefornyc](https://github.com/timfitzzz/nursefornyc) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
+    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">timfitzzz created comment 751514653 on issue set up test mongodb database in timfitzzz/stemmy &#xD;
+  done, will include settings in commit. env file needed for creds and test server configuration. &#xD;
+&#xD;
+timfitzzz closed issue set up test mongodb database in timfitzzz/stemmy &#xD;
+&#xD;
+timfitzzz granted access for user rf- to timfitzzz/stemmy &#xD;
+&#xD;
+</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:365:15)
     at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
+    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:364:17)
     at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
     at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
     at new Promise (&lt;anonymous&gt;)
     at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
--   "rixtech deleted a branch feature/dirs-with-spaces in rixtech/webp2gif",
-+   "rixtech deleted a branch feature/dirs-with-spaces in rixtech/webp2gif &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
+    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">timfitzzz created a branch newPlatformDesign in timfitzzz/nursefornyc &#xD;
+&#xD;
+</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:365:15)
     at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
+    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:364:17)
     at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
     at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
     at new Promise (&lt;anonymous&gt;)
     at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
--   "[rixtech](https://github.com/rixtech) deleted a branch feature/dirs-with-spaces in [rixtech/webp2gif](https://github.com/rixtech/webp2gif)",
-+   "[rixtech](https://github.com/rixtech) deleted a branch feature/dirs-with-spaces in [rixtech/webp2gif](https://github.com/rixtech/webp2gif) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
+    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">timfitzzz pushed commit d4e5d71da8b6cd7b169c090458142527eeb3c0af to refs/heads/master in timfitzzz/nursefornyc &#xD;
+  Added Labor Unions/Sindicals to endorsement section titles &#xD;
+&#xD;
+vercel[bot] created a comment 47077458 on a commit (4b8dd057ab076677f75d1ffe2bcc36cb43c07a1c) in dm2444/Venwiz-Demo &#xD;
+  Successfully deployed to the following URLs:
+  
+  * [venwiz-demo.dm2444.vercel.app](https://venwiz-demo.dm2444.vercel.app)  
+  * [venwiz-demo.vercel.app](https://venwiz-demo.vercel.app)  
+  * [venwiz-demo-git-main.dm2444.vercel.app](https://venwiz-demo-git-main.dm2444.vercel.app) &#xD;
+&#xD;
+arzrasel published release 1.0.3.04 in arzrasel/EasySwiftUIKit &#xD;
+&#xD;
+RegularSpark set repository RegularSpark/wrappedchat to 'public' &#xD;
+&#xD;
+Grandolf49 added a review 589944777 of pull request Conversion:Survey related fragments and activities in openMF/android-client &#xD;
+  @robustTechie We'll need to remove the `mifosng-android/gradle/wrapper/gradle-wrapper.jar` as well! &#xD;
+&#xD;
+rixtech deleted a branch feature/dirs-with-spaces in rixtech/webp2gif &#xD;
+&#xD;
+shangow forked repository errodringer/ransomware to new repository shangow/ransomware &#xD;
+&#xD;
+paq added a comment 575624667 on pull request avm2: Implement ByteArray in ruffle-rs/ruffle &#xD;
+  It seems that `coerce_to_string` is necessary here as well.&#xD;
+  &#xD;
+  Test code&#xD;
+  ```as&#xD;
+  import flash.utils.ByteArray;&#xD;
+  import flash.utils.Endian;&#xD;
+  &#xD;
+  class A {&#xD;
+      public function A() {}&#xD;
+      public function toString():String {&#xD;
+          return "shift-jis";&#xD;
+      }&#xD;
+  }&#xD;
+  &#xD;
+  var test = new ByteArray();&#xD;
+  test.writeMultiByte("次", new A());&#xD;
+  test.position = 0;&#xD;
+  trace(test.readMultiByte(2, "shift-jis"));&#xD;
+  ```&#xD;
+  &#xD;
+  Flash player prints `次`.&#xD;
+  Ruffle prints `谺`.&#xD;
+   &#xD;
+&#xD;
+</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:365:15)
     at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
+    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:364:17)
     at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
     at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
     at new Promise (&lt;anonymous&gt;)
     at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
--   "shangow forked repository errodringer/ransomware to new repository shangow/ransomware",
-+   "shangow forked repository errodringer/ransomware to new repository shangow/ransomware &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
+    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">kii-chan-reloaded created wiki page Pain in kii-chan-reloaded/GeneticChickengineering &#xD;
+&#xD;
+kii-chan-reloaded edited 2 wiki pages in kii-chan-reloaded/GeneticChickengineering &#xD;
+  Home (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home) &#xD;
+  Settings (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings) &#xD;
+&#xD;
+</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:389:15)
     at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
+    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:388:14)
     at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
     at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
     at new Promise (&lt;anonymous&gt;)
     at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
--   "[shangow](https://github.com/shangow) forked repository [errodringer/ransomware](https://github.com/errodringer/ransomware) to new repository [shangow/ransomware](https://github.com/shangow/ransomware)",
-+   "[shangow](https://github.com/shangow) forked repository [errodringer/ransomware](https://github.com/errodringer/ransomware) to new repository [shangow/ransomware](https://github.com/shangow/ransomware) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
+    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[timfitzzz](https://github.com/timfitzzz) started watching repository [mohebifar/react-use-context-selector](https://github.com/mohebifar/react-use-context-selector) &#xD;
+&#xD;
+</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:389:15)
     at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
+    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:388:14)
     at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
     at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
     at new Promise (&lt;anonymous&gt;)
     at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 19, 2021",
-    ],
--   "kii-chan-reloaded created wiki page Pain in kii-chan-reloaded/GeneticChickengineering",
-+   "kii-chan-reloaded created wiki page Pain in kii-chan-reloaded/GeneticChickengineering &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
+    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[timfitzzz](https://github.com/timfitzzz) closed pull request [Bringing up to date with current version](https://github.com/timfitzzz/gatsby-theme-localization/pull/1) in [timfitzzz/gatsby-theme-localization](https://github.com/timfitzzz/gatsby-theme-localization) &#xD;
+&#xD;
+</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:389:15)
     at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
+    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:388:14)
     at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
     at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
     at new Promise (&lt;anonymous&gt;)
     at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 19, 2021",
-    ],
--   "[kii-chan-reloaded](https://github.com/kii-chan-reloaded) created wiki page [Pain](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Pain) in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering)",
-+   "[kii-chan-reloaded](https://github.com/kii-chan-reloaded) created wiki page [Pain](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Pain) in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
+    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[timfitzzz](https://github.com/timfitzzz) created comment [751514653](https://github.com/timfitzzz/stemmy/issues/13#issuecomment-751514653) on issue [set up test mongodb database](https://github.com/timfitzzz/stemmy/issues/13) in [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy) &#xD;
+* done, will include settings in commit. env file needed for creds and test server configuration. &#xD;
+&#xD;
+[timfitzzz](https://github.com/timfitzzz) closed issue [set up test mongodb database](https://github.com/timfitzzz/stemmy/issues/13) in [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy) &#xD;
+&#xD;
+[timfitzzz](https://github.com/timfitzzz) granted access for user [rf-](https://github.com/rf-) to [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy) &#xD;
+&#xD;
+</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:389:15)
     at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
+    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:388:14)
     at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
     at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
     at new Promise (&lt;anonymous&gt;)
     at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-@@ -3,7 +3,8 @@
-      "February 19, 2021",
-      "February 19, 2021",
-    ],
-    "kii-chan-reloaded edited 2 wiki pages in kii-chan-reloaded/GeneticChickengineering",
-    "  Home (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
--   "  Settings (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
-+   "  Settings (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
+    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[timfitzzz](https://github.com/timfitzzz) created a branch newPlatformDesign in [timfitzzz/nursefornyc](https://github.com/timfitzzz/nursefornyc) &#xD;
+&#xD;
+</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:389:15)
     at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
+    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:388:14)
     at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
     at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
     at new Promise (&lt;anonymous&gt;)
     at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 2
-+ Received  + 3
-
-@@ -2,8 +2,9 @@
-    Array [
-      "February 19, 2021",
-      "February 19, 2021",
-    ],
-    "[kii-chan-reloaded](https://github.com/kii-chan-reloaded) edited 2 wiki pages in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering)",
--   "  * [Home](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
--   "  * [Settings](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
-+   "* [Home](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
-+   "* [Settings](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
+    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[timfitzzz](https://github.com/timfitzzz) pushed commit [d4e5d71da8b6cd7b169c090458142527eeb3c0af](https://github.com/timfitzzz/nursefornyc/commits/d4e5d71da8b6cd7b169c090458142527eeb3c0af) to refs/heads/master in [timfitzzz/nursefornyc](https://github.com/timfitzzz/nursefornyc) &#xD;
+* Added Labor Unions/Sindicals to endorsement section titles &#xD;
+&#xD;
+[vercel[bot]](https://github.com/apps/vercel) created a comment [47077458](https://github.com/dm2444/Venwiz-Demo/commit/4b8dd057ab076677f75d1ffe2bcc36cb43c07a1c#commitcomment-47077458) on [a commit](https://github.com/dm2444/Venwiz-Demo/commit/4b8dd057ab076677f75d1ffe2bcc36cb43c07a1c#commitcomment-47077458) in [dm2444/Venwiz-Demo](https://github.com/dm2444/Venwiz-Demo) &#xD;
+* Successfully deployed to the following URLs:
+  
+  * [venwiz-demo.dm2444.vercel.app](https://venwiz-demo.dm2444.vercel.app)  
+  * [venwiz-demo.vercel.app](https://venwiz-demo.vercel.app)  
+  * [venwiz-demo-git-main.dm2444.vercel.app](https://venwiz-demo-git-main.dm2444.vercel.app) &#xD;
+&#xD;
+[arzrasel](https://github.com/arzrasel) published release [1.0.3.04](https://github.com/arzrasel/EasySwiftUIKit/releases/tag/1.0.3.04) in [arzrasel/EasySwiftUIKit](https://github.com/arzrasel/EasySwiftUIKit) &#xD;
+&#xD;
+[RegularSpark](https://github.com/RegularSpark) set repository [RegularSpark/wrappedchat](https://github.com/RegularSpark/wrappedchat) to 'public' &#xD;
+&#xD;
+[Grandolf49](https://github.com/Grandolf49) added a review [589944777](https://github.com/openMF/android-client/pull/1539#pullrequestreview-589944777) of pull request [Conversion:Survey related fragments and activities](https://github.com/openMF/android-client/pull/1539) in [openMF/android-client](https://github.com/openMF/android-client) &#xD;
+* @robustTechie We'll need to remove the `mifosng-android/gradle/wrapper/gradle-wrapper.jar` as well! &#xD;
+&#xD;
+[rixtech](https://github.com/rixtech) deleted a branch feature/dirs-with-spaces in [rixtech/webp2gif](https://github.com/rixtech/webp2gif) &#xD;
+&#xD;
+[shangow](https://github.com/shangow) forked repository [errodringer/ransomware](https://github.com/errodringer/ransomware) to new repository [shangow/ransomware](https://github.com/shangow/ransomware) &#xD;
+&#xD;
+[paq](https://github.com/paq) added a comment [575624667](https://github.com/ruffle-rs/ruffle/pull/3213#discussion_r575624667) on pull request [avm2: Implement ByteArray](https://github.com/ruffle-rs/ruffle/pull/3213) in [ruffle-rs/ruffle](https://github.com/ruffle-rs/ruffle) &#xD;
+* It seems that `coerce_to_string` is necessary here as well.&#xD;
+  &#xD;
+  Test code&#xD;
+  ```as&#xD;
+  import flash.utils.ByteArray;&#xD;
+  import flash.utils.Endian;&#xD;
+  &#xD;
+  class A {&#xD;
+      public function A() {}&#xD;
+      public function toString():String {&#xD;
+          return "shift-jis";&#xD;
+      }&#xD;
+  }&#xD;
+  &#xD;
+  var test = new ByteArray();&#xD;
+  test.writeMultiByte("次", new A());&#xD;
+  test.position = 0;&#xD;
+  trace(test.readMultiByte(2, "shift-jis"));&#xD;
+  ```&#xD;
+  &#xD;
+  Flash player prints `次`.&#xD;
+  Ruffle prints `谺`.&#xD;
+   &#xD;
+&#xD;
+</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:389:15)
     at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
+    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:388:14)
     at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
     at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
     at new Promise (&lt;anonymous&gt;)
     at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "December 27, 2020",
-    ],
-    "timfitzzz created comment 751514653 on issue set up test mongodb database in timfitzzz/stemmy",
--   "done, will include settings in commit. env file needed for creds and test server configuration.",
-+   "  done, will include settings in commit. env file needed for creds and test server configuration. &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "December 27, 2020",
-    ],
-    "[timfitzzz](https://github.com/timfitzzz) created comment [751514653](https://github.com/timfitzzz/stemmy/issues/13#issuecomment-751514653) on issue [set up test mongodb database](https://github.com/timfitzzz/stemmy/issues/13) in [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy)",
--   "done, will include settings in commit. env file needed for creds and test server configuration.",
-+   "* done, will include settings in commit. env file needed for creds and test server configuration. &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "December 27, 2020",
-    ],
--   "timfitzzz closed issue set up test mongodb database in timfitzzz/stemmy",
-+   "timfitzzz closed issue set up test mongodb database in timfitzzz/stemmy &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "December 27, 2020",
-    ],
--   "[timfitzzz](https://github.com/timfitzzz) closed issue [set up test mongodb database](https://github.com/timfitzzz/stemmy/issues/13) in [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy)",
-+   "[timfitzzz](https://github.com/timfitzzz) closed issue [set up test mongodb database](https://github.com/timfitzzz/stemmy/issues/13) in [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "December 28, 2020",
-    ],
--   "timfitzzz granted access for user rf- to timfitzzz/stemmy",
-+   "timfitzzz granted access for user rf- to timfitzzz/stemmy &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "December 28, 2020",
-    ],
--   "[timfitzzz](https://github.com/timfitzzz) granted access for user [rf-](https://github.com/rf-) to [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy)",
-+   "[timfitzzz](https://github.com/timfitzzz) granted access for user [rf-](https://github.com/rf-) to [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
--   "RegularSpark set repository RegularSpark/wrappedchat to 'public'",
-+   "RegularSpark set repository RegularSpark/wrappedchat to 'public' &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
--   "[RegularSpark](https://github.com/RegularSpark) set repository [RegularSpark/wrappedchat](https://github.com/RegularSpark/wrappedchat) to 'public'",
-+   "[RegularSpark](https://github.com/RegularSpark) set repository [RegularSpark/wrappedchat](https://github.com/RegularSpark/wrappedchat) to 'public' &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "December 15, 2020",
-    ],
--   "timfitzzz closed pull request Bringing up to date with current version in timfitzzz/gatsby-theme-localization",
-+   "timfitzzz closed pull request Bringing up to date with current version in timfitzzz/gatsby-theme-localization &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "December 15, 2020",
-    ],
--   "[timfitzzz](https://github.com/timfitzzz) closed pull request [Bringing up to date with current version](https://github.com/timfitzzz/gatsby-theme-localization/pull/1) in [timfitzzz/gatsby-theme-localization](https://github.com/timfitzzz/gatsby-theme-localization)",
-+   "[timfitzzz](https://github.com/timfitzzz) closed pull request [Bringing up to date with current version](https://github.com/timfitzzz/gatsby-theme-localization/pull/1) in [timfitzzz/gatsby-theme-localization](https://github.com/timfitzzz/gatsby-theme-localization) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
-    "Grandolf49 added a review 589944777 of pull request Conversion:Survey related fragments and activities in openMF/android-client",
--   "@robustTechie We'll need to remove the `mifosng-android/gradle/wrapper/gradle-wrapper.jar` as well!",
-+   "  @robustTechie We'll need to remove the `mifosng-android/gradle/wrapper/gradle-wrapper.jar` as well! &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
-    "[Grandolf49](https://github.com/Grandolf49) added a review [589944777](https://github.com/openMF/android-client/pull/1539#pullrequestreview-589944777) of pull request [Conversion:Survey related fragments and activities](https://github.com/openMF/android-client/pull/1539) in [openMF/android-client](https://github.com/openMF/android-client)",
--   "@robustTechie We'll need to remove the `mifosng-android/gradle/wrapper/gradle-wrapper.jar` as well!",
-+   "* @robustTechie We'll need to remove the `mifosng-android/gradle/wrapper/gradle-wrapper.jar` as well! &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 22
-+ Received  + 23
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
-    "paq added a comment 575624667 on pull request avm2: Implement ByteArray in ruffle-rs/ruffle",
--   "It seems that `coerce_to_string` is necessary here as well.&#xD;
-- &#xD;
-- Test code&#xD;
-- ```as&#xD;
-- import flash.utils.ByteArray;&#xD;
-- import flash.utils.Endian;&#xD;
-- &#xD;
-- class A {&#xD;
--     public function A() {}&#xD;
--     public function toString():String {&#xD;
--         return \"shift-jis\";&#xD;
--     }&#xD;
-- }&#xD;
-- &#xD;
-- var test = new ByteArray();&#xD;
-- test.writeMultiByte(\"次\", new A());&#xD;
-- test.position = 0;&#xD;
-- trace(test.readMultiByte(2, \"shift-jis\"));&#xD;
-- ```&#xD;
-- &#xD;
-- Flash player prints `次`.&#xD;
-- Ruffle prints `谺`.&#xD;
-+   "  It seems that `coerce_to_string` is necessary here as well.&#xD;
-+   &#xD;
-+   Test code&#xD;
-+   ```as&#xD;
-+   import flash.utils.ByteArray;&#xD;
-+   import flash.utils.Endian;&#xD;
-+   &#xD;
-+   class A {&#xD;
-+       public function A() {}&#xD;
-+       public function toString():String {&#xD;
-+           return \"shift-jis\";&#xD;
-+       }&#xD;
-+   }&#xD;
-+   &#xD;
-+   var test = new ByteArray();&#xD;
-+   test.writeMultiByte(\"次\", new A());&#xD;
-+   test.position = 0;&#xD;
-+   trace(test.readMultiByte(2, \"shift-jis\"));&#xD;
-+   ```&#xD;
-+   &#xD;
-+   Flash player prints `次`.&#xD;
-+   Ruffle prints `谺`.&#xD;
-+    &#xD;
-  ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 22
-+ Received  + 23
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
-    "[paq](https://github.com/paq) added a comment [575624667](https://github.com/ruffle-rs/ruffle/pull/3213#discussion_r575624667) on pull request [avm2: Implement ByteArray](https://github.com/ruffle-rs/ruffle/pull/3213) in [ruffle-rs/ruffle](https://github.com/ruffle-rs/ruffle)",
--   "It seems that `coerce_to_string` is necessary here as well.&#xD;
-- &#xD;
-- Test code&#xD;
-- ```as&#xD;
-- import flash.utils.ByteArray;&#xD;
-- import flash.utils.Endian;&#xD;
-- &#xD;
-- class A {&#xD;
--     public function A() {}&#xD;
--     public function toString():String {&#xD;
--         return \"shift-jis\";&#xD;
--     }&#xD;
-- }&#xD;
-- &#xD;
-- var test = new ByteArray();&#xD;
-- test.writeMultiByte(\"次\", new A());&#xD;
-- test.position = 0;&#xD;
-- trace(test.readMultiByte(2, \"shift-jis\"));&#xD;
-- ```&#xD;
-- &#xD;
-- Flash player prints `次`.&#xD;
-- Ruffle prints `谺`.&#xD;
-+   "* It seems that `coerce_to_string` is necessary here as well.&#xD;
-+   &#xD;
-+   Test code&#xD;
-+   ```as&#xD;
-+   import flash.utils.ByteArray;&#xD;
-+   import flash.utils.Endian;&#xD;
-+   &#xD;
-+   class A {&#xD;
-+       public function A() {}&#xD;
-+       public function toString():String {&#xD;
-+           return \"shift-jis\";&#xD;
-+       }&#xD;
-+   }&#xD;
-+   &#xD;
-+   var test = new ByteArray();&#xD;
-+   test.writeMultiByte(\"次\", new A());&#xD;
-+   test.position = 0;&#xD;
-+   trace(test.readMultiByte(2, \"shift-jis\"));&#xD;
-+   ```&#xD;
-+   &#xD;
-+   Flash player prints `次`.&#xD;
-+   Ruffle prints `谺`.&#xD;
-+    &#xD;
-  ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 8, 2021",
-    ],
-    "timfitzzz pushed commit d4e5d71da8b6cd7b169c090458142527eeb3c0af to refs/heads/master in timfitzzz/nursefornyc",
--   "Added Labor Unions/Sindicals to endorsement section titles",
-+   "  Added Labor Unions/Sindicals to endorsement section titles &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 8, 2021",
-    ],
-    "[timfitzzz](https://github.com/timfitzzz) pushed commit [d4e5d71da8b6cd7b169c090458142527eeb3c0af](https://github.com/timfitzzz/nursefornyc/commits/d4e5d71da8b6cd7b169c090458142527eeb3c0af) to refs/heads/master in [timfitzzz/nursefornyc](https://github.com/timfitzzz/nursefornyc)",
--   "Added Labor Unions/Sindicals to endorsement section titles",
-+   "* Added Labor Unions/Sindicals to endorsement section titles &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
--   "arzrasel published release 1.0.3.04 in arzrasel/EasySwiftUIKit",
-+   "arzrasel published release 1.0.3.04 in arzrasel/EasySwiftUIKit &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "February 13, 2021",
-    ],
--   "[arzrasel](https://github.com/arzrasel) published release [1.0.3.04](https://github.com/arzrasel/EasySwiftUIKit/releases/tag/1.0.3.04) in [arzrasel/EasySwiftUIKit](https://github.com/arzrasel/EasySwiftUIKit)",
-+   "[arzrasel](https://github.com/arzrasel) published release [1.0.3.04](https://github.com/arzrasel/EasySwiftUIKit/releases/tag/1.0.3.04) in [arzrasel/EasySwiftUIKit](https://github.com/arzrasel/EasySwiftUIKit) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct plain rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "December 4, 2020",
-    ],
--   "timfitzzz started watching repository mohebifar/react-use-context-selector",
-+   "timfitzzz started watching repository mohebifar/react-use-context-selector &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:206:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderEventPropSetGroup from testEventSet</div><div class="test-title">should return the correct md rendered events text sets for the prop sets of this single event</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toStrictEqual(expected) // deep equality
-
-- Expected  - 1
-+ Received  + 2
-
-  Array [
-    Array [
-      "December 4, 2020",
-    ],
--   "[timfitzzz](https://github.com/timfitzzz) started watching repository [mohebifar/react-use-context-selector](https://github.com/mohebifar/react-use-context-selector)",
-+   "[timfitzzz](https://github.com/timfitzzz) started watching repository [mohebifar/react-use-context-selector](https://github.com/mohebifar/react-use-context-selector) &#xD;
-+ ",
-  ]
-    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:215:30)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderDatedContent</div><div class="test-title">should return expected md text with only required args</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toBe(expected) // Object.is equality
-
-Expected: "  * March 12, 2021: content string"
-Received: "* March 12, 2021: content string"
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:268:20)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderDatedContent</div><div class="test-title">should return expected md text with url but no title</div><div class="test-status">failed</div><div class="test-duration">0s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toBe(expected) // Object.is equality
-
-Expected: "  * [March 12, 2021](https://github.com/timfitzzz): content string"
-Received: "* [March 12, 2021](https://github.com/timfitzzz): content string"
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:294:20)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderDatedContent</div><div class="test-title">should return expected md text with url and title</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toBe(expected) // Object.is equality
-
-Expected: "  * March 12, 2021 - [Test Content](https://github.com/timfitzzz): content string"
-Received: "* March 12, 2021 - [Test Content](https://github.com/timfitzzz): content string"
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:322:20)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">renderDatedContent</div><div class="test-title">should return expected md text with title but no url</div><div class="test-status">failed</div><div class="test-duration">0s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toBe(expected) // Object.is equality
-
-Expected: "  * March 12, 2021 - Test Content: content string"
-Received: "* March 12, 2021 - Test Content: content string"
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:348:20)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</pre></div></div></div><div class="suite-consolelog"><div class="suite-consolelog-header">Console Log</div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  'vercel[bot] created a comment 47077458 on a commit (4b8dd057ab076677f75d1ffe2bcc36cb43c07a1c) in dm2444/Venwiz-Demo',
-  '  Successfully deployed to the following URLs:\n' +
-    '  \n' +
-    '  * [venwiz-demo.dm2444.vercel.app](https://venwiz-demo.dm2444.vercel.app)  \n' +
-    '  * [venwiz-demo.vercel.app](https://venwiz-demo.vercel.app)  \n' +
-    '  * [venwiz-demo-git-main.dm2444.vercel.app](https://venwiz-demo-git-main.dm2444.vercel.app) \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  '[vercel[bot]](https://github.com/apps/vercel) created a comment [47077458](https://github.com/dm2444/Venwiz-Demo/commit/4b8dd057ab076677f75d1ffe2bcc36cb43c07a1c#commitcomment-47077458) on [a commit](https://github.com/dm2444/Venwiz-Demo/commit/4b8dd057ab076677f75d1ffe2bcc36cb43c07a1c#commitcomment-47077458) in [dm2444/Venwiz-Demo](https://github.com/dm2444/Venwiz-Demo)',
-  '* Successfully deployed to the following URLs:\n' +
-    '  \n' +
-    '  * [venwiz-demo.dm2444.vercel.app](https://venwiz-demo.dm2444.vercel.app)  \n' +
-    '  * [venwiz-demo.vercel.app](https://venwiz-demo.vercel.app)  \n' +
-    '  * [venwiz-demo-git-main.dm2444.vercel.app](https://venwiz-demo-git-main.dm2444.vercel.app) \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'January 25, 2021' ],
-  'timfitzzz created a branch newPlatformDesign in timfitzzz/nursefornyc \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'January 25, 2021' ],
-  '[timfitzzz](https://github.com/timfitzzz) created a branch newPlatformDesign in [timfitzzz/nursefornyc](https://github.com/timfitzzz/nursefornyc) \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  'rixtech deleted a branch feature/dirs-with-spaces in rixtech/webp2gif \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  '[rixtech](https://github.com/rixtech) deleted a branch feature/dirs-with-spaces in [rixtech/webp2gif](https://github.com/rixtech/webp2gif) \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  'shangow forked repository errodringer/ransomware to new repository shangow/ransomware \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  '[shangow](https://github.com/shangow) forked repository [errodringer/ransomware](https://github.com/errodringer/ransomware) to new repository [shangow/ransomware](https://github.com/shangow/ransomware) \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 19, 2021' ],
-  'kii-chan-reloaded created wiki page Pain in kii-chan-reloaded/GeneticChickengineering \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 19, 2021' ],
-  '[kii-chan-reloaded](https://github.com/kii-chan-reloaded) created wiki page [Pain](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Pain) in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering) \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 19, 2021', 'February 19, 2021' ],
-  'kii-chan-reloaded edited 2 wiki pages in kii-chan-reloaded/GeneticChickengineering',
-  '  Home (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)',
-  '  Settings (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings) \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 19, 2021', 'February 19, 2021' ],
-  '[kii-chan-reloaded](https://github.com/kii-chan-reloaded) edited 2 wiki pages in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering)',
-  '* [Home](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)',
-  '* [Settings](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings) \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'December 27, 2020' ],
-  'timfitzzz created comment 751514653 on issue set up test mongodb database in timfitzzz/stemmy',
-  '  done, will include settings in commit. env file needed for creds and test server configuration. \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'December 27, 2020' ],
-  '[timfitzzz](https://github.com/timfitzzz) created comment [751514653](https://github.com/timfitzzz/stemmy/issues/13#issuecomment-751514653) on issue [set up test mongodb database](https://github.com/timfitzzz/stemmy/issues/13) in [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy)',
-  '* done, will include settings in commit. env file needed for creds and test server configuration. \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'December 27, 2020' ],
-  'timfitzzz closed issue set up test mongodb database in timfitzzz/stemmy \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'December 27, 2020' ],
-  '[timfitzzz](https://github.com/timfitzzz) closed issue [set up test mongodb database](https://github.com/timfitzzz/stemmy/issues/13) in [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy) \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'December 28, 2020' ],
-  'timfitzzz granted access for user rf- to timfitzzz/stemmy \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'December 28, 2020' ],
-  '[timfitzzz](https://github.com/timfitzzz) granted access for user [rf-](https://github.com/rf-) to [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy) \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  "RegularSpark set repository RegularSpark/wrappedchat to 'public' \r\n"
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  "[RegularSpark](https://github.com/RegularSpark) set repository [RegularSpark/wrappedchat](https://github.com/RegularSpark/wrappedchat) to 'public' \r\n"
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'December 15, 2020' ],
-  'timfitzzz closed pull request Bringing up to date with current version in timfitzzz/gatsby-theme-localization \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'December 15, 2020' ],
-  '[timfitzzz](https://github.com/timfitzzz) closed pull request [Bringing up to date with current version](https://github.com/timfitzzz/gatsby-theme-localization/pull/1) in [timfitzzz/gatsby-theme-localization](https://github.com/timfitzzz/gatsby-theme-localization) \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  'Grandolf49 added a review 589944777 of pull request Conversion:Survey related fragments and activities in openMF/android-client',
-  "  @robustTechie We'll need to remove the `mifosng-android/gradle/wrapper/gradle-wrapper.jar` as well! \r\n"
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  '[Grandolf49](https://github.com/Grandolf49) added a review [589944777](https://github.com/openMF/android-client/pull/1539#pullrequestreview-589944777) of pull request [Conversion:Survey related fragments and activities](https://github.com/openMF/android-client/pull/1539) in [openMF/android-client](https://github.com/openMF/android-client)',
-  "* @robustTechie We'll need to remove the `mifosng-android/gradle/wrapper/gradle-wrapper.jar` as well! \r\n"
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  'paq added a comment 575624667 on pull request avm2: Implement ByteArray in ruffle-rs/ruffle',
-  '  It seems that `coerce_to_string` is necessary here as well.\r\n' +
-    '  \r\n' +
-    '  Test code\r\n' +
-    '  ```as\r\n' +
-    '  import flash.utils.ByteArray;\r\n' +
-    '  import flash.utils.Endian;\r\n' +
-    '  \r\n' +
-    '  class A {\r\n' +
-    '      public function A() {}\r\n' +
-    '      public function toString():String {\r\n' +
-    '          return "shift-jis";\r\n' +
-    '      }\r\n' +
-    '  }\r\n' +
-    '  \r\n' +
-    '  var test = new ByteArray();\r\n' +
-    '  test.writeMultiByte("次", new A());\r\n' +
-    '  test.position = 0;\r\n' +
-    '  trace(test.readMultiByte(2, "shift-jis"));\r\n' +
-    '  ```\r\n' +
-    '  \r\n' +
-    '  Flash player prints `次`.\r\n' +
-    '  Ruffle prints `谺`.\r\n' +
-    '   \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  '[paq](https://github.com/paq) added a comment [575624667](https://github.com/ruffle-rs/ruffle/pull/3213#discussion_r575624667) on pull request [avm2: Implement ByteArray](https://github.com/ruffle-rs/ruffle/pull/3213) in [ruffle-rs/ruffle](https://github.com/ruffle-rs/ruffle)',
-  '* It seems that `coerce_to_string` is necessary here as well.\r\n' +
-    '  \r\n' +
-    '  Test code\r\n' +
-    '  ```as\r\n' +
-    '  import flash.utils.ByteArray;\r\n' +
-    '  import flash.utils.Endian;\r\n' +
-    '  \r\n' +
-    '  class A {\r\n' +
-    '      public function A() {}\r\n' +
-    '      public function toString():String {\r\n' +
-    '          return "shift-jis";\r\n' +
-    '      }\r\n' +
-    '  }\r\n' +
-    '  \r\n' +
-    '  var test = new ByteArray();\r\n' +
-    '  test.writeMultiByte("次", new A());\r\n' +
-    '  test.position = 0;\r\n' +
-    '  trace(test.readMultiByte(2, "shift-jis"));\r\n' +
-    '  ```\r\n' +
-    '  \r\n' +
-    '  Flash player prints `次`.\r\n' +
-    '  Ruffle prints `谺`.\r\n' +
-    '   \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 8, 2021' ],
-  'timfitzzz pushed commit d4e5d71da8b6cd7b169c090458142527eeb3c0af to refs/heads/master in timfitzzz/nursefornyc',
-  '  Added Labor Unions/Sindicals to endorsement section titles \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 8, 2021' ],
-  '[timfitzzz](https://github.com/timfitzzz) pushed commit [d4e5d71da8b6cd7b169c090458142527eeb3c0af](https://github.com/timfitzzz/nursefornyc/commits/d4e5d71da8b6cd7b169c090458142527eeb3c0af) to refs/heads/master in [timfitzzz/nursefornyc](https://github.com/timfitzzz/nursefornyc)',
-  '* Added Labor Unions/Sindicals to endorsement section titles \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  'arzrasel published release 1.0.3.04 in arzrasel/EasySwiftUIKit \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'February 13, 2021' ],
-  '[arzrasel](https://github.com/arzrasel) published release [1.0.3.04](https://github.com/arzrasel/EasySwiftUIKit/releases/tag/1.0.3.04) in [arzrasel/EasySwiftUIKit](https://github.com/arzrasel/EasySwiftUIKit) \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:205:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:204:50)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'December 4, 2020' ],
-  'timfitzzz started watching repository mohebifar/react-use-context-selector \r\n'
-]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at forEach (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:214:23)
-    at Array.forEach (&lt;anonymous&gt;)
-    at Object.&lt;anonymous&gt; (/home/timfitzgerald/tlf/io-collector/naive-gh-events-to-md/__tests__/getText.test.ts:213:47)
-    at Object.asyncJestTest (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[
-  [ 'December 4, 2020' ],
-  '[timfitzzz](https://github.com/timfitzzz) started watching repository [mohebifar/react-use-context-selector](https://github.com/mohebifar/react-use-context-selector) \r\n'
-]</pre></div></div></div></div></body></html>
+    at /home/timfitzgerald/tlf/node_modules/jest-jasmine2/build/queueRunner.js:75:41</pre><pre class="suite-consolelog-item-message">[kii-chan-reloaded](https://github.com/kii-chan-reloaded) created wiki page [Pain](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Pain) in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering) &#xD;
+&#xD;
+[kii-chan-reloaded](https://github.com/kii-chan-reloaded) edited 2 wiki pages in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering) &#xD;
+* [Home](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home) &#xD;
+* [Settings](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings) &#xD;
+&#xD;
+</pre></div></div></div></div></body></html>

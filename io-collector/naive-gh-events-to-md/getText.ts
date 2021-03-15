@@ -343,29 +343,13 @@ export function renderDate(
   return DateTime.fromJSDate(date).toLocaleString(formatOptions)
 }
 
-function addIndentsToContent(
-  content: string,
-  { md = true }: { md: boolean } = { md: true }
-): string {
-  let contentLines = content.split("\n")
-
-  let output =
-    `${md ? "* " : "  "}` +
-    contentLines
-      .map((line, i) => `${i != 0 ? (md ? "  " : "  ") : ""}${line}`)
-      .join("\n")
-
-  return output
-}
-
 export function renderDatedContent(
   content: string,
   date: string,
   url: string | null,
   title: string | null,
-  { md = false, indentContent = true }: Partial<NaiveConfig> = {
+  { md = false }: Partial<NaiveConfig> = {
     md: false,
-    indentContent: true,
   }
 ): string {
   let output = `${title ? date + " - " : ""}${md && url ? "[" : ""}${
@@ -374,10 +358,6 @@ export function renderDatedContent(
     url && !md ? " (" + url + ")" : ""
   }`
 
-  if (indentContent) {
-    output = addIndentsToContent(output, { md })
-  }
-
   return output
 }
 
@@ -385,9 +365,8 @@ export function renderContent(
   content: string,
   url: string | null,
   title: string | null,
-  { md = false, indentContent = true }: Partial<NaiveConfig> = {
+  { md = false }: Partial<NaiveConfig> = {
     md: false,
-    indentContent: true,
   }
 ): string {
   let output = `${md && url ? "[" : ""}${title ? title : md ? "item" : ""}${
@@ -395,10 +374,6 @@ export function renderContent(
   }${content && content !== title ? `: ${content}` : ""}${
     url && !md ? " (" + url + ")" : ""
   }`
-
-  if (indentContent) {
-    output = addIndentsToContent(output, { md })
-  }
 
   return output
 }
@@ -410,15 +385,11 @@ export function renderEventPropSetGroup(
     dateTimeFormatOptions = defaultNaiveConfig.dateTimeFormatOptions,
     dateSummaries = defaultNaiveConfig.dateSummaries,
     dateContent = defaultNaiveConfig.dateContent,
-    // omitContent = defaultNaiveConfig.omitContent,
-    indentContent = defaultNaiveConfig.indentContent,
   }: Partial<NaiveConfig> = {
     md: false,
     dateTimeFormatOptions: DateTime.DATE_FULL,
     dateSummaries: false,
     dateContent: false,
-    omitContent: false,
-    indentContent: false,
   }
 ): RenderedEventsTextSet {
   let output: Partial<RenderedEventsTextSet> = [[]]
@@ -465,9 +436,10 @@ export function renderEventPropSetGroup(
     //   reps, output, i, url, title, result
     // )
     // prettier-ignore
-    if (reps.content || eventPropSets.length > 1) {
-      dateContent
-        ? output.push(
+    if (reps.content || eventPropSets.length > 1) { 
+      // if content exists, or there are multiple prop sets
+      dateContent // should content lines be dated?
+        ? output.push(              // if so, use renderDatedContent
             renderDatedContent(
               reps.content ? reps.content : title ? title : "",
               reps.date,
@@ -476,31 +448,78 @@ export function renderEventPropSetGroup(
               { md }
             )
           ) 
-        : output.push(
-            eventPropSets.length > 1
-              ? renderContent(
+        : output.push(    // if we're not dating the content lines:
+            eventPropSets.length > 1  // if there are multiple subjects
+              ? renderContent(    // render or generate content lines
                   reps.content ? reps.content : title ? title : "",
                   url ? url : null,
                   title ? title : null,
-                  { md, indentContent }
-                )
-              : indentContent 
-                ? reps.content
-                  ? addIndentsToContent(reps.content, { md })
-                  : undefined
-                : reps.content
+                  { md }
+                ) // if there is just one content prop, return it directly
+              : reps.content
           )
     }
   })
+  return output as RenderedEventsTextSet
+}
 
-  // add new line after contentless summaries
-  output[1] = !output[2] ? output[1] + " \r\n" : output[1]
-  // add new line after last line of content
-  if (output[2]) {
-    output[output.length - 1] = output[output.length - 1] + " \r\n"
+function formatRenderedEventsTextSet(
+  rets: RenderedEventsTextSet,
+  {
+    md = true,
+    indentContent = true,
+    omitContent = false,
+    newLinesBetween = true,
+  }: Partial<NaiveConfig> = {
+    indentContent: true,
+    omitContent: false,
+    newLinesBetween: true,
+    md: true,
+  }
+): RenderedEventsTextSet {
+  let [dates, summary, ...content] = rets
+
+  // the last line ending (could be summary or content, depending)
+  let lastLineEnding = " \r\n" + (newLinesBetween ? "\r\n" : "")
+
+  // if omitContent, drop content
+  content = omitContent ? [] : content
+
+  // finally, handle indentation
+  let contentIndentation = indentContent ? (md ? "* " : "  ") : ""
+
+  content =
+    content.length > 0
+      ? content.map((contentLine) =>
+          formatContentLine(contentLine, contentIndentation)
+        )
+      : []
+
+  // if no content, apply last line ending to summary
+  if (content.length < 1) {
+    summary = summary + lastLineEnding
+  } else {
+    // otherwise, add basic line ending to summary line...
+    summary = summary + " \r\n"
+    // ...join content lines with basic line ending between them...
+    content = content.map((contentLine, i) =>
+      i != content.length - 1 ? contentLine + " \r\n" : contentLine
+    )
+    // ...and apply last line ending to last content string
+    content[content.length - 1] = content[content.length - 1] + lastLineEnding
   }
 
-  return output as RenderedEventsTextSet
+  return [dates, summary, ...content]
+}
+
+function formatContentLine(content: string, indentation: string): string {
+  let contentLines = content.split("\n")
+
+  let output =
+    indentation +
+    contentLines.map((line, i) => `${i != 0 ? "  " : ""}${line}`).join("\n")
+
+  return output
 }
 
 // export function collapseRenderedEventPropSets(
@@ -536,6 +555,7 @@ export function renderEvents(
     omitContent = defaultNaiveConfig.omitContent,
     indentContent = defaultNaiveConfig.indentContent,
     dateTimeFormatOptions = DateTime.DATE_FULL,
+    newLinesBetween = true,
   }: Partial<NaiveConfig> = {
     sortBy: "date",
     groupByDays: 7,
@@ -547,6 +567,7 @@ export function renderEvents(
     omitContent: false,
     indentContent: true,
     dateTimeFormatOptions: DateTime.DATE_FULL,
+    newLinesBetween: true,
   }
 ): RenderedEventCollectionSet[] {
   let eventPropSetGroupCollection: SortedDatedEventCollections = getSortedDatedEventCollections(
@@ -573,8 +594,7 @@ export function renderEvents(
           : "",
       renderedEventCollections: eventPropSetGroups
         ? eventPropSetGroups.map((epsg) => {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            let [_dates, summary, ...content] = renderEventPropSetGroup(epsg, {
+            let repts = renderEventPropSetGroup(epsg, {
               md,
               dateTimeFormatOptions,
               dateSummaries,
@@ -583,7 +603,32 @@ export function renderEvents(
               indentContent,
             })
 
-            return [summary, ...content].join("  \r\n") + "  \r\n"
+            let processedRenderedSet = formatRenderedEventsTextSet(repts, {
+              md,
+              indentContent,
+              omitContent,
+              newLinesBetween,
+            })
+
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            let [_dates, summary, ...content] = processedRenderedSet
+
+            return summary + content.join("")
+
+            // if (content.length < 1) {
+            //   return summary + " \r\n\r\n"
+            // } else {
+            //   return (
+            //     [
+            //       summary,
+            //       ...content.map((content) =>
+            //         indentContent
+            //           ? addIndentsToContent(content, { md: md || true })
+            //           : content
+            //       ),
+            //     ].join("  \r\n") + "  \r\n"
+            //   )
+            // }
           })
         : [],
     }

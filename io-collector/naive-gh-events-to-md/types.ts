@@ -1,8 +1,8 @@
 import { Endpoints } from "@octokit/types"
-import { DateTime, DateTimeFormatOptions, LocaleOptions } from "luxon"
+import { DateTime, LocaleOptions } from "luxon"
 import { GHEvent } from "./eventTypes"
 import { resultDef } from "./eventTypes/helperTypes"
-import { RenderedEventPropSet, RenderedEventsTextSet } from "./getText"
+// import { RenderedEventPropSet, RenderedEventsTextSet } from "./getText"
 
 export type GithubEvent = Endpoints["GET /users/{username}/events"]["response"]["data"][0]
 export type GithubIssue = Endpoints["GET /repos/{owner}/{repo}/issues"]["response"]["data"][0]
@@ -16,11 +16,11 @@ export type GithubRelease = Endpoints["GET /repos/{owner}/{repo}/releases/{relea
 
 export interface EntityProps {
   id: number | string
-  url: string
-  desc: string
-  preposition: string
-  title: string
-  content?: string
+  url: string | undefined
+  desc: string | undefined
+  preposition: string | undefined
+  title: string | undefined
+  content?: string | undefined
 }
 
 export interface ActorProps {
@@ -38,7 +38,7 @@ export interface EventPropSet {
   subject: EntityProps
   actor: ActorProps
   target?: EntityProps
-  parent: EntityProps
+  parent?: EntityProps
 }
 
 export interface TestStringsSet {
@@ -82,18 +82,20 @@ export interface TestEventsByActionType {
 export type TestEvents = TestEventsByActionType
 
 export interface TypeTestData {
-  testEvents?: TestEvents
+  testEvents: TestEvents
 }
 
 export interface NaiveConfig {
   sortBy?: "date" | "actor" | "type" | "target" | "parent"
   collapse?: boolean
+  dateSummaries?: boolean
+  dateContent?: boolean
   groupByDays?: number
   startDate?: Date
   md?: boolean
   omitContent?: boolean
   indentContent?: boolean
-  dateTimeFormatOptions?: LocaleOptions & DateTimeFormatOptions
+  dateTimeFormatOptions?: LocaleOptions
 }
 
 export const defaultNaiveConfig: NaiveConfig = {
@@ -105,4 +107,25 @@ export const defaultNaiveConfig: NaiveConfig = {
   omitContent: false,
   indentContent: true,
   dateTimeFormatOptions: DateTime.DATE_FULL,
+}
+
+export type RenderedSubjectAndContent = [subject: string, content?: string]
+export type RenderedEventPropSetText = [
+  summary: string,
+  ...content: string[] | []
+]
+export type RenderedEventsTextSet = [
+  dates: string[],
+  summary: string,
+  ...content: string[] | []
+]
+
+export interface RenderedEventPropSet {
+  date: string
+  actor: string
+  verb: string
+  subject: string
+  content?: string
+  target?: string
+  parent?: string
 }

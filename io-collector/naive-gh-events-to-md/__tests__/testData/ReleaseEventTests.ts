@@ -46,7 +46,7 @@ ReleaseEventTests.testEvents.published = [
           actor: "arzrasel",
           date: "February 13, 2021",
           verb: "published",
-          subject: "release 1.0.3.04",
+          subject: "1.0.3.04",
           target: "in arzrasel/EasySwiftUIKit",
           content: undefined,
           parent: undefined,
@@ -56,7 +56,7 @@ ReleaseEventTests.testEvents.published = [
           date: "February 13, 2021",
           verb: "published",
           subject:
-            "release [1.0.3.04](https://github.com/arzrasel/EasySwiftUIKit/releases/tag/1.0.3.04)",
+            "[1.0.3.04](https://github.com/arzrasel/EasySwiftUIKit/releases/tag/1.0.3.04)",
           target:
             "in [arzrasel/EasySwiftUIKit](https://github.com/arzrasel/EasySwiftUIKit)",
           content: undefined,

@@ -1,9 +1,17 @@
 import { DateTimeFormatOptions, DateTime } from "luxon"
 import { GHEvent } from "./eventTypes"
 import { getActorProps, getVerbs } from "./getProps"
-import { NaiveConfig } from "./types"
-import { getSortedDatedEventCollections } from "./collectPropSets"
-import { EntityProps, EventPropSet } from "./types"
+import {
+  defaultNaiveConfig,
+  NaiveConfig,
+  RenderedEventPropSet,
+  RenderedSubjectAndContent,
+} from "./types"
+import {
+  getSortedDatedEventCollections,
+  SortedDatedEventCollections,
+} from "./collectPropSets"
+import { EntityProps, EventPropSet, RenderedEventsTextSet } from "./types"
 
 // type EventTypeRequirement<T> = T extends GHEventPayloadIteree
 //   ? string
@@ -118,28 +126,6 @@ import { EntityProps, EventPropSet } from "./types"
 
 // }
 
-function processPropSet(
-  set: Partial<EntityProps> = {},
-  { md }: { md: boolean } = { md: false }
-) {
-  let { id, url, desc, preposition, title } = set
-  let space = " "
-
-  let titleString = md
-    ? title || desc || id || ""
-    : title || desc
-    ? title || desc + (id ? " (" + id + ")" : "")
-    : id || ""
-  // prettier-ignore
-  return "" + // make sure at least an empty string is returned
-    (preposition ? preposition + space : "") + // preposition
-    ((desc && title) ? desc + space : "") + // if both desc and title, desc
-    (md && url ? "[" : "") + // open link if md and url
-    titleString + // title, or desc, or id
-    (md && url ? "]" : "") + // close link if md and url
-      (md && url ? `(${url})` : "") // url if md and url
-}
-
 // function renderEventPropertySet(set: EntityProps, { md }: { md: boolean} = { md: false }) {
 //   let { id, url, desc, preposition, title } = set
 //   let space = " "
@@ -166,10 +152,10 @@ function processPropSet(
 
 //   if (Array.isArray(EntityProps)) {
 //     return [
-//       ...EntityProps.map((propSet: EntityProps) => processPropSet(propSet, { md })),
+//       ...EntityProps.map((propSet: EntityProps) => renderEntity(propSet, { md })),
 //     ]
 //   } else {
-//     return [processPropSet(EntityProps, { md })]
+//     return [renderEntity(EntityProps, { md })]
 //   }
 // }
 
@@ -278,30 +264,34 @@ export function joinEntitySummaries(entityText: string[][]): string {
 //   )
 // }
 
-export type RenderedSubjectAndContent = [subject: string, content: string]
-export type RenderedEventPropSetText = [summary: string, ...content: string[]]
-export type RenderedEventsTextSet = [
-  dates: string[],
-  summary: string,
-  ...content: string[]
-]
-
-export interface RenderedEventPropSet {
-  date: string
-  actor: string
-  verb: string
-  subject: string
-  content: string
-  target: string
-  parent: string
-}
-
 export function renderEntityText(
-  EntityProps: EntityProps,
+  set: Partial<EntityProps> = {},
   { md }: { md: boolean } = { md: false }
 ): string {
-  return processPropSet(EntityProps, { md })
+  let { id, url, desc, preposition, title } = set
+  let space = " "
+
+  let titleString = md
+    ? title || desc || id || ""
+    : title || desc
+    ? title || desc + (id ? " (" + id + ")" : "")
+    : id || ""
+  // prettier-ignore
+  return "" + // make sure at least an empty string is returned
+    (preposition ? preposition + space : "") + // preposition
+    ((desc && title) ? desc + space : "") + // if both desc and title, desc
+    (md && url ? "[" : "") + // open link if md and url
+    titleString + // title, or desc, or id
+    (md && url ? "]" : "") + // close link if md and url
+      (md && url ? `(${url})` : "") // url if md and url
 }
+
+// export function renderEntityText(
+//   EntityProps: EntityProps,
+//   { md }: { md: boolean } = { md: false }
+// ): string {
+//   return renderEntity(EntityProps, { md })
+// }
 
 export const renderSubject = (
   subjectProps: EventPropSet["subject"],
@@ -314,19 +304,26 @@ export const renderSubject = (
 export function getRenderedEventPropSet(
   eventProps: EventPropSet,
   {
-    md,
-    dateTimeFormatOptions,
-  }: { md: boolean; dateTimeFormatOptions: DateTimeFormatOptions } = {
+    md = false,
+    dateTimeFormatOptions = DateTime.DATE_FULL,
+  }: Partial<NaiveConfig> = {
     md: false,
     dateTimeFormatOptions: DateTime.DATE_FULL,
   }
 ): RenderedEventPropSet {
-  let date = renderDate(eventProps.date, dateTimeFormatOptions) // make the format a config option
-  let actor = renderActorText(eventProps.actor, { md })
+  let date = renderDate(
+    eventProps.date,
+    dateTimeFormatOptions ? dateTimeFormatOptions : DateTime.DATE_FULL
+  ) // make the format a config option
+  let actor = renderActorText(eventProps.actor, { md: md as boolean })
   let verb = renderVerbText(eventProps.verb)
-  let subject = renderSubject(eventProps.subject, { md })
-  let target = renderEntityText(eventProps.target, { md })
-  let parent = renderEntityText(eventProps.parent, { md })
+  let subject = renderSubject(eventProps.subject, { md: md as boolean })
+  let target = eventProps.target
+    ? renderEntityText(eventProps.target, { md: md as boolean })
+    : undefined
+  let parent = eventProps.parent
+    ? renderEntityText(eventProps.parent, { md: md as boolean })
+    : undefined
 
   return {
     date,
@@ -346,39 +343,92 @@ export function renderDate(
   return DateTime.fromJSDate(date).toLocaleString(formatOptions)
 }
 
+function addIndentsToContent(
+  content: string,
+  { md = true }: { md: boolean } = { md: true }
+): string {
+  let contentLines = content.split("\n")
+
+  let output =
+    `${md ? "* " : "  "}` +
+    contentLines
+      .map((line, i) => `${i != 0 ? (md ? "  " : "  ") : ""}${line}`)
+      .join("\n")
+
+  return output
+}
+
 export function renderDatedContent(
   content: string,
   date: string,
-  url: string,
-  title: string,
-  { md }: { md: boolean } = { md: false }
+  url: string | null,
+  title: string | null,
+  { md = false, indentContent = true }: Partial<NaiveConfig> = {
+    md: false,
+    indentContent: true,
+  }
 ): string {
-  return title
-    ? date
-    : "" + md
-    ? "["
-    : "" + title
-    ? title
-    : date + md
-    ? "](" + url + "): "
-    : ": " + content
+  let output = `${title ? date + " - " : ""}${md && url ? "[" : ""}${
+    title ? title : date
+  }${md && url ? "](" + url + "): " : ": "}${content}${
+    url && !md ? " (" + url + ")" : ""
+  }`
+
+  if (indentContent) {
+    output = addIndentsToContent(output, { md })
+  }
+
+  return output
+}
+
+export function renderContent(
+  content: string,
+  url: string | null,
+  title: string | null,
+  { md = false, indentContent = true }: Partial<NaiveConfig> = {
+    md: false,
+    indentContent: true,
+  }
+): string {
+  let output = `${md && url ? "[" : ""}${title ? title : md ? "item" : ""}${
+    md && url ? "](" + url + ")" : ""
+  }${content && content !== title ? `: ${content}` : ""}${
+    url && !md ? " (" + url + ")" : ""
+  }`
+
+  if (indentContent) {
+    output = addIndentsToContent(output, { md })
+  }
+
+  return output
 }
 
 export function renderEventPropSetGroup(
   eventPropSets: EventPropSet[],
   {
-    md,
-    dateTimeFormatOptions,
-  }: { md: boolean; dateTimeFormatOptions: DateTimeFormatOptions } = {
+    md = defaultNaiveConfig.md as boolean,
+    dateTimeFormatOptions = defaultNaiveConfig.dateTimeFormatOptions,
+    dateSummaries = defaultNaiveConfig.dateSummaries,
+    dateContent = defaultNaiveConfig.dateContent,
+    // omitContent = defaultNaiveConfig.omitContent,
+    indentContent = defaultNaiveConfig.indentContent,
+  }: Partial<NaiveConfig> = {
     md: false,
     dateTimeFormatOptions: DateTime.DATE_FULL,
+    dateSummaries: false,
+    dateContent: false,
+    omitContent: false,
+    indentContent: false,
   }
 ): RenderedEventsTextSet {
-  let output: RenderedEventsTextSet = [[], undefined, undefined]
+  let output: Partial<RenderedEventsTextSet> = [[]]
 
   let renderedSets = eventPropSets.map((eps) => {
     // console.log(eps);
-    return getRenderedEventPropSet(eps, { md, dateTimeFormatOptions })
+    return getRenderedEventPropSet(eps, {
+      md,
+      dateTimeFormatOptions,
+    })
   })
 
   // console.log(renderedSets)
@@ -389,18 +439,24 @@ export function renderEventPropSetGroup(
       result,
     } = eventPropSets[i]
 
-    output[0].push(reps.date)
+    output[0] && output[0].push(reps.date)
 
     if (i === 0) {
-      const summaryString = `${reps.actor} ${reps.verb} ${
+      const summaryString = `${dateSummaries ? reps.date + ": " : ""}${
+        reps.actor
+      } ${reps.verb}${
+        eventPropSets.length > 1 ? ` ${eventPropSets.length} ` : " "
+      }${
         typeof result === "string"
           ? result
           : eventPropSets.length > 1
           ? result[1]
           : result[0]
-      } ${eventPropSets.length > 1 ? "" : reps.subject + " "}${
-        reps.target ? reps.target + (reps.parent ? " " : "") : ""
-      }${reps.parent ? reps.parent : ""}`
+      }${eventPropSets.length > 1 ? "" : " " + reps.subject}${
+        reps.target || reps.parent ? " " : ""
+      }${reps.target ? reps.target + (reps.parent ? " " : "") : ""}${
+        reps.parent ? reps.parent : ""
+      }`
 
       output[1] = summaryString
       // console.log(summaryString)
@@ -408,21 +464,43 @@ export function renderEventPropSetGroup(
     // console.log(
     //   reps, output, i, url, title, result
     // )
-
-    if (reps.content) {
-      output.push(
-        renderDatedContent(
-          reps.content,
-          reps.date,
-          url ? url : null,
-          title ? title : null,
-          { md }
-        )
-      )
+    // prettier-ignore
+    if (reps.content || eventPropSets.length > 1) {
+      dateContent
+        ? output.push(
+            renderDatedContent(
+              reps.content ? reps.content : title ? title : "",
+              reps.date,
+              url ? url : null,
+              title ? title : null,
+              { md }
+            )
+          ) 
+        : output.push(
+            eventPropSets.length > 1
+              ? renderContent(
+                  reps.content ? reps.content : title ? title : "",
+                  url ? url : null,
+                  title ? title : null,
+                  { md, indentContent }
+                )
+              : indentContent 
+                ? reps.content
+                  ? addIndentsToContent(reps.content, { md })
+                  : undefined
+                : reps.content
+          )
     }
   })
 
-  return output
+  // add new line after contentless summaries
+  output[1] = !output[2] ? output[1] + " \r\n" : output[1]
+  // add new line after last line of content
+  if (output[2]) {
+    output[output.length - 1] = output[output.length - 1] + " \r\n"
+  }
+
+  return output as RenderedEventsTextSet
 }
 
 // export function collapseRenderedEventPropSets(
@@ -438,7 +516,7 @@ export function renderEventPropSetGroup(
 
 // }
 
-export interface RenderedEventCollections {
+export interface RenderedEventCollectionSet {
   startDate: string
   endDate: string
   renderedEventCollections: RenderedEventCollection[]
@@ -447,47 +525,67 @@ export type RenderedEventCollection = string
 
 export function renderEvents(
   events: GHEvent[],
-  options: NaiveConfig = {
+  {
+    sortBy = defaultNaiveConfig.sortBy,
+    groupByDays = defaultNaiveConfig.groupByDays,
+    dateSummaries = defaultNaiveConfig.dateSummaries,
+    dateContent = defaultNaiveConfig.dateContent,
+    collapse = defaultNaiveConfig.collapse,
+    md = defaultNaiveConfig.md,
+    startDate = defaultNaiveConfig.startDate,
+    omitContent = defaultNaiveConfig.omitContent,
+    indentContent = defaultNaiveConfig.indentContent,
+    dateTimeFormatOptions = DateTime.DATE_FULL,
+  }: Partial<NaiveConfig> = {
     sortBy: "date",
     groupByDays: 7,
+    dateSummaries: false,
+    dateContent: true,
     collapse: true,
     md: true,
-    startDate: new Date(1 / 1 / 1970),
+    startDate: new Date("1/1/1970"),
     omitContent: false,
     indentContent: true,
     dateTimeFormatOptions: DateTime.DATE_FULL,
   }
-): RenderedEventCollections[] {
-  const { md, dateTimeFormatOptions } = options
-
-  let eventPropSetGroupCollection = getSortedDatedEventCollections(
+): RenderedEventCollectionSet[] {
+  let eventPropSetGroupCollection: SortedDatedEventCollections = getSortedDatedEventCollections(
     events,
-    options
-  )
+    { sortBy, collapse, groupByDays, startDate }
+  ) as SortedDatedEventCollections
 
-  return eventPropSetGroupCollection.map(
-    ({ startDate, endDate, eventPropSetGroups }) => {
-      return {
-        startDate:
-          typeof startDate === "string"
-            ? startDate
-            : startDate
-            ? renderDate(startDate, options.dateTimeFormatOptions)
-            : "",
-        endDate:
-          typeof endDate === "string"
-            ? endDate
-            : endDate
-            ? renderDate(endDate, options.dateTimeFormatOptions)
-            : "",
-        renderedEventCollections: eventPropSetGroups
-          ? eventPropSetGroups.map((epsg) =>
-              renderEventPropSetGroup(epsg, { md, dateTimeFormatOptions }).join(
-                "\r\n"
-              )
-            )
-          : [],
-      }
+  return eventPropSetGroupCollection.map((sdec) => {
+    let { startDate, endDate, eventPropSetGroups } = sdec
+
+    return {
+      startDate: startDate ? renderDate(startDate, dateTimeFormatOptions) : "",
+      // startDate:
+      //   typeof startDate === "string"
+      //     ? startDate
+      //     : startDate
+      //     ? renderDate(startDate, dateTimeFormatOptions)
+      //     : "",
+      endDate:
+        typeof endDate === "string"
+          ? endDate
+          : endDate
+          ? renderDate(endDate, dateTimeFormatOptions)
+          : "",
+      renderedEventCollections: eventPropSetGroups
+        ? eventPropSetGroups.map((epsg) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            let [_dates, summary, ...content] = renderEventPropSetGroup(epsg, {
+              md,
+              dateTimeFormatOptions,
+              dateSummaries,
+              dateContent,
+              omitContent,
+              indentContent,
+            })
+
+            return [summary, ...content].join("  \r\n") + "  \r\n"
+          })
+        : [],
     }
-  )
+  })
 }

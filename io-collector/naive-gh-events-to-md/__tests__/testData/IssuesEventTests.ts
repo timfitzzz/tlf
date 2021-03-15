@@ -47,7 +47,7 @@ IssuesEventTests.testEvents.closed = [
           verb: "closed",
           subject: "set up test mongodb database",
           target: undefined,
-          parent: "timfitzzz/stemmy",
+          parent: "in timfitzzz/stemmy",
           content: undefined,
         },
         md: {
@@ -57,7 +57,7 @@ IssuesEventTests.testEvents.closed = [
           subject:
             "[set up test mongodb database](https://github.com/timfitzzz/stemmy/issues/13)",
           target: undefined,
-          parent: "[timfitzzz/stemmy](https://github.com/timfitzzz/stemmy)",
+          parent: "in [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy)",
           content: undefined,
         },
       },

@@ -58,7 +58,7 @@ PullRequestReviewEventTests.testEvents.created = [
           content:
             "@robustTechie We'll need to remove the `mifosng-android/gradle/wrapper/gradle-wrapper.jar` as well!",
           target:
-            "pull request Conversion:Survey related fragments and activities",
+            "of pull request Conversion:Survey related fragments and activities",
           parent: "in openMF/android-client",
         },
         md: {
@@ -70,9 +70,9 @@ PullRequestReviewEventTests.testEvents.created = [
           content:
             "@robustTechie We'll need to remove the `mifosng-android/gradle/wrapper/gradle-wrapper.jar` as well!",
           target:
-            "pull request [Conversion:Survey related fragments and activities](https://github.com/openMF/android-client/pull/1539)",
+            "of pull request [Conversion:Survey related fragments and activities](https://github.com/openMF/android-client/pull/1539)",
           parent:
-            "in [openMF/android-client](https://github.com/openMF/android-client",
+            "in [openMF/android-client](https://github.com/openMF/android-client)",
         },
       },
     ],

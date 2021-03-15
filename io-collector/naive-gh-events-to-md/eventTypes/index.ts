@@ -43,7 +43,7 @@ export default {
   WatchEvent,
 }
 
-type StrippedGHEvent = Omit<GithubEvent, "payload">
+type StrippedGHEvent = Omit<GithubEvent, "payload" | "type">
 
 export type GHEventPayload =
   | CommitCommentEventPayload
@@ -69,4 +69,5 @@ export type GHEventPayloadIteree =
 
 export interface GHEvent extends StrippedGHEvent {
   payload: GHEventPayload
+  type: string
 }

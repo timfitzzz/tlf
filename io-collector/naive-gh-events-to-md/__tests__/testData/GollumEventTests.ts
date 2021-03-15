@@ -15,7 +15,7 @@ GollumEventTests.testEvents.created = [
         private: false,
         type: "GollumEvent",
         verb: "created",
-        result: ["a wiki page", "wiki pages"],
+        result: ["wiki page", "wiki pages"],
         actionType: "created",
         actor: {
           id: "kii-chan-reloaded",
@@ -49,7 +49,7 @@ GollumEventTests.testEvents.created = [
           verb: "created",
           subject: "Pain",
           target: undefined,
-          parent: "kii-chan-reloaded/GeneticChickengineering",
+          parent: "in kii-chan-reloaded/GeneticChickengineering",
           content: undefined,
         },
         md: {
@@ -137,7 +137,7 @@ GollumEventTests.testEvents.edited = [
         private: false,
         type: "GollumEvent",
         verb: "edited",
-        result: ["a wiki page", "wiki pages"],
+        result: ["wiki page", "wiki pages"],
         actionType: "edited",
         actor: {
           id: "kii-chan-reloaded",
@@ -167,7 +167,7 @@ GollumEventTests.testEvents.edited = [
         private: false,
         type: "GollumEvent",
         verb: "edited",
-        result: ["a wiki page", "wiki pages"],
+        result: ["wiki page", "wiki pages"],
         actionType: "edited",
         actor: {
           id: "kii-chan-reloaded",
@@ -201,7 +201,7 @@ GollumEventTests.testEvents.edited = [
           verb: "edited",
           subject: "Home",
           target: undefined,
-          parent: "kii-chan-reloaded/GeneticChickengineering",
+          parent: "in kii-chan-reloaded/GeneticChickengineering",
           content: undefined,
         },
         md: {
@@ -223,7 +223,7 @@ GollumEventTests.testEvents.edited = [
           verb: "edited",
           subject: "Settings",
           target: undefined,
-          parent: "kii-chan-reloaded/GeneticChickengineering",
+          parent: "in kii-chan-reloaded/GeneticChickengineering",
           content: undefined,
         },
         md: {
@@ -243,16 +243,16 @@ GollumEventTests.testEvents.edited = [
       collapsed: [
         {
           plain: [
-            ["February 19, 2021"],
+            ["February 19, 2021", "February 19, 2021"],
             "kii-chan-reloaded edited 2 wiki pages in kii-chan-reloaded/GeneticChickengineering",
-            "Home",
-            "Settings",
+            "  Home (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
+            "  Settings (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
           ],
           md: [
-            ["February 19, 2021"],
+            ["February 19, 2021", "February 19, 2021"],
             "[kii-chan-reloaded](https://github.com/kii-chan-reloaded) edited 2 wiki pages in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering)",
-            "[Home](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
-            "[Settings](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
+            "  * [Home](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
+            "  * [Settings](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
           ],
         },
       ],
@@ -442,13 +442,13 @@ GollumEventTests.testEvents.multiple = [
         },
         {
           plain: [
-            ["February 19, 2021"],
+            ["February 19, 2021", "February 19, 2021"],
             "kii-chan-reloaded edited 2 wiki pages in kii-chan-reloaded/GeneticChickengineering",
-            "Home",
-            "Settings",
+            "Home (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
+            "Settings (https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",
           ],
           md: [
-            ["February 19, 2021"],
+            ["February 19, 2021", "February 19, 2021"],
             "[kii-chan-reloaded](https://github.com/kii-chan-reloaded) edited 2 wiki pages in [kii-chan-reloaded/GeneticChickengineering](https://github.com/kii-chan-reloaded/GeneticChickengineering)",
             "[Home](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Home)",
             "[Settings](https://github.com/kii-chan-reloaded/GeneticChickengineering/wiki/Settings)",

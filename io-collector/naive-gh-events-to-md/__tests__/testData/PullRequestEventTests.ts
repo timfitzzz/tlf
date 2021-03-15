@@ -48,7 +48,7 @@ PullRequestEventTests.testEvents.closed = [
           subject: "Bringing up to date with current version",
           content: undefined,
           target: undefined,
-          parent: "in timfitzzz/stemmy",
+          parent: "in timfitzzz/gatsby-theme-localization",
         },
         md: {
           date: "December 15, 2020",
@@ -59,7 +59,7 @@ PullRequestEventTests.testEvents.closed = [
           content: undefined,
           target: undefined,
           parent:
-            "in [timfitzzz/stemmy](https://github.com/timfitzzz/nursefornyc)",
+            "in [timfitzzz/gatsby-theme-localization](https://github.com/timfitzzz/gatsby-theme-localization)",
         },
       },
     ],

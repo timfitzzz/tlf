@@ -17,7 +17,7 @@ const GollumEvent: GithubEventType = {
       created: "created",
       edited: "edited",
     },
-    result: ["a wiki page", "wiki pages"],
+    result: ["wiki page", "wiki pages"],
     subject: {
       id: "page_name",
       url: "html_url",

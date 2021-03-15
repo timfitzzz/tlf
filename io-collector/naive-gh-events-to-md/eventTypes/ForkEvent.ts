@@ -6,7 +6,7 @@ const ForkEvent: GithubEventType = {
   paths: {
     actor: defaultActorPaths,
     verb: "forked",
-    result: ["a repo", "repos"],
+    result: ["repository", "repositories"],
     subject: {
       id: "repo.id",
       url: "repo.url",
@@ -14,7 +14,7 @@ const ForkEvent: GithubEventType = {
     },
     target: {
       preposition: "to",
-      desc: "new repo",
+      desc: "new repository",
       id: "payload.forkee.id",
       title: "payload.forkee.full_name",
       url: "payload.forkee.html_url",

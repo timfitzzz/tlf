@@ -51,32 +51,36 @@ export function lookupActionTypes(
   event: GHEvent,
   itereeIdx?: number
 ): string[] | null {
-  const { actionPropPath, actionTypes, iterator } = EventTypes[
-    event.type
-  ].config
+  if (event.type) {
+    const { actionPropPath, actionTypes, iterator } = EventTypes[
+      event.type
+    ].config
 
-  if (iterator && actionTypes) {
-    if (itereeIdx) {
-      // console.log(`got itereeIdx`)
-      let iteree = _.get(event, iterator)[itereeIdx]
-      // console.log(`got iteree: ${iteree}`)
-      // console.log("getting path ", actionPropPath[1])
-      // console.log(_.get(iteree, actionPropPath[1]))
-      let output = [_.get(iteree, actionPropPath[1])]
-      return output
+    if (iterator && actionTypes) {
+      if (itereeIdx) {
+        // console.log(`got itereeIdx`)
+        let iteree = _.get(event, iterator)[itereeIdx]
+        // console.log(`got iteree: ${iteree}`)
+        // console.log("getting path ", actionPropPath[1])
+        // console.log(_.get(iteree, actionPropPath[1]))
+        let output = [_.get(iteree, actionPropPath[1])]
+        return output
+      } else {
+        let types: string[] = _.get(event, iterator).map((iteree) =>
+          _.get(iteree, actionPropPath[1])
+        )
+        // console.log(types)
+        // .reduce((acc, i) => (acc.indexOf(i) ? acc + i : acc), [])
+        return types
+      }
+    } else if (actionPropPath) {
+      // console.log(_.get(event, actionPropPath))
+      return [_.get(event, actionPropPath)]
     } else {
-      let types: string[] = _.get(event, iterator).map((iteree) =>
-        _.get(iteree, actionPropPath[1])
-      )
-      // console.log(types)
-      // .reduce((acc, i) => (acc.indexOf(i) ? acc + i : acc), [])
-      return types
+      // console.log("actionTypes === null")
+      return null
     }
-  } else if (actionPropPath) {
-    // console.log(_.get(event, actionPropPath))
-    return [_.get(event, actionPropPath)]
   } else {
-    // console.log("actionTypes === null")
     return null
   }
 }
@@ -86,21 +90,34 @@ export function getVerbs<K extends GHEvent>(
   // eventType: EventTypeRequirement<K> = undefined,
   // iterantIndex: IterantIndexRequirement<K> = undefined
 ): string[] {
-  const typeMetadata: GithubEventType = EventTypes[event.type]
-  const {
-    config: { iterator },
-    paths,
-  } = typeMetadata
+  if (event.type) {
+    const typeMetadata: GithubEventType = EventTypes[event.type]
+    const {
+      config: { iterator },
+      paths,
+    } = typeMetadata
 
-  if (typeof paths.verb === "string") {
-    if (iterator) {
-      const iterations = _.get(event, iterator)
-      return iterations.map(() => paths.verb)
+    if (typeof paths.verb === "string") {
+      if (iterator) {
+        const iterations = _.get(event, iterator)
+        return iterations.map(() => paths.verb)
+      } else {
+        return [paths.verb]
+      }
     } else {
-      return [paths.verb]
+      // if verb isn't a string, it's an object indexed by action type
+      let actionTypes = lookupActionTypes(event)
+
+      if (actionTypes) {
+        return actionTypes.map((type) =>
+          paths.verb ? paths.verb[type] : "did"
+        )
+      } else {
+        return ["did"]
+      }
     }
   } else {
-    return lookupActionTypes(event).map((type) => paths.verb[type])
+    return ["did"]
   }
 }
 
@@ -131,12 +148,19 @@ export function getActorProps(event: GHEvent): { id: string; url: string } {
     EventTypes[event.type].paths.actor
   // console.log(actorPaths)
 
-  return {
-    id: _.get(event, actorPaths.id),
-    url: _.get(event, actorPaths.url).replace(
-      "api.github.com/users",
-      "github.com"
-    ),
+  if (actorPaths) {
+    return {
+      id: _.get(event, actorPaths.id),
+      url: _.get(event, actorPaths.url).replace(
+        "api.github.com/users",
+        "github.com"
+      ),
+    }
+  } else {
+    return {
+      id: "unknown actor",
+      url: "https://github.com",
+    }
   }
 }
 
@@ -151,10 +175,15 @@ function pathsToProps(obj: object, paths: EntityRef): EntityProps {
   // console.log(paths)
   // paths.id === "page_name" && console.log("processing obj: ", obj)
   // paths.id === "page_name" && console.log("getting paths ", paths)
+
+  let url: string | undefined | null = paths.url
+    ? fixUrl(_.get(obj, paths.url))
+    : undefined
+
   return {
     preposition: paths.preposition,
     id: _.get(obj, paths.id) || paths.id,
-    url: paths.url ? fixUrl(_.get(obj, paths.url)) : undefined,
+    url: url ? url : undefined,
     title: _.get(obj, paths.title),
     desc: _.get(obj, paths.desc) || paths.desc,
     content: _.get(obj, paths.content),
@@ -169,7 +198,7 @@ export function getSubjectPropSets(event: GHEvent): EntityProps[] {
     EventTypes[event.type].paths.subject
   const { iterator, actionTypes } = EventTypes[event.type].config
 
-  let output: EntityProps[]
+  let output: EntityProps[] = []
 
   if (subjectPaths) {
     if (iterator) {
@@ -178,16 +207,22 @@ export function getSubjectPropSets(event: GHEvent): EntityProps[] {
       output = subjects.map((subject, i) => {
         // console.log(lookupActionTypes(event, i))
         return actionTypes && !subjectPaths.id
-          ? pathsToProps(subject, subjectPaths[lookupActionTypes(event, i)[0]])
-          : pathsToProps(subject, subjectPaths as EntityRef)
+          ? pathsToProps(
+              subject as object,
+              subjectPaths[(lookupActionTypes(event, i) as string[])[0]]
+            )
+          : pathsToProps(subject as object, subjectPaths as EntityRef)
       })
     } else {
+      // in this case, there are not multiple subjects.
+      // so lookupActionTypes' response array [0] is the only action type.
+      let eventActionType =
+        event && lookupActionTypes(event)
+          ? (lookupActionTypes(event) as string[])[0]
+          : null
       output = [
-        actionTypes && !subjectPaths.id
-          ? pathsToProps(
-              event,
-              subjectPaths[lookupActionTypes(event)[0]] as EntityRef
-            )
+        actionTypes && eventActionType && !subjectPaths.id
+          ? pathsToProps(event, subjectPaths[eventActionType] as EntityRef)
           : pathsToProps(event, subjectPaths as EntityRef),
       ]
     }
@@ -199,7 +234,7 @@ export function getEntityProps(
   event: GHEvent,
   entityType: string,
   actionType?: string
-): EntityProps {
+): EntityProps | undefined {
   // console.dir(event.type + " " + entityType + " " + actionType)
   const entityPaths: EntityRef | { [key: string]: EntityRef } =
     EventTypes[event.type].paths[entityType]
@@ -210,7 +245,7 @@ export function getEntityProps(
 
   if (entityPaths) {
     if (typeof entityPaths.id === "undefined") {
-      if (entityPaths[actionType]) {
+      if (actionType && entityPaths[actionType]) {
         // for entities with multiple action types:
         // entityPaths = { [key: string]: EntityRef }
         output = pathsToProps(event, entityPaths[actionType])
@@ -250,7 +285,8 @@ export function getEventPropSets(event: GHEvent): EventPropSet[] {
 
   return subjectPropSets.map((subject, i) => {
     return {
-      date: new Date(event.created_at),
+      //eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      date: new Date(event.created_at!),
       private: !event.public,
       verb: verbs[i],
       type: event.type,
@@ -276,5 +312,8 @@ export function getEventPropSets(event: GHEvent): EventPropSet[] {
 }
 
 export function getEventsPropSets(events: GHEvent[]): EventPropSet[] {
-  return events.reduce((acc, event) => acc.concat(getEventPropSets(event)), [])
+  return events.reduce(
+    (acc, event) => acc.concat(getEventPropSets(event)),
+    [] as EventPropSet[]
+  )
 }

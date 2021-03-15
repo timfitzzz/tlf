@@ -42,7 +42,7 @@ MemberEventTests.testEvents.added = [
     renderedPropSets: [
       {
         plain: {
-          date: "December 29, 2020",
+          date: "December 28, 2020",
           actor: "timfitzzz",
           verb: "granted",
           subject: "for user rf-",
@@ -51,7 +51,7 @@ MemberEventTests.testEvents.added = [
           content: undefined,
         },
         md: {
-          date: "December 29, 2020",
+          date: "December 28, 2020",
           actor: "[timfitzzz](https://github.com/timfitzzz)",
           verb: "granted",
           subject: "for user [rf-](https://github.com/rf-)",
@@ -65,11 +65,11 @@ MemberEventTests.testEvents.added = [
       collapsed: [
         {
           plain: [
-            ["December 29, 2020"],
+            ["December 28, 2020"],
             "timfitzzz granted access for user rf- to timfitzzz/stemmy",
           ],
           md: [
-            ["December 29, 2020"],
+            ["December 28, 2020"],
             "[timfitzzz](https://github.com/timfitzzz) granted access for user [rf-](https://github.com/rf-) to [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy)",
           ],
         },
@@ -77,11 +77,11 @@ MemberEventTests.testEvents.added = [
       individual: [
         {
           plain: [
-            ["December 29, 2020"],
+            ["December 28, 2020"],
             "timfitzzz granted access for user rf- to timfitzzz/stemmy",
           ],
           md: [
-            ["December 29, 2020"],
+            ["December 28, 2020"],
             "[timfitzzz](https://github.com/timfitzzz) granted access for user [rf-](https://github.com/rf-) to [timfitzzz/stemmy](https://github.com/timfitzzz/stemmy)",
           ],
         },

@@ -14,7 +14,7 @@ ForkEventTests.testEvents.none = [
         private: false,
         type: "ForkEvent",
         verb: "forked",
-        result: ["a repo", "repos"],
+        result: ["repository", "repositories"],
         actionType: undefined,
         subject: {
           id: 298321273,
@@ -31,7 +31,7 @@ ForkEventTests.testEvents.none = [
         target: {
           title: "shangow/ransomware",
           url: "https://github.com/shangow/ransomware",
-          desc: "new repo",
+          desc: "new repository",
           preposition: "to",
           id: 338503682,
           content: undefined,
@@ -45,8 +45,8 @@ ForkEventTests.testEvents.none = [
           date: "February 13, 2021",
           actor: "shangow",
           verb: "forked",
-          subject: "a repo errodringer/ransomware",
-          target: "to new repo shangow/ransomware",
+          subject: "errodringer/ransomware",
+          target: "to new repository shangow/ransomware",
           parent: undefined,
           content: undefined,
         },
@@ -55,9 +55,9 @@ ForkEventTests.testEvents.none = [
           actor: "[shangow](https://github.com/shangow)",
           verb: "forked",
           subject:
-            "a repo [errodringer/ransomware](https://github.com/errodringer/ransomware)",
+            "[errodringer/ransomware](https://github.com/errodringer/ransomware)",
           target:
-            "to new repo [shangow/ransomware](https://github.com/shangow/ransomware)",
+            "to new repository [shangow/ransomware](https://github.com/shangow/ransomware)",
           parent: undefined,
           content: undefined,
         },
@@ -68,11 +68,11 @@ ForkEventTests.testEvents.none = [
         {
           plain: [
             ["February 13, 2021"],
-            "shangow forked a repo errodringer/ransomware to new repo shangow/ransomware",
+            "shangow forked repository errodringer/ransomware to new repository shangow/ransomware",
           ],
           md: [
             ["February 13, 2021"],
-            "[shangow](https://github.com/shangow) forked a repo [errodringer/ransomware](https://github.com/errodringer/ransomware) to new repo [shangow/ransomware](https://github.com/shangow/ransomware)",
+            "[shangow](https://github.com/shangow) forked repository [errodringer/ransomware](https://github.com/errodringer/ransomware) to new repository [shangow/ransomware](https://github.com/shangow/ransomware)",
           ],
         },
       ],
@@ -80,11 +80,11 @@ ForkEventTests.testEvents.none = [
         {
           plain: [
             ["February 13, 2021"],
-            "shangow forked a repo errodringer/ransomware to new repo shangow/ransomware",
+            "shangow forked repository errodringer/ransomware to new repository shangow/ransomware",
           ],
           md: [
             ["February 13, 2021"],
-            "[shangow](https://github.com/shangow) forked a repo [errodringer/ransomware](https://github.com/errodringer/ransomware) to new repo [shangow/ransomware](https://github.com/shangow/ransomware)",
+            "[shangow](https://github.com/shangow) forked repository [errodringer/ransomware](https://github.com/errodringer/ransomware) to new repository [shangow/ransomware](https://github.com/shangow/ransomware)",
           ],
         },
       ],

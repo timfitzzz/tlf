@@ -1,5 +1,5 @@
 import SectionsLayout from "../layouts/SectionsLayout"
-import MDXRenderer from "gatsby-mdx/mdx-renderer"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 import { ISectionEdge } from "../types"
 import { useTransitionState } from "gatsby-plugin-transition-link/hooks"
 import React from "react"
@@ -27,19 +27,17 @@ export default function CV({ location }: { location: WindowLocation }) {
                     title
                     path
                   }
-                  code {
-                    body
-                  }
+                  body
                 }
               }
             }
           }
         `}
-        render={data => (
+        render={(data) => (
           <MDXRenderer key={Math.random().toString()}>
             {data.allMdx.edges.filter((edge: ISectionEdge) => {
               return edge.node.frontmatter.title === "CV" ? true : false
-            })[0]?.node.code.body || ""}
+            })[0]?.node.body || ""}
           </MDXRenderer>
         )}
       />

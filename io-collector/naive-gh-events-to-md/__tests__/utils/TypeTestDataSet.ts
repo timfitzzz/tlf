@@ -1,5 +1,0 @@
-// class TypeTestDataSet {
-
-//   type: string;
-
-// }

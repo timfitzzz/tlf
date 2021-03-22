@@ -4,7 +4,7 @@ import { useTransitionState } from "gatsby-plugin-transition-link/hooks"
 // import { Link } from "gatsby"
 import React from "react"
 // import { Box, Flex } from "rebass/styled-components"
-import MDXRenderer from "gatsby-mdx/mdx-renderer"
+import MDXRenderer from "gatsby-plugin-mdx/mdx-renderer"
 import SectionsLayout from "./SectionsLayout"
 import styled from "styled-components"
 import { motion } from "framer-motion"
@@ -25,7 +25,7 @@ export default function BlogPage({ location, data }: IBlogPage) {
     mdx: {
       // id,
       // excerpt,
-      code: { body },
+      body,
       // fields: { route },
       frontmatter: { title /* date, description, tags  */ },
       // html,
@@ -70,9 +70,7 @@ export const pageQuery = graphql`
       id
       excerpt(pruneLength: 100)
       bodyText: excerpt
-      code {
-        body
-      }
+      body
       fields {
         route
       }
@@ -82,7 +80,6 @@ export const pageQuery = graphql`
         description
         tags
       }
-      html
     }
   }
 `

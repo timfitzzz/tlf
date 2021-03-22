@@ -13,12 +13,10 @@ export default function IO({ location }: { location: WindowLocation }) {
 
   const [visibleTags /* setVisibleTags */] = useState<string[]>([])
 
-  // console.log(process.env.GATSBY_SC_APIKEY)
-
   return (
     <StaticQuery
       query={graphql`
-        query BlogPostQuery {
+        query IOQuery {
           allMdx(filter: { fileAbsolutePath: { regex: "/content/io/" } }) {
             edges {
               node {
@@ -36,23 +34,21 @@ export default function IO({ location }: { location: WindowLocation }) {
                   description
                   tags
                 }
-                code {
-                  body
-                }
+                body
               }
             }
           }
         }
       `}
-      render={data => (
+      render={(data) => (
         <SectionsLayout
           current={current}
           sectionTitle={"io"}
           location={location}
-          tags={data.allMdx.edges.map(edge => edge.node.frontmatter.tags)}
+          tags={data.allMdx.edges.map((edge) => edge.node.frontmatter.tags)}
           visibleTags={visibleTags}
         >
-          {data.allMdx.edges.map(edge => (
+          {data.allMdx.edges.map((edge) => (
             <div key={edge.node.id + "brief"}>
               {/* <div>
                 <Link to={edge.node.fields.route}>
@@ -63,14 +59,11 @@ export default function IO({ location }: { location: WindowLocation }) {
                 {
                   {
                     soundcloud: (
-                      <SoundCloudPlayerWidget
-                        body={edge.node.code.body}
-                        {...edge.node.frontmatter}
-                      />
+                      <SoundCloudPlayerWidget {...edge.node.frontmatter} />
                     ),
                     github: (
                       <GitHubWidget
-                        body={edge.node.code.body}
+                        body={edge.node.body}
                         {...edge.node.frontmatter}
                       />
                     ),

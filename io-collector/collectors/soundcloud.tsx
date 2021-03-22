@@ -21,7 +21,7 @@ export interface IcollectSoundCloud {
 }
 
 export async function getSoundCloudUserId(userName: string, apiKey: string) {
-  const paramsSerializer = function(params: {
+  const paramsSerializer = function (params: {
     [key: string]: number | string
   }) {
     return qs.stringify(params, { encode: false })
@@ -105,7 +105,7 @@ export async function getSoundCloudUserTracksSince(
     if (newTracks.length === 0) {
       done = true
     } else {
-      newTracks.forEach(track => tracks.push(track))
+      newTracks.forEach((track) => tracks.push(track))
       // pageCount = pageCount + 1
       nextPageUrl = next_href
     }
@@ -125,14 +125,14 @@ export const getNewSoundCloudTracks = async (
   let newTracks: any[] = []
 
   await Promise.all(
-    usersToScrape.map(async user => {
+    usersToScrape.map(async (user) => {
       return await getSoundCloudUserTracksSince(user, apiKey, lastRecordDate)
 
       // userTracks.forEach(track => newTracks.push(track))
     })
-  ).then(userTracksArray =>
-    userTracksArray.forEach(userTracks =>
-      userTracks.forEach(track => newTracks.push(track))
+  ).then((userTracksArray) =>
+    userTracksArray.forEach((userTracks) =>
+      userTracks.forEach((track) => newTracks.push(track))
     )
   )
 
@@ -156,16 +156,16 @@ function generateTrackObject(
     source: "soundcloud",
     title,
     date: created_at,
-    description,
+    description: description ? description : "",
     URI: uri,
     tags: ["music", user.username, genre, "soundcloud"],
     // data: JSON.stringify(track),
-    body: [description],
+    body: [description ? description : ""],
   }
 }
 
 function writeNewRecords(tracks: SoundcloudTrackV2[], mdxFolder: string) {
-  tracks.forEach(track => {
+  tracks.forEach((track) => {
     const trackObject = generateTrackObject(track)
     const trackFile = generateIOMDXFileContents(trackObject)
 
@@ -191,7 +191,7 @@ export const collectSoundCloud = ({
   mdxFolder,
   ioRecordsList,
 }: IcollectSoundCloud) => {
-  getNewSoundCloudTracks(apiKey, usersToScrape, ioRecordsList).then(tracks =>
+  getNewSoundCloudTracks(apiKey, usersToScrape, ioRecordsList).then((tracks) =>
     writeNewRecords(tracks, mdxFolder)
   )
 }

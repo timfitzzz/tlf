@@ -9,7 +9,7 @@ export const MenuRootContainer = ({
 }: {
   location: Location<LocationState>
 }) => {
-  const { w, h } = WindowConfig.useContainer()
+  const { w, h } = WindowConfig.useContainer() as { h: number; w: number }
   // eslint-disable-next-line
 
   return (
@@ -26,9 +26,7 @@ export const MenuRootContainer = ({
                   title
                   path
                 }
-                code {
-                  body
-                }
+                body
               }
             }
           }
@@ -46,7 +44,7 @@ export const MenuRootContainer = ({
           }
         }
       `}
-      render={data => (
+      render={(data) => (
         <HeaderSlashCard
           headerImageUrl={data.allImageSharp.edges[0].node.resize.src}
           windowWidth={w}

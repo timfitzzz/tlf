@@ -6,9 +6,9 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-import { Boot } from "./src/Boot"
-import { Location } from "@reach/router"
-import React from 'react'
+// import { Boot } from "./src/Boot"
+// import { Location } from "@reach/router"
+// import React from 'react'
 
 // export const wrapRootElement = ({element}) => (
 //   <Location>

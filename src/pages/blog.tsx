@@ -23,21 +23,19 @@ export default function Blog({ location }: { location: WindowLocation }) {
                 frontmatter {
                   title
                 }
-                code {
-                  body
-                }
+                body
               }
             }
           }
         }
       `}
-      render={data => (
+      render={(data) => (
         <SectionsLayout
           current={current}
           sectionTitle={"blog"}
           location={location}
         >
-          {data.allMdx.edges.map(edge => (
+          {data.allMdx.edges.map((edge) => (
             <>
               <div>
                 <Link to={`/blog${edge.node.fields.route}`}>

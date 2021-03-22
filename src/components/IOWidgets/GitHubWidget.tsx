@@ -5,7 +5,7 @@ import {
   IOEntryContainer,
   IOItemHeader,
 } from "./IOCommon"
-import MDXRenderer from "gatsby-mdx/mdx-renderer"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 import GithubIcon from "../../../static/assets/media/github.svg"
 
 const GitHubWidgetBody = styled.div`

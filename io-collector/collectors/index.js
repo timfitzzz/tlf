@@ -1,2 +1,2 @@
-export * from './github'
+export * from './gh'
 export * from './soundcloud'

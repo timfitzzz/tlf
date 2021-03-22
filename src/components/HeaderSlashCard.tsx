@@ -185,7 +185,11 @@ const transitions = {
 const getMenuCardContainerVariants = (
   windowWidth: number,
   windowHeight: number
-): { expanded: TargetAndTransition; contracted: TargetAndTransition } => {
+): {
+  expanded: TargetAndTransition
+  contracted: TargetAndTransition
+  fadeIn: { opacity: [number, number] }
+} => {
   // function getWidthTween(percentageOfMargin) {
   //   if (windowWidth) {
   //     return MIN_WIDTH + (windowWidth - MIN_WIDTH) * percentageOfMargin
@@ -215,7 +219,11 @@ const getMenuCardContainerVariants = (
     },
   }
 
-  return variants
+  return variants as {
+    expanded: TargetAndTransition
+    contracted: TargetAndTransition
+    fadeIn: { opacity: [number, number] }
+  }
 }
 
 const MenuCardFadeContainer = styled(motion.div).attrs(() => ({
@@ -270,7 +278,7 @@ const MenuCard = styled(motion.div).attrs(() => ({
   variants: MenuCardVariants,
 }))`
   width: 100%;
-  background-color: ${p => p.theme.palette.darkBackground};
+  background-color: ${(p) => p.theme.palette.darkBackground};
   border-radius: 16px;
   display: flex;
   margin-left: auto;
@@ -402,7 +410,7 @@ const PortraitPhoto = styled(motion.img).attrs(() => ({
 }))<{ currentAnimate: string }>`
   mask-image: linear-gradient(
     to bottom,
-    ${p => p.theme.palette.darkBackground} 90%,
+    ${(p) => p.theme.palette.darkBackground} 90%,
     rgba(0, 0, 0, 0)
   );
   object-fit: cover;
@@ -561,7 +569,7 @@ interface TopNavLinkProps {
 
 const TopNavLink = styled(TransitionLink)<TopNavLinkProps>`
   text-decoration: none;
-  color: ${p => (p.$isCurrent ? p.theme.palette.highlightText : "white")};
+  color: ${(p) => (p.$isCurrent ? p.theme.palette.highlightText : "white")};
   margin: auto 8px auto 8px;
   padding: 8px 16px;
   height: 20px;
@@ -717,25 +725,25 @@ export const HeaderSlashCard = ({
                     })}
                   </AnimatePresence>
                   <TopNavLink
-                    to={`/blog`}
+                    to={`/io`}
                     $isCurrent={
-                      currentPath.indexOf(`/blog`) !== -1 ? true : undefined
+                      currentPath.indexOf(`/io`) !== -1 ? true : undefined
                     }
                     entry={{
                       length: TRANSITION_DURATION * 0.5,
                       state: {
-                        initial: getNextAnimate("/blog"),
+                        initial: getNextAnimate("/io"),
                       },
                     }}
                     exit={{
                       length: TRANSITION_DURATION * 0.5,
                       state: {
                         initial: getCurrentInitial(),
-                        animate: getExitAnimate("/blog"),
+                        animate: getExitAnimate("/io"),
                       },
                     }}
                   >
-                    Blog
+                    I/O
                   </TopNavLink>
                 </MenuPositionContainer>
               </MenuContainer>

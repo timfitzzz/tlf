@@ -59,10 +59,10 @@ function createNode(
 
   if (idx < 0) {
     tree.push({
-      name,
+      name: name as string,
       // TODO: Pass in transformer callback
       formattedName: data.title,
-      path: fullPath,
+      path: fullPath as string,
       data,
       children: [],
     })

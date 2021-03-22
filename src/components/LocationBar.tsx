@@ -55,7 +55,7 @@ export const LocationBarContainer = styled(motion.div).attrs(() => ({
   },
 }))<{ windowWidth: number }>`
   margin-top: 24px;
-  /* width: ${p => (p.windowWidth ? `${p.windowWidth - 75}px` : "100%")}; */
+  /* width: ${(p) => (p.windowWidth ? `${p.windowWidth - 75}px` : "100%")}; */
   display: flex;
   flex-direction: column;
   margin-left: auto;
@@ -87,7 +87,7 @@ export const LocationBarBody = styled(motion.div).attrs(() => ({
   flex-direction: row;
   /* width: 100%; */
   height: 100%;
-  background-color: ${p => p.theme.palette.lightBackground};
+  background-color: ${(p) => p.theme.palette.lightBackground};
   display: flex;
   margin-top: auto;
   margin-bottom: auto;
@@ -130,7 +130,7 @@ export const LocationBar = ({
 // tags,
 // visibleTags,
 ILocationBar) => {
-  const { w } = WindowConfig.useContainer()
+  const { w } = WindowConfig.useContainer() as { h: number; w: number }
 
   const [open /* setOpen */] = useState<boolean>(false)
 

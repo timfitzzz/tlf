@@ -36,7 +36,7 @@ export function useWindowConfig() {
   useEffect(() => {
     if (window) {
       window.addEventListener("resize", triggerResize)
-      setDimensions({ h: window.innerHeight, w: getAdjustedWidth() })
+      setDimensions({ h: window.innerHeight, w: getAdjustedWidth() as number })
       setResize(false)
     }
 

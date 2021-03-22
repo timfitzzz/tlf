@@ -11,11 +11,11 @@ export const BodyContainerDiv = styled.div<{ maxWidth: number }>`
   align-items: top;
   height: 100%;
   width: 100%;
-  max-width: ${p => (p.maxWidth ? p.maxWidth : "1000")}px;
+  max-width: ${(p) => (p.maxWidth ? p.maxWidth : "1000")}px;
 `
 
 export const BodyContainer = ({ children }: { children: any }) => {
-  const { w } = WindowConfig.useContainer()
+  const { w } = WindowConfig.useContainer() as { h: number; w: number }
 
   return <BodyContainerDiv maxWidth={w}>{children}</BodyContainerDiv>
 }

@@ -31,18 +31,20 @@ export class NavState extends Container<State> {
     if (typeof window !== "undefined") {
       const expandedNavItems = ["/" + window.location.pathname.split("/")[1]]
       this.state = {
+        // @ts-ignore
         expandedNavItems,
       }
     }
   }
 
-  toggleNavItem = navItem => {
+  toggleNavItem = (navItem) => {
     const { expandedNavItems } = this.state
     const hasNavItem = includes(expandedNavItems, navItem)
 
     const updated = hasNavItem
       ? without(expandedNavItems, navItem)
-      : expandedNavItems.concat([navItem])
+      : // @ts-ignore
+        expandedNavItems.concat([navItem])
 
     this.setState({
       expandedNavItems: updated,

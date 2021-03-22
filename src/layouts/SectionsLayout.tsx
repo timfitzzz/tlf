@@ -31,7 +31,7 @@ const ContentContainer = styled(motion.custom(Box)).attrs(() => ({
   // width: 100%;
   height: 100%;
   display: block;
-  color: ${p => p.theme.palette.darkBackground};
+  color: ${(p) => p.theme.palette.darkBackground};
 `
 
 const InnerBodyContainerVariants = {
@@ -131,7 +131,7 @@ export default ({
     <>
       {location.pathname !== "/" && (
         <LocationBar
-          path={[sectionTitle, title]}
+          path={[sectionTitle, title || ""]}
           initial={current && current.state ? "fadedOut" : "fadedIn"}
           animate={"fadedIn"}
           location={location}

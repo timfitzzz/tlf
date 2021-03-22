@@ -48,30 +48,37 @@ export default function IO({ location }: { location: WindowLocation }) {
           tags={data.allMdx.edges.map((edge) => edge.node.frontmatter.tags)}
           visibleTags={visibleTags}
         >
-          {data.allMdx.edges.map((edge) => (
-            <div key={edge.node.id + "brief"}>
-              {/* <div>
+          {data.allMdx.edges
+            .sort((edgeA, edgeB) => {
+              return (
+                new Date(edgeB.node.frontmatter.date).getTime() -
+                new Date(edgeA.node.frontmatter.date).getTime()
+              )
+            })
+            .map((edge) => (
+              <div key={edge.node.id + "brief"}>
+                {/* <div>
                 <Link to={edge.node.fields.route}>
                   {edge.node.frontmatter.title}
                 </Link>
               </div> */}
-              <div style={{ marginBottom: "24px" }}>
-                {
+                <div style={{ marginBottom: "24px" }}>
                   {
-                    soundcloud: (
-                      <SoundCloudPlayerWidget {...edge.node.frontmatter} />
-                    ),
-                    github: (
-                      <GitHubWidget
-                        body={edge.node.body}
-                        {...edge.node.frontmatter}
-                      />
-                    ),
-                  }[edge.node.frontmatter.templateKey]
-                }
+                    {
+                      soundcloud: (
+                        <SoundCloudPlayerWidget {...edge.node.frontmatter} />
+                      ),
+                      github: (
+                        <GitHubWidget
+                          body={edge.node.body}
+                          {...edge.node.frontmatter}
+                        />
+                      ),
+                    }[edge.node.frontmatter.templateKey]
+                  }
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </SectionsLayout>
       )}
     />

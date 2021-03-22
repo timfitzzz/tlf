@@ -7,6 +7,7 @@ import {
 } from "./IOCommon"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import GithubIcon from "../../../static/assets/media/github.svg"
+import { DateTime } from "luxon"
 
 const GitHubWidgetBody = styled.div`
   font-size: 12px;
@@ -53,10 +54,12 @@ const GitHubWidgetBody = styled.div`
 `
 
 export const GitHubWidget = ({ date, title, body, tags }) => {
+  const dateString = DateTime.fromISO(date).toLocaleString(DateTime.DATE_HUGE)
+
   return (
     <IOEntryContainer>
       <IOItemHeader
-        date={date}
+        date={dateString}
         title={title}
         tags={tags}
         source={"github"}

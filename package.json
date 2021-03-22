@@ -69,7 +69,7 @@
     "eslint-plugin-react": "^7.12.4",
     "gatsby-plugin-typescript": "^2.0.3",
     "graphql-typescript-definitions": "^0.15.0",
-    "husky": "4",
+    "husky": "^4.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "jest-html-reporter": "^3.3.0",

@@ -1,10 +1,11 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { PlayButton, Progress, Timer } from "react-soundplayer/components"
 import { withSoundCloudAudio } from "react-soundplayer/addons"
+import ReactMarkdown from "react-markdown"
+import TurndownService from "turndown"
 import { DateTime } from "luxon"
 import {
-  IODescription,
   IODescriptionContainer,
   IOEntryContainer,
   IOItemHeader,
@@ -25,7 +26,7 @@ import SoundCloudIcon from "../../../static/assets/media/soundcloud.svg"
 // `
 
 export const CustomPlayerArtContainer = styled.div`
-  width: 100%;
+  min-width: 100%;
   /* height: 330px; */
   display: inherit;
   border: 2px solid lightgray;
@@ -35,6 +36,35 @@ export const CustomPlayerArtContainer = styled.div`
   > img {
     width: 100%;
   }
+`
+
+export const CustomPlayerColumnContainer = styled.div`
+  @media screen and (max-width: 560px) {
+    min-width: 100%;
+  }
+
+  @media screen and (min-width: 561px) {
+    &:first-of-type {
+      padding-right: 8px;
+      width: auto;
+      min-width: 53%;
+      max-width: 53%;
+    }
+
+    &:last-of-type {
+      width: 45%;
+    }
+  }
+`
+
+const SoundCloudPlayerWidgetContainer = styled(IOEntryContainer)`
+  /* width: 50%;
+  max-width: 330px;
+  min-width: 250px;
+  margin-left: auto;
+  margin-right: auto; */
+  flex-direction: row;
+  flex-wrap: wrap;
 `
 
 export const CustomPlayerDetailsContainer = styled.div`
@@ -54,7 +84,7 @@ export const CustomTimer = styled(Timer)`
   margin-left: 4px;
 `
 
-export const CustomPlayButton = styled(PlayButton).attrs(p => ({
+export const CustomPlayButton = styled(PlayButton).attrs((p) => ({
   backgroundImgUrl: p.backgroundImgUrl,
 }))<{
   backgroundImgUrl: string
@@ -69,7 +99,7 @@ export const CustomPlayButton = styled(PlayButton).attrs(p => ({
     width: 10px;
     margin: 0px;
   }
-  /* background-image: url(${p => p.backgroundImgUrl}); */
+  /* background-image: url(${(p) => p.backgroundImgUrl}); */
 `
 
 export const PlayerLabel = styled.div`
@@ -109,16 +139,15 @@ export const CustomProgress = styled(Progress)`
   border-radius: 3px;
   margin-bottom: 4px;
   margin-top: 0px;
-  background-color: ${p => p.theme.palette.darkBackground};
-  background-image: url(${p => p.waveformUrl});
+  background-color: ${(p) => p.theme.palette.darkBackground};
+  background-image: url(${(p) => p.waveformUrl});
   background-size: 100% 100%;
   width: 100%;
   height: 50px;
   overflow: hidden;
   cursor: pointer;
 
-
-/* 
+  /* 
   ::before {
     content: "";
     position: absolute
@@ -126,15 +155,19 @@ export const CustomProgress = styled(Progress)`
 
   > div {
     border-radius: 3px 0 0 3px;
-    /* background-image: url(${p => p.waveformUrl});
+    /* background-image: url(${(p) => p.waveformUrl});
     background-color: 'orange'; */
-    background-color: ${p => p.theme.palette.lightBackground}88;
+    background-color: ${(p) => p.theme.palette.lightBackground}88;
     height: 100%;
     transition: width 0.2s ease-in;
     cursor: pointer;
-
   }
 `
+
+const SoundCloudPlayerContainer = styled.div`
+  margin-top: 8px;
+`
+
 export const SoundCloudPlayer = withSoundCloudAudio(
   ({ track, currentTime, duration, ...props }) => {
     // console.log(track)
@@ -156,7 +189,7 @@ export const SoundCloudPlayer = withSoundCloudAudio(
     }
 
     return (
-      <IOEntryContainer>
+      <SoundCloudPlayerContainer>
         <CustomPlayerArtContainer>
           <img src={getMainArtworkUrl()} />
         </CustomPlayerArtContainer>
@@ -198,18 +231,10 @@ export const SoundCloudPlayer = withSoundCloudAudio(
             </ArtistContainer>
           </TopSectionContainer> */}
         </CustomPlayerDetailsContainer>
-      </IOEntryContainer>
+      </SoundCloudPlayerContainer>
     )
   }
 )
-
-const SoundCloudPlayerWidgetContainer = styled.div`
-  width: 50%;
-  max-width: 330px;
-  min-width: 250px;
-  margin-left: auto;
-  margin-right: auto;
-`
 
 export const SoundCloudPlayerWidget = ({
   URI,
@@ -224,23 +249,35 @@ export const SoundCloudPlayerWidget = ({
     "yyyy/MM/dd HH:mm:ss ZZZ"
   ).toLocaleString(DateTime.DATE_HUGE)
 
+  let [mdDesc, setMdDesc] = useState<string | null>(null)
+
+  console.log(mdDesc)
+  useEffect(() => {
+    const turndownService = new TurndownService()
+    setMdDesc(turndownService.turndown(description))
+  }, [description])
+
   return (
     <SoundCloudPlayerWidgetContainer>
-      <IOItemHeader
-        date={dateString}
-        title={title}
-        tags={tags}
-        source={source}
-        icon={SoundCloudIcon}
-      />
-      <SoundCloudPlayer
-        resolveUrl={URI}
-        clientId={process.env.GATSBY_SC_APIKEY}
-        date={date}
-      />
-      <IODescriptionContainer>
-        <IODescription>{description}</IODescription>
-      </IODescriptionContainer>
+      <CustomPlayerColumnContainer>
+        <IOItemHeader
+          date={dateString}
+          title={title}
+          tags={tags}
+          source={source}
+          icon={SoundCloudIcon}
+        />
+        <IODescriptionContainer>
+          {mdDesc && <ReactMarkdown>{mdDesc || ""}</ReactMarkdown>}
+        </IODescriptionContainer>
+      </CustomPlayerColumnContainer>
+      <CustomPlayerColumnContainer>
+        <SoundCloudPlayer
+          resolveUrl={URI}
+          clientId={process.env.GATSBY_SC_APIKEY}
+          date={date}
+        />
+      </CustomPlayerColumnContainer>
     </SoundCloudPlayerWidgetContainer>
   )
 }

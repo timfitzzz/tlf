@@ -62,7 +62,7 @@ export default function IO({ location }: { location: WindowLocation }) {
                   {edge.node.frontmatter.title}
                 </Link>
               </div> */}
-                <div style={{ marginBottom: "24px" }}>
+                <>
                   {
                     {
                       soundcloud: (
@@ -76,7 +76,7 @@ export default function IO({ location }: { location: WindowLocation }) {
                       ),
                     }[edge.node.frontmatter.templateKey]
                   }
-                </div>
+                </>
               </div>
             ))}
         </SectionsLayout>

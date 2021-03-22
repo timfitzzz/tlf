@@ -1,3 +1,4 @@
+// prettier-ignore
 import React from "react"
 import styled from "styled-components"
 import {
@@ -8,45 +9,98 @@ import {
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import GithubIcon from "../../../static/assets/media/github.svg"
 import { DateTime } from "luxon"
+//prettier-ignore
+
+const NaiveMDXRenderer = styled(MDXRenderer)`
+
+
+`
 
 const GitHubWidgetBody = styled.div`
-  font-size: 12px;
+  font-size: 12px !important;
   overflow: wrap;
-  div {
-    ul {
+  display: flex;
+  flex-direction: column;
+
+  a {
+    font-weight: 500;
+  }
+
+  p {
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-block-start: 4px;
+    margin-block-end: 4px;
+  }
+
+  ul {
+    margin-top: 4px;
+    padding-left: 14px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    li {
       padding-left: 5px;
+      padding-bottom: 6px;
+      line-height: 18px;
 
-      li {
-        padding-left: 5px;
+      blockquote {
+        margin: 5px;
 
-        blockquote {
-          margin: 5px;
+        img {
+          width: 30%;
+          margin-right: 8px;
+          border: 1px solid lightgray;
+        }
+      }
+      img {
+        width: 30%;
+        margin-right: 8px;
+        border: 1px solid lightgray;
+        float: left;
+      }
 
-          p {
-            font-size: 12px;
-            /* padding-left: 22px;
-            text-indent: -22px; */
+      pre {
+        font-size: 12px;
+        margin-left: 8px;
+        white-space: pre-wrap; /* css-3 */
+        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+        white-space: -pre-wrap; /* Opera 4-6 */
+        white-space: -o-pre-wrap; /* Opera 7 */
+        word-wrap: break-word; /* Internet Explorer 5.5+ */
+      }
 
-            img {
-              width: 40%;
-              margin-right: 8px;
-              border: 1px solid lightgray;
-            }
-          }
+      p {
+        font-size: 12px !important;
+        &:first-of-type {
+          margin-top: 4px;
+          margin-bottom: 0px;
+          margin-left: 0px;
         }
 
-        pre {
-          font-size: 10px;
-          margin-left: 8px;
-          white-space: pre-wrap; /* css-3 */
-          white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-          white-space: -pre-wrap; /* Opera 4-6 */
-          white-space: -o-pre-wrap; /* Opera 7 */
-          word-wrap: break-word; /* Internet Explorer 5.5+ */
+        &:nth-of-type(even) {
+          margin-top: 4px;
+          margin-left: 4px;
         }
 
-        p {
-          font-size: 12px;
+        &:nth-of-type(odd) {
+          margin-top: 4px;
+          margin-left: 4px;
+        }
+
+        &:last-of-type {
+          margin-bottom: 12px;
+          margin-top: 4px;
+        }
+
+        &:only-of-type {
+          margin-top: 0px;
+          margin-bottom: 0px;
+        }
+
+        code {
+          display: block;
+          margin: 8px;
         }
       }
     }
@@ -67,7 +121,7 @@ export const GitHubWidget = ({ date, title, body, tags }) => {
       />
       <IODescriptionContainer>
         <GitHubWidgetBody>
-          <MDXRenderer>{body}</MDXRenderer>
+          <NaiveMDXRenderer>{body}</NaiveMDXRenderer>
         </GitHubWidgetBody>
       </IODescriptionContainer>
     </IOEntryContainer>

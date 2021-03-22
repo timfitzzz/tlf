@@ -89,7 +89,7 @@ function generateGitHubWeekFile(renderedSet: RenderedEventCollectionSet) {
       templateKey: "github",
       source: "github",
       title: generateTitle(),
-      date: DateTime.fromJSDate(new Date(renderedSet.startDate)).toISO(),
+      date: DateTime.fromJSDate(new Date(renderedSet.endDate)).toISO(),
       description: "Week of GitHub Activity",
       URI: "https://github.com/timfitzzz",
       tags: ["GitHub"],

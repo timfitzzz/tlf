@@ -128,7 +128,7 @@ export const LayoutComponents = {
     font-size: 20px;
   `,
   p: styled.p`
-    font-size: 16px;
+    
   `,
   h2compact: styled.h2`
     font-size: 15px;

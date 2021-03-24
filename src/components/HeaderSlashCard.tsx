@@ -456,22 +456,32 @@ const Name = styled.h1`
   color: white;
 `
 
-const TopNavNameContainer = styled(motion.div).attrs(() => ({
-  variants: {
-    expanded: {
-      paddingTop: 0,
-      opacity: [null, 0, 0],
-      transition: transitions.TopNavNameContainer.expanded,
-      width: 0,
+const TopNavNameContainer = styled(motion.div).attrs(
+  (p: { windowWidth: number }) => ({
+    variants: {
+      expanded: {
+        paddingTop: 0,
+        opacity: [null, 0, 0],
+        transition: transitions.TopNavNameContainer.expanded,
+        width: 0,
+      },
+      contracted: {
+        paddingTop: 0,
+        opacity: [null, 0, 1],
+        transition: transitions.TopNavNameContainer.contracted,
+        width: 120,
+      },
     },
-    contracted: {
-      paddingTop: 0,
-      opacity: [null, 0, 1],
-      transition: transitions.TopNavNameContainer.contracted,
-      width: 120,
-    },
-  },
-}))`
+    windowWidth: p.windowWidth,
+  })
+)`
+  ${(p) =>
+    p.windowWidth && p.windowWidth < 440
+      ? `
+      width: 0px!important;
+    `
+      : `
+    `}
   margin-left: 16px;
   margin-right: auto;
   display: flex;
@@ -479,12 +489,21 @@ const TopNavNameContainer = styled(motion.div).attrs(() => ({
   justify-items: center;
 `
 
-const TopNavName = styled.div`
+const TopNavName = styled.div<{ windowWidth: number }>`
   margin-top: auto;
   margin-bottom: auto;
   font-size: 16px;
   overflow: visible;
   color: white;
+
+  ${(p) =>
+    p.windowWidth && p.windowWidth < 440
+      ? `
+    display: none;
+  `
+      : `
+    display: inherit;
+  `}
 `
 
 const DescH2 = motion.custom(LayoutComponents.h2compact)
@@ -849,8 +868,10 @@ export const HeaderSlashCard = ({
                 </PortraitPhotoColumn>
                 <AnimatePresence>
                   {animate === "contracted" && (
-                    <TopNavNameContainer>
-                      <TopNavName>Tim L. Fitzgerald</TopNavName>
+                    <TopNavNameContainer windowWidth={windowWidth}>
+                      <TopNavName windowWidth={windowWidth}>
+                        Tim L. Fitzgerald
+                      </TopNavName>
                     </TopNavNameContainer>
                   )}
                 </AnimatePresence>

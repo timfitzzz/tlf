@@ -82,9 +82,11 @@ export const Tag = ({
 export const IOTag = styled(Tag)<{ selected: boolean }>`
   font-size: 10px;
 
-  padding: 4px;
+  padding: 2px 4px 2px 4px;
   height: 12px;
   border-radius: 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 
   /* background-color: ${(p) =>
     p.theme.tagColors[p.tag.toLowerCase()]

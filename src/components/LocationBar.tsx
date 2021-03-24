@@ -41,22 +41,24 @@ export const LocationBarFadeContainer = styled(motion.div).attrs(() => ({
       transition: transitions.LocationBarFadeContainer.fadedIn,
     },
   },
-}))``
+}))`
+  display: flex;
+`
 
 export const LocationBarContainer = styled(motion.div).attrs(() => ({
-  variants: {
-    open: {
-      transition: transitions.LocationBarContainer.open,
-      height: 64,
-    },
-    closed: {
-      transition: transitions.LocationBarContainer.closed,
-      height: 32,
-    },
-  },
+  // variants: {
+  //   open: {
+  //     transition: transitions.LocationBarContainer.open,
+  //     height: 64,
+  //   },
+  //   closed: {
+  //     transition: transitions.LocationBarContainer.closed,
+  //     height: 32,
+  //   },
+  // },
 }))<{ windowWidth: number }>`
-  margin-top: 24px;
-  /* width: ${(p) => (p.windowWidth ? `${p.windowWidth - 75}px` : "100%")}; */
+  margin-top: 8px;
+  max-width: ${(p) => (p.windowWidth ? `${p.windowWidth - 16}px` : "100%")};
   display: flex;
   flex-direction: column;
   margin-left: auto;
@@ -68,41 +70,62 @@ export const LocationBarContainer = styled(motion.div).attrs(() => ({
 `
 
 export const LocationBarBody = styled(motion.div).attrs(() => ({
-  variants: {
-    open: {
-      transition: transitions.LocationBarBody.open,
-      borderTopLeftRadius: "16px",
-      borderBottomLeftRadius: "16px",
-      borderTopRightRadius: "16px",
-      borderBottomRightRadius: "16px",
-    },
-    closed: {
-      transition: transitions.LocationBarBody.closed,
-      borderTopLeftRadius: "16px",
-      borderBottomLeftRadius: "16px",
-      borderTopRightRadius: "16px",
-      borderBottomRightRadius: "16px",
-    },
-  },
+  // variants: {
+  //   open: {
+  //     transition: transitions.LocationBarBody.open,
+  //     borderTopLeftRadius: "16px",
+  //     borderBottomLeftRadius: "16px",
+  //     borderTopRightRadius: "16px",
+  //     borderBottomRightRadius: "16px",
+  //   },
+  //   closed: {
+  //     transition: transitions.LocationBarBody.closed,
+  //     borderTopLeftRadius: "16px",
+  //     borderBottomLeftRadius: "16px",
+  //     borderTopRightRadius: "16px",
+  //     borderBottomRightRadius: "16px",
+  //   },
+  // },
 }))`
   flex-direction: row;
+  flex-wrap: no-wrap;
   /* width: 100%; */
   height: 100%;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+
   background-color: ${(p) => p.theme.palette.lightBackground};
   display: flex;
   margin-top: auto;
   margin-bottom: auto;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   padding-left: 16px;
   padding-right: 16px;
   box-sizing: border-box;
-  justify-content: space-evenly;
+  justify-content: left;
+`
+
+export const LocationBarSectionsContainer = styled.div`
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin-left: 0px;
+  display: flex;
   > div {
     &:last-of-type {
-      margin-right: 0px;
+      padding-right: 0px;
     }
   }
+`
+
+export const LocationBarSectionContainer = styled.div`
+  display: flex;
+  flex-wrap: no-wrap;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-left: 0;
 `
 
 export const LocationBarPathContainer = styled(motion.div).attrs(() => ({}))`
@@ -110,8 +133,10 @@ export const LocationBarPathContainer = styled(motion.div).attrs(() => ({}))`
   font-size: 14px;
   margin-top: auto;
   margin-bottom: auto;
+  margin-left: 0;
   height: fit-content;
-  margin-right: 16px;
+  padding-right: 16px;
+  margin-right: 0;
 `
 
 export interface ILocationBar {
@@ -132,7 +157,7 @@ const LocationBarTagMenu = styled.div`
 
 const LocationBarSourceMenu = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: no-wrap;
 `
 
 const LocationBarTypeTitle = styled.div`
@@ -143,15 +168,15 @@ const LocationBarTypeTitle = styled.div`
   margin-right: 8px;
 `
 
-const LocationBarVerticalDivider = styled.div`
-  height: 20px;
-  width: 2px;
-  background-color: white;
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-left: 8px;
-  margin-right: 16px;
-`
+// const LocationBarVerticalDivider = styled.div`
+//   height: 20px;
+//   width: 2px;
+//   background-color: white;
+//   margin-top: auto;
+//   margin-bottom: auto;
+//   margin-left: 8px;
+//   margin-right: 16px;
+// `
 
 export const LocationBar = ({
   path,
@@ -180,55 +205,64 @@ export const LocationBar = ({
       <LocationBarContainer windowWidth={w} animate={open ? "open" : "closed"}>
         <LocationBarBody animate={open ? "open" : "closed"}>
           <LocationBarPathContainer>{path}</LocationBarPathContainer>
-          {sources && (
-            <LocationBarSourceMenu>
+          <LocationBarSectionsContainer>
+            <LocationBarSectionContainer>
               <LocationBarTypeTitle>sources</LocationBarTypeTitle>
-              {sources
-                .reduce((arr, source): string[] => {
-                  if (source && arr.indexOf(source) === -1) {
-                    arr.push(source)
-                    return arr
-                  } else {
-                    return arr
-                  }
-                }, [] as string[])
-                .map((source) => (
-                  <SelectableSource
-                    source={source}
-                    selected={isSelected("source", source)}
-                    selectSource={
-                      toggleFilter
-                        ? () => toggleFilter("source", source)
-                        : () => {}
-                    }
-                  />
-                ))}
-            </LocationBarSourceMenu>
-          )}
-          {sources && tags && <LocationBarVerticalDivider />}
-          {tags && (
-            <LocationBarTagMenu>
+              {sources && (
+                <LocationBarSourceMenu>
+                  {sources
+                    .reduce((arr, source): string[] => {
+                      if (source && arr.indexOf(source) === -1) {
+                        arr.push(source)
+                        return arr
+                      } else {
+                        return arr
+                      }
+                    }, [] as string[])
+                    .map((source) => (
+                      <SelectableSource
+                        source={source}
+                        selected={isSelected("source", source)}
+                        selectSource={
+                          toggleFilter
+                            ? () => toggleFilter("source", source)
+                            : () => {}
+                        }
+                      />
+                    ))}
+                </LocationBarSourceMenu>
+              )}
+            </LocationBarSectionContainer>
+
+            {/* {sources && tags && <LocationBarVerticalDivider />} */}
+            <LocationBarSectionContainer>
               <LocationBarTypeTitle>tags</LocationBarTypeTitle>
-              {tags
-                .reduce((arr, tag): string[] => {
-                  if (tag && arr.indexOf(tag) === -1) {
-                    arr.push(tag)
-                    return arr
-                  } else {
-                    return arr
-                  }
-                }, [] as string[])
-                .map((tag) => (
-                  <SelectableTag
-                    tagName={tag}
-                    selected={isSelected("tag", tag)}
-                    selectTag={
-                      toggleFilter ? () => toggleFilter("tag", tag) : () => {}
-                    }
-                  ></SelectableTag>
-                ))}
-            </LocationBarTagMenu>
-          )}
+              {tags && (
+                <LocationBarTagMenu>
+                  {tags
+                    .reduce((arr, tag): string[] => {
+                      if (tag && arr.indexOf(tag) === -1) {
+                        arr.push(tag)
+                        return arr
+                      } else {
+                        return arr
+                      }
+                    }, [] as string[])
+                    .map((tag) => (
+                      <SelectableTag
+                        tagName={tag}
+                        selected={isSelected("tag", tag)}
+                        selectTag={
+                          toggleFilter
+                            ? () => toggleFilter("tag", tag)
+                            : () => {}
+                        }
+                      ></SelectableTag>
+                    ))}
+                </LocationBarTagMenu>
+              )}
+            </LocationBarSectionContainer>
+          </LocationBarSectionsContainer>
         </LocationBarBody>
       </LocationBarContainer>
     </LocationBarFadeContainer>

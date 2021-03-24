@@ -133,29 +133,55 @@ export default ({
   })
 
   function toggleFilter(type: "tag" | "source", value: string): void {
+    let thisType = type === "tag" ? "tags" : "sources"
+    let otherType = type === "tag" ? "sources" : "tags"
     console.log(`toggling ${type} filter for ${value}`)
     console.log(
       filters,
-      filters ? filters[type + "s"] : "no filters set",
+      filters ? filters[thisType] : "no filters set",
       setFilters
     )
-    if (filters && filters[type + "s"] && setFilters) {
-      let valIndex = filters[type + "s"].indexOf(value)
-      console.log("found index ", valIndex)
-      if (
-        valIndex !== -1 &&
-        filters[type + "s"].length === 1 &&
-        filters[type == "source" ? "tags" : "sources"].length === 0
-      ) {
-        console.log("found only this filter set, setting to null now")
-        setFilters(null)
+    if (filters && filters[thisType] && setFilters) {
+      let valIndex = filters[thisType].indexOf(value)
+      if (valIndex !== -1) {
+        console.log("removing filter")
+        if (filters[thisType].length === 1 && filters[otherType].length === 0) {
+          console.log(
+            `found filter ${thisType} length is 1, other is 0, setting null`
+          )
+          setFilters(null)
+        } else if (filters[thisType].length === metaTypes[thisType].length) {
+          console.log(
+            `found filter ${thisType} length is same as known metaType length`
+          )
+          if (filters[otherType].length === 0) {
+            console.log(
+              "there are no other filters in the other type, so setting null"
+            )
+            setFilters(null)
+          } else {
+            console.log(
+              "there are other filters in the other type, so setting this type to 0 length"
+            )
+            setFilters({
+              ...filters,
+              [thisType]: [],
+            })
+          }
+        } else {
+          setFilters({
+            ...filters,
+            [thisType]: filters[thisType].filter((val) => val !== value),
+          })
+        }
       } else {
+        console.log("adding filter")
         setFilters({
           ...filters,
-          [type + "s"]:
+          [thisType]:
             valIndex === -1
-              ? [...filters[type + "s"], value]
-              : filters[type + "s"].filter((val) => val !== value),
+              ? [...filters[thisType], value]
+              : filters[thisType].filter((val) => val !== value),
         })
       }
     } else if ((setFilters && type === "source") || "tag") {

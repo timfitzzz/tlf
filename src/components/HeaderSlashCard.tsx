@@ -476,7 +476,7 @@ const TopNavNameContainer = styled(motion.div).attrs(
   })
 )`
   ${(p) =>
-    p.windowWidth && p.windowWidth < 440
+    p.windowWidth && p.windowWidth < 360
       ? `
       width: 0px!important;
     `

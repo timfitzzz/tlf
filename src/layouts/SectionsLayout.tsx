@@ -1,10 +1,11 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, useState } from "react"
 import { Box } from "rebass/styled-components"
 import styled from "styled-components"
 import { TRANSITION_DURATION } from "../Theme"
 import { WindowLocation } from "@reach/router"
 import { AnimatePresence, motion } from "framer-motion"
 import { LocationBar } from "components/LocationBar"
+import { IOQueryData } from "pages/io"
 
 const ContentContainerVariants = {
   expanded: {
@@ -23,6 +24,10 @@ const ContentContainerVariants = {
   },
 }
 
+const CustomAnimatePresence = styled(AnimatePresence)`
+  overflow: display;
+`
+
 const ContentContainer = styled(motion.custom(Box)).attrs(() => ({
   variants: ContentContainerVariants,
 }))`
@@ -31,6 +36,7 @@ const ContentContainer = styled(motion.custom(Box)).attrs(() => ({
   // width: 100%;
   height: 100%;
   display: block;
+  overflow: display;
   color: ${(p) => p.theme.palette.darkBackground};
 `
 
@@ -85,16 +91,20 @@ export default ({
   current,
   title,
   children,
-  tags,
-  visibleTags,
+  data,
+  filters,
+  setFilters,
 }: {
   sectionTitle: string
   current: any
   location: WindowLocation
   title?: string
   children?: ReactNode[] | ReactNode
-  tags?: string[]
-  visibleTags?: string[]
+  data?: IOQueryData
+  // tags?: string[]
+  // sources?: string[]
+  filters?: { tags: string[]; sources: string[] }
+  setFilters?: (state: { tags: string[]; sources: string[] } | null) => void
 }) => {
   const animate =
     current && current.state && current.state.animate
@@ -106,26 +116,55 @@ export default ({
       ? current.state.initial
       : null
 
-  // const allMdxQuery = graphql`
-  //   query MainSectionsQuery {
-  //     allMdx(filter: { fileAbsolutePath: { regex: "/content/mdx/" } }) {
-  //       edges {
-  //         node {
-  //           fields {
-  //             route
-  //           }
-  //           frontmatter {
-  //             title
-  //             path
-  //           }
-  //           code {
-  //             body
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `
+  const getTags = (edges: IOQueryData["allMdx"]["edges"]): string[] =>
+    edges
+      .map((edge) => edge.node.frontmatter.tags)
+      .reduce((acc, tags) => [...acc, ...tags], [])
+
+  const getSources = (edges: IOQueryData["allMdx"]["edges"]): string[] =>
+    edges.map((edge) => edge.node.frontmatter.source)
+
+  const [metaTypes, _setMetaTypes] = useState<{
+    tags: string[]
+    sources: string[]
+  }>({
+    tags: data ? getTags(data.allMdx.edges) : [],
+    sources: data ? getSources(data.allMdx.edges) : [],
+  })
+
+  function toggleFilter(type: "tag" | "source", value: string): void {
+    console.log(`toggling ${type} filter for ${value}`)
+    console.log(
+      filters,
+      filters ? filters[type + "s"] : "no filters set",
+      setFilters
+    )
+    if (filters && filters[type + "s"] && setFilters) {
+      let valIndex = filters[type + "s"].indexOf(value)
+      console.log("found index ", valIndex)
+      if (
+        valIndex !== -1 &&
+        filters[type + "s"].length === 1 &&
+        filters[type == "source" ? "tags" : "sources"].length === 0
+      ) {
+        console.log("found only this filter set, setting to null now")
+        setFilters(null)
+      } else {
+        setFilters({
+          ...filters,
+          [type + "s"]:
+            valIndex === -1
+              ? [...filters[type + "s"], value]
+              : filters[type + "s"].filter((val) => val !== value),
+        })
+      }
+    } else if ((setFilters && type === "source") || "tag") {
+      setFilters!({
+        sources: type === "source" ? [value] : [],
+        tags: type === "source" ? [] : [value],
+      })
+    }
+  }
 
   return (
     <>
@@ -135,8 +174,10 @@ export default ({
           initial={current && current.state ? "fadedOut" : "fadedIn"}
           animate={"fadedIn"}
           location={location}
-          tags={tags}
-          visibleTags={visibleTags}
+          tags={metaTypes.tags.length > 0 ? metaTypes.tags : undefined}
+          sources={metaTypes.sources.length > 0 ? metaTypes.sources : undefined}
+          filters={filters ? filters : undefined}
+          toggleFilter={toggleFilter}
         />
       )}
       <InnerBodyFadeContainer
@@ -144,7 +185,7 @@ export default ({
         animate={"fadedIn"}
       >
         <InnerBodyContainer initial={initial} animate={animate} layout>
-          <AnimatePresence>
+          <CustomAnimatePresence>
             {location.pathname !== "/" && (
               <ContentContainer
                 initial={initial}
@@ -155,7 +196,7 @@ export default ({
                 {children}
               </ContentContainer>
             )}
-          </AnimatePresence>
+          </CustomAnimatePresence>
         </InnerBodyContainer>
       </InnerBodyFadeContainer>
     </>

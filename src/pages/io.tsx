@@ -7,11 +7,43 @@ import { useTransitionState } from "gatsby-plugin-transition-link/hooks"
 import { SoundCloudPlayerWidget } from "components/IOWidgets/SoundCloudWidget"
 import { GitHubWidget } from "components/IOWidgets/GitHubWidget"
 
+export interface IOQueryData {
+  allMdx: {
+    edges: {
+      node: {
+        id: string
+        excerpt: string
+        fields: {
+          route: string
+        }
+        frontmatter: {
+          title: string
+          source: string
+          URI: string
+          templateKey: string
+          date: string
+          description: string
+          tags: string[]
+        }
+        body: string
+      }
+    }[]
+  }
+}
+
+// interface IOOptions {
+//   tags: string[]
+//   sources: string[]
+// }
+
 export default function IO({ location }: { location: WindowLocation }) {
   const state = useTransitionState()
   const { current } = state
 
-  const [visibleTags /* setVisibleTags */] = useState<string[]>([])
+  const [filters, setFilters] = useState<{
+    tags: string[]
+    sources: string[]
+  } | null>(null)
 
   return (
     <StaticQuery
@@ -40,13 +72,14 @@ export default function IO({ location }: { location: WindowLocation }) {
           }
         }
       `}
-      render={(data) => (
+      render={(data: IOQueryData) => (
         <SectionsLayout
           current={current}
-          sectionTitle={"io"}
+          sectionTitle={"I/O"}
           location={location}
-          tags={data.allMdx.edges.map((edge) => edge.node.frontmatter.tags)}
-          visibleTags={visibleTags}
+          data={data}
+          filters={filters ? filters : undefined}
+          setFilters={setFilters}
         >
           {data.allMdx.edges
             .sort((edgeA, edgeB) => {
@@ -54,6 +87,27 @@ export default function IO({ location }: { location: WindowLocation }) {
                 new Date(edgeB.node.frontmatter.date).getTime() -
                 new Date(edgeA.node.frontmatter.date).getTime()
               )
+            })
+            .filter((edge) => {
+              if (!filters) {
+                return true
+              } else {
+                let pass = true
+                if (filters.sources.length > 0) {
+                  pass =
+                    filters.sources.indexOf(edge.node.frontmatter.source) !== -1
+                }
+                if (pass && filters.tags.length > 0) {
+                  pass = edge.node.frontmatter.tags.reduce((acc, tag) => {
+                    if (acc) {
+                      return true
+                    } else {
+                      return filters.tags.indexOf(tag) !== -1
+                    }
+                  }, false as boolean)
+                }
+                return pass
+              }
             })
             .map((edge) => (
               <div key={edge.node.id + "brief"}>

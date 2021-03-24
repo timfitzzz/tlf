@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import { WindowConfig } from "hooks/useWindowConfig"
 import React, { useState } from "react"
 import styled from "styled-components"
+import { SelectableSource, SelectableTag } from "./IOWidgets/IOCommon"
 
 export const transitions = {
   LocationBarFadeContainer: {
@@ -96,6 +97,7 @@ export const LocationBarBody = styled(motion.div).attrs(() => ({
   padding-left: 16px;
   padding-right: 16px;
   box-sizing: border-box;
+  justify-content: space-evenly;
 `
 
 export const LocationBarPathContainer = styled(motion.div).attrs(() => ({}))`
@@ -104,6 +106,7 @@ export const LocationBarPathContainer = styled(motion.div).attrs(() => ({}))`
   margin-top: auto;
   margin-bottom: auto;
   height: fit-content;
+  margin-right: 16px;
 `
 
 export interface ILocationBar {
@@ -112,35 +115,115 @@ export interface ILocationBar {
   animate: string
   location: WindowLocation
   tags?: string[]
-  visibleTags?: string[]
+  sources?: string[]
+  filters?: { tags: string[]; sources: string[] }
+  toggleFilter?: (type: "source" | "tag", value: string) => void
 }
 
-// export const LocationBarPathDisplay = ({path}: {path: string[]}) => {
+const LocationBarTagMenu = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
 
-//   return (
+const LocationBarSourceMenu = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
 
-//   )
-// }
+const LocationBarTypeTitle = styled.div`
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 8px;
+  color: white;
+  margin-right: 8px;
+`
+
+const LocationBarVerticalDivider = styled.div`
+  height: 20px;
+  width: 2px;
+  background-color: white;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 8px;
+  margin-right: 16px;
+`
 
 export const LocationBar = ({
   path,
   initial,
   animate,
-}: // location,
-// tags,
-// visibleTags,
-ILocationBar) => {
+  tags,
+  sources,
+  filters,
+  toggleFilter,
+}: ILocationBar) => {
   const { w } = WindowConfig.useContainer() as { h: number; w: number }
-
   const [open /* setOpen */] = useState<boolean>(false)
 
-  // console.log(location)
+  function isSelected(type: string, value: string) {
+    type = type + "s"
+
+    return (filters && filters[type] && filters[type].indexOf(value) !== -1) ||
+      !filters ||
+      filters[type].length == 0
+      ? true
+      : false
+  }
 
   return (
     <LocationBarFadeContainer initial={initial} animate={animate}>
       <LocationBarContainer windowWidth={w} animate={open ? "open" : "closed"}>
         <LocationBarBody animate={open ? "open" : "closed"}>
           <LocationBarPathContainer>{path}</LocationBarPathContainer>
+          {sources && (
+            <LocationBarSourceMenu>
+              <LocationBarTypeTitle>sources</LocationBarTypeTitle>
+              {sources
+                .reduce((arr, source): string[] => {
+                  if (source && arr.indexOf(source) === -1) {
+                    arr.push(source)
+                    return arr
+                  } else {
+                    return arr
+                  }
+                }, [] as string[])
+                .map((source) => (
+                  <SelectableSource
+                    source={source}
+                    selected={isSelected("source", source)}
+                    selectSource={
+                      toggleFilter
+                        ? () => toggleFilter("source", source)
+                        : () => {}
+                    }
+                  />
+                ))}
+            </LocationBarSourceMenu>
+          )}
+          <LocationBarVerticalDivider />
+          {tags && (
+            <LocationBarTagMenu>
+              <LocationBarTypeTitle>tags</LocationBarTypeTitle>
+              {tags
+                .reduce((arr, tag): string[] => {
+                  if (tag && arr.indexOf(tag) === -1) {
+                    arr.push(tag)
+                    return arr
+                  } else {
+                    return arr
+                  }
+                }, [] as string[])
+                .map((tag) => (
+                  <SelectableTag
+                    tagName={tag}
+                    selected={isSelected("tag", tag)}
+                    selectTag={
+                      toggleFilter ? () => toggleFilter("tag", tag) : () => {}
+                    }
+                  ></SelectableTag>
+                ))}
+            </LocationBarTagMenu>
+          )}
         </LocationBarBody>
       </LocationBarContainer>
     </LocationBarFadeContainer>

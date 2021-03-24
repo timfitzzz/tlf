@@ -34,7 +34,8 @@ const tagColors = {
   'soundcloud': colors.burntOrange,
   'rap': colors.purple,
   'github': colors.orange,
-  'default': colors.spectralLightOrange
+  'default': colors.spectralLightOrange,
+  'coding': colors.spectralDarkOrange
 }
 
 export const theme = {
@@ -102,6 +103,10 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
   } */
+
+  .tl-edges {
+    overflow-y: hidden;
+  }
 
   h1 {
     font-family: "Asap Condensed", Arial, Helvetica, sans-serif;

@@ -107,7 +107,7 @@ const GitHubWidgetBody = styled.div`
   }
 `
 
-export const GitHubWidget = ({ date, title, body, tags }) => {
+export const GitHubWidget = ({ date, title, body, tags, URI }) => {
   const dateString = DateTime.fromISO(date).toLocaleString(DateTime.DATE_HUGE)
 
   return (
@@ -118,6 +118,7 @@ export const GitHubWidget = ({ date, title, body, tags }) => {
         tags={tags}
         source={"github"}
         icon={GithubIcon}
+        URI={URI}
       />
       <IODescriptionContainer>
         <GitHubWidgetBody>

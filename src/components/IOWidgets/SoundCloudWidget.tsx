@@ -251,7 +251,6 @@ export const SoundCloudPlayerWidget = ({
 
   let [mdDesc, setMdDesc] = useState<string | null>(null)
 
-  console.log(mdDesc)
   useEffect(() => {
     const turndownService = new TurndownService()
     setMdDesc(turndownService.turndown(description))
@@ -261,6 +260,7 @@ export const SoundCloudPlayerWidget = ({
     <SoundCloudPlayerWidgetContainer>
       <CustomPlayerColumnContainer>
         <IOItemHeader
+          URI={URI}
           date={dateString}
           title={title}
           tags={tags}

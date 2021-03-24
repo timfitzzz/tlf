@@ -118,6 +118,10 @@ const SelectableTagContainer = styled.div<{
   margin-top: auto;
   margin-bottom: auto;
   margin-right: 8px;
+
+  &:last-of-type {
+    margin-right: 0px;
+  }
 `
 
 export const SelectableTag = ({

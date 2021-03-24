@@ -98,6 +98,11 @@ export const LocationBarBody = styled(motion.div).attrs(() => ({
   padding-right: 16px;
   box-sizing: border-box;
   justify-content: space-evenly;
+  > div {
+    &:last-of-type {
+      margin-right: 0px;
+    }
+  }
 `
 
 export const LocationBarPathContainer = styled(motion.div).attrs(() => ({}))`
@@ -200,7 +205,7 @@ export const LocationBar = ({
                 ))}
             </LocationBarSourceMenu>
           )}
-          <LocationBarVerticalDivider />
+          {sources && tags && <LocationBarVerticalDivider />}
           {tags && (
             <LocationBarTagMenu>
               <LocationBarTypeTitle>tags</LocationBarTypeTitle>

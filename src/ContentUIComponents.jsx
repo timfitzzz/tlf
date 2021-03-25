@@ -53,7 +53,7 @@ export const CVLocation = styled.span`
   white-space: nowrap;
   font-size: 14px;
   line-height: 14px;
-  margin-top: 2px;
+  margin-top: 6px;
 `
 
 export const CVDescription = styled.div`

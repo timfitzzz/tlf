@@ -16,6 +16,11 @@ const NaiveMDXRenderer = styled(MDXRenderer)`
 
 `
 
+const GithubWidgetContainer = styled(IOEntryContainer)`
+  margin-top: 8px;
+  margin-bottom: 16px;
+`
+
 const GitHubWidgetBody = styled.div`
   font-size: 12px !important;
   overflow: wrap;
@@ -111,7 +116,7 @@ export const GitHubWidget = ({ date, title, body, tags, URI, setFilters }) => {
   const dateString = DateTime.fromISO(date).toLocaleString(DateTime.DATE_HUGE)
 
   return (
-    <IOEntryContainer>
+    <GithubWidgetContainer>
       <IOItemHeader
         date={dateString}
         title={title}
@@ -126,6 +131,6 @@ export const GitHubWidget = ({ date, title, body, tags, URI, setFilters }) => {
           <NaiveMDXRenderer>{body}</NaiveMDXRenderer>
         </GitHubWidgetBody>
       </IODescriptionContainer>
-    </IOEntryContainer>
+    </GithubWidgetContainer>
   )
 }

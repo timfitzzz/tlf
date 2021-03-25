@@ -25,11 +25,23 @@ import SoundCloudIcon from "../../../static/assets/media/soundcloud.svg"
 //   min-width: 300px;
 // `
 
+const SoundCloudPlayerWidgetContainer = styled(IOEntryContainer)`
+  /* width: 50%;
+  max-width: 330px;
+  min-width: 250px;
+  margin-left: auto;
+  margin-right: auto; */
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  margin-bottom: 16px;
+`
+
 export const CustomPlayerArtContainer = styled.div`
   min-width: 100%;
   /* height: 330px; */
   display: inherit;
-  border: 2px solid lightgray;
+  border: 2px solid ${(p) => p.theme.palette.lightBackground};
   border-radius: 3px;
   box-sizing: inherit;
 
@@ -57,16 +69,6 @@ export const CustomPlayerColumnContainer = styled.div`
   }
 `
 
-const SoundCloudPlayerWidgetContainer = styled(IOEntryContainer)`
-  /* width: 50%;
-  max-width: 330px;
-  min-width: 250px;
-  margin-left: auto;
-  margin-right: auto; */
-  flex-direction: row;
-  flex-wrap: wrap;
-`
-
 export const CustomPlayerDetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -82,24 +84,24 @@ export const CustomPlayerControlsContainer = styled.div`
 export const CustomTimer = styled(Timer)`
   font-size: 11px;
   margin-left: 4px;
+  margin-top: auto;
+  margin-bottom: auto;
 `
 
-export const CustomPlayButton = styled(PlayButton).attrs((p) => ({
-  backgroundImgUrl: p.backgroundImgUrl,
-}))<{
-  backgroundImgUrl: string
-}>`
-  height: 13px;
-  width: 13px;
+export const CustomPlayButton = styled(PlayButton)`
+  height: 15px;
+  width: 12px;
   padding: 0px;
   display: flex;
+  border: unset;
+  background-color: unset;
+  cursor: pointer;
 
   svg {
-    height: 9px;
-    width: 10px;
-    margin: 0px;
+    height: 10px;
+    width: 12px;
+    margin: auto auto auto 0;
   }
-  /* background-image: url(${(p) => p.backgroundImgUrl}); */
 `
 
 export const PlayerLabel = styled.div`
@@ -169,31 +171,13 @@ const SoundCloudPlayerContainer = styled.div`
 `
 
 export const SoundCloudPlayer = withSoundCloudAudio(
-  ({ track, currentTime, duration, ...props }) => {
+  ({ track, currentTime, duration, setArtworkUrl, ...props }) => {
     // console.log(track)
 
-    function getMainArtworkUrl() {
-      if (track && track.artwork_url) {
-        return (
-          track.artwork_url.slice(0, track.artwork_url.length - 9) +
-          "t500x500.jpg"
-        )
-      } else if (track && track.user && track.user.avatar_url) {
-        return (
-          track.user.avatar_url.slice(0, track.user.avatar_url.length - 9) +
-          "t500x500.jpg"
-        )
-      } else {
-        return ""
-      }
-    }
+    setArtworkUrl(track)
 
     return (
       <SoundCloudPlayerContainer>
-        <CustomPlayerArtContainer>
-          <img src={getMainArtworkUrl()} />
-        </CustomPlayerArtContainer>
-
         <CustomPlayerDetailsContainer>
           <CustomProgress
             value={(currentTime / duration) * 100 || 0}
@@ -201,10 +185,7 @@ export const SoundCloudPlayer = withSoundCloudAudio(
             {...props}
           ></CustomProgress>
           <CustomPlayerControlsContainer>
-            <CustomPlayButton
-              {...props}
-              backgroundImgUrl={getMainArtworkUrl()}
-            />
+            <CustomPlayButton {...props} backgroundImgUrl={""} />
             <CustomTimer
               duration={track ? track.duration / 1000 : 0}
               currentTime={currentTime}
@@ -251,6 +232,23 @@ export const SoundCloudPlayerWidget = ({
   ).toLocaleString(DateTime.DATE_HUGE)
 
   let [mdDesc, setMdDesc] = useState<string | null>(null)
+  let [mainArtworkURL, setMainArtworkURL] = useState<string | null>(null)
+
+  function setArtworkUrl(track) {
+    if (track && track.artwork_url) {
+      setMainArtworkURL(
+        track.artwork_url.slice(0, track.artwork_url.length - 9) +
+          "t500x500.jpg"
+      )
+    } else if (track && track.user && track.user.avatar_url) {
+      setMainArtworkURL(
+        track.user.avatar_url.slice(0, track.user.avatar_url.length - 9) +
+          "t500x500.jpg"
+      )
+    } else {
+      setMainArtworkURL(null)
+    }
+  }
 
   useEffect(() => {
     const turndownService = new TurndownService()
@@ -269,16 +267,20 @@ export const SoundCloudPlayerWidget = ({
           icon={SoundCloudIcon}
           setFilters={setFilters}
         />
+        <SoundCloudPlayer
+          resolveUrl={URI}
+          clientId={process.env.GATSBY_SC_APIKEY}
+          date={date}
+          setArtworkUrl={setArtworkUrl}
+        />
         <IODescriptionContainer>
           {mdDesc && <ReactMarkdown>{mdDesc || ""}</ReactMarkdown>}
         </IODescriptionContainer>
       </CustomPlayerColumnContainer>
       <CustomPlayerColumnContainer>
-        <SoundCloudPlayer
-          resolveUrl={URI}
-          clientId={process.env.GATSBY_SC_APIKEY}
-          date={date}
-        />
+        <CustomPlayerArtContainer>
+          <img src={mainArtworkURL ? mainArtworkURL : ""} />
+        </CustomPlayerArtContainer>
       </CustomPlayerColumnContainer>
     </SoundCloudPlayerWidgetContainer>
   )

@@ -25,7 +25,7 @@ export const IOTitleBar = styled.div`
   margin-bottom: 4px;
 
   &:first-of-type {
-    margin-top: 8px;
+    margin-top: 0px;
   }
 `
 

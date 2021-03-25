@@ -7,6 +7,8 @@ export const IODescriptionContainer = styled.div`
   p {
     font-size: 14px;
   }
+  padding-left: 8px;
+  padding-right: 8px;
 `
 
 export const IODate = styled.div`
@@ -199,16 +201,31 @@ const SourceIconContainer = styled.div<{
   ${(p) =>
     p.selected
       ? `
-    fill: white;
+    fill: color: ${(p) => p.theme.palette.darkBackground};
   `
       : `
-      fill: black;
+      fill: gray;
 
   `}
 
-  svg {
-    width: 18px;
+  @media screen and (max-width: 560px) {
+    width: 17px;
+    height: 20px;
+
+    svg {
+      width: 17px;
+      height: 20px;
+    }
+  }
+
+  @media screen and (min-width: 561px) {
     height: 21px;
+    width: 18px;
+
+    svg {
+      width: 18px;
+      height: 21px;
+    }
   }
 `
 
@@ -244,6 +261,7 @@ export const IOItemHeader = ({
   className,
   icon,
   URI,
+  setFilters,
 }: {
   date: string
   title: string
@@ -252,6 +270,7 @@ export const IOItemHeader = ({
   icon: any
   URI: string
   className?: string
+  setFilters?: (filters: { tags: string[]; sources: string[] }) => void
 }) => {
   return (
     <div className={className}>
@@ -268,8 +287,10 @@ export const IOItemHeader = ({
             <SelectableTag
               tagName={tag}
               key={tag + title}
-              selected={false}
-              selectTag={() => {}}
+              selected={true}
+              selectTag={() => {
+                setFilters && setFilters({ sources: [], tags: [tag] })
+              }}
             />
           ))}
         </IOTagsContainer>

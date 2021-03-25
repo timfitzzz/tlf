@@ -58,7 +58,7 @@ export const LocationBarContainer = styled(motion.div).attrs(() => ({
   // },
 }))<{ windowWidth: number }>`
   margin-top: 8px;
-  max-width: ${(p) => (p.windowWidth ? `${p.windowWidth - 16}px` : "100%")};
+  max-width: ${(p) => (p.windowWidth ? `${p.windowWidth - 20}px` : "100%")};
   display: flex;
   flex-direction: column;
   margin-left: auto;
@@ -95,9 +95,10 @@ export const LocationBarBody = styled(motion.div).attrs(() => ({
   border-top-right-radius: 16px;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
-
-  background-color: ${(p) => p.theme.palette.lightBackground};
+  border: 2px solid ${(p) => p.theme.palette.darkBackground};
+  background-color: white;
   display: flex;
+  color: ${(p) => p.theme.palette.darkBackground};
   margin-top: auto;
   margin-bottom: auto;
   /* margin-left: auto;
@@ -106,6 +107,11 @@ export const LocationBarBody = styled(motion.div).attrs(() => ({
   padding-right: 16px;
   box-sizing: border-box;
   justify-content: left;
+  > div {
+    &:last-of-type {
+      padding-right: 0px;
+    }
+  }
 `
 
 export const LocationBarSectionsContainer = styled.div`
@@ -133,14 +139,16 @@ export const LocationBarSectionContainer = styled.div`
 `
 
 export const LocationBarPathContainer = styled(motion.div).attrs(() => ({}))`
-  color: white;
-  font-size: 14px;
+  color: ${(p) => p.theme.palette.darkBackground};
+  font-size: 16px;
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 0;
   height: fit-content;
   padding-right: 16px;
   margin-right: 0;
+  font-family: ${(p) => p.theme.fonts.title1};
+  font-weight: 700;
 `
 
 export interface ILocationBar {
@@ -167,9 +175,9 @@ const LocationBarSourceMenu = styled.div`
 const LocationBarTypeTitle = styled.div`
   margin-top: auto;
   margin-bottom: auto;
-  font-size: 8px;
-  color: white;
-  margin-right: 8px;
+  font-size: 12px;
+  color: ${(p) => p.theme.palette.darkBackground};
+  margin-right: 4px;
 `
 
 // const LocationBarVerticalDivider = styled.div`
@@ -209,64 +217,70 @@ export const LocationBar = ({
       <LocationBarContainer windowWidth={w} animate={open ? "open" : "closed"}>
         <LocationBarBody animate={open ? "open" : "closed"}>
           <LocationBarPathContainer>{path}</LocationBarPathContainer>
-          <LocationBarSectionsContainer>
-            <LocationBarSectionContainer>
-              <LocationBarTypeTitle>sources</LocationBarTypeTitle>
+          {tags || sources ? (
+            <LocationBarSectionsContainer>
               {sources && (
-                <LocationBarSourceMenu>
-                  {sources
-                    .reduce((arr, source): string[] => {
-                      if (source && arr.indexOf(source) === -1) {
-                        arr.push(source)
-                        return arr
-                      } else {
-                        return arr
-                      }
-                    }, [] as string[])
-                    .map((source) => (
-                      <SelectableSource
-                        source={source}
-                        selected={isSelected("source", source)}
-                        selectSource={
-                          toggleFilter
-                            ? () => toggleFilter("source", source)
-                            : () => {}
-                        }
-                      />
-                    ))}
-                </LocationBarSourceMenu>
+                <LocationBarSectionContainer>
+                  <LocationBarTypeTitle>sources</LocationBarTypeTitle>
+                  {sources && (
+                    <LocationBarSourceMenu>
+                      {sources
+                        .reduce((arr, source): string[] => {
+                          if (source && arr.indexOf(source) === -1) {
+                            arr.push(source)
+                            return arr
+                          } else {
+                            return arr
+                          }
+                        }, [] as string[])
+                        .map((source) => (
+                          <SelectableSource
+                            source={source}
+                            selected={isSelected("source", source)}
+                            selectSource={
+                              toggleFilter
+                                ? () => toggleFilter("source", source)
+                                : () => {}
+                            }
+                          />
+                        ))}
+                    </LocationBarSourceMenu>
+                  )}
+                </LocationBarSectionContainer>
               )}
-            </LocationBarSectionContainer>
-
-            {/* {sources && tags && <LocationBarVerticalDivider />} */}
-            <LocationBarSectionContainer>
-              <LocationBarTypeTitle>tags</LocationBarTypeTitle>
               {tags && (
-                <LocationBarTagMenu>
-                  {tags
-                    .reduce((arr, tag): string[] => {
-                      if (tag && arr.indexOf(tag) === -1) {
-                        arr.push(tag)
-                        return arr
-                      } else {
-                        return arr
-                      }
-                    }, [] as string[])
-                    .map((tag) => (
-                      <SelectableTag
-                        tagName={tag}
-                        selected={isSelected("tag", tag)}
-                        selectTag={
-                          toggleFilter
-                            ? () => toggleFilter("tag", tag)
-                            : () => {}
-                        }
-                      ></SelectableTag>
-                    ))}
-                </LocationBarTagMenu>
+                <LocationBarSectionContainer>
+                  <LocationBarTypeTitle>tags</LocationBarTypeTitle>
+                  {tags && (
+                    <LocationBarTagMenu>
+                      {tags
+                        .reduce((arr, tag): string[] => {
+                          if (tag && arr.indexOf(tag) === -1) {
+                            arr.push(tag)
+                            return arr
+                          } else {
+                            return arr
+                          }
+                        }, [] as string[])
+                        .map((tag) => (
+                          <SelectableTag
+                            tagName={tag}
+                            selected={isSelected("tag", tag)}
+                            selectTag={
+                              toggleFilter
+                                ? () => toggleFilter("tag", tag)
+                                : () => {}
+                            }
+                          ></SelectableTag>
+                        ))}
+                    </LocationBarTagMenu>
+                  )}
+                </LocationBarSectionContainer>
               )}
-            </LocationBarSectionContainer>
-          </LocationBarSectionsContainer>
+            </LocationBarSectionsContainer>
+          ) : (
+            <></>
+          )}
         </LocationBarBody>
       </LocationBarContainer>
     </LocationBarFadeContainer>

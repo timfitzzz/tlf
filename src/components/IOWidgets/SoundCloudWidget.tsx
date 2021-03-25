@@ -243,6 +243,7 @@ export const SoundCloudPlayerWidget = ({
   tags,
   description,
   source,
+  setFilters,
 }) => {
   const dateString = DateTime.fromFormat(
     date,
@@ -266,6 +267,7 @@ export const SoundCloudPlayerWidget = ({
           tags={tags}
           source={source}
           icon={SoundCloudIcon}
+          setFilters={setFilters}
         />
         <IODescriptionContainer>
           {mdDesc && <ReactMarkdown>{mdDesc || ""}</ReactMarkdown>}

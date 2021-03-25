@@ -120,11 +120,15 @@ export default function IO({ location }: { location: WindowLocation }) {
                   {
                     {
                       soundcloud: (
-                        <SoundCloudPlayerWidget {...edge.node.frontmatter} />
+                        <SoundCloudPlayerWidget
+                          setFilters={setFilters}
+                          {...edge.node.frontmatter}
+                        />
                       ),
                       github: (
                         <GitHubWidget
                           body={edge.node.body}
+                          setFilters={setFilters}
                           {...edge.node.frontmatter}
                         />
                       ),

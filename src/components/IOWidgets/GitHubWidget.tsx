@@ -36,11 +36,11 @@ const GitHubWidgetBody = styled.div`
 
   ul {
     margin-top: 4px;
-    padding-left: 14px;
+    padding-left: 19px;
     margin-bottom: 8px;
     font-size: 12px;
     li {
-      padding-left: 5px;
+      padding-left: 0px;
       padding-bottom: 6px;
       line-height: 18px;
 
@@ -107,7 +107,7 @@ const GitHubWidgetBody = styled.div`
   }
 `
 
-export const GitHubWidget = ({ date, title, body, tags, URI }) => {
+export const GitHubWidget = ({ date, title, body, tags, URI, setFilters }) => {
   const dateString = DateTime.fromISO(date).toLocaleString(DateTime.DATE_HUGE)
 
   return (
@@ -119,6 +119,7 @@ export const GitHubWidget = ({ date, title, body, tags, URI }) => {
         source={"github"}
         icon={GithubIcon}
         URI={URI}
+        setFilters={setFilters}
       />
       <IODescriptionContainer>
         <GitHubWidgetBody>

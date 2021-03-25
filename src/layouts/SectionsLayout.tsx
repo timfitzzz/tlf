@@ -32,7 +32,7 @@ const ContentContainer = styled(motion.custom(Box)).attrs(() => ({
   variants: ContentContainerVariants,
 }))`
   margin: 8px 8px 8px 8px;
-  padding: 8px 16px 8px 8px;
+  padding: 0px 16px 8px 8px;
   // width: 100%;
   height: 100%;
   display: block;
@@ -42,13 +42,13 @@ const ContentContainer = styled(motion.custom(Box)).attrs(() => ({
 
 const InnerBodyContainerVariants = {
   expanded: {
-    marginTop: "8px",
+    marginTop: "0px",
     transition: {
       duration: TRANSITION_DURATION,
     },
   },
   contracted: {
-    marginTop: "8px",
+    marginTop: "0px",
     transition: {
       duration: TRANSITION_DURATION,
     },
@@ -73,7 +73,7 @@ const InnerBodyFadeContainer = styled(motion.div).attrs(() => ({
 }))``
 
 const InnerBodyContainer = styled(motion.div).attrs(() => ({
-  variants: InnerBodyContainerVariants,
+  // variants: InnerBodyContainerVariants,
 }))`
   margin: 8px;
   border-radius: 16px;

@@ -115,8 +115,8 @@ export const LocationBarBody = styled(motion.div).attrs(() => ({
 `
 
 export const LocationBarSectionsContainer = styled.div`
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   margin-left: 0px;
   display: flex;
   > div {
@@ -134,7 +134,7 @@ export const LocationBarSectionContainer = styled.div`
   margin-left: 0;
 
   &:last-of-type {
-    margin-left: 8px;
+    margin-left: 12px;
   }
 `
 
@@ -149,6 +149,8 @@ export const LocationBarPathContainer = styled(motion.div).attrs(() => ({}))`
   margin-right: 0;
   font-family: ${(p) => p.theme.fonts.title1};
   font-weight: 700;
+  padding-top: 2px;
+  padding-bottom: 2px;
 `
 
 export interface ILocationBar {
@@ -175,9 +177,14 @@ const LocationBarSourceMenu = styled.div`
 const LocationBarTypeTitle = styled.div`
   margin-top: auto;
   margin-bottom: auto;
-  font-size: 12px;
+  padding-top: 0px;
+  padding-bottom: 2px;
+  font-size: 14px;
+  line-height: 10px;
   color: ${(p) => p.theme.palette.darkBackground};
   margin-right: 4px;
+  font-variant: small-caps;
+  height: fit-content;
 `
 
 // const LocationBarVerticalDivider = styled.div`

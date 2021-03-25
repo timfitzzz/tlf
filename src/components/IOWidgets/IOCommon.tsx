@@ -12,8 +12,10 @@ export const IODescriptionContainer = styled.div`
 `
 
 export const IODate = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   font-variant: small-caps;
+  margin-top: auto;
+  margin-bottom: auto;
 `
 
 export const IOTitleBar = styled.div`
@@ -67,8 +69,10 @@ export const IOTagsContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-right: auto;
-  margin-left: 0;
+  margin-left: 8px;
   flex-wrap: wrap;
+  margin-top: auto;
+  margin-bottom: auto;
 `
 
 export const Tag = ({
@@ -276,12 +280,6 @@ export const IOItemHeader = ({
     <div className={className}>
       <IOTitleBar>
         <IODate>{date}</IODate>
-      </IOTitleBar>
-      <IOTitleBar>
-        <IOSource icon={icon} URI={URI} />
-        <IOTitle>{title}</IOTitle>
-      </IOTitleBar>
-      <IOTitleBar>
         <IOTagsContainer>
           {tags.map((tag) => (
             <SelectableTag
@@ -294,6 +292,10 @@ export const IOItemHeader = ({
             />
           ))}
         </IOTagsContainer>
+      </IOTitleBar>
+      <IOTitleBar>
+        <IOSource icon={icon} URI={URI} />
+        <IOTitle>{title}</IOTitle>
       </IOTitleBar>
     </div>
   )

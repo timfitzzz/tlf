@@ -721,15 +721,21 @@ export const HeaderSlashCard = ({
                             key={index}
                             $isCurrent={currentPath === path ? true : undefined}
                             entry={{
-                              delay: TRANSITION_DURATION * 0.75,
-                              length: TRANSITION_DURATION * 0.25,
+                              delay:
+                                currentPath === "/" || path === "/"
+                                  ? TRANSITION_DURATION * 0.9
+                                  : TRANSITION_DURATION * 0.25,
+                              length: TRANSITION_DURATION * 0.1,
                               state: {
                                 initial: getNextInitial(path),
                                 animate: getNextAnimate(path),
                               },
                             }}
                             exit={{
-                              length: TRANSITION_DURATION,
+                              length:
+                                currentPath === "/"
+                                  ? TRANSITION_DURATION
+                                  : TRANSITION_DURATION * 0.1,
                               state: {
                                 initial: getCurrentInitial(),
                                 animate: getExitAnimate(path),
@@ -749,15 +755,21 @@ export const HeaderSlashCard = ({
                       currentPath.indexOf(`/io`) !== -1 ? true : undefined
                     }
                     entry={{
-                      delay: TRANSITION_DURATION * 0.75,
-                      length: TRANSITION_DURATION * 0.25,
+                      delay:
+                        currentPath === "/"
+                          ? TRANSITION_DURATION * 0.75
+                          : TRANSITION_DURATION * 0.1,
+                      length: TRANSITION_DURATION * 0.2,
                       state: {
                         initial: getNextInitial("/io"),
                         animate: getNextAnimate("/io"),
                       },
                     }}
                     exit={{
-                      length: TRANSITION_DURATION,
+                      length:
+                        currentPath === "/"
+                          ? TRANSITION_DURATION
+                          : TRANSITION_DURATION * 0.1,
                       state: {
                         initial: getCurrentInitial(),
                         animate: getExitAnimate("/io"),
@@ -851,7 +863,7 @@ export const HeaderSlashCard = ({
                       },
                     }}
                     exit={{
-                      length: TRANSITION_DURATION,
+                      length: TRANSITION_DURATION * 0.5,
                       state: {
                         initial: getCurrentInitial(),
                         animate: getExitAnimate("/"),

@@ -3,12 +3,10 @@ import styled from "styled-components"
 import Icons from "../Icons"
 
 export const IODescriptionContainer = styled.div`
-  margin-top: 8px;
+  margin-top: 4px;
   p {
     font-size: 14px;
   }
-  padding-left: 8px;
-  padding-right: 8px;
 `
 
 export const IODate = styled.div`

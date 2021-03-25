@@ -210,13 +210,12 @@ export default ({
         initial={current && current.state ? "fadedOut" : "fadedIn"}
         animate={"fadedIn"}
       >
-        <InnerBodyContainer initial={initial} animate={animate} layout>
+        <InnerBodyContainer initial={initial} animate={animate}>
           <CustomAnimatePresence>
             {location.pathname !== "/" && (
               <ContentContainer
                 initial={initial}
                 animate={animate}
-                layout
                 key={sectionTitle + "ContentContainer"}
               >
                 {children}

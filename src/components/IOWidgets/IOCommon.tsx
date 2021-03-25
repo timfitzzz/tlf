@@ -119,7 +119,7 @@ const SelectableTagContainer = styled.div<{
 }>`
   margin-top: auto;
   margin-bottom: auto;
-  margin-right: 8px;
+  margin-right: 4px;
 
   &:last-of-type {
     margin-right: 0px;
@@ -191,7 +191,7 @@ const SourceIconContainer = styled.div<{
   onClick: () => void
 }>`
   display: flex;
-  margin-right: 8px;
+  margin-right: 4px;
   height: 21px;
   width: 21px;
   margin-top: auto;

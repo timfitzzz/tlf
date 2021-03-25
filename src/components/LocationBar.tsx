@@ -126,6 +126,10 @@ export const LocationBarSectionContainer = styled.div`
   padding-top: 2px;
   padding-bottom: 2px;
   margin-left: 0;
+
+  &:last-of-type {
+    margin-left: 8px;
+  }
 `
 
 export const LocationBarPathContainer = styled(motion.div).attrs(() => ({}))`

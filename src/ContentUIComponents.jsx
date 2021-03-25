@@ -85,7 +85,7 @@ export const CVJobTitleTextColumn = styled(Flex)`
 `
 
 export const CVEntryContainer = styled(Box)`
-  padding-left: 8px;
+  padding-left: 0px;
   padding-right: 8px;
   padding-top: 16px;
   position: relative;
@@ -95,7 +95,7 @@ export const CVDescriptionList = styled.ul`
   font-family: ${p=>p.theme.fonts.body};
   font-size: 15px;
   font-weight: 300;
-  padding-left: 10px;
+  padding-left: 16px;
   list-style: none;
   padding-right: 10px;
   margin-top: 8px;
@@ -107,7 +107,7 @@ export const CVDescriptionList = styled.ul`
 export const CVDescriptionListItem = styled.li`
   font-size: 14px;
   line-height: 18px;
-  padding-bottom: 8px;
+  padding-bottom: 4px;
 
 `
 

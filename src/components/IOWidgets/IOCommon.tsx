@@ -41,13 +41,9 @@ export const IOEntryContainer = styled.div`
   box-sizing: border-box;
   width: 100%;
   max-width: 650px;
-  margin-top: 16px;
+  margin-top: 0px;
   margin-left: auto;
   margin-right: auto;
-
-  &:first-of-type {
-    margin-top: 0px;
-  }
 `
 
 export const IOTitle = styled.div`

@@ -33,8 +33,7 @@ const SoundCloudPlayerWidgetContainer = styled(IOEntryContainer)`
   margin-right: auto; */
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 8px;
-  margin-bottom: 16px;
+  margin-top: 16px;
 `
 
 export const CustomPlayerArtContainer = styled.div`

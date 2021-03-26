@@ -30,7 +30,7 @@ const GitHubWidgetBody = styled.div`
 
   p {
     font-size: 14px;
-    margin-top: 8px;
+    margin-top: 8x;
     margin-bottom: 8px;
     margin-block-start: 4px;
     margin-block-end: 4px;
@@ -44,7 +44,7 @@ const GitHubWidgetBody = styled.div`
     li {
       padding-left: 0px;
       padding-bottom: 6px;
-      line-height: 18px;
+      line-height: 14px;
 
       blockquote {
         margin: 5px;
@@ -91,7 +91,7 @@ const GitHubWidgetBody = styled.div`
         }
 
         &:last-of-type {
-          margin-bottom: 12px;
+          margin-bottom: 8px;
           margin-top: 4px;
         }
 

@@ -6,6 +6,8 @@ export const IODescriptionContainer = styled.div`
   margin-top: 4px;
   p {
     font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 8px;
   }
 `
 

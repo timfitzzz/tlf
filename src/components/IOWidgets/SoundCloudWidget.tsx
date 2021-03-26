@@ -33,12 +33,11 @@ const SoundCloudPlayerWidgetContainer = styled(IOEntryContainer)`
   margin-right: auto; */
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 16px;
 `
 
 export const CustomPlayerArtContainer = styled.div`
   min-width: 100%;
-  /* height: 330px; */
+  height: fit-content;
   display: inherit;
   border: 2px solid ${(p) => p.theme.palette.lightBackground};
   border-radius: 3px;
@@ -46,6 +45,7 @@ export const CustomPlayerArtContainer = styled.div`
 
   > img {
     width: 100%;
+    display: block;
   }
 `
 
@@ -224,6 +224,16 @@ export const SoundCloudPlayerWidget = ({
   description,
   source,
   setFilters,
+  className,
+}: {
+  URI: string
+  date: string
+  title: string
+  tags: string[]
+  description: string
+  source: string
+  setFilters: (options: { tags: string[]; sources: string[] }) => void
+  className?: string
 }) => {
   const dateString = DateTime.fromFormat(
     date,
@@ -255,7 +265,7 @@ export const SoundCloudPlayerWidget = ({
   }, [description])
 
   return (
-    <SoundCloudPlayerWidgetContainer>
+    <SoundCloudPlayerWidgetContainer className={className}>
       <CustomPlayerColumnContainer>
         <IOItemHeader
           URI={URI}

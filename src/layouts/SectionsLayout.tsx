@@ -32,12 +32,20 @@ const ContentContainer = styled(motion.custom(Box)).attrs(() => ({
   variants: ContentContainerVariants,
 }))`
   margin: 8px 8px 8px 8px;
-  padding: 0px 16px 8px 8px;
+  padding: 0px 8px 8px 8px;
   // width: 100%;
   height: 100%;
   display: block;
   overflow: display;
   color: ${(p) => p.theme.palette.darkBackground};
+
+  > div {
+    margin-top: 32px;
+
+    &:first-of-type {
+      margin-top: 16px;
+    }
+  }
 `
 
 const InnerBodyContainerVariants = {

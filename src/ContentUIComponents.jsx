@@ -12,8 +12,8 @@ export const CVSectionTitle = styled.div`
 
 export const CVEmployer = styled.div`
   font-family: ${p=>p.theme.fonts.title2};
-  font-size: 16px;
-  line-height: 16px;
+  font-size: 18px;
+  line-height: 18px;
   font-weight: 600;
   margin-top: 0px;
   margin-right: 8px;
@@ -29,8 +29,9 @@ export const CVDates = styled.div`
 export const CVJobTitle = styled.div`
   font-family: ${p=>p.theme.fonts.title1};
   font-size: 16px;
-  line-height: 20px;
-  margin-top: 4px;
+  line-height: 16px;
+  margin-top: 8px;
+  font-weight: 500;
 `
 
 export const CVJobTitleRow = styled.div`
@@ -51,21 +52,32 @@ export const CVLocation = styled.span`
   font-style: italic;
 
   white-space: nowrap;
-  font-size: 14px;
-  line-height: 14px;
-  margin-top: 6px;
+  font-size: 16px;
+  line-height: 16px;
+  margin-top: 8px;
 `
 
 export const CVDescription = styled.div`
   font-family: ${p=>p.theme.fonts.body};
-  font-size: 15px;
-  font-weight: 200;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 4px;
+  
+
+  &:last-of-type {
+    margin-bottom: 8px;
+  }
+  &:first-of-type {
+    margin-top: 8px;
+  }
+
+`
+
+export const CVDescriptionContainer = styled.div`
 `
 
 export const CVSection = styled(Box)`
-  padding: 8px 8px 8px 0px!important;
+  padding: 8px 0px 8px 0px!important;
 `
 
 export const CVRow = styled(Flex)`
@@ -86,7 +98,7 @@ export const CVJobTitleTextColumn = styled(Flex)`
 
 export const CVEntryContainer = styled(Box)`
   padding-left: 0px;
-  padding-right: 8px;
+  padding-right: 0px;
   padding-top: 16px;
   position: relative;
 `
@@ -98,8 +110,8 @@ export const CVDescriptionList = styled.ul`
   padding-left: 16px;
   list-style: none;
   padding-right: 10px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 4px;
+  margin-bottom: 12px;
   width: 80%;
   min-width: 300px;
 `
@@ -168,7 +180,7 @@ const CVDatesDisplayOuterContainer = styled.div`
   display: flex;
   position: absolute;
   top: 14px;
-  right: 8px;
+  right: 0px;
 `
 
 const CVDatesBoxesContainer = styled(Flex)`

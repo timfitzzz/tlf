@@ -16,9 +16,7 @@ const NaiveMDXRenderer = styled(MDXRenderer)`
 
 `
 
-const GithubWidgetContainer = styled(IOEntryContainer)`
-  margin-top: 16px;
-`
+const GithubWidgetContainer = styled(IOEntryContainer)``
 
 const GitHubWidgetBody = styled.div`
   font-size: 12px !important;

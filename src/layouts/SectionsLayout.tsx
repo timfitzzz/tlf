@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react"
+import React, { ReactNode, useState, useRef } from "react"
 import { Box } from "rebass/styled-components"
 import styled from "styled-components"
 import { TRANSITION_DURATION } from "../Theme"
@@ -6,6 +6,7 @@ import { WindowLocation } from "@reach/router"
 import { AnimatePresence, motion } from "framer-motion"
 import { LocationBar } from "components/LocationBar"
 import { IOQueryData } from "pages/io"
+import Pdf from "react-to-pdf"
 
 const ContentContainerVariants = {
   expanded: {
@@ -40,28 +41,13 @@ const ContentContainer = styled(motion.custom(Box)).attrs(() => ({
   color: ${(p) => p.theme.palette.darkBackground};
 
   > div {
-    margin-top: 32px;
+    margin-top: 24px;
 
     &:first-of-type {
       margin-top: 16px;
     }
   }
 `
-
-const InnerBodyContainerVariants = {
-  expanded: {
-    marginTop: "0px",
-    transition: {
-      duration: TRANSITION_DURATION,
-    },
-  },
-  contracted: {
-    marginTop: "0px",
-    transition: {
-      duration: TRANSITION_DURATION,
-    },
-  },
-}
 
 const InnerBodyFadeContainer = styled(motion.div).attrs(() => ({
   variants: {
@@ -114,6 +100,8 @@ export default ({
   filters?: { tags: string[]; sources: string[] }
   setFilters?: (state: { tags: string[]; sources: string[] } | null) => void
 }) => {
+  const ref = useRef(null)
+
   const animate =
     current && current.state && current.state.animate
       ? current.state.animate
@@ -143,77 +131,122 @@ export default ({
   function toggleFilter(type: "tag" | "source", value: string): void {
     let thisType = type === "tag" ? "tags" : "sources"
     let otherType = type === "tag" ? "sources" : "tags"
-    console.log(`toggling ${type} filter for ${value}`)
-    console.log(
-      filters,
-      filters ? filters[thisType] : "no filters set",
-      setFilters
-    )
+
     if (filters && filters[thisType] && setFilters) {
       let valIndex = filters[thisType].indexOf(value)
       if (valIndex !== -1) {
-        console.log("removing filter")
-        if (filters[thisType].length === 1 && filters[otherType].length === 0) {
-          console.log(
-            `found filter ${thisType} length is 1, other is 0, setting null`
-          )
-          setFilters(null)
-        } else if (filters[thisType].length === metaTypes[thisType].length) {
-          console.log(
-            `found filter ${thisType} length is same as known metaType length`
-          )
-          if (filters[otherType].length === 0) {
-            console.log(
-              "there are no other filters in the other type, so setting null"
-            )
-            setFilters(null)
-          } else {
-            console.log(
-              "there are other filters in the other type, so setting this type to 0 length"
-            )
-            setFilters({
-              ...filters,
-              [thisType]: [],
-            })
-          }
-        } else {
+        if (filters[otherType].length > 0) {
           setFilters({
-            ...filters,
-            [thisType]: filters[thisType].filter((val) => val !== value),
+            tags: thisType === "tags" ? [] : filters.tags,
+            sources: thisType === "sources" ? [] : filters.sources,
           })
+        } else {
+          setFilters(null)
         }
       } else {
-        console.log("adding filter")
         setFilters({
-          ...filters,
-          [thisType]:
-            valIndex === -1
-              ? [...filters[thisType], value]
-              : filters[thisType].filter((val) => val !== value),
+          tags: thisType === "tags" ? [value] : filters.tags,
+          sources: thisType === "sources" ? [value] : filters.sources,
         })
       }
-    } else if ((setFilters && type === "source") || "tag") {
-      setFilters!({
-        sources: type === "source" ? [value] : [],
-        tags: type === "source" ? [] : [value],
+    } else if (setFilters) {
+      setFilters({
+        tags: thisType === "tags" ? [value] : [],
+        sources: thisType === "sources" ? [value] : [],
       })
     }
+
+    //
+    // console.log(`toggling ${type} filter for ${value}`)
+    // console.log(
+    //   filters,
+    //   filters ? filters[thisType] : "no filters set",
+    //   setFilters
+    // )
+    // if (filters && filters[thisType] && setFilters) {
+    //   let valIndex = filters[thisType].indexOf(value)
+    //   if (valIndex !== -1) {
+    //     console.log("removing filter")
+    //     if (filters[thisType].length === 1 && filters[otherType].length === 0) {
+    //       console.log(
+    //         `found filter ${thisType} length is 1, other is 0, setting null`
+    //       )
+    //       setFilters(null)
+    //     } else if (filters[thisType].length === metaTypes[thisType].length) {
+    //       console.log(
+    //         `found filter ${thisType} length is same as known metaType length`
+    //       )
+    //       if (filters[otherType].length === 0) {
+    //         console.log(
+    //           "there are no other filters in the other type, so setting null"
+    //         )
+    //         setFilters(null)
+    //       } else {
+    //         console.log(
+    //           "there are other filters in the other type, so setting this type to 0 length"
+    //         )
+    //         setFilters({
+    //           ...filters,
+    //           [thisType]: [],
+    //         })
+    //       }
+    //     } else {
+    //       setFilters({
+    //         ...filters,
+    //         [thisType]: filters[thisType].filter((val) => val !== value),
+    //       })
+    //     }
+    //   } else {
+    //     console.log("adding filter")
+    //     setFilters({
+    //       ...filters,
+    //       [thisType]:
+    //         valIndex === -1
+    //           ? [...filters[thisType], value]
+    //           : filters[thisType].filter((val) => val !== value),
+    //     })
+    //   }
+    // } else if ((setFilters && type === "source") || "tag") {
+    //   setFilters!({
+    //     sources: type === "source" ? [value] : [],
+    //     tags: type === "source" ? [] : [value],
+    //   })
+    // }
   }
 
   return (
     <>
-      {location.pathname !== "/" && (
-        <LocationBar
-          path={[sectionTitle, title || ""]}
-          initial={current && current.state ? "fadedOut" : "fadedIn"}
-          animate={"fadedIn"}
-          location={location}
-          tags={metaTypes.tags.length > 0 ? metaTypes.tags : undefined}
-          sources={metaTypes.sources.length > 0 ? metaTypes.sources : undefined}
-          filters={filters ? filters : undefined}
-          toggleFilter={toggleFilter}
-        />
-      )}
+      <Pdf
+        x={18}
+        y={18}
+        imgWidth={8}
+        pageHeight={11}
+        scale={3}
+        targetRef={ref}
+        filename="timothyliamfitzgerald-resume.pdf"
+        options={{ orientation: "p", unit: "in", format: [8.5, 11] }}
+      >
+        {({ toPdf }) => {
+          return (
+            location.pathname !== "/" && (
+              <LocationBar
+                path={[sectionTitle, title || ""]}
+                initial={current && current.state ? "fadedOut" : "fadedIn"}
+                animate={"fadedIn"}
+                location={location}
+                tags={metaTypes.tags.length > 0 ? metaTypes.tags : undefined}
+                sources={
+                  metaTypes.sources.length > 0 ? metaTypes.sources : undefined
+                }
+                filters={filters ? filters : undefined}
+                toggleFilter={toggleFilter}
+                setFilters={setFilters}
+                generatePdf={toPdf}
+              />
+            )
+          )
+        }}
+      </Pdf>
       <InnerBodyFadeContainer
         initial={current && current.state ? "fadedOut" : "fadedIn"}
         animate={"fadedIn"}
@@ -225,6 +258,7 @@ export default ({
                 initial={initial}
                 animate={animate}
                 key={sectionTitle + "ContentContainer"}
+                ref={ref}
               >
                 {children}
               </ContentContainer>

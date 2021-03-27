@@ -8,7 +8,7 @@ import React, { Fragment } from "react"
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components"
 import { Button } from "rebass/styled-components"
 import { Row, Column, Section } from "./components/elements";
-import { CVColumn, CVDatesDisplay, CVRow, CVSectionTitle, CVEmployer, CVDates, CVJobTitle, CVLocation, CVDescription, CVSection, CVEntryContainer, CVDescriptionListItem, CVDescriptionList, CVFlexBreak, CVJobTitleRow, CVJobTitleTextColumn, CVDescriptionContainer } from './ContentUIComponents';
+import { CVColumn, CVDatesDisplay, CVRow, CVSectionTitle, CVEmployer, CVDates, CVJobTitle, CVLocation, CVDescription, CVSection, CVEntryContainer, CVDescriptionListItem, CVDescriptionList, CVFlexBreak, CVJobTitleRow, CVJobTitleTextColumn, CVDescriptionContainer, CVIntro, CVHeaderContainer, CVHeaderItem, CVHeaderName } from './ContentUIComponents';
 
 const colors = {
   gold: 'gold',
@@ -166,6 +166,10 @@ export const MAX_WIDTH = 800
 
 export const UIComponents = {
   Button: props => <Button {...props}>{props.children}</Button>,
+  CVIntro: props => <CVIntro {...props}>{props.children}</CVIntro>,
+  CVHeaderContainer: props => <CVHeaderContainer {...props}>{props.children}</CVHeaderContainer>,
+  CVHeaderName: props => <CVHeaderName {...props}>{props.children}</CVHeaderName>,
+  CVHeaderItem: props => <CVHeaderItem {...props}>{props.children}</CVHeaderItem>,
   CVSectionTitle: props => <CVSectionTitle {...props}>{props.children}</CVSectionTitle>,
   CVEmployer: props => <CVEmployer {...props}>{props.children}</CVEmployer>,
   CVDates: props => <CVDates {...props}>{props.children}</CVDates>,

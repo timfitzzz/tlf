@@ -1,7 +1,7 @@
 import { WindowLocation } from "@reach/router"
 import { motion } from "framer-motion"
 import { WindowConfig } from "hooks/useWindowConfig"
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
 import { SelectableSource, SelectableTag } from "./IOWidgets/IOCommon"
 
@@ -45,18 +45,7 @@ export const LocationBarFadeContainer = styled(motion.div).attrs(() => ({
   display: flex;
 `
 
-export const LocationBarContainer = styled(motion.div).attrs(() => ({
-  // variants: {
-  //   open: {
-  //     transition: transitions.LocationBarContainer.open,
-  //     height: 64,
-  //   },
-  //   closed: {
-  //     transition: transitions.LocationBarContainer.closed,
-  //     height: 32,
-  //   },
-  // },
-}))<{ windowWidth: number }>`
+export const LocationBarContainer = styled.div<{ windowWidth: number }>`
   margin-top: 8px;
   max-width: ${(p) => (p.windowWidth ? `${p.windowWidth - 20}px` : "100%")};
   display: flex;
@@ -69,24 +58,7 @@ export const LocationBarContainer = styled(motion.div).attrs(() => ({
   height: 100%;
 `
 
-export const LocationBarBody = styled(motion.div).attrs(() => ({
-  // variants: {
-  //   open: {
-  //     transition: transitions.LocationBarBody.open,
-  //     borderTopLeftRadius: "16px",
-  //     borderBottomLeftRadius: "16px",
-  //     borderTopRightRadius: "16px",
-  //     borderBottomRightRadius: "16px",
-  //   },
-  //   closed: {
-  //     transition: transitions.LocationBarBody.closed,
-  //     borderTopLeftRadius: "16px",
-  //     borderBottomLeftRadius: "16px",
-  //     borderTopRightRadius: "16px",
-  //     borderBottomRightRadius: "16px",
-  //   },
-  // },
-}))`
+export const LocationBarBody = styled.div`
   flex-direction: row;
   flex-wrap: no-wrap;
   /* width: 100%; */
@@ -138,7 +110,7 @@ export const LocationBarSectionContainer = styled.div`
   }
 `
 
-export const LocationBarPathContainer = styled(motion.div).attrs(() => ({}))`
+export const LocationBarPathContainer = styled.div`
   color: ${(p) => p.theme.palette.darkBackground};
   font-size: 16px;
   margin-top: auto;
@@ -162,6 +134,8 @@ export interface ILocationBar {
   sources?: string[]
   filters?: { tags: string[]; sources: string[] }
   toggleFilter?: (type: "source" | "tag", value: string) => void
+  setFilters?: (filters: { tags: string[]; sources: string[] } | null) => void
+  generatePdf?: () => void
 }
 
 const LocationBarTagMenu = styled.div`
@@ -197,6 +171,22 @@ const LocationBarTypeTitle = styled.div`
 //   margin-right: 16px;
 // `
 
+const ClearFiltersButton = styled.div<{ activated: boolean }>`
+  font-size: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 0;
+  margin-left: auto;
+  padding-left: 12px;
+  color: ${(p) =>
+    p.activated ? p.theme.palette.darkBackground : "transparent"};
+  cursor: pointer;
+`
+
+const PdfDownloadButton = styled.div`
+  cursor: pointer;
+`
+
 export const LocationBar = ({
   path,
   initial,
@@ -205,9 +195,10 @@ export const LocationBar = ({
   sources,
   filters,
   toggleFilter,
+  setFilters,
+  generatePdf,
 }: ILocationBar) => {
   const { w } = WindowConfig.useContainer() as { h: number; w: number }
-  const [open /* setOpen */] = useState<boolean>(false)
 
   function isSelected(type: string, value: string) {
     type = type + "s"
@@ -221,8 +212,8 @@ export const LocationBar = ({
 
   return (
     <LocationBarFadeContainer initial={initial} animate={animate}>
-      <LocationBarContainer windowWidth={w} animate={open ? "open" : "closed"}>
-        <LocationBarBody animate={open ? "open" : "closed"}>
+      <LocationBarContainer windowWidth={w}>
+        <LocationBarBody>
           <LocationBarPathContainer>{path}</LocationBarPathContainer>
           {tags || sources ? (
             <LocationBarSectionsContainer>
@@ -285,6 +276,25 @@ export const LocationBar = ({
                 </LocationBarSectionContainer>
               )}
             </LocationBarSectionsContainer>
+          ) : (
+            <></>
+          )}
+          {tags && sources ? (
+            <ClearFiltersButton
+              activated={!(typeof filters === "undefined")}
+              onClick={() => {
+                setFilters && setFilters(null)
+              }}
+            >
+              ✖
+            </ClearFiltersButton>
+          ) : (
+            <></>
+          )}
+          {generatePdf ? (
+            <PdfDownloadButton onClick={() => generatePdf()}>
+              🖫
+            </PdfDownloadButton>
           ) : (
             <></>
           )}

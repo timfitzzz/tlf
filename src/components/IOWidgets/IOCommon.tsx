@@ -103,10 +103,16 @@ export const IOTag = styled(Tag)<{ selected: boolean }>`
           : p.theme.tagColors.default
       };
       color: white;
+      border: 1px solid transparent;
   `
       : `
   
       color: ${
+        p.theme.tagColors[p.tag.toLowerCase()]
+          ? p.theme.tagColors[p.tag.toLowerCase()]
+          : p.theme.tagColors.default
+      };
+      border: 1px solid ${
         p.theme.tagColors[p.tag.toLowerCase()]
           ? p.theme.tagColors[p.tag.toLowerCase()]
           : p.theme.tagColors.default
@@ -256,7 +262,6 @@ export const IOItemHeader = ({
   date,
   title,
   tags,
-  source,
   className,
   icon,
   URI,

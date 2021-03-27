@@ -151,6 +151,7 @@
     "react-pose": "^4.0.10",
     "react-powerplug": "^1.0.0",
     "react-soundplayer": "^1.0.5",
+    "react-to-pdf": "https://github.com/timfitzzz/react-to-pdf.git",
     "rebass": "^4.0.7",
     "sanitize-filename": "^1.6.3",
     "soundcloud.ts": "^0.3.4",
@@ -184,5 +185,8 @@
     "MDX",
     "Rebass",
     "Starter"
-  ]
+  ],
+  "resolutions": {
+    "react-to-pdf/jspdf": "^2.3.1"
+  }
 }

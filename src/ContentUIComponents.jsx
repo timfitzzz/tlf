@@ -2,6 +2,38 @@ import React, { useState } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
+export const CVHeaderContainer = styled.div`
+  padding: 4px;
+  border-top: 1px double ${p => p.theme.colors.darkBackground};
+  border-bottom: 1px double ${p => p.theme.colors.darkBackground};
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+`
+
+export const CVHeaderName = styled.span`
+  font-family: ${p=>p.theme.fonts.title1};
+  font-size: 16px;
+  line-height: 16px;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: 500;
+`
+
+export const CVHeaderItem = styled.span`
+  font-family: ${p=>p.theme.fonts.title1};
+  font-size: 16px;
+  line-height: 16px;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: 400;
+  padding-left: 8px;
+  margin-left: 8px;
+  text-align: center;
+  justify-content: center;
+  border-left: 1px solid ${p => p.theme.colors.darkBackground}
+`
+
 export const CVSectionTitle = styled.div`
   font-family: ${p=>p.theme.fonts.title1};
   font-size: 20px;
@@ -57,11 +89,20 @@ export const CVLocation = styled.span`
   margin-top: 8px;
 `
 
+export const CVIntro = styled.div`
+  font-family: ${p=>p.theme.fonts.title1};
+  font-style: italic;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 8px;
+`
+
 export const CVDescription = styled.div`
   font-family: ${p=>p.theme.fonts.body};
   font-size: 14px;
   font-weight: 400;
   margin-top: 4px;
+  line-height: 19px;
   
 
   &:last-of-type {
@@ -76,7 +117,10 @@ export const CVDescription = styled.div`
 export const CVDescriptionContainer = styled.div`
 `
 
-export const CVSection = styled(Box)`
+export const CVSection = styled.div`
+  box-sizing: border-box;
+  min-width: 0;
+  margin-top: 16px;
   padding: 8px 0px 8px 0px!important;
 `
 

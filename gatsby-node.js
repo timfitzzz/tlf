@@ -46,48 +46,48 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
  * to static pages like "About" or "Home", etc, and is subject data limitations
  * since query data resolved below cannot be injected in at build time.
  */
-exports.createPages = ({ graphql, actions }) => {
-  return new Promise((resolve, reject) => {
-    resolve(
-      graphql(`
-        query CreatePagesQuery {
-          allMdx(filter: {fileAbsolutePath: {regex: "/content/blog/"}}) {
-            edges {
-              node {
-                id
-                fields {
-                  route
-                }
-              }
-            }
-          }
-        }
-      `).then(result => {
-        if (result.errors) {
-          console.error(result.errors)
-          reject(result.errors)
-        }
+// exports.createPages = ({ graphql, actions }) => {
+//   return new Promise((resolve, reject) => {
+//     resolve(
+//       graphql(`
+//         query CreatePagesQuery {
+//           allMdx(filter: {fileAbsolutePath: {regex: "/content/blog/"}}) {
+//             edges {
+//               node {
+//                 id
+//                 fields {
+//                   route
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       `).then(result => {
+//         if (result.errors) {
+//           console.error(result.errors)
+//           reject(result.errors)
+//         }
 
-        result.data.allMdx.edges.forEach(({ node }) => {
-          actions.createPage({
-            // Encode the route
-            path: `/blog` + node.fields.route,
-            // Layout for the page
-            component: path.resolve("./src/layouts/BlogPage.tsx"),
-            // Values defined here are injected into the page as props and can
-            // be passed to a GraphQL query as arguments
-            context: {
-              id: node.id,
-            },
-          })
-        })
-      })
+//         result.data.allMdx.edges.forEach(({ node }) => {
+//           actions.createPage({
+//             // Encode the route
+//             path: `/blog` + node.fields.route,
+//             // Layout for the page
+//             component: path.resolve("./src/layouts/BlogPage.tsx"),
+//             // Values defined here are injected into the page as props and can
+//             // be passed to a GraphQL query as arguments
+//             context: {
+//               id: node.id,
+//             },
+//           })
+//         })
+//       })
     
       
       
-    )
-  })
-}
+//     )
+//   })
+// }
 
 // /**
 //  * Add the file-system as an api proxy:

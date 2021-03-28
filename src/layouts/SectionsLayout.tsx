@@ -6,7 +6,7 @@ import { WindowLocation } from "@reach/router"
 import { AnimatePresence, motion } from "framer-motion"
 import { LocationBar } from "components/LocationBar"
 import { IOQueryData } from "pages/io"
-import Pdf from "react-to-pdf"
+// import Pdf from "react-to-pdf"
 
 const ContentContainerVariants = {
   expanded: {
@@ -100,7 +100,7 @@ export default ({
   filters?: { tags: string[]; sources: string[] }
   setFilters?: (state: { tags: string[]; sources: string[] } | null) => void
 }) => {
-  const ref = useRef(null)
+  // const ref = useRef(null)
 
   const animate =
     current && current.state && current.state.animate
@@ -216,39 +216,38 @@ export default ({
 
   return (
     <>
-      {" "}
-      {window ? (
-        <Pdf
-          x={18}
-          y={18}
-          imgWidth={8}
-          pageHeight={11}
-          scale={3}
-          targetRef={ref}
-          filename="timothyliamfitzgerald-resume.pdf"
-          options={{ orientation: "p", unit: "in", format: [8.5, 11] }}
-        >
-          {({ toPdf }) => {
-            return (
-              location.pathname !== "/" && (
-                <LocationBar
-                  path={[sectionTitle, title || ""]}
-                  initial={current && current.state ? "fadedOut" : "fadedIn"}
-                  animate={"fadedIn"}
-                  location={location}
-                  tags={metaTypes.tags.length > 0 ? metaTypes.tags : undefined}
-                  sources={
-                    metaTypes.sources.length > 0 ? metaTypes.sources : undefined
-                  }
-                  filters={filters ? filters : undefined}
-                  toggleFilter={toggleFilter}
-                  setFilters={setFilters}
-                  generatePdf={toPdf}
-                />
-              )
-            )
-          }}
-        </Pdf>
+      {
+        // window ? (
+        //   <Pdf
+        //     x={18}
+        //     y={18}
+        //     imgWidth={8}
+        //     pageHeight={11}
+        //     scale={3}
+        //     targetRef={ref}
+        //     filename="timothyliamfitzgerald-resume.pdf"
+        //     options={{ orientation: "p", unit: "in", format: [8.5, 11] }}
+        //   >
+        //     {({ toPdf }) => {
+        //       return (
+        location.pathname !== "/" && (
+          <LocationBar
+            path={[sectionTitle, title || ""]}
+            initial={current && current.state ? "fadedOut" : "fadedIn"}
+            animate={"fadedIn"}
+            location={location}
+            tags={metaTypes.tags.length > 0 ? metaTypes.tags : undefined}
+            sources={
+              metaTypes.sources.length > 0 ? metaTypes.sources : undefined
+            }
+            filters={filters ? filters : undefined}
+            toggleFilter={toggleFilter}
+            setFilters={setFilters}
+            // generatePdf={toPdf}
+          />
+        )
+      }
+      {/* </Pdf>
       ) : (
         location.pathname !== "/" && (
           <LocationBar
@@ -265,7 +264,7 @@ export default ({
             setFilters={setFilters}
           />
         )
-      )}
+      )} */}
       <InnerBodyFadeContainer
         initial={current && current.state ? "fadedOut" : "fadedIn"}
         animate={"fadedIn"}
@@ -277,7 +276,7 @@ export default ({
                 initial={initial}
                 animate={animate}
                 key={sectionTitle + "ContentContainer"}
-                ref={ref}
+                // ref={ref}
               >
                 {children}
               </ContentContainer>

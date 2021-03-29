@@ -834,7 +834,7 @@ export const HeaderSlashCard = ({
                       <InstagramIcon />
                     </a>
                     <a
-                      href={"https://linkedin.com/timlfitzgerald"}
+                      href={"https://linkedin.com/in/timlfitzgerald"}
                       target={"_blank"}
                       rel="noreferrer"
                     >

@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useRef } from "react"
+import React, { ReactNode, useState } from "react"
 import { Box } from "rebass/styled-components"
 import styled from "styled-components"
 import { TRANSITION_DURATION } from "../Theme"

@@ -802,7 +802,7 @@ export const HeaderSlashCard = ({
                       initial={initial || getCurrentInitial()}
                       variants={getTextContainerVariants(16)}
                     >
-                      systems engineer
+                      software engineer
                     </DescH2>
                     <DescH2
                       initial={initial || getCurrentInitial()}

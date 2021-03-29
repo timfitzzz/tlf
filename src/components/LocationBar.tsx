@@ -135,7 +135,7 @@ export interface ILocationBar {
   filters?: { tags: string[]; sources: string[] }
   toggleFilter?: (type: "source" | "tag", value: string) => void
   setFilters?: (filters: { tags: string[]; sources: string[] } | null) => void
-  generatePdf?: () => void
+  downloadUrl?: string
 }
 
 const LocationBarTagMenu = styled.div`
@@ -183,8 +183,10 @@ const ClearFiltersButton = styled.div<{ activated: boolean }>`
   cursor: pointer;
 `
 
-const PdfDownloadButton = styled.div`
+const PdfDownloadButton = styled.a`
   cursor: pointer;
+  text-decoration: none;
+  margin-left: 4px;
 `
 
 export const LocationBar = ({
@@ -196,7 +198,7 @@ export const LocationBar = ({
   filters,
   toggleFilter,
   setFilters,
-  generatePdf,
+  downloadUrl,
 }: ILocationBar) => {
   const { w } = WindowConfig.useContainer() as { h: number; w: number }
 
@@ -291,8 +293,8 @@ export const LocationBar = ({
           ) : (
             <></>
           )}
-          {generatePdf ? (
-            <PdfDownloadButton onClick={() => generatePdf()}>
+          {downloadUrl ? (
+            <PdfDownloadButton href={downloadUrl} download>
               🖫
             </PdfDownloadButton>
           ) : (

@@ -88,6 +88,7 @@ export default ({
   data,
   filters,
   setFilters,
+  downloadUrl,
 }: {
   sectionTitle: string
   current: any
@@ -99,6 +100,7 @@ export default ({
   // sources?: string[]
   filters?: { tags: string[]; sources: string[] }
   setFilters?: (state: { tags: string[]; sources: string[] } | null) => void
+  downloadUrl?: string
 }) => {
   // const ref = useRef(null)
 
@@ -243,7 +245,7 @@ export default ({
             filters={filters ? filters : undefined}
             toggleFilter={toggleFilter}
             setFilters={setFilters}
-            // generatePdf={toPdf}
+            downloadUrl={downloadUrl}
           />
         )
       }

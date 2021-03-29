@@ -5,13 +5,19 @@ import { useTransitionState } from "gatsby-plugin-transition-link/hooks"
 import React from "react"
 import { WindowLocation } from "@reach/router"
 import { graphql, StaticQuery } from "gatsby"
+const CVPDF = require("../../static/assets/media/tim.l.fitzgerald.resume.march.2020.pdf") as string
 
 export default function CV({ location }: { location: WindowLocation }) {
   const state = useTransitionState()
   const { current } = state
 
   return (
-    <SectionsLayout current={current} sectionTitle={"CV"} location={location}>
+    <SectionsLayout
+      current={current}
+      sectionTitle={"CV"}
+      location={location}
+      downloadUrl={CVPDF}
+    >
       <StaticQuery
         query={graphql`
           query cvQuery {

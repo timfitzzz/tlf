@@ -11,6 +11,21 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [
+          'G-4Q333Y7S0R'
+        ],
+        gtagConfig: {
+          anonymize_ip: true,
+          cookie_expires: 0
+        }
+      },
+      pluginConfig: {
+        head: true
+      }
+    },
+    {
       resolve: "gatsby-plugin-mdx",
       options: {
         extensions: [".mdx", ".md"],

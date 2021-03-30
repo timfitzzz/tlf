@@ -5,6 +5,7 @@ import { useTransitionState } from "gatsby-plugin-transition-link/hooks"
 import React from "react"
 import { WindowLocation } from "@reach/router"
 import { graphql, StaticQuery } from "gatsby"
+import { Helmet } from "react-helmet"
 const CVPDF = require("../../static/assets/media/tim.l.fitzgerald.resume.march.2020.pdf") as string
 
 export default function CV({ location }: { location: WindowLocation }) {
@@ -18,6 +19,11 @@ export default function CV({ location }: { location: WindowLocation }) {
       location={location}
       downloadUrl={CVPDF}
     >
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Tim L. Fitzgerald - CV</title>
+        <link rel="canonical" href="https://timfitz.dev/cv" />
+      </Helmet>
       <StaticQuery
         query={graphql`
           query cvQuery {

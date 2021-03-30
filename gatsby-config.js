@@ -5,10 +5,11 @@ const playgroundHastPlugin = require("./src/utils/playgroundHastPlugin")
 module.exports = {
   siteMetadata: {
     title: "Tim L. Fitzgerald",
-    description: "-- placeholder --",
+    description: "Personal website and portfolio",
     author: "timothyliamfitzgerald@gmail.com",
   },
   plugins: [
+    `gatsby-plugin-react-helmet`,
     {
       resolve: "gatsby-plugin-mdx",
       options: {

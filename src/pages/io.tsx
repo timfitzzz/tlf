@@ -6,6 +6,7 @@ import { WindowLocation } from "@reach/router"
 import { useTransitionState } from "gatsby-plugin-transition-link/hooks"
 import { SoundCloudPlayerWidget } from "components/IOWidgets/SoundCloudWidget"
 import { GitHubWidget } from "components/IOWidgets/GitHubWidget"
+import { Helmet } from "react-helmet"
 
 export interface IOQueryData {
   allMdx: {
@@ -81,6 +82,11 @@ export default function IO({ location }: { location: WindowLocation }) {
           filters={filters ? filters : undefined}
           setFilters={setFilters}
         >
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>Tim L. Fitzgerald - I/O</title>
+            <link rel="canonical" href="https://timfitz.dev/io" />
+          </Helmet>
           {data.allMdx.edges
             .sort((edgeA, edgeB) => {
               return (

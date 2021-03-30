@@ -96,8 +96,6 @@ export default ({
   title?: string
   children?: ReactNode[] | ReactNode
   data?: IOQueryData
-  // tags?: string[]
-  // sources?: string[]
   filters?: { tags: string[]; sources: string[] }
   setFilters?: (state: { tags: string[]; sources: string[] } | null) => void
   downloadUrl?: string
@@ -157,116 +155,24 @@ export default ({
         sources: thisType === "sources" ? [value] : [],
       })
     }
-
-    //
-    // console.log(`toggling ${type} filter for ${value}`)
-    // console.log(
-    //   filters,
-    //   filters ? filters[thisType] : "no filters set",
-    //   setFilters
-    // )
-    // if (filters && filters[thisType] && setFilters) {
-    //   let valIndex = filters[thisType].indexOf(value)
-    //   if (valIndex !== -1) {
-    //     console.log("removing filter")
-    //     if (filters[thisType].length === 1 && filters[otherType].length === 0) {
-    //       console.log(
-    //         `found filter ${thisType} length is 1, other is 0, setting null`
-    //       )
-    //       setFilters(null)
-    //     } else if (filters[thisType].length === metaTypes[thisType].length) {
-    //       console.log(
-    //         `found filter ${thisType} length is same as known metaType length`
-    //       )
-    //       if (filters[otherType].length === 0) {
-    //         console.log(
-    //           "there are no other filters in the other type, so setting null"
-    //         )
-    //         setFilters(null)
-    //       } else {
-    //         console.log(
-    //           "there are other filters in the other type, so setting this type to 0 length"
-    //         )
-    //         setFilters({
-    //           ...filters,
-    //           [thisType]: [],
-    //         })
-    //       }
-    //     } else {
-    //       setFilters({
-    //         ...filters,
-    //         [thisType]: filters[thisType].filter((val) => val !== value),
-    //       })
-    //     }
-    //   } else {
-    //     console.log("adding filter")
-    //     setFilters({
-    //       ...filters,
-    //       [thisType]:
-    //         valIndex === -1
-    //           ? [...filters[thisType], value]
-    //           : filters[thisType].filter((val) => val !== value),
-    //     })
-    //   }
-    // } else if ((setFilters && type === "source") || "tag") {
-    //   setFilters!({
-    //     sources: type === "source" ? [value] : [],
-    //     tags: type === "source" ? [] : [value],
-    //   })
-    // }
   }
 
   return (
     <>
-      {
-        // window ? (
-        //   <Pdf
-        //     x={18}
-        //     y={18}
-        //     imgWidth={8}
-        //     pageHeight={11}
-        //     scale={3}
-        //     targetRef={ref}
-        //     filename="timothyliamfitzgerald-resume.pdf"
-        //     options={{ orientation: "p", unit: "in", format: [8.5, 11] }}
-        //   >
-        //     {({ toPdf }) => {
-        //       return (
-        location.pathname !== "/" && (
-          <LocationBar
-            path={[sectionTitle, title || ""]}
-            initial={current && current.state ? "fadedOut" : "fadedIn"}
-            animate={"fadedIn"}
-            location={location}
-            tags={metaTypes.tags.length > 0 ? metaTypes.tags : undefined}
-            sources={
-              metaTypes.sources.length > 0 ? metaTypes.sources : undefined
-            }
-            filters={filters ? filters : undefined}
-            toggleFilter={toggleFilter}
-            setFilters={setFilters}
-            downloadUrl={downloadUrl}
-          />
-        )
-      }
-      {/* </Pdf>
-      ) : (
-        location.pathname !== "/" && (
-          <LocationBar
-            path={[sectionTitle, title || ""]}
-            initial={current && current.state ? "fadedOut" : "fadedIn"}
-            animate={"fadedIn"}
-            location={location}
-            tags={metaTypes.tags.length > 0 ? metaTypes.tags : undefined}
-            sources={
-              metaTypes.sources.length > 0 ? metaTypes.sources : undefined
-            }
-            filters={filters ? filters : undefined}
-            toggleFilter={toggleFilter}
-            setFilters={setFilters}
-          />
-        )
-      )} */}
+      {location.pathname !== "/" && (
+        <LocationBar
+          path={[sectionTitle, title || ""]}
+          initial={current && current.state ? "fadedOut" : "fadedIn"}
+          animate={"fadedIn"}
+          location={location}
+          tags={metaTypes.tags.length > 0 ? metaTypes.tags : undefined}
+          sources={metaTypes.sources.length > 0 ? metaTypes.sources : undefined}
+          filters={filters ? filters : undefined}
+          toggleFilter={toggleFilter}
+          setFilters={setFilters}
+          downloadUrl={downloadUrl}
+        />
+      )}
       <InnerBodyFadeContainer
         initial={current && current.state ? "fadedOut" : "fadedIn"}
         animate={"fadedIn"}
@@ -278,7 +184,6 @@ export default ({
                 initial={initial}
                 animate={animate}
                 key={sectionTitle + "ContentContainer"}
-                // ref={ref}
               >
                 {children}
               </ContentContainer>

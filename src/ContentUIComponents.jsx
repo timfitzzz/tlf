@@ -1,6 +1,80 @@
 import React, { useState } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
+import PhoneIcon from '../static/assets/media/phone.svg'
+import EmailIcon from '../static/assets/media/email-icon.svg'
+
+export const CVHeaderEntriesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1px 0px 1px 0px;
+`
+
+export const CVHeaderEntryContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 100%;
+  align-content: center;
+
+  @media (max-width: 680px) {
+    font-size: 12px;
+    padding-top: 2px;
+  }
+
+  @media (min-width: 681px) {
+    border-left: 1px solid ${p => p.theme.colors.darkBackground};
+    padding-left: 8px;
+    margin-left: 8px;
+  }
+
+`
+
+export const CVHeaderEmailIcon = styled(({className}) => 
+  <div className={className}><EmailIcon/></div>
+)`
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: -4px;
+
+  @media (max-width: 680px) {
+    svg {
+      height: 12px;
+    }
+  }
+
+  @media (min-width: 681px) {
+    svg {
+      height: 16px;
+    }
+  }
+
+`
+
+export const CVHeaderPhoneIcon = styled(({className}) => 
+  <div className={className}><PhoneIcon/></div>
+)`
+display: flex;
+margin-top: auto;
+margin-bottom: auto;
+margin-left: -4px;
+
+@media (max-width: 680px) {
+  svg {
+    height: 12px;
+  }
+}
+
+@media (min-width: 681px) {
+  svg {
+    height: 16px;
+  }
+}
+
+`
 
 export const CVHeaderContainer = styled.div`
   padding: 4px;
@@ -8,10 +82,24 @@ export const CVHeaderContainer = styled.div`
   border-bottom: 1px double ${p => p.theme.colors.darkBackground};
   margin-bottom: 8px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (max-width: 680px) {
+    flex-direction: column;
+    width: 260px;
+  }
+
+  @media (min-width: 681px) {
+    flex-direction: row;
+  }
+
+
 `
 
-export const CVHeaderName = styled.span`
+export const CVHeaderName = styled.div`
   font-family: ${p=>p.theme.fonts.title1};
   font-size: 16px;
   line-height: 16px;
@@ -20,18 +108,39 @@ export const CVHeaderName = styled.span`
   font-weight: 500;
 `
 
-export const CVHeaderItem = styled.span`
+export const CVHeaderItem = styled.div`
   font-family: ${p=>p.theme.fonts.title1};
   font-size: 16px;
   line-height: 16px;
   margin-top: auto;
   margin-bottom: auto;
   font-weight: 400;
-  padding-left: 8px;
-  margin-left: 8px;
+
+
   text-align: center;
   justify-content: center;
-  border-left: 1px solid ${p => p.theme.colors.darkBackground}
+
+  @media (max-width: 680px) {
+    flex-direction: column;
+    padding-left: 0px;
+    margin-left: 0px;
+
+    &:nth-of-type(2) {
+      margin-left: 8px!important;
+      padding-left: 8px!important;
+      border-left: 1px solid ${p => p.theme.colors.darkBackground};
+    }
+
+  }
+
+  @media (min-width: 681px) {
+    flex-direction: row;
+    border-left: 1px solid ${p => p.theme.colors.darkBackground};
+    padding-left: 8px;
+    margin-left: 8px;
+  }
+
+
 `
 
 export const CVSectionTitle = styled.div`

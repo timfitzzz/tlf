@@ -4,6 +4,7 @@ import { WindowConfig } from "hooks/useWindowConfig"
 import React from "react"
 import styled from "styled-components"
 import { SelectableSource, SelectableTag } from "./IOWidgets/IOCommon"
+import SaveIcon from "../../static/assets/media/download.svg"
 
 export const transitions = {
   LocationBarFadeContainer: {
@@ -181,12 +182,23 @@ const ClearFiltersButton = styled.div<{ activated: boolean }>`
   color: ${(p) =>
     p.activated ? p.theme.palette.darkBackground : "transparent"};
   cursor: pointer;
+  display: flex;
 `
 
 const PdfDownloadButton = styled.a`
   cursor: pointer;
   text-decoration: none;
   margin-left: 4px;
+  margin-top: auto;
+  margin-bottom: auto;
+
+  svg {
+    fill: ${(p) => p.theme.palette.darkBackground};
+    height: 18px;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: block;
+  }
 `
 
 export const LocationBar = ({
@@ -295,7 +307,7 @@ export const LocationBar = ({
           )}
           {downloadUrl ? (
             <PdfDownloadButton href={downloadUrl} download>
-              🖫
+              <SaveIcon />
             </PdfDownloadButton>
           ) : (
             <></>

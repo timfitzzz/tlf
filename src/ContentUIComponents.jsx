@@ -3,6 +3,7 @@ import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 import PhoneIcon from '../static/assets/media/phone.svg'
 import EmailIcon from '../static/assets/media/email-icon.svg'
+import LocationIcon from '../static/assets/media/my_location.svg'
 
 export const CVHeaderEntriesContainer = styled.div`
   display: flex;
@@ -19,12 +20,12 @@ export const CVHeaderEntryContainer = styled.div`
   height: 100%;
   align-content: center;
 
-  @media (max-width: 680px) {
+  @media (max-width: 685px) {
     font-size: 12px;
     padding-top: 2px;
   }
 
-  @media (min-width: 681px) {
+  @media (min-width: 686px) {
     border-left: 1px solid ${p => p.theme.colors.darkBackground};
     padding-left: 8px;
     margin-left: 8px;
@@ -32,21 +33,19 @@ export const CVHeaderEntryContainer = styled.div`
 
 `
 
-export const CVHeaderEmailIcon = styled(({className}) => 
-  <div className={className}><EmailIcon/></div>
-)`
+export const CVHeaderIcon = styled(({className, Icon}) => <div className={className}><Icon/></div>)`
   display: flex;
   margin-top: auto;
   margin-bottom: auto;
   margin-left: -4px;
 
-  @media (max-width: 680px) {
+  @media (max-width: 685px) {
     svg {
       height: 12px;
     }
   }
 
-  @media (min-width: 681px) {
+  @media (min-width: 686px) {
     svg {
       height: 16px;
     }
@@ -54,30 +53,12 @@ export const CVHeaderEmailIcon = styled(({className}) =>
 
 `
 
-export const CVHeaderPhoneIcon = styled(({className}) => 
-  <div className={className}><PhoneIcon/></div>
-)`
-display: flex;
-margin-top: auto;
-margin-bottom: auto;
-margin-left: -4px;
-
-@media (max-width: 680px) {
-  svg {
-    height: 12px;
-  }
-}
-
-@media (min-width: 681px) {
-  svg {
-    height: 16px;
-  }
-}
-
-`
+export const CVHeaderEmailIcon = styled(CVHeaderIcon).attrs(p => ({Icon: EmailIcon}))``
+export const CVHeaderPhoneIcon = styled(CVHeaderIcon).attrs(p => ({Icon: PhoneIcon}))``
+export const CVHeaderLocationIcon = styled(CVHeaderIcon).attrs(p => ({Icon: LocationIcon}))``
 
 export const CVHeaderContainer = styled.div`
-  padding: 4px;
+  padding: 4px 0px 4px 0px;
   border-top: 1px double ${p => p.theme.colors.darkBackground};
   border-bottom: 1px double ${p => p.theme.colors.darkBackground};
   margin-bottom: 8px;
@@ -87,16 +68,15 @@ export const CVHeaderContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  @media (max-width: 680px) {
+  @media (max-width: 685px) {
     flex-direction: column;
-    width: 260px;
+    width: 100%;  
+    margin-bottom: 16px;
   }
 
-  @media (min-width: 681px) {
+  @media (min-width: 686px) {
     flex-direction: row;
   }
-
-
 `
 
 export const CVHeaderName = styled.div`
@@ -120,7 +100,7 @@ export const CVHeaderItem = styled.div`
   text-align: center;
   justify-content: center;
 
-  @media (max-width: 680px) {
+  @media (max-width: 685px) {
     flex-direction: column;
     padding-left: 0px;
     margin-left: 0px;
@@ -133,7 +113,7 @@ export const CVHeaderItem = styled.div`
 
   }
 
-  @media (min-width: 681px) {
+  @media (min-width: 686px) {
     flex-direction: row;
     border-left: 1px solid ${p => p.theme.colors.darkBackground};
     padding-left: 8px;

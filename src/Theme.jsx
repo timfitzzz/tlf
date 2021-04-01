@@ -8,7 +8,7 @@ import React, { Fragment } from "react"
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components"
 import { Button } from "rebass/styled-components"
 import { Row, Column, Section } from "./components/elements";
-import { CVColumn, CVDatesDisplay, CVRow, CVSectionTitle, CVEmployer, CVDates, CVJobTitle, CVLocation, CVDescription, CVSection, CVEntryContainer, CVDescriptionListItem, CVDescriptionList, CVFlexBreak, CVJobTitleRow, CVJobTitleTextColumn, CVDescriptionContainer, CVIntro, CVHeaderContainer, CVHeaderItem, CVHeaderName, CVHeaderEmailIcon, CVHeaderPhoneIcon, CVHeaderEntryContainer, CVHeaderEntriesContainer } from './ContentUIComponents';
+import { CVColumn, CVDatesDisplay, CVRow, CVSectionTitle, CVEmployer, CVDates, CVJobTitle, CVLocation, CVDescription, CVSection, CVEntryContainer, CVDescriptionListItem, CVDescriptionList, CVFlexBreak, CVJobTitleRow, CVJobTitleTextColumn, CVDescriptionContainer, CVIntro, CVHeaderContainer, CVHeaderItem, CVHeaderName, CVHeaderEmailIcon, CVHeaderPhoneIcon, CVHeaderEntryContainer, CVHeaderEntriesContainer, CVHeaderLocationIcon } from './ContentUIComponents';
 
 const colors = {
   gold: 'gold',
@@ -192,6 +192,7 @@ export const UIComponents = {
   CVJobTitleTextColumn: props => <CVJobTitleTextColumn {...props}/>,
   CVHeaderEmailIcon: props => <CVHeaderEmailIcon {...props}/>,
   CVHeaderPhoneIcon: props => <CVHeaderPhoneIcon {...props}/>,
+  CVHeaderLocationIcon: props => <CVHeaderLocationIcon {...props}/>,
   CVHeaderEntryContainer: props => <CVHeaderEntryContainer {...props}/>,
   CVHeaderEntriesContainer: props => <CVHeaderEntriesContainer {...props}/>
 }

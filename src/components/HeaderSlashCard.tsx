@@ -32,17 +32,11 @@ const transitions = {
     expanded: {
       delay: TRANSITION_DURATION * 0.1,
       duration: TRANSITION_DURATION * 0.6,
-      // when: "beforeChildren",
-      // staggerChildren: TRANSITION_DURATION / 20,
-      // delayChildren: TRANSITION_DURATION * 0.8,
-      // staggerDirection: 1,
       ease: "easeIn",
     },
     contracted: {
       delay: TRANSITION_DURATION * 0.3,
       duration: TRANSITION_DURATION * 0.4,
-      // when: "afterChildren",
-      // staggerChildren: TRANSITION_DURATION / 20,
       ease: "easeOut",
     },
   },
@@ -55,7 +49,6 @@ const transitions = {
       delay: TRANSITION_DURATION * 0.2,
       duration: TRANSITION_DURATION * 0.5,
       times: [0, 0.2, 1],
-      // duration: TRANSITION_DURATION * 0.8,
     },
   },
   MenuMiddle: {
@@ -149,25 +142,11 @@ const transitions = {
       delay: TRANSITION_DURATION * 0.0,
       duration: TRANSITION_DURATION * 1,
       times: [0, 0.1, 0.3, 0.7, 0.9, 1],
-      // times: [
-      //   0,
-      //   TRANSITION_DURATION * 0.25,
-      //   TRANSITION_DURATION * 0.5,
-      //   TRANSITION_DURATION * 0.75,
-      //   TRANSITION_DURATION,
-      // ],
     },
     contracted: {
       delay: TRANSITION_DURATION * 0.0,
       duration: TRANSITION_DURATION,
       times: [0, 0.1, 0.4, 0.7, 0.9, 0.95, 1],
-      // times: [
-      //   0,
-      //   TRANSITION_DURATION * 0.25,
-      //   TRANSITION_DURATION * 0.5,
-      //   TRANSITION_DURATION * 0.75,
-      //   TRANSITION_DURATION,
-      // ],
     },
   },
   MenuPositionContainer: {
@@ -190,17 +169,9 @@ const getMenuCardContainerVariants = (
   contracted: TargetAndTransition
   fadeIn: { opacity: [number, number] }
 } => {
-  // function getWidthTween(percentageOfMargin) {
-  //   if (windowWidth) {
-  //     return MIN_WIDTH + (windowWidth - MIN_WIDTH) * percentageOfMargin
-  //   }
-  // }
-
   let variants = {
     expanded: {
       width: windowWidth ? [null, MIN_WIDTH] : MIN_WIDTH,
-      // display: "flex",
-      // flexDirection: "column",
 
       marginTop: windowHeight
         ? [null, (windowHeight - 320) / 2 + "px"]
@@ -211,7 +182,6 @@ const getMenuCardContainerVariants = (
     contracted: {
       width: windowWidth ? [null, windowWidth - 16] : "100%",
       marginTop: "8px",
-      // flexDirection: "row-reverse",
       transition: transitions.MenuCardContainer.contracted,
     },
     fadeIn: {
@@ -323,7 +293,6 @@ const MenuMiddleColumnVariants = {
     display: "flex",
   },
   contracted: {
-    // opacity: [null, 1, 0.9, 0.6, 0.2, 0],
     width: [null, 0],
     height: [null, "0%"],
     transition: transitions.MenuMiddleColumn.contracted,
@@ -365,7 +334,7 @@ const PortraitPhotoBoxVariants = {
       null,
       theme.palette.darkBackground,
       theme.palette.darkBackground,
-    ], //"rgba(0,0,0,1)",
+    ],
     transition: transitions.PortraitPhotoBox.expanded,
   },
   contracted: {
@@ -575,13 +544,6 @@ const SocialIconsContainer = styled(motion.div).attrs(() => ({
   }
 `
 
-// const SocialIcon = styled(motion.img).attrs(() => ({
-//   variants: {
-//     expanded: {},
-//     contracted: {},
-//   },
-// }))``
-
 interface TopNavLinkProps {
   readonly iscurrent: boolean
 }
@@ -623,7 +585,7 @@ export const HeaderSlashCard = ({
 
   function getMenuInitial(currentPath, lastPath) {
     return currentPath == lastPath
-      ? false // { opacity: 0, transition: { duration: 0.5 } }
+      ? false
       : lastPath === "/"
       ? "expanded"
       : "contracted"
@@ -681,13 +643,6 @@ export const HeaderSlashCard = ({
     setCurrentPath(location.pathname)
   }, [location.pathname])
 
-  // useEffect(() => {
-  //   if (windowWidth) {
-  //     console.log("setting width ", windowWidth, ", prev width ", width)
-  //     setWidth(windowWidth)
-  //   }
-  // }, [windowWidth])
-  // imageData.allImageSharp.edges[0].node.resize.src
   return (
     <AnimatePresence>
       <MenuCardFadeContainer initial={initialOpacity} animate={animateOpacity}>
@@ -697,7 +652,6 @@ export const HeaderSlashCard = ({
             windowHeight={windowHeight}
             animate={animate}
             initial={initial}
-            // style={initial ? { x, opacity: [0, 1] } : { x }}
             layout
           >
             <MenuCard>
@@ -890,9 +844,6 @@ export const HeaderSlashCard = ({
               </MenuMiddle>
             </MenuCard>
           </MenuCardContainer>
-          // )
-          // : (
-          //   <div style={{ height: 75, width: "100%" }}></div>
         )}
       </MenuCardFadeContainer>
     </AnimatePresence>

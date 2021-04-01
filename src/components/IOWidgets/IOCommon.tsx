@@ -34,10 +34,6 @@ export const IODescription = styled.div``
 export const IOEntryContainer = styled.div`
   display: flex;
   flex-direction: column;
-  /* margin: 8px; */
-  /* padding: 16px; */
-  /* border: 2px solid ${(p) => p.theme.palette.lightBackground};
-  border-radius: 16px; */
   box-sizing: border-box;
   width: 100%;
   max-width: 650px;
@@ -89,10 +85,6 @@ export const IOTag = styled(Tag)<{ selected: boolean }>`
   margin-top: 2px;
   margin-bottom: 2px;
 
-  /* background-color: ${(p) =>
-    p.theme.tagColors[p.tag.toLowerCase()]
-      ? p.theme.tagColors[p.tag.toLowerCase()]
-      : p.theme.tagColors.default}; */
   cursor: pointer;
   ${(p) =>
     p.selected

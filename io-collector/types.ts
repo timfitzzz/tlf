@@ -6,6 +6,5 @@ export interface IOMDXRecord {
   description: string
   URI: string
   tags: string[]
-  // data: string
   body: string[]
 }

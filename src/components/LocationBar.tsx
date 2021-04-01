@@ -53,7 +53,6 @@ export const LocationBarContainer = styled.div<{ windowWidth: number }>`
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
-  /* margin-right: 8px; */
   margin-bottom: auto;
   box-sizing: border-box;
   height: 100%;
@@ -62,7 +61,6 @@ export const LocationBarContainer = styled.div<{ windowWidth: number }>`
 export const LocationBarBody = styled.div`
   flex-direction: row;
   flex-wrap: no-wrap;
-  /* width: 100%; */
   height: 100%;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -74,8 +72,6 @@ export const LocationBarBody = styled.div`
   color: ${(p) => p.theme.palette.darkBackground};
   margin-top: auto;
   margin-bottom: auto;
-  /* margin-left: auto;
-  margin-right: auto; */
   padding-left: 16px;
   padding-right: 16px;
   box-sizing: border-box;
@@ -161,16 +157,6 @@ const LocationBarTypeTitle = styled.div`
   font-variant: small-caps;
   height: fit-content;
 `
-
-// const LocationBarVerticalDivider = styled.div`
-//   height: 20px;
-//   width: 2px;
-//   background-color: white;
-//   margin-top: auto;
-//   margin-bottom: auto;
-//   margin-left: 8px;
-//   margin-right: 16px;
-// `
 
 const ClearFiltersButton = styled.div<{ activated: boolean }>`
   font-size: 10px;

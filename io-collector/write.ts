@@ -20,7 +20,6 @@ export function generateIOMDXFileContents(
   IOMDXFile += `URI: ${recordObject.URI}\r\n`
   IOMDXFile += `tags: \r\n`
   recordObject.tags.forEach((tag) => (IOMDXFile += `  - '${tag}'\r\n`))
-  // IOMDXFile += `data: ${recordObject.data}\r\n`
   IOMDXFile += `---\r\n`
   IOMDXFile += `\r\n`
   rawBody

@@ -12,25 +12,7 @@ import {
 } from "./IOCommon"
 import SoundCloudIcon from "../../../static/assets/media/soundcloud.svg"
 
-// export const CustomPlayerContainer = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   /* margin: 8px; */
-//   /* padding: 16px; */
-//   /* border: 2px solid ${p => p.theme.palette.lightBackground};
-//   border-radius: 16px; */
-//   box-sizing: border-box;
-//   width: 100%;
-//   max-width: 330px;
-//   min-width: 300px;
-// `
-
 const SoundCloudPlayerWidgetContainer = styled(IOEntryContainer)`
-  /* width: 50%;
-  max-width: 330px;
-  min-width: 250px;
-  margin-left: auto;
-  margin-right: auto; */
   flex-direction: row;
   flex-wrap: wrap;
 `
@@ -109,14 +91,6 @@ export const PlayerLabel = styled.div`
   width: 100%;
 `
 
-// export const TrackName = styled.div`
-//   font-family: ${p => p.theme.fonts.title1};
-//   font-weight: 700;
-//   font-size: 12px;
-//   margin-right: 0;
-//   margin-left: auto;
-// `
-
 export const ArtistContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -148,16 +122,8 @@ export const CustomProgress = styled(Progress)`
   overflow: hidden;
   cursor: pointer;
 
-  /* 
-  ::before {
-    content: "";
-    position: absolute
-  } */
-
   > div {
     border-radius: 3px 0 0 3px;
-    /* background-image: url(${(p) => p.waveformUrl});
-    background-color: 'orange'; */
     background-color: ${(p) => p.theme.palette.lightBackground}88;
     height: 100%;
     transition: width 0.2s ease-in;
@@ -171,8 +137,6 @@ const SoundCloudPlayerContainer = styled.div`
 
 export const SoundCloudPlayer = withSoundCloudAudio(
   ({ track, currentTime, duration, setArtworkUrl, ...props }) => {
-    // console.log(track)
-
     setArtworkUrl(track)
 
     return (
@@ -191,25 +155,6 @@ export const SoundCloudPlayer = withSoundCloudAudio(
               {...props}
             />
           </CustomPlayerControlsContainer>
-          {/* <TopSectionContainer>
-            <ArtistContainer>
-              <ArtistLink
-                href={track && track.user && track.user.permalink_url}
-              >
-                <ArtistLogo
-                  src={
-                    track &&
-                    track.user &&
-                    track.user.avatar_url.slice(
-                      0,
-                      track.user.avatar_url.length - 9
-                    ) + "t500x500.jpg"
-                  }
-                />
-                <PlayerLabel className="custom-player-title"></PlayerLabel>
-              </ArtistLink>
-            </ArtistContainer>
-          </TopSectionContainer> */}
         </CustomPlayerDetailsContainer>
       </SoundCloudPlayerContainer>
     )

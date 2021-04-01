@@ -8,9 +8,6 @@ import { Location as LocationProvider } from "@reach/router"
 import { MenuRootContainer } from "./components/MenuRootContainer"
 import BodyContainer from "components/BodyContainer"
 
-// TODO: Need to create gatsby-plugin-react-head
-// import { HeadProvider } from "react-head"
-
 export const Boot: React.FunctionComponent<{
   children: any
 }> = ({ children }) => {

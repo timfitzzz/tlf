@@ -1,6 +1,10 @@
 const fs = require("fs")
 import { DateTime } from "luxon"
-import Naive, { GHEvent, RenderedEventCollectionSet } from "naive-gh-events"
+import Naive, {
+  GHEvent,
+  RenderedEventCollectionSet,
+  NaiveConfig,
+} from "naive-gh-events"
 import axios, { AxiosRequestConfig } from "axios"
 import { IioRecordsListItem } from "../../collect"
 import { getLastRecordDate } from "../../getLastRecord"
@@ -129,9 +133,12 @@ export const collectGithub = ({
   mdxFolder,
   ioRecordsList,
 }: IcollectGithub) => {
-  const NaiveConfig = {
+  const NaiveConfig: NaiveConfig = {
     md: true,
     collapse: true,
+    markPrivate: true,
+    omitPrivateLinks: true,
+    italicizePrivateLinks: true,
   }
 
   getNewGithubEvents(personalAccessToken, ioRecordsList).then((userEvents) =>

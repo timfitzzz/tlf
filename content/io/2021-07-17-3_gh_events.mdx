@@ -1,0 +1,55 @@
+---
+templateKey: github
+source: github
+title: "GitHub activity, July 17, 2021 to July 24, 2021"
+date: 2021-07-24T00:00:00.000-04:00
+description: "Week of GitHub Activity"
+URI: https://github.com/timfitzzz
+tags: 
+  - 'GitHub'
+---
+
+[timfitzzz](https://github.com/timfitzzz) opened 5 issues in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* [Clear / Close Channel Refinements](https://github.com/timfitzzz/twitch-clipcatcher/issues/32): Convert clear clips button to two buttons "behind glass": clear clips only and clear annotations.  
+* [Left Pane Adjustment](https://github.com/timfitzzz/twitch-clipcatcher/issues/31): There's a broken implementation of drag and drop adjustment for the left column width; fix it.  
+* [Integrate Meta and Drama icons into Vertical Vote Count component; color code to indicate meta or drama status](https://github.com/timfitzzz/twitch-clipcatcher/issues/30): - [ ] Make Meta and Drama icons that can be used in the same place as UserPips
+  - [ ] Include Meta and Drama icons at the top of voting list
+  - [ ] Color code Vertical Vote Count to indicate meta and drama tags  
+* [Clip Stacks sorting issues](https://github.com/timfitzzz/twitch-clipcatcher/issues/29): There are a few issues with the way clip stacks are sorted.
+  
+  Sometimes the duration indicator in particular is noticeably wrong vis a vis the first clip shown. The same thing can occur with the other indicators, but is most meaningful wrt the duration.
+  
+  This is because the sorted value of the stack as a whole is in reference to the value displayed, but the first clip may be presented not because of that value but because of a preferred sort.
+  
+  Questions to resolve:
+  - [ ] Should Stack-level badges reflect the displayed clip or the stack as a whole? What is most useful vs least confusing?
+    - [ ] DURATION should reflect the displayed clip because it's confusing if it doesn't
+      - [ ] Should duration be displayed as a range, with the clip-specific indicator displayed on the clip?
+    - [ ] VIEWS should reflect the stack total because that's definitely the most useful
+    - [ ] TIME should reflect the stack as a whole because that's the most useful
+      - [ ] Should time be displayed as a range, with the clip-specific indicator displayed on the clip?
+    
+* [Reimagine tab selector and options panel](https://github.com/timfitzzz/twitch-clipcatcher/issues/28): The tab selector doesn't quite work because of the limited width of the left column. Also, the controls could take up the rest of the width of the channel title's section. Combine the current tab and the first line of the options panel and provide a different way to change tabs or create new ones.  
+
+[timfitzzz](https://github.com/timfitzzz) created comment [886094558](https://github.com/timfitzzz/twitch-clipcatcher/issues/28#issuecomment-886094558) on issue [Reimagine tab selector and options panel](https://github.com/timfitzzz/twitch-clipcatcher/issues/28) in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* This is fine for beta.  
+
+[timfitzzz](https://github.com/timfitzzz) closed 6 issues in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* [Clip Stacks](https://github.com/timfitzzz/twitch-clipcatcher/issues/2)  
+* [Reimagine tab selector and options panel](https://github.com/timfitzzz/twitch-clipcatcher/issues/28)  
+* [Auto-refresh page views](https://github.com/timfitzzz/twitch-clipcatcher/issues/17)  
+* [PlayerPane: Pop out](https://github.com/timfitzzz/twitch-clipcatcher/issues/3)  
+* [Clip Stacks sorting issues](https://github.com/timfitzzz/twitch-clipcatcher/issues/29)  
+* [Integrate Meta and Drama icons into Vertical Vote Count component; color code to indicate meta or drama status](https://github.com/timfitzzz/twitch-clipcatcher/issues/30)  
+
+[timfitzzz](https://github.com/timfitzzz) pushed 8 commits to refs/heads/main in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* [b2f31046622fca138f26b064bc8dca0d59a8ac4e](https://github.com/timfitzzz/twitch-clipcatcher/commits/b2f31046622fca138f26b064bc8dca0d59a8ac4e): Continued adjustment to clip stacks. Marking #2 resolved, filing bugs for remaining issues.  
+* [a5654c7b68c8fa028131474bec1d7042c522092e](https://github.com/timfitzzz/twitch-clipcatcher/commits/a5654c7b68c8fa028131474bec1d7042c522092e): Further adjusted clip stack summary per #2.  
+* [3050e858fd4b3a22560dc777fe5012d772447faa](https://github.com/timfitzzz/twitch-clipcatcher/commits/3050e858fd4b3a22560dc777fe5012d772447faa): redesigned tabs UI per #28  
+* [475d3e817233f436b6c44b8177ccd0fe24cea1a9](https://github.com/timfitzzz/twitch-clipcatcher/commits/475d3e817233f436b6c44b8177ccd0fe24cea1a9): Resolved #17: Added automatic page view refresh, once per minute  
+* [15b9849b803d78c89f4653e60f6aeb164bb030cf](https://github.com/timfitzzz/twitch-clipcatcher/commits/15b9849b803d78c89f4653e60f6aeb164bb030cf): Resolved #3: Added Player Pane popout controls and handled various UI situations involved in implementing the popout.  Improved PlayerPane title card slightly.  
+* [078cdd35196375e1d852d13cffe878a614699899](https://github.com/timfitzzz/twitch-clipcatcher/commits/078cdd35196375e1d852d13cffe878a614699899): Resolved #29: added duration badge to first clip of stack. Also rectified clip badges and stack badges and removed redundant iconography since the icons and/or visual cues  appear literally pixels away in the stack badges.  
+* [90bfd3fb59abd17b2651e70da3c1fb7fc5805d63](https://github.com/timfitzzz/twitch-clipcatcher/commits/90bfd3fb59abd17b2651e70da3c1fb7fc5805d63): Added duration span to stack-level duration badge and corrected sort order issue for duration, per #29  
+* [63bebd37cd8cd74063d0d490b813c940c846af35](https://github.com/timfitzzz/twitch-clipcatcher/commits/63bebd37cd8cd74063d0d490b813c940c846af35): Integrated Meta, Drama, and Veto indicators into VerticalVoteBadge. Adjusted per-clip Meta and Drama indicators to match. VerticalVoteBadge now changes color to match warning or danger states, depending on source of special tag. Resolves #30.  
+
+

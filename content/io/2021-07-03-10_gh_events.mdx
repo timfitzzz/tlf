@@ -1,0 +1,101 @@
+---
+templateKey: github
+source: github
+title: "GitHub activity, July 3, 2021 to July 10, 2021"
+date: 2021-07-10T00:00:00.000-04:00
+description: "Week of GitHub Activity"
+URI: https://github.com/timfitzzz
+tags: 
+  - 'GitHub'
+---
+
+[timfitzzz](https://github.com/timfitzzz) pushed 20 commits to refs/heads/main in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* [36718cc3c7c872c6ea158f1a694eaf69dbe4771d](https://github.com/timfitzzz/twitch-clipcatcher/commits/36718cc3c7c872c6ea158f1a694eaf69dbe4771d): Set up WhenAgo badge to handle retrying clip real time when vod doesn't come back right away. Checks once a minute between 2 and 5 minutes of clip age. We'll see if that's long enough or if we need to make that longer; in the meantime, can refresh manually as well.  
+* [3a426a747e98c61b54becb5cdd087bbebe3e7393](https://github.com/timfitzzz/twitch-clipcatcher/commits/3a426a747e98c61b54becb5cdd087bbebe3e7393): Adjusted join/part useEffect to avoid unwanted parts from channel. Fixed inconsistent display of 'clear clips' icon.  
+* [03db2b079af0b0359aef5613a20358bc3c048045](https://github.com/timfitzzz/twitch-clipcatcher/commits/03db2b079af0b0359aef5613a20358bc3c048045): Refactored Clips and badges and introduced new hook, useUpdateLock, to facilitate Lock function, which now works on the list of clips, upvotes, and tags. It does not block veto, drama, or meta designation updates. Also updated the clip stats display to indicate when there are clips waiting behind the lock, and updated Lock icon to make it more obvious when the display is locked. Finally, confirmed that trash functionality works, and decided that the current behavior (retains annotations, does not reset message count) is optimal for now. Resolves #25.  
+* [7b7e9440576e357a7d5b7127d05516f8bd836d15](https://github.com/timfitzzz/twitch-clipcatcher/commits/7b7e9440576e357a7d5b7127d05516f8bd836d15): Record button now determines whether ChatClient is joined or parted from a channel, addressing part of #25  
+* [c6efb94f8ff58e1621baccff2423ce369637e732](https://github.com/timfitzzz/twitch-clipcatcher/commits/c6efb94f8ff58e1621baccff2423ce369637e732): First steps towards #18 -- made it easier to change sort priority (wider drop targets).  
+* [3c3900001150c40850be42f56a62a8cee9d1ed91](https://github.com/timfitzzz/twitch-clipcatcher/commits/3c3900001150c40850be42f56a62a8cee9d1ed91): Removed debug console.logs  
+* [8fd9fd70f1fc5be0783277ce6b37c2e0f5032dd3](https://github.com/timfitzzz/twitch-clipcatcher/commits/8fd9fd70f1fc5be0783277ce6b37c2e0f5032dd3): Added favico, site title, and GA.  
+* [24a70b0ecdd37463235486944a34287530666c8a](https://github.com/timfitzzz/twitch-clipcatcher/commits/24a70b0ecdd37463235486944a34287530666c8a): Added conditional removal of link based on past annotations when messages are removed: resolves #21. Warmed up by moving intro panels to PlayerPane when logged out.  
+* [866928bd459dcae133293fc029e1156d959869f1](https://github.com/timfitzzz/twitch-clipcatcher/commits/866928bd459dcae133293fc029e1156d959869f1): Added Play button and implemented VETO functionality as an extra click and warning colors. Resolves #8  
+* [4b89f03dc2080622b06fee13982d14c3ad00a80f](https://github.com/timfitzzz/twitch-clipcatcher/commits/4b89f03dc2080622b06fee13982d14c3ad00a80f): Addressed rendering crash when a clip is removed entirely from a timeline.  
+* [52acd0d41ef0a3a035973b927ea239d3b857c603](https://github.com/timfitzzz/twitch-clipcatcher/commits/52acd0d41ef0a3a035973b927ea239d3b857c603): Added Popover logic to summarize Meta and Drama badges. Resolves #7  
+* [ed6dc256733ae02396482ec9dda5eedd66de4d79](https://github.com/timfitzzz/twitch-clipcatcher/commits/ed6dc256733ae02396482ec9dda5eedd66de4d79): Added SpecialBadge to display status of meta and drama tags. Need to add popover, per #7  
+* [8017ceac6aeeb2c7e2c0623e214066b7e197eb89](https://github.com/timfitzzz/twitch-clipcatcher/commits/8017ceac6aeeb2c7e2c0623e214066b7e197eb89): Corrections to README / added TOC. Resolves #11  
+* [877fc15f75b791e43ad13b353c45cb7d7fa1b086](https://github.com/timfitzzz/twitch-clipcatcher/commits/877fc15f75b791e43ad13b353c45cb7d7fa1b086): Added initial README  
+* [c301381af6290b38eb4b0bce844edcf4f683c3b6](https://github.com/timfitzzz/twitch-clipcatcher/commits/c301381af6290b38eb4b0bce844edcf4f683c3b6): Implemented and tested tagging, veto, meta, drama functions. Addressed all but the final bulletpoint in #5.  
+* [0e2e571d6b16d9a7aacaad5e08e85250880bed8d](https://github.com/timfitzzz/twitch-clipcatcher/commits/0e2e571d6b16d9a7aacaad5e08e85250880bed8d): Added handling for onMessageRemove and onTimeout, resolving #4  
+* [073d0730ffc50983556c44e9695c6e48b82efde0](https://github.com/timfitzzz/twitch-clipcatcher/commits/073d0730ffc50983556c44e9695c6e48b82efde0): Enable fullscreen in PlayerPane  
+* [e2187459eeff0c15aec39f02db43921018ad5033](https://github.com/timfitzzz/twitch-clipcatcher/commits/e2187459eeff0c15aec39f02db43921018ad5033): Disabling debug logging on Twitch Auth service  
+* [181c340eeafe182c97b3987ccf165140c3cd89a7](https://github.com/timfitzzz/twitch-clipcatcher/commits/181c340eeafe182c97b3987ccf165140c3cd89a7): Moved hyphen to start of capture group to try to resolve issue  
+* [6feb46d016f456c5c8e2026eee584e38fe5a427c](https://github.com/timfitzzz/twitch-clipcatcher/commits/6feb46d016f456c5c8e2026eee584e38fe5a427c): Simplified link search regexp to try to solve weird issue  
+
+[timfitzzz](https://github.com/timfitzzz) closed 8 issues in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* [Fix or remove Record, Lock, Clear buttons](https://github.com/timfitzzz/twitch-clipcatcher/issues/25)  
+* [Google Analytics](https://github.com/timfitzzz/twitch-clipcatcher/issues/10)  
+* [Message removal bugs](https://github.com/timfitzzz/twitch-clipcatcher/issues/21)  
+* [Implement Veto function](https://github.com/timfitzzz/twitch-clipcatcher/issues/8)  
+* [Implement Meta and Drama badges](https://github.com/timfitzzz/twitch-clipcatcher/issues/7)  
+* [Add README](https://github.com/timfitzzz/twitch-clipcatcher/issues/11)  
+* [Test and document chat API](https://github.com/timfitzzz/twitch-clipcatcher/issues/5)  
+* [Message Removal](https://github.com/timfitzzz/twitch-clipcatcher/issues/4)  
+
+[timfitzzz](https://github.com/timfitzzz) opened 7 issues in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* [Fix or remove Record, Lock, Clear buttons](https://github.com/timfitzzz/twitch-clipcatcher/issues/25): <!-- Edit the body of your new issue then click the ✓ "Create Issue" button in the top right of the editor. The first line will be the issue title. Assignees and Labels follow after a blank line. Leave an empty line before beginning the body of the issue. -->  
+* [Veto details popover](https://github.com/timfitzzz/twitch-clipcatcher/issues/24): When a clip is Vetoed, display a popover indicating who it was vetoed by and how to override.  
+* [Console: wide view when PlayerPane is popped out](https://github.com/timfitzzz/twitch-clipcatcher/issues/23): Currently the console has a fixed width. When the PlayerPane pop-out feature is added (#3), it will leave a lot of space unused in the main window. We should take advantage of this by allowing clips to be displayed in ways that make use of the extra space. Some possible features to consider:
+  
+  - [ ] A list / details view
+  - [ ] A wider tab area
+  - [ ] Some other type of statistics breakdown  
+* [Mobile Support](https://github.com/timfitzzz/twitch-clipcatcher/issues/22): ClipsTime is ultimately intended for use on the most common streaming platform -- the desktop PC. However, there is obvious utility in non-streamer users -- moderators and viewers -- being able to interact with the ClipsTime UI on mobile devices.
+  
+  This will be particularly beneficial once #10 is implemented. Therefore, let's target them both for the 1.2 milestone.  
+* [Message removal bugs](https://github.com/timfitzzz/twitch-clipcatcher/issues/21): Action taken: 
+  a. messageRemove on a message containing a link and a tag
+  b. messageRemove on a message containing a link
+  
+  Expected results:
+  a. tag is removed, cliip remains
+  b. user is removed from clip postedBy, clip remains if another postedBy remains
+  
+  Observed results:
+  a. tag and clip are removed
+  b. clip is removed  
+* [For broadcaster/mods, add button to reverse veto (sends -veto)](https://github.com/timfitzzz/twitch-clipcatcher/issues/20)  
+* [Moderators / Broadcaster: -meta / -drama  / -veto to undo self-issued special tags](https://github.com/timfitzzz/twitch-clipcatcher/issues/19): Right now this can be accomplished by deleting another moderator's message, so let's kick this to 1.1.  
+
+[timfitzzz](https://github.com/timfitzzz) created a tag 1.0-alpha in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+
+[timfitzzz](https://github.com/timfitzzz) published release [1.0-alpha](https://github.com/timfitzzz/twitch-clipcatcher/releases/tag/1.0-alpha) in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+
+[timfitzzz](https://github.com/timfitzzz) created comment [876618182](https://github.com/timfitzzz/twitch-clipcatcher/issues/10#issuecomment-876618182) on issue [Google Analytics](https://github.com/timfitzzz/twitch-clipcatcher/issues/10) in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* Resolved in 8fd9fd70f1fc5be0783277ce6b37c2e0f5032dd3  
+
+[timfitzzz](https://github.com/timfitzzz) created a comment [53230775](https://github.com/timfitzzz/twitch-clipcatcher/commit/8fd9fd70f1fc5be0783277ce6b37c2e0f5032dd3#commitcomment-53230775) on [a commit](https://github.com/timfitzzz/twitch-clipcatcher/commit/8fd9fd70f1fc5be0783277ce6b37c2e0f5032dd3#commitcomment-53230775) in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* Resolves #10.  
+
+[timfitzzz](https://github.com/timfitzzz) created 2 comments on issue [Message removal bugs](https://github.com/timfitzzz/twitch-clipcatcher/issues/21) in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* [item](https://github.com/timfitzzz/twitch-clipcatcher/issues/21#issuecomment-876599593): Complexity-added proved not to be too difficult to implement, especially since we were already separately indexing Annotations by user->clip. Solution simply scans for prior annotations that match the channel and if a "Link" annotation is found, skips the link and upvote reversions.  
+* [item](https://github.com/timfitzzz/twitch-clipcatcher/issues/21#issuecomment-876576969): Investigated this a bit, and it turns out that this might be less of a bug and more of an undesired feature, and not the simplest thing to resolve.
+  
+  The root cause of the problem is basically this: 
+  * Annotations mutate clips in the app's Redux store. 
+  * Subsequently, if an annotation is deleted, we attempt to reverse that mutation as appropriate. 
+  * Annotation types tag, upvote, downvote, and veto are all cleanly reversible, since a user can only apply any of these types once, and removing their contribution can be done without any loss of fidelity.
+  * Annotation type Link, though, is established by the presence of a clip link in the message. This is overloaded, because a link can be interpreted both as a submission of that clip, and as a reference to it for the purposes of targeting one of the other Annotations. Thus the ambiguity arises: if a Link+Tag is removed, should the Link action be reversed, or only the Tag? It depends on whether the link is a submission or a reference; if it's a submission, it should be reversed -- but if it's just a reference, it should not.
+  
+  To solve this we need to either a) add complexity to the reversion process, or b) re-examine how annotations and links are handled.
+  
+  **The complexity-added solution:** The reversion process could include examining a user's other annotations to determine whether another has the Link annotation type. If so, revert only the non-Link aspect of the message. (If the removed message produced only a Link annotation, though, we can assume the intent is to undo the Link). _Downsides:_ reversion process now has to search for another Link annotation; it's a bit of a monkey-patch, especially considering the additional conditions.
+  **The conceptual change solution:** Currently, the state of a clip is stored as mutated by all prior annotations. Perhaps an unmodified copy of the clip should be stored as well. That way, if necessary, all prior annotations can be re-applied to a clip (minus the removed ones) to produce the exact desired state.
+  
+  For now, considering this project's timelines, I'm going to investigate the viability of the complexity-added solution. However, in the long run, the conceptual fix is (as usual) probably the one we should think about moving towards.  
+
+[timfitzzz](https://github.com/timfitzzz) created comment [875012505](https://github.com/timfitzzz/twitch-clipcatcher/issues/5#issuecomment-875012505) on issue [Test and document chat API](https://github.com/timfitzzz/twitch-clipcatcher/issues/5) in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* Kicking final requirement for this issue to a future release, since it can be accomplished by another moderator deleting their message.  
+
+[timfitzzz](https://github.com/timfitzzz) created comment [874959114](https://github.com/timfitzzz/twitch-clipcatcher/issues/4#issuecomment-874959114) on issue [Message Removal](https://github.com/timfitzzz/twitch-clipcatcher/issues/4) in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* Added handlers for onMessageRemove and onTimeout, tested manually, seems to work as expected.  
+

@@ -1,0 +1,99 @@
+---
+templateKey: github
+source: github
+title: "GitHub activity, June 26, 2021 to July 3, 2021"
+date: 2021-07-03T00:00:00.000-04:00
+description: "Week of GitHub Activity"
+URI: https://github.com/timfitzzz
+tags: 
+  - 'GitHub'
+---
+
+[timfitzzz](https://github.com/timfitzzz) opened 17 issues in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* [Improve Sorting Interface](https://github.com/timfitzzz/twitch-clipcatcher/issues/18): - [ ] The sorting interface is too small. It should be easier to understand if brought to same size as first row of controls / stats in toolbar.
+  - [ ] Change hover cursor to indicate toggle & drag
+  - [ ] Consider (i) icon popover to explain  
+* [Auto-refresh page views](https://github.com/timfitzzz/twitch-clipcatcher/issues/17): Wire up existing page view refresh functionality to automatically refresh views every ~30s.  
+* [Favorites](https://github.com/timfitzzz/twitch-clipcatcher/issues/16): User should be able to save favorites
+  
+  - [ ] Save clips as favorites
+  - [ ] Add favorites tab
+  - [ ] Save favorites to local storage  
+* [Export / Import Annotations](https://github.com/timfitzzz/twitch-clipcatcher/issues/15): Provide option to export / import annotations as JSON.  
+* [Save / load state in LocalStorage](https://github.com/timfitzzz/twitch-clipcatcher/issues/14): Save currently-known clips, annotations, and UI state in LocalStorage and automatically reload upon next use of the application.  
+* [Stats and help in Player Pane](https://github.com/timfitzzz/twitch-clipcatcher/issues/13): - [ ] Give PlayerPane the ability to display info / credit for submitters / moderators who help provide clips
+  - [ ] Add option for PlayerPane to display guidance for using commands in chat  
+* [Moderation Functionality in-app (WRITE to chat)](https://github.com/timfitzzz/twitch-clipcatcher/issues/12): Display buttons in UI for moderators/broadcasters to send moderation feedback directly in the application.  
+* [Add README](https://github.com/timfitzzz/twitch-clipcatcher/issues/11): Create readme for this repo that contains basic information about how to use and to help develop the application  
+* [Google Analytics](https://github.com/timfitzzz/twitch-clipcatcher/issues/10): Implement GA. Also, change the page title while you're at it  
+* [Add help popovers](https://github.com/timfitzzz/twitch-clipcatcher/issues/9): When help button in topbar is selected, display modal with popovers.
+  
+  - Clips List
+  - Sorter / Stack Button
+  - On top of PlayerPane display "About" equivalent
+  - Login/Logout
+  - Link to Chat API documentation  
+* [Implement Veto function](https://github.com/timfitzzz/twitch-clipcatcher/issues/8): Implement veto functionality:
+  
+  - [ ] Fade vetoed clips out in ClipsList and prevent playback
+  - [ ] For broadcaster/mods, add button to reverse veto (sends -veto)
+  - [ ] For non-broadcaster/mods, add button to reveal clip temporarily.  
+* [Implement Meta and Drama badges](https://github.com/timfitzzz/twitch-clipcatcher/issues/7): Meta and drama tags need to be implemented as on-clip badges with details in popover.  
+* [Tags display](https://github.com/timfitzzz/twitch-clipcatcher/issues/6): Tags are currently displayed in a rudimentary form in a panel alongside the associated clip.
+  
+  - [ ] Move tags to a summary badge atop clip thumbnail
+  - [ ] Implement popover display containing details  
+* [Test and document chat API](https://github.com/timfitzzz/twitch-clipcatcher/issues/5): Test and document the following all-user features:
+  
+  - [ ] _+1_ / _-1_ to annotate with up or down vote
+  - [ ] _meta_ or _drama_ to suggest meta or drama tags
+  - [ ] other words
+  
+  Test and document the following moderator/broadcaster-only features:
+  
+  - [ ] _veto_ to gray out a clip
+  - [ ] _-meta_ / _-drama_  / _-veto_ to undo self-issued special tags
+  
+  It's likely that additional issues will be discovered during this process.  
+* [Message Removal](https://github.com/timfitzzz/twitch-clipcatcher/issues/4): When moderators time out users or clear individual messages from chat, remove those messages and their effects from ClipsTime.  
+* [PlayerPane: Pop out](https://github.com/timfitzzz/twitch-clipcatcher/issues/3): Player pane should be able to pop out of the primary frame, so that it can be full-screened on a separate display.  
+* [Clip Stacks](https://github.com/timfitzzz/twitch-clipcatcher/issues/2): **Feature:** Display simultaneous clips in "stack" with buttons to 'surface' clips by feature: shortest, longest, most views, most votes.
+  
+  Requirements:
+  - [ ] Implement in useClips hook (change API to output array of clipId arrays)
+    - [ ] Address second-order impacts of useClips API change
+  - [ ] Display in clips list with combined stats, tags, and selection buttons:
+    - Shortest clip
+    - Longest clip
+    - Most-viewed clip
+    - Most-voted-for clip  
+
+[timfitzzz](https://github.com/timfitzzz) pushed 12 commits to refs/heads/main in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* [837c5879c08dda776a67eda5472ea8069f1cce1d](https://github.com/timfitzzz/twitch-clipcatcher/commits/837c5879c08dda776a67eda5472ea8069f1cce1d): Refined interface and login flow; added draft descriptive info for new users; removed filters and moderation settings from UI pending implementation; added placeholder component when no clips are yet available  
+* [20939e31a70398a1f55bc28382a6a998872a7159](https://github.com/timfitzzz/twitch-clipcatcher/commits/20939e31a70398a1f55bc28382a6a998872a7159): Improvements to Auth flow and UI  
+* [f5394ce3f0dc41ca4aef33ec5280ac9204c40924](https://github.com/timfitzzz/twitch-clipcatcher/commits/f5394ce3f0dc41ca4aef33ec5280ac9204c40924): Bugfixes  
+* [d0415a2372222130dbe4216370711b66c0c8c726](https://github.com/timfitzzz/twitch-clipcatcher/commits/d0415a2372222130dbe4216370711b66c0c8c726): Moved upvotes / posted by to popover; added Tags panel to clips; added some tag filtering to remove short words, url query strings, and @ tags; added basic styling to player pane; added user icon and associated async logic; added redux store for aspects of ui state; added basic top bar styling and buttons; added ability to re-query vod / vod offset timing since often new clips don't have a vod associated yet; bugfixes and improvements.  
+* [9c124b646ce64f8f5eda881aec938f68ce78b94c](https://github.com/timfitzzz/twitch-clipcatcher/commits/9c124b646ce64f8f5eda881aec938f68ce78b94c): Merge pull request #1 from timfitzzz/newChannelReducer
+  
+  Reorganized and expanded Redux stores. Implemented Lexicographical so…  
+* [27b2ae1499e71571c10892dabaf17404c6be5fed](https://github.com/timfitzzz/twitch-clipcatcher/commits/27b2ae1499e71571c10892dabaf17404c6be5fed): Added users store. Implemented undoing annotations, needs testing.  
+* [ccb911a90450128ec1e551a975018b663afd3ac1](https://github.com/timfitzzz/twitch-clipcatcher/commits/ccb911a90450128ec1e551a975018b663afd3ac1): Removed debug consoles  
+* [c64503a677b4c27eba4497cb2867af7ddcd954ec](https://github.com/timfitzzz/twitch-clipcatcher/commits/c64503a677b4c27eba4497cb2867af7ddcd954ec): Removed test data  
+* [b3d55b84e16910f6a3fd45691e7f93d96585a762](https://github.com/timfitzzz/twitch-clipcatcher/commits/b3d55b84e16910f6a3fd45691e7f93d96585a762): Merge branch 'main' of github.com:timfitzzz/twitch-clipcatcher  
+* [bd1f63c26c91b4aa2eecd9bb882a6c2c1218aafe](https://github.com/timfitzzz/twitch-clipcatcher/commits/bd1f63c26c91b4aa2eecd9bb882a6c2c1218aafe): Reorganized and expanded Redux stores. Implemented Lexicographical sort. Improved clip display.  
+* [aef19938801e49f65abd84dfdd37bdc33d0503d0](https://github.com/timfitzzz/twitch-clipcatcher/commits/aef19938801e49f65abd84dfdd37bdc33d0503d0): Resolved eslint warnings  
+* [10a6ddba2d4bdb85151e809f9f5fef9a4390571c](https://github.com/timfitzzz/twitch-clipcatcher/commits/10a6ddba2d4bdb85151e809f9f5fef9a4390571c): Merge pull request #1 from timfitzzz/newChannelReducer
+  
+  Reorganized and expanded Redux stores. Implemented Lexicographical so…  
+
+[timfitzzz](https://github.com/timfitzzz) deleted a branch newChannelReducer in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+
+[timfitzzz](https://github.com/timfitzzz) closed pull request [Reorganized and expanded Redux stores. Implemented Lexicographical so…](https://github.com/timfitzzz/twitch-clipcatcher/pull/1) in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+
+[timfitzzz](https://github.com/timfitzzz) pushed commit [aef19938801e49f65abd84dfdd37bdc33d0503d0](https://github.com/timfitzzz/twitch-clipcatcher/commits/aef19938801e49f65abd84dfdd37bdc33d0503d0) to refs/heads/newChannelReducer in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+* Resolved eslint warnings  
+
+[timfitzzz](https://github.com/timfitzzz) opened pull request [Reorganized and expanded Redux stores. Implemented Lexicographical so…](https://github.com/timfitzzz/twitch-clipcatcher/pull/1) in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+
+[timfitzzz](https://github.com/timfitzzz) created branch newChannelReducer in [timfitzzz/twitch-clipcatcher](https://github.com/timfitzzz/twitch-clipcatcher)  
+

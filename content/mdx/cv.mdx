@@ -4,6 +4,9 @@ path: cv
 ---
 
 <CVSection padding={'8px'}>
+    <CVIntro>
+    Hello! Thank you for your interest in my CV. I'm a seasoned tech professional and systems engineer seeking employment in web development or DevOps / system automation.
+  </CVIntro>
   <CVHeaderContainer>
     <CVHeaderEntriesContainer>
       <CVHeaderName>
@@ -14,16 +17,12 @@ path: cv
     <CVHeaderEntryContainer><CVHeaderPhoneIcon/> 508 369 3226</CVHeaderEntryContainer>
     <CVHeaderEntryContainer><CVHeaderEmailIcon/> <a href={'mailto:timothyliamfitzgerald@gmail.com'}>timothyliamfitzgerald@gmail.com</a></CVHeaderEntryContainer>
   </CVHeaderContainer>
-  <CVIntro>
-    Hello! Thank you for checking out my CV. I'm a seasoned tech professional with broad experience, seeking employment in web development or DevOps / system automation. Please don't hesitate to <a href={"mailto:timothyliamfitzgerald@gmail.com"}>get in touch</a>!
-  </CVIntro>
   <CVSectionTitle>SELECTED WORK EXPERIENCE</CVSectionTitle>
   <CVEntryContainer>
     <CVRow>
       <CVJobTitleTextColumn>
         <CVJobTitleRow>
           <CVEmployer>Jacobson Consulting Applications</CVEmployer><CVFlexBreak/>
-          <CVLocation>New York, NY</CVLocation><CVFlexBreak/>
         </CVJobTitleRow>
       </CVJobTitleTextColumn>
       <CVDatesDisplay 
@@ -33,13 +32,14 @@ path: cv
         endYear={2020}
       />
     </CVRow>
-    <CVJobTitle>Senior Network Engineer </CVJobTitle>
+      <CVJobTitle>Senior Network Engineer</CVJobTitle><CVFlexBreak/>
+      <CVLocation>New York, NY</CVLocation><CVFlexBreak/>
       <CVDescriptionContainer>
         <CVDescription>
-          Supported consultants and product specialists serving medium and large nonprofit institutions in the arts, medical, and advocacy sectors
+          Developed and implemented soup-to-nuts cloud deployment and maintenance strategy for a major arts industry SaaS product using AWS components (CloudFormation, Lambda, DynamoDB, and API Gateway), PowerShell, Node.js, and React.js 
         </CVDescription>
         <CVDescription>
-          Developed and implemented soup-to-nuts cloud deployment and maintenance strategy for a major arts industry SaaS product using AWS components (CloudFormation, Lambda, DynamoDB, and API Gateway), PowerShell, Node.js, and React.js 
+          Supported consultants and product specialists serving medium and large nonprofit institutions in the arts, medical, and advocacy sectors
         </CVDescription>
         <CVDescription>
           Other areas of focus include: automation in Windows environments deployed to AWS; internal documentation, training, and communication; evangelizing DevOps approach 
@@ -51,7 +51,6 @@ path: cv
       <CVJobTitleTextColumn>
         <CVJobTitleRow>
           <CVEmployer>ITW Group / Availeron Consulting</CVEmployer><CVFlexBreak/>
-          <CVLocation>New York City Area</CVLocation><CVFlexBreak/>
         </CVJobTitleRow>
       </CVJobTitleTextColumn>
       <CVDatesDisplay
@@ -61,7 +60,8 @@ path: cv
         endYear={2016}
       />
     </CVRow>
-    <CVJobTitle>Senior Technician, Account Manager, Project Manager</CVJobTitle>
+    <CVJobTitle>Senior Technician / Account Manager / Project Manager</CVJobTitle><CVFlexBreak/>
+    <CVLocation>New York City Area</CVLocation><CVFlexBreak/>
     <CVDescriptionContainer>
       <CVDescription>
         Served ~20 small/medium businesses as account manager & primary support engineer
@@ -76,6 +76,7 @@ path: cv
       <CVJobTitleTextColumn>
         <CVJobTitleRow>
           <CVEmployer>Cartwheel</CVEmployer><CVFlexBreak/>
+              <CVJobTitle>Personal Technician / Home Client Coordinator</CVJobTitle><CVFlexBreak/>
           <CVLocation>New York, NY</CVLocation><CVFlexBreak/>
         </CVJobTitleRow>
       </CVJobTitleTextColumn>
@@ -86,13 +87,12 @@ path: cv
         endYear={2011}
       />
     </CVRow>
-    <CVJobTitle>Personal Technician, Home Client Coordinator</CVJobTitle>
     <CVDescriptionContainer>
       <CVDescription>
-        Met high-end customers’ personal technology needs incl. setup, maintenance, education 
+        Met high-end customers’ personal technology needs including setup, maintenance, education 
       </CVDescription>
       <CVDescription>
-        As coordinator, handled intake and troubleshooting, dispatched field techs as needed 
+        As coordinator, handled intake and troubleshooting, dispatching field techs as needed.
       </CVDescription>
     </CVDescriptionContainer>
   </CVEntryContainer>
@@ -101,6 +101,7 @@ path: cv
       <CVJobTitleTextColumn>
         <CVJobTitleRow>
           <CVEmployer>Apple</CVEmployer><CVFlexBreak/>
+          <CVJobTitle>Family Room Specialist</CVJobTitle><CVFlexBreak/>
           <CVLocation>New York, NY</CVLocation><CVFlexBreak/>
         </CVJobTitleRow>
       </CVJobTitleTextColumn>
@@ -111,7 +112,6 @@ path: cv
         endYear={2010}
       />
     </CVRow>
-    <CVJobTitle>Family Room Specialist</CVJobTitle>
     <CVDescriptionContainer>
       <CVDescription>
         Provided top-rated device support and personal tutoring at flagship Upper West Side store
@@ -129,6 +129,7 @@ path: cv
       <CVJobTitleTextColumn>
         <CVJobTitleRow>
           <CVEmployer>MathWorks</CVEmployer><CVFlexBreak/>
+          <CVJobTitle>Installation and Licensing Specialist</CVJobTitle><CVFlexBreak/>
           <CVLocation>Natick, MA</CVLocation><CVFlexBreak/>
         </CVJobTitleRow>
       </CVJobTitleTextColumn>
@@ -139,7 +140,6 @@ path: cv
         endYear={2009}
       />
     </CVRow>
-    <CVJobTitle>Installation and Licensing Specialist</CVJobTitle>
     <CVDescriptionContainer>
       <CVDescription>
         Assisted customers and coworkers as support engineer via email and telephone
@@ -157,7 +157,6 @@ path: cv
       <CVJobTitleTextColumn>
         <CVJobTitleRow>
           <CVEmployer>Sandy for Council / Nurse for New York</CVEmployer><CVFlexBreak/>
-          <CVLocation>Brooklyn, NY</CVLocation><CVFlexBreak/>
         </CVJobTitleRow>
       </CVJobTitleTextColumn>
       <CVDatesDisplay
@@ -167,10 +166,11 @@ path: cv
         endYear={2021}
       />
     </CVRow>
-    <CVJobTitle>Web Developer / Kitchen Cabinet</CVJobTitle><CVFlexBreak/>
+    <CVJobTitle>CTO / Web Developer / Kitchen Cabinet</CVJobTitle><CVFlexBreak/>
+    <CVLocation>Brooklyn, NY</CVLocation><CVFlexBreak/>
     <CVDescriptionContainer>
       <CVDescription>
-          Served as in-house volunteer web developer and consultant for the campaign of Sandy Nurse, candidate for New York City Council in District 37. Worked on several different generations of campaign website (currently <a href={"https://sandyforcouncil.com"}>sandyforcouncil.com</a>) with a focus on multilingual accessibility.
+          Serve as in-house volunteer web developer and consultant for the campaign of Sandy Nurse, nominee for New York City Council in District 37. Worked on several different generations of campaign website (currently <a href={"https://sandyforcouncil.com"}>sandyforcouncil.com</a>) with a focus on multilingual accessibility.
       </CVDescription>
     </CVDescriptionContainer>
   </CVEntryContainer>
@@ -179,7 +179,6 @@ path: cv
       <CVJobTitleTextColumn>
         <CVJobTitleRow>
           <CVEmployer>Occupy Wall Street and Occupy Sandy</CVEmployer><CVFlexBreak/>
-          <CVLocation>New York, NY </CVLocation><CVFlexBreak/>
         </CVJobTitleRow>
       </CVJobTitleTextColumn>
       <CVDatesDisplay
@@ -190,7 +189,8 @@ path: cv
       />
     </CVRow>
     <CVJobTitle>Occupy Wall Street: Real-time documentarian & organizer</CVJobTitle><CVFlexBreak/>
-    <CVJobTitle>Occupy Sandy: Network logistics, transportation coordinator</CVJobTitle>
+    <CVJobTitle>Occupy Sandy: Network logistics and transportation coordinator</CVJobTitle><CVFlexBreak/>
+    <CVLocation>New York, NY </CVLocation><CVFlexBreak/>
     <CVDescriptionContainer>
       <CVDescription>
         Worked individually and with many volunteer groups on projects including:
@@ -221,7 +221,6 @@ path: cv
     <CVRow>
       <CVJobTitleRow>
         <CVEmployer>University of Massachusetts at Boston</CVEmployer><CVFlexBreak/>
-        <CVLocation>Boston, MA</CVLocation><CVFlexBreak/>
       </CVJobTitleRow>
     </CVRow>
     <CVJobTitle>Bachelor of Arts: Political Science</CVJobTitle>

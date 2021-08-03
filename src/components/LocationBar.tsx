@@ -88,10 +88,15 @@ export const LocationBarSectionsContainer = styled.div`
   padding-bottom: 0px;
   margin-left: 0px;
   display: flex;
+  justify-content: space-between;
   > div {
     &:last-of-type {
       padding-right: 0px;
     }
+  }
+
+  @media (max-width: 350px) {
+    align-items: center;
   }
 `
 
@@ -100,10 +105,15 @@ export const LocationBarSectionContainer = styled.div`
   flex-wrap: no-wrap;
   padding-top: 2px;
   padding-bottom: 2px;
-  margin-left: 0;
+  margin-left: 0px;
 
   &:last-of-type {
-    margin-left: 12px;
+    margin-left: 8px;
+  }
+
+  @media (max-width: 350px) {
+    flex-direction: column-reverse;
+    align-items: center;
   }
 `
 
@@ -138,11 +148,20 @@ export interface ILocationBar {
 const LocationBarTagMenu = styled.div`
   display: flex;
   flex-wrap: wrap;
+  @media (max-width: 350px) {
+    justify-content: center;
+  }
 `
 
 const LocationBarSourceMenu = styled.div`
   display: flex;
   flex-wrap: no-wrap;
+
+  svg {
+    max-height: 16px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 `
 
 const LocationBarTypeTitle = styled.div`
@@ -279,7 +298,7 @@ export const LocationBar = ({
           ) : (
             <></>
           )}
-          {tags && sources ? (
+          {tags && sources && !(typeof filters === "undefined") ? (
             <ClearFiltersButton
               activated={!(typeof filters === "undefined")}
               onClick={() => {

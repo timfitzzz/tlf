@@ -225,7 +225,7 @@ const MenuCardVariants: {
   contracted: TargetAndTransition
 } = {
   expanded: {
-    height: "320px",
+    height: "300px",
     borderTopLeftRadius: "16px",
     borderBottomLeftRadius: "16px",
     transitionEnd: {
@@ -282,12 +282,13 @@ const MenuMiddle = styled(motion.div).attrs(() => ({
   margin-right: auto;
   margin-top: 0;
   margin-bottom: auto;
+  z-index: 10;
 `
 
 const MenuMiddleColumnVariants = {
   expanded: {
     opacity: [null, 0, 0.2, 0.6, 0.9, 1],
-    width: [null, 0, 20, 40, 50, 136],
+    width: [null, 0, 20, 40, 50, 165],
     height: "100%",
     transition: transitions.MenuMiddleColumn.expanded,
     display: "flex",
@@ -306,6 +307,7 @@ const MenuMiddleColumn = styled(motion.div).attrs(() => ({
   variants: MenuMiddleColumnVariants,
 }))`
   flex-direction: column;
+  background-color: transparent;
 `
 
 const PortraitPhotoColumn = styled(motion.div).attrs(() => ({
@@ -335,6 +337,27 @@ const PortraitPhotoBoxVariants = {
       theme.palette.darkBackground,
       theme.palette.darkBackground,
     ],
+    marginLeft: [null, -36],
+    marginTop: [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      -10,
+      -20,
+      -30,
+      -35,
+      -40,
+      -45,
+      -50,
+    ],
+    position: "absolute",
     transition: transitions.PortraitPhotoBox.expanded,
   },
   contracted: {
@@ -343,8 +366,11 @@ const PortraitPhotoBoxVariants = {
     borderRadius: "50%",
     border: "1px solid white",
     backgroundColor: "rgba(255,255,255,1)",
+    marginLeft: [null, 0],
+    marginTop: [null, -25, 0, 0, 0, 0, 0],
     transition: transitions.PortraitPhotoBox.contracted,
     paddingLeft: [null, null, null, 0],
+    position: "relative",
   },
 }
 
@@ -361,8 +387,8 @@ const PortraitPhotoBox = styled(motion.div).attrs(() => ({
 
 const PortraitPhotoVariants = {
   expanded: {
-    width: "120px",
-    height: "230px",
+    width: "170px",
+    height: "272px",
     borderRadius: "0px",
     transition: transitions.PortraitPhoto.expanded,
   },
@@ -390,11 +416,15 @@ const PortraitPhoto = styled(motion.img).attrs(() => ({
 `
 
 const DescriptionContainer = styled.div`
-  margin-top: 8px;
+  margin-top: 76px;
   margin-left: 16px;
   margin-right: auto;
   margin-bottom: 8px;
+  position: absolute;
   color: white;
+  z-index: 10;
+  background-color: transparent;
+  overflow: visible;
 `
 
 const getTextContainerVariants = (lineHeight: number) => ({
@@ -415,6 +445,7 @@ const NameContainer = styled(motion.div).attrs(() => ({
 }))`
   margin-left: 16px;
   margin-right: auto;
+  z-index: 10;
 `
 
 const Name = styled.h1`
@@ -423,6 +454,7 @@ const Name = styled.h1`
   font-size: 28px;
   overflow: visible;
   color: white;
+  z-index: 20;
 `
 
 const TopNavNameContainer = styled(motion.div).attrs(
@@ -531,7 +563,8 @@ const SocialIconsContainer = styled(motion.div).attrs(() => ({
 }))`
   display: flex;
   flex-direction: row;
-  margin-top: 16px;
+  margin-top: auto;
+  margin-bottom: 16px;
   margin-left: 12px;
   width: 125px;
   justify-content: space-around;
@@ -744,13 +777,7 @@ export const HeaderSlashCard = ({
                       initial={initial || getCurrentInitial()}
                       variants={getTextContainerVariants(16)}
                     >
-                      programmer
-                    </DescH2>
-                    <DescH2
-                      initial={initial || getCurrentInitial()}
-                      variants={getTextContainerVariants(16)}
-                    >
-                      sysadmin
+                      systems engineer
                     </DescH2>
                     <DescH2
                       initial={initial || getCurrentInitial()}

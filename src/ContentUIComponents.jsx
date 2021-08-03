@@ -61,7 +61,7 @@ export const CVHeaderContainer = styled.div`
   padding: 4px 0px 4px 0px;
   border-top: 1px double ${p => p.theme.colors.darkBackground};
   border-bottom: 1px double ${p => p.theme.colors.darkBackground};
-  margin-bottom: 8px;
+  margin-bottom: 26px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -125,9 +125,10 @@ export const CVHeaderItem = styled.div`
 
 export const CVSectionTitle = styled.div`
   font-family: ${p=>p.theme.fonts.title1};
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 18px;
+  letter-spacing: normal;
   padding: 10px 0px 5px 0px;
 `
 
@@ -138,6 +139,7 @@ export const CVEmployer = styled.div`
   font-weight: 600;
   margin-top: 0px;
   margin-right: 8px;
+  letter-spacing: 0.5px;
 `
 
 export const CVDates = styled.div`
@@ -151,8 +153,9 @@ export const CVJobTitle = styled.div`
   font-family: ${p=>p.theme.fonts.title1};
   font-size: 16px;
   line-height: 16px;
-  margin-top: 8px;
+  margin-top: 4px;
   font-weight: 500;
+  letter-spacing: normal;
 `
 
 export const CVJobTitleRow = styled.div`
@@ -170,20 +173,21 @@ export const CVFlexBreak = styled.div`
   
 export const CVLocation = styled.span`
   font-family: ${p=>p.theme.fonts.title1};
-  font-style: italic;
 
   white-space: nowrap;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 16px;
-  margin-top: 8px;
+  margin-top: 6px;
+  letter-spacing: normal;
 `
 
 export const CVIntro = styled.div`
   font-family: ${p=>p.theme.fonts.title1};
   font-style: italic;
   font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 8px;
+  line-height: 20px;
+  margin-bottom: 20px;
+  letter-spacing: normal;
 `
 
 export const CVDescription = styled.div`
@@ -191,8 +195,11 @@ export const CVDescription = styled.div`
   font-size: 14px;
   font-weight: 400;
   margin-top: 4px;
-  line-height: 19px;
+  padding-left: 4px;
+  line-height: 17px;
+  letter-spacing: normal;
   
+  margin-bottom: 8px;
 
   &:last-of-type {
     margin-bottom: 8px;
@@ -209,15 +216,13 @@ export const CVDescriptionContainer = styled.div`
 export const CVSection = styled.div`
   box-sizing: border-box;
   min-width: 0;
-  margin-top: 16px;
+  margin-top: 0px!important;
   padding: 8px 0px 8px 0px!important;
 `
 
 export const CVRow = styled(Flex)`
-  margin-bottom: 4px!important;
+  margin-bottom: 2px!important;
 `
-
-
 
 export const CVColumn = styled(Flex)`
   flex-direction: column;
@@ -232,7 +237,7 @@ export const CVJobTitleTextColumn = styled(Flex)`
 export const CVEntryContainer = styled(Box)`
   padding-left: 0px;
   padding-right: 0px;
-  padding-top: 16px;
+  padding-top: 8px;
   position: relative;
 `
 
@@ -312,7 +317,7 @@ const CVDatesDisplayContainer = styled.div`
 const CVDatesDisplayOuterContainer = styled.div`
   display: flex;
   position: absolute;
-  top: 14px;
+  top: 6px;
   right: 0px;
 `
 

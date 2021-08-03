@@ -226,29 +226,33 @@ const SourceIconContainer = styled.div<{
   }
 `
 
-export const SelectableSource = ({
-  source,
-  selected,
-  selectSource,
-  className,
-}: {
-  source: string
-  selected: boolean
-  selectSource: () => void
-  className?: string
-}) => {
-  let Icon = Icons[source]
+export const SelectableSource = styled(
+  ({
+    source,
+    selected,
+    selectSource,
+    className,
+  }: {
+    source: string
+    selected: boolean
+    selectSource: () => void
+    className?: string
+  }) => {
+    let Icon = Icons[source]
 
-  return (
-    <SourceIconContainer
-      className={className}
-      onClick={selectSource}
-      selected={selected}
-    >
-      <Icon />
-    </SourceIconContainer>
-  )
-}
+    return (
+      <SourceIconContainer
+        className={className}
+        onClick={selectSource}
+        selected={selected}
+      >
+        <Icon />
+      </SourceIconContainer>
+    )
+  }
+)`
+  cursor: pointer;
+`
 
 export const IOItemHeader = ({
   date,

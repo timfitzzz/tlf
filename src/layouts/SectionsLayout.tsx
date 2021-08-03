@@ -42,7 +42,7 @@ const ContentContainer = styled(motion.custom(Box)).attrs(() => ({
     margin-top: 24px;
 
     &:first-of-type {
-      margin-top: 16px;
+      margin-top: 24px;
     }
   }
 `

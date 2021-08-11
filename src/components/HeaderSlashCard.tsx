@@ -174,7 +174,7 @@ const getMenuCardContainerVariants = (
       width: windowWidth ? [null, MIN_WIDTH] : MIN_WIDTH,
 
       marginTop: windowHeight
-        ? [null, (windowHeight - 320) / 2 + "px"]
+        ? [null, (windowHeight - 500) / 2 + "px"]
         : "auto",
 
       transition: transitions.MenuCardContainer.expanded,
@@ -569,10 +569,12 @@ const SocialIconsContainer = styled(motion.div).attrs(() => ({
   width: 125px;
   justify-content: space-around;
   overflow: hidden;
-  > a {
-    > svg {
-      fill: white;
-      width: 16px;
+
+  svg {
+    fill: white;
+    width: 16px;
+    &:hover {
+      fill: ${(p) => p.theme.palette.highlightText};
     }
   }
 `
@@ -587,6 +589,10 @@ const TopNavLink = styled(TransitionLink)<TopNavLinkProps>`
   margin: auto 8px auto 8px;
   padding: 8px 16px;
   height: 20px;
+
+  &:hover {
+    color: ${(p) => p.theme.palette.highlightText};
+  }
 `
 
 const HomeNavLink = styled(TransitionLink)``
@@ -709,7 +715,9 @@ export const HeaderSlashCard = ({
                             $isCurrent={currentPath === path ? true : undefined}
                             entry={{
                               delay:
-                                currentPath === "/" || path === "/"
+                                currentPath === "/" ||
+                                path === "/" ||
+                                path === ""
                                   ? TRANSITION_DURATION * 0.9
                                   : TRANSITION_DURATION * 0.25,
                               length: TRANSITION_DURATION * 0.1,
@@ -721,7 +729,7 @@ export const HeaderSlashCard = ({
                             exit={{
                               length:
                                 currentPath === "/"
-                                  ? TRANSITION_DURATION
+                                  ? TRANSITION_DURATION * 0.1
                                   : TRANSITION_DURATION * 0.1,
                               state: {
                                 initial: getCurrentInitial(),

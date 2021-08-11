@@ -10,13 +10,13 @@ import { IOQueryData } from "pages/io"
 
 const ContentContainerVariants = {
   expanded: {
-    opacity: [null, 0.8, 0.5, 0.2, 0.0, 0.0, 0],
+    opacity: [0.0, 0.0, 0.0, 0, 0, 1],
     transition: {
-      duration: TRANSITION_DURATION,
+      duration: TRANSITION_DURATION + 0.5,
     },
   },
   contracted: {
-    opacity: [null, 0.1, 0.3, 0.6, 0.75, 0.9, 1],
+    opacity: [0, 0, 0.0, 0, 0, 1],
     transition: {
       duration: TRANSITION_DURATION,
     },
@@ -177,7 +177,7 @@ export default ({
       >
         <InnerBodyContainer initial={initial} animate={animate}>
           <CustomAnimatePresence>
-            {location.pathname !== "/" && (
+            {
               <ContentContainer
                 initial={initial}
                 animate={animate}
@@ -185,7 +185,7 @@ export default ({
               >
                 {children}
               </ContentContainer>
-            )}
+            }
           </CustomAnimatePresence>
         </InnerBodyContainer>
       </InnerBodyFadeContainer>

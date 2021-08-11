@@ -142,6 +142,7 @@ export const LayoutComponents = {
     line-height: 15px;
     font-weight: 400;
     padding-bottom: 4px;
+    letter-spacing: 0.5px;
   `,
   h3: styled.h3`
     font-family: "Asap Condensed", Helvetica, sans-serif;

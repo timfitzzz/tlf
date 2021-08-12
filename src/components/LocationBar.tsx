@@ -43,6 +43,7 @@ export const LocationBarFadeContainer = styled(motion.div).attrs(() => ({
     },
   },
 }))`
+  margin-top: 12px;
   display: flex;
 `
 

@@ -9,12 +9,17 @@ import styled from "styled-components"
 const ButtonIcon = styled.img``
 
 const ProjectHeader = styled.div`
+  padding-top: 16px;
+  padding-bottom: 8px;
   width: 300px;
   margin-left: auto;
   margin-right: auto;
   font-size: 14px;
   letter-spacing: 0px;
   text-align: center;
+  font-weight: 700;
+  text-transform: lowercase;
+  color: ${(p) => p.theme.palette.lightBackground};
 `
 
 export default function Home({ location }: { location: WindowLocation }) {
@@ -31,7 +36,7 @@ export default function Home({ location }: { location: WindowLocation }) {
         <link rel="canonical" href="https://timfitz.dev" />
       </Helmet>
       <ProjectHeader className={"projectsHeader"}>
-        Current Projects
+        Current Projects - august 11th, 2021
       </ProjectHeader>
       <ProjectButton
         url={"https://sandyforcouncil.com"}

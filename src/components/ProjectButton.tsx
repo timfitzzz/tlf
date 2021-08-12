@@ -36,13 +36,19 @@ export const ProjectButton = styled(
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin-top: 8px !important;
+  margin-top: 4px !important;
 
-  border: 1px solid ${(p) => p.theme.palette.lightBackground};
   &:hover {
+    // border: 1px solid ${(p) => p.theme.palette.lightBackground};
     box-shadow: 2px 2px 1px ${({ theme }) => theme.palette.darkBackground};
     background-color: ${(p) => p.theme.palette.lightBackground};
     a {
+      color: white;
+    }
+    .imgContainer {
+      border-bottom: 1px solid ${(p) => p.theme.palette.darkBackground};
+    }
+    .textContainer {
       color: white;
     }
   }
@@ -58,7 +64,7 @@ export const ProjectButton = styled(
     display: flex;
     flex-direction: row;
     justify-items: space-between;
-    padding: 8px;
+    padding: 8px 8px 4px 8px;
     box-sizing: border-box;
   }
 
@@ -69,7 +75,8 @@ export const ProjectButton = styled(
     display: inline-block;
 
     background-color: white;
-    border-radius: 8px;
+    border-radius: 12px;
+    border-bottom: 1px solid transparent;
   }
 
   img {
@@ -77,11 +84,13 @@ export const ProjectButton = styled(
     width: 100%;
     object-fit: contain;
     object-position: center;
+    margin: auto;
   }
 
   .textContainer {
     margin-left: 8px;
     text-decoration: none !important;
+    color: ${({ theme }) => theme.palette.darkBackground};
   }
 
   .nameContainer {

@@ -290,7 +290,7 @@ export const IOItemHeader = ({
         </IOTagsContainer>
       </IOTitleBar>
       <IOTitleBar>
-        <IOSource icon={icon} URI={URI} />
+        <IOSource icon={icon} URI={URI.replace("api.", "")} />
         <IOTitle>{title}</IOTitle>
       </IOTitleBar>
     </div>

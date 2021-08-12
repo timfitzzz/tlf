@@ -20,6 +20,18 @@ export const CVHeaderEntryContainer = styled.div`
   height: 100%;
   align-content: center;
 
+  a {
+    color: ${({ theme }) => theme.palette.lightBackground};
+
+    &:visited {
+      color: ${({ theme }) => theme.palette.lightBackground};
+    }
+
+    &:hover {
+      color: ${({ theme }) => theme.palette.darkBackground};
+    }
+  }
+
   @media (max-width: 685px) {
     font-size: 12px;
     padding-top: 2px;
@@ -61,12 +73,13 @@ export const CVHeaderContainer = styled.div`
   padding: 4px 0px 4px 0px;
   border-top: 1px double ${p => p.theme.colors.darkBackground};
   border-bottom: 1px double ${p => p.theme.colors.darkBackground};
-  margin-bottom: 26px;
+  margin-bottom: 8px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
+  letter-spacing: 0px;
 
   @media (max-width: 685px) {
     flex-direction: column;
@@ -86,6 +99,7 @@ export const CVHeaderName = styled.div`
   margin-top: auto;
   margin-bottom: auto;
   font-weight: 500;
+  letter-spacing: 0.5px;
 `
 
 export const CVHeaderItem = styled.div`
@@ -237,8 +251,11 @@ export const CVJobTitleTextColumn = styled(Flex)`
 export const CVEntryContainer = styled(Box)`
   padding-left: 0px;
   padding-right: 0px;
-  padding-top: 8px;
+  padding-top: 12px;
   position: relative;
+  &:first-of-type {
+    padding-top: 8px;
+  }
 `
 
 export const CVDescriptionList = styled.ul`

@@ -161,7 +161,7 @@ export const LayoutComponents = {
   `
 }
 
-export const TRANSITION_DURATION = 1
+export const TRANSITION_DURATION = 0.75
 export const MIN_WIDTH = 304
 export const MIN_HEIGHT = 568
 export const MAX_WIDTH = 800

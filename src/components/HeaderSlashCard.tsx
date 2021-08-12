@@ -174,7 +174,7 @@ const getMenuCardContainerVariants = (
       width: windowWidth ? [null, MIN_WIDTH] : MIN_WIDTH,
 
       marginTop: windowHeight
-        ? [null, (windowHeight - 500) / 2 + "px"]
+        ? [null, (windowHeight - 520) / 2 + "px"]
         : "auto",
 
       transition: transitions.MenuCardContainer.expanded,

@@ -37,13 +37,13 @@ const collectors = [
       username: process.env.GATSBY_GITHUB_USERNAME || "timfitzzz",
     },
   },
-  {
-    name: "soundcloud",
-    config: {
-      apiKey: process.env.GATSBY_SC_APIKEY,
-      usersToScrape: ["parker-bird", "dicey-troop"],
-    },
-  },
+  // ,{
+  //   name: "soundcloud",
+  //   config: {
+  //     apiKey: process.env.GATSBY_SC_APIKEY,
+  //     usersToScrape: ["parker-bird", "dicey-troop"],
+  //   },
+  // },
 ]
 
 export const ioCollectorOptions = {

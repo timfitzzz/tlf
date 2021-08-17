@@ -6,7 +6,7 @@ import React from "react"
 import { WindowLocation } from "@reach/router"
 import { graphql, StaticQuery } from "gatsby"
 import { Helmet } from "react-helmet"
-const CVPDF = require("../../static/assets/media/tim.l.fitzgerald.resume.march.2020.pdf") as string
+const CVPDF = require("../../static/assets/media/tim.l.fitzgerald.resume.august.2021.pdf") as string
 
 export default function CV({ location }: { location: WindowLocation }) {
   const state = useTransitionState()

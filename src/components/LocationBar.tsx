@@ -194,16 +194,21 @@ const ClearFiltersButton = styled.div<{ activated: boolean }>`
 const PdfDownloadButton = styled.a`
   cursor: pointer;
   text-decoration: none;
-  margin-left: 4px;
+  margin-left: 0px;
   margin-top: auto;
   margin-bottom: auto;
 
   svg {
     fill: ${(p) => p.theme.palette.darkBackground};
     height: 18px;
+    width: 18px;
     margin-top: auto;
     margin-bottom: auto;
     display: block;
+
+    &:hover {
+      fill: ${(p) => p.theme.palette.lightBackground};
+    }
   }
 `
 
@@ -312,9 +317,12 @@ export const LocationBar = ({
             <></>
           )}
           {downloadUrl ? (
-            <PdfDownloadButton href={downloadUrl} download>
-              <SaveIcon />
-            </PdfDownloadButton>
+            <LocationBarSectionContainer>
+              <LocationBarTypeTitle>download</LocationBarTypeTitle>
+              <PdfDownloadButton href={downloadUrl} download>
+                <SaveIcon />
+              </PdfDownloadButton>
+            </LocationBarSectionContainer>
           ) : (
             <></>
           )}
